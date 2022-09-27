@@ -2,24 +2,26 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'java'
 apply plugin: 'com.diffplug.spotless'
+apply plugin: "maven-publish"
+apply plugin: "signing"
+apply plugin: "io.codearte.nexus-staging"
 
 group = 'com.whispir'
 version = '1.0.0'
 
 buildscript {
     repositories {
-        mavenLocal()
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.+'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.diffplug.spotless:spotless-plugin-gradle:6.3.0'
+        classpath 'io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0'
     }
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
@@ -80,48 +82,6 @@ if(hasProperty('target') && target == 'android') {
     artifacts {
         archives sourcesJar
     }
-
-} else {
-
-    apply plugin: 'java'
-    apply plugin: 'maven-publish'
-
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-
-    publishing {
-        publications {
-            maven(MavenPublication) {
-               artifactId = 'whispir-java'
-               from components.java
-            }
-
-            // // Specify relocation POM - 'relocation' gets built as a folder with a pom.xml file
-            // relocation(MavenPublication) {
-            //     pom {
-            //         // Old artifact coordinates
-            //         groupId = "org.whispir"
-            //         artifactId = "whispir-java"
-            //         version = "2.0.0"
-
-            //         distributionManagement {
-            //             relocation {
-            //                 // New artifact coordinates
-            //                 groupId = "com.published"
-            //                 artifactId = "whispir-java"
-            //                 version = "2.0.0"
-            //                 message = "groupId has been changed"
-            //             }
-            //         }
-            //     }
-            // }
-        }
-    }
-
-    task execute(type:JavaExec) {
-       main = System.getProperty('mainClass')
-       classpath = sourceSets.main.runtimeClasspath
-    }
 }
 
 ext {
@@ -175,6 +135,8 @@ spotless {
         importOrder()
     }
 }
+
+apply from: "deploy.gradle"
 
 test {
     // Enable JUnit 5 (Gradle 4.6+).

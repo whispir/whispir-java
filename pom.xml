@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <name>whispir-java</name>
     <version>1.0.0</version>
-    <url>https://github.com/openapitools/openapi-generator</url>
+    <url>https://github.com/whispir/whispir-java</url>
     <description>Whispir Java SDK</description>
     <scm>
         <connection>scm:git:git@github.com:whispir/whispir-java.git</connection>
