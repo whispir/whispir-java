@@ -22,13 +22,13 @@ Building the API client library requires:
 To install the API client library to your local Maven repository, simply execute:
 
 ```shell
-mvn clean install
+./gradlew clean build
 ```
 
 To deploy it to a remote Maven repository instead, configure the settings of the repository and execute:
 
 ```shell
-mvn clean deploy
+./gradlew publishToMavenLocal
 ```
 
 Refer to the [OSSRH Guide](http://central.sonatype.org/pages/ossrh-guide.html) for more information.
@@ -66,7 +66,7 @@ Add this dependency to your project's build file:
 At first generate the JAR by executing:
 
 ```shell
-mvn clean package
+./gradlew assemble
 ```
 
 Then manually install the following JARs:
