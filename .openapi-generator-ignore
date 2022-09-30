@@ -21,3 +21,9 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+# ensure the pipeline is not modified
+ci.yml
+
+# ensure build.gradle script isn't modified
+build.gradle
