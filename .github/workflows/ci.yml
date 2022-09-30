@@ -36,15 +36,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java-version:
-          - "1.8"
-          - "9"
-          - "10"
+        java-version: # https://github.com/actions/setup-java#supported-version-syntax
+          - "8"
           - "11"
-          - "12"
-          - "13"
-          - "14"
-          - "15"
           - "16"
           - "17"
           - "18"
