@@ -15,16 +15,13 @@ jobs:
   build:
     name: Build Whispir Platform API
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java: ["18"] # always use 18 for building
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
         id: setup-jre
         uses: actions/setup-java@v2
         with:
-          java-version: ${{ matrix.java }}
+          java-version: "18" # always use 18 for building
           architecture: x64
 
       - name: Set Test Java Runtime Environment variable
@@ -32,7 +29,6 @@ jobs:
 
       - name: Build artifacts
         run: ./gradlew assemble
-
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -57,7 +53,7 @@ jobs:
 
       - name: Setup Test Java runtime
         id: setup-test-jre
-
+        uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java-version }}
           architecture: x64
@@ -82,7 +78,6 @@ jobs:
 
       - name: Run test suite
         run: ./gradlew test
-
   publish:
     needs: [build, test]
     runs-on: ubuntu-latest
