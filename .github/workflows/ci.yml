@@ -22,6 +22,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: "18" # always use 18 for building
+          distribution: 'temurin'
           architecture: x64
 
       - name: Set Test Java Runtime Environment variable
@@ -56,6 +57,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
           architecture: x64
 
       - name: Set Test Java Runtime Environment variable
@@ -65,6 +67,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: "18" # always use 18 for building
+          distribution: 'temurin'
           architecture: x64
 
       - name: Tweak gradle.properties for Java 1.8
@@ -88,6 +91,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: "18" # always use 18 for building
+          distribution: 'temurin'
           architecture: x64
       - name: Set Test Java Runtime Environment variable
         run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
