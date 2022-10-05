@@ -220,7 +220,7 @@ Class | Method | HTTP request | Description
  - [CallbackInstanceFrom](docs/CallbackInstanceFrom.md)
  - [CallbackInstanceResponseMessage](docs/CallbackInstanceResponseMessage.md)
  - [Contact](docs/Contact.md)
- - [CreateContactAndSendMessage](docs/CreateContactAndSendMessage.md.md)
+ - [CreateContactAndSendMessage](docs/CreateContactAndSendMessage.md)
  - [CustomList](docs/CustomList.md)
  - [CustomListCustomlabellistsInner](docs/CustomListCustomlabellistsInner.md)
  - [Distributionlist](docs/Distributionlist.md)
