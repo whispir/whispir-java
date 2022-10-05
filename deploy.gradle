@@ -91,27 +91,9 @@ afterEvaluate { project ->
                     }
                     developers {
                         developer {
-                            id = "rfontein"
-                            name = "Richard Fontein"
-                            email = "rfontein@whispir.com"
-                        }
-
-                        developer {
-                            id = "mneri"
-                            name = "Mark Hugh Neri"
-                            email = "mneri@whispir.com"
-                        }
-
-                        developer {
-                            id = "corale"
-                            name = "Carl Angelo Orale"
-                            email = "corale@whispir.com"
-                        }
-
-                        developer {
-                            id = "hutomo"
-                            name = "Harry Utomo"
-                            email = "hutomo@whispir.com"
+                            id = "whispirsupport"
+                            name = "Whispir Support"
+                            email = "support@whispir.com"
                         }
                     }
                     organization {
