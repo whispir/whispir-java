@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package whispir_sdk_java;
 
 import org.whispir.api.AuthApi;
@@ -18,7 +14,7 @@ import io.github.cdimascio.dotenv.Dotenv;
  * @author carlangeloorale
  */
 public class CreateContactAndSaveMessage {
-    
+
     public static ApiClient createClient() {
         ApiClient client;
         client = new ApiClient();
@@ -32,25 +28,8 @@ public class CreateContactAndSaveMessage {
         return client;
     }
 
-    public static void generateAuthToken() {
-        ApiClient client = createClient();
-        // initialize Auth API
-        AuthApi authApi = new AuthApi(client);
-        Dotenv dotenv = Dotenv.load();
-        try {
-            // performs an Auth API post to request for token
-            PostAuth200Response response = authApi.postAuth(
-                    dotenv.get("API_KEY"),
-                    "application/vnd.whispir.auth-v1+json",
-                    "application/vnd.whispir.auth-v1+json");
-            System.out.println(response);
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println(e);
-        }
-    }
-
-    public static void createContact(String firstName, String lastName, String workPhoneNumber, String workEmail, String country, String timezone) {
+    public static void createContact(String firstName, String lastName, String workPhoneNumber, String workEmail,
+           String country, String timezone, String contentType, String accept) {
         ApiClient client = createClient();
         // initialize createContact API
         ContactsApi contactsApi = new ContactsApi(client);
@@ -70,8 +49,8 @@ public class CreateContactAndSaveMessage {
             Contact response = contactsApi.postContacts(
                     dotenv.get("WORKSPACE_ID"),
                     dotenv.get("API_KEY"),
-                    "application/vnd.whispir.contact-v1+json",
-                    "application/vnd.whispir.contact-v1+json",
+                     contentType,
+                    accept,
                     contact);
 
             System.out.println(response);
@@ -80,7 +59,7 @@ public class CreateContactAndSaveMessage {
         }
     }
 
-    public static void sendMessage(String subject, String body) {
+    public static void sendMessage(String subject, String body, String contentType, String accept) {
         ApiClient client = createClient();
 
         MessagesApi messageApi = new MessagesApi(client);
@@ -97,8 +76,8 @@ public class CreateContactAndSaveMessage {
             Message response = messageApi.postMessages(
                     dotenv.get("WORKSPACE_ID"),
                     dotenv.get("API_KEY"),
-                    "application/vnd.whispir.message-v1+json",
-                    "application/vnd.whispir.message-v1+json",
+                    contentType,
+                    accept,
                     message);
 
             System.out.println(response);
@@ -108,5 +87,5 @@ public class CreateContactAndSaveMessage {
         }
 
     }
-    
+
 }
