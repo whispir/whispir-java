@@ -22,8 +22,14 @@
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
 
-# ensure the pipeline is not modified
-ci.yml
-
-# ensure build.gradle script isn't modified
+# Ensure open-api generator does not generate these files
+/.github/workflows/maven.yml
+.openapi-generator
+bin
+build
+.travis.yml
+build.sbt
+pom.xml
+git_push.sh
 build.gradle
+.gitignore
