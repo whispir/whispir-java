@@ -1,11 +1,9 @@
-import io.github.cdimascio.dotenv.Dotenv;
-import java.math.BigDecimal;
-import org.openapitools.client.model.Message;
-import org.whispir.api.MessagesApi;
+import org.openapitools.client.model.Template;
+import org.whispir.api.TemplatesApi;
 import whispir_sdk_java.utils.AuthClient;
 import whispir_sdk_java.utils.WrapperInit;
 
-public class MessagesWrappedApi {
+public class TemplatesWrappedApi {
 
   public static WrapperInit wrapperInit() {
     WrapperInit wrapper = new WrapperInit();
@@ -19,25 +17,28 @@ public class MessagesWrappedApi {
     return wrapper;
   }
 
-  public static Message sendMessage(String WORKSPACE_ID, Message MESSAGE) {
+  public static Template createTemplate(
+    String WORKSPACE_ID,
+    Template TEMPLATE
+  ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    TemplatesApi templatesApi = new TemplatesApi(AuthClient.createClient());
 
     try {
-      return messageApi.postMessages(
+      return templatesApi.postTemplates(
         WORKSPACE_ID,
         wrapper.getApiKey(),
         wrapper.getContentType(),
         wrapper.getAccept(),
-        MESSAGE
+        TEMPLATE
       );
     } catch (Exception e) {
       throw new Error(e);
     }
   }
 
-  public static Message listMessages(
+  public static Template listTemplates(
     String WORKSPACE_ID,
     BigDecimal LIMIT,
     BigDecimal OFFSET,
@@ -46,10 +47,10 @@ public class MessagesWrappedApi {
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    TemplatesApi templatesApi = new TemplatesApi(AuthClient.createClient());
 
     try {
-      return messageApi.getMessages(
+      return templatesApi.getTemplates(
         WORKSPACE_ID,
         wrapper.getApiKey(),
         wrapper.getAccept(),
@@ -63,84 +64,63 @@ public class MessagesWrappedApi {
     }
   }
 
-  public static Message retrieveMessage(
+  public static Template retrieveTemplate(
     String WORKSPACE_ID,
-    String MESSAGE_ID
+    String TEMPLATE_ID
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    TemplatesApi templatesApi = new TemplatesApi(AuthClient.createClient());
 
     try {
-      return messageApi.getMessageById(
+      return templatesApi.getTemplatesById(
         WORKSPACE_ID,
         wrapper.getApiKey(),
-        wrapper.getAccept(),
-        MESSAGE_ID
+        TEMPLATE_ID,
+        wrapper.getAccept()
       );
     } catch (Exception e) {
       throw new Error(e);
     }
   }
 
-  public static Message retrieveMessageStatus(
+  public static Template updateTemplate(
     String WORKSPACE_ID,
-    String MESSAGE_ID,
-    BigDecimal LIMIT,
-    BigDecimal OFFSET,
-    String SORT_ORDER,
-    String SORT_FIELDS,
-    String VIEW,
-    String FILTER
+    Template TEMPLATE_ID
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    TemplatesApi templatesApi = new TemplatesApi(AuthClient.createClient());
 
     try {
-      return messageApi.getMessageStatus(
+      return templatesApi.putTemplatesById(
         WORKSPACE_ID,
         wrapper.getApiKey(),
+        TEMPLATE_ID,
+        wrapper.getContentType(),
         wrapper.getAccept(),
-        MESSAGE_ID,
-        LIMIT,
-        OFFSET,
-        SORT_ORDER,
-        SORT_FIELDS,
-        VIEW,
-        FILTER
+        TEMPLATE
       );
     } catch (Exception e) {
       throw new Error(e);
     }
   }
 
-  public static Message retrieveMessageResponse(
+  public static Template deleteTemplate(
     String WORKSPACE_ID,
-    String MESSAGE_ID,
-    BigDecimal LIMIT,
-    BigDecimal OFFSET,
-    String SORT_ORDER,
-    String SORT_FIELDS,
-    String VIEW,
-    String FILTER
+    String TEMPLATE_ID
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    TemplatesApi templatesApi = new TemplatesApi(AuthClient.createClient());
 
     try {
-      return messageApi.getMessageResponsesById(
+      return templatesApi.deleteTemplatesById(
         WORKSPACE_ID,
         wrapper.getApiKey(),
-        wrapper.getAccept(),
-        MESSAGE_ID,
-        LIMIT,
-        OFFSET,
-        SORT_ORDER,
-        SORT_FIELDS,
-        VIEW,
-        FILTER
+        TEMPLATE_ID,
+        wrapper.getContentType(),
+        wrapper.getAccept()
       );
     } catch (Exception e) {
       throw new Error(e);
