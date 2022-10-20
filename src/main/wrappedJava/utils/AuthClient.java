@@ -1,4 +1,3 @@
-
 import io.github.cdimascio.dotenv.Dotenv;
 import whispir_sdk_java.ApiClient;
 
@@ -12,7 +11,7 @@ import whispir_sdk_java.ApiClient;
  * @author carlangeloorale
  */
 public class AuthClient {
-    
+
     public static ApiClient createClient() {
         ApiClient client;
         client = new ApiClient();
