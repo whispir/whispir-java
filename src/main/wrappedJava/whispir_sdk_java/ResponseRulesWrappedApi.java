@@ -1,11 +1,9 @@
-import io.github.cdimascio.dotenv.Dotenv;
-import java.math.BigDecimal;
-import org.openapitools.client.model.Message;
-import org.whispir.api.MessagesApi;
+import org.openapitools.client.model.ResponseRule;
+import org.whispir.api.ResponseRulesApi;
 import whispir_sdk_java.utils.AuthClient;
 import whispir_sdk_java.utils.WrapperInit;
 
-public class MessagesWrappedApi {
+public class ResponseRulesWrappedApi {
 
   public static WrapperInit wrapperInit() {
     WrapperInit wrapper = new WrapperInit();
@@ -19,25 +17,30 @@ public class MessagesWrappedApi {
     return wrapper;
   }
 
-  public static Message sendMessage(String WORKSPACE_ID, Message MESSAGE) {
+  public static ResponseRule createResponseRule(
+    String WORKSPACE_ID,
+    ResponseRule RESPONSE_RULE
+  ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ResponseRulesApi responseRulesApi = new ResponseRulesApi(
+      AuthClient.createClient()
+    );
 
     try {
-      return messageApi.postMessages(
+      return responseRulesApi.postResponseRules(
         WORKSPACE_ID,
         wrapper.getApiKey(),
         wrapper.getContentType(),
         wrapper.getAccept(),
-        MESSAGE
+        RESPONSE_RULE
       );
     } catch (Exception e) {
       throw new Error(e);
     }
   }
 
-  public static Message listMessages(
+  public static ResponseRule listResponseRules(
     String WORKSPACE_ID,
     BigDecimal LIMIT,
     BigDecimal OFFSET,
@@ -46,10 +49,12 @@ public class MessagesWrappedApi {
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ResponseRulesApi responseRulesApi = new ResponseRulesApi(
+      AuthClient.createClient()
+    );
 
     try {
-      return messageApi.getMessages(
+      return responseRulesApi.getResponseRules(
         WORKSPACE_ID,
         wrapper.getApiKey(),
         wrapper.getAccept(),
@@ -63,84 +68,68 @@ public class MessagesWrappedApi {
     }
   }
 
-  public static Message retrieveMessage(
+  public static ResponseRule retrieveResponseRule(
     String WORKSPACE_ID,
-    String MESSAGE_ID
+    String RESPONSE_RULE_ID
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ResponseRulesApi responseRulesApi = new ResponseRulesApi(
+      AuthClient.createClient()
+    );
 
     try {
-      return messageApi.getMessageById(
+      return responseRulesApi.getResponseRulesById(
         WORKSPACE_ID,
         wrapper.getApiKey(),
         wrapper.getAccept(),
-        MESSAGE_ID
+        RESPONSE_RULE_ID
       );
     } catch (Exception e) {
       throw new Error(e);
     }
   }
 
-  public static Message retrieveMessageStatus(
+  public static ResponseRule updateResponseRule(
     String WORKSPACE_ID,
-    String MESSAGE_ID,
-    BigDecimal LIMIT,
-    BigDecimal OFFSET,
-    String SORT_ORDER,
-    String SORT_FIELDS,
-    String VIEW,
-    String FILTER
+    String RESPONSE_RULE_ID,
+    ResponseRule RESPONSE_RULE
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ResponseRulesApi responseRulesApi = new ResponseRulesApi(
+      AuthClient.createClient()
+    );
 
     try {
-      return messageApi.getMessageStatus(
+      return responseRulesApi.putResponseRulesById(
         WORKSPACE_ID,
         wrapper.getApiKey(),
+        wrapper.getContentType(),
         wrapper.getAccept(),
-        MESSAGE_ID,
-        LIMIT,
-        OFFSET,
-        SORT_ORDER,
-        SORT_FIELDS,
-        VIEW,
-        FILTER
+        RESPONSE_RULE_ID,
+        RESPONSE_RULE
       );
     } catch (Exception e) {
       throw new Error(e);
     }
   }
 
-  public static Message retrieveMessageResponse(
+  public static ResponseRule deleteResponseRule(
     String WORKSPACE_ID,
-    String MESSAGE_ID,
-    BigDecimal LIMIT,
-    BigDecimal OFFSET,
-    String SORT_ORDER,
-    String SORT_FIELDS,
-    String VIEW,
-    String FILTER
+    String RESPONSE_RULE_ID
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ResponseRulesApi responseRulesApi = new ResponseRulesApi(
+      AuthClient.createClient()
+    );
 
     try {
-      return messageApi.getMessageResponsesById(
+      return responseRulesApi.deleteResponseRulesById(
         WORKSPACE_ID,
         wrapper.getApiKey(),
-        wrapper.getAccept(),
-        MESSAGE_ID,
-        LIMIT,
-        OFFSET,
-        SORT_ORDER,
-        SORT_FIELDS,
-        VIEW,
-        FILTER
+        RESPONSE_RULE_ID
       );
     } catch (Exception e) {
       throw new Error(e);

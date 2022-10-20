@@ -1,11 +1,9 @@
-import io.github.cdimascio.dotenv.Dotenv;
-import java.math.BigDecimal;
-import org.openapitools.client.model.Message;
-import org.whispir.api.MessagesApi;
+import org.openapitools.client.model.Scenario;
+import org.whispir.api.ScenariosApi;
 import whispir_sdk_java.utils.AuthClient;
 import whispir_sdk_java.utils.WrapperInit;
 
-public class MessagesWrappedApi {
+public class ScenariosWrappedApi {
 
   public static WrapperInit wrapperInit() {
     WrapperInit wrapper = new WrapperInit();
@@ -19,25 +17,28 @@ public class MessagesWrappedApi {
     return wrapper;
   }
 
-  public static Message sendMessage(String WORKSPACE_ID, Message MESSAGE) {
+  public static Scenario createScenario(
+    String WORKSPACE_ID,
+    Scenario SCENARIO
+  ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ScenariosApi scenarioApi = new ScenariosApi(AuthClient.createClient());
 
     try {
-      return messageApi.postMessages(
+      return scenarioApi.postScenarios(
         WORKSPACE_ID,
         wrapper.getApiKey(),
         wrapper.getContentType(),
         wrapper.getAccept(),
-        MESSAGE
+        SCENARIO
       );
     } catch (Exception e) {
       throw new Error(e);
     }
   }
 
-  public static Message listMessages(
+  public static Scenario listScenarios(
     String WORKSPACE_ID,
     BigDecimal LIMIT,
     BigDecimal OFFSET,
@@ -46,10 +47,10 @@ public class MessagesWrappedApi {
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ScenariosApi scenarioApi = new ScenariosApi(AuthClient.createClient());
 
     try {
-      return messageApi.getMessages(
+      return scenarioApi.getScenarios(
         WORKSPACE_ID,
         wrapper.getApiKey(),
         wrapper.getAccept(),
@@ -63,84 +64,80 @@ public class MessagesWrappedApi {
     }
   }
 
-  public static Message retrieveMessage(
+  public static Scenario retrieveScenario(
     String WORKSPACE_ID,
-    String MESSAGE_ID
+    String SCENARIO_ID
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ScenariosApi scenarioApi = new ScenariosApi(AuthClient.createClient());
 
     try {
-      return messageApi.getMessageById(
+      return scenarioApi.getScenariosById(
         WORKSPACE_ID,
         wrapper.getApiKey(),
         wrapper.getAccept(),
-        MESSAGE_ID
+        SCENARIO_ID
       );
     } catch (Exception e) {
       throw new Error(e);
     }
   }
 
-  public static Message retrieveMessageStatus(
-    String WORKSPACE_ID,
-    String MESSAGE_ID,
-    BigDecimal LIMIT,
-    BigDecimal OFFSET,
-    String SORT_ORDER,
-    String SORT_FIELDS,
-    String VIEW,
-    String FILTER
-  ) {
+  public static Scenario runScenario(String WORKSPACE_ID, String SCENARIO_ID) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ScenariosApi scenarioApi = new ScenariosApi(AuthClient.createClient());
 
     try {
-      return messageApi.getMessageStatus(
+      return scenarioApi.postScenariosById(
         WORKSPACE_ID,
         wrapper.getApiKey(),
+        wrapper.getContentType(),
         wrapper.getAccept(),
-        MESSAGE_ID,
-        LIMIT,
-        OFFSET,
-        SORT_ORDER,
-        SORT_FIELDS,
-        VIEW,
-        FILTER
+        SCENARIO_ID
       );
     } catch (Exception e) {
       throw new Error(e);
     }
   }
 
-  public static Message retrieveMessageResponse(
+  public static Scenario updateScenario(
     String WORKSPACE_ID,
-    String MESSAGE_ID,
-    BigDecimal LIMIT,
-    BigDecimal OFFSET,
-    String SORT_ORDER,
-    String SORT_FIELDS,
-    String VIEW,
-    String FILTER
+    String SCENARIO_ID,
+    Scenario SCENARIO
   ) {
     WrapperInit wrapper = wrapperInit();
 
-    MessagesApi messageApi = new MessagesApi(AuthClient.createClient());
+    ScenariosApi scenarioApi = new ScenariosApi(AuthClient.createClient());
 
     try {
-      return messageApi.getMessageResponsesById(
+      return scenarioApi.putScenariosById(
         WORKSPACE_ID,
         wrapper.getApiKey(),
+        wrapper.getContentType(),
         wrapper.getAccept(),
-        MESSAGE_ID,
-        LIMIT,
-        OFFSET,
-        SORT_ORDER,
-        SORT_FIELDS,
-        VIEW,
-        FILTER
+        SCENARIO_ID,
+        SCENARIO
+      );
+    } catch (Exception e) {
+      throw new Error(e);
+    }
+  }
+
+  public static Scenario deleteScenario(
+    String WORKSPACE_ID,
+    String SCENARIO_ID
+  ) {
+    WrapperInit wrapper = wrapperInit();
+
+    ScenariosApi scenarioApi = new ScenariosApi(AuthClient.createClient());
+
+    try {
+      return scenarioApi.deleteScenariosById(
+        WORKSPACE_ID,
+        wrapper.getApiKey(),
+        SCENARIO_ID
       );
     } catch (Exception e) {
       throw new Error(e);
