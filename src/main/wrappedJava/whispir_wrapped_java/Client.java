@@ -5,8 +5,6 @@
 package whispir_wrapped_java;
 
 import whispir_sdk_java.ApiClient;
-import whispir_wrapped_java.MessageClient;
-import org.openapitools.client.model.Message;
 
 /**
  *
@@ -26,11 +24,11 @@ public class Client {
         client.setUsername(USERNAME);
         client.setPassword(PASSWORD);
         
-        this.initClient = client;
-        this.workspaceId =  WORKSPACE_ID;
+        initClient = client;
+        workspaceId =  WORKSPACE_ID;
     }
     
-    public MessageClient MessageClient() {
+    public MessageClient messageClient() {
         return new MessageClient(initClient, workspaceId);
     }
     
