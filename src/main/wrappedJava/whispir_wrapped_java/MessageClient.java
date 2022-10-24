@@ -12,6 +12,7 @@ import org.openapitools.client.model.Message;
 import org.whispir.api.MessagesApi;
 import whispir_sdk_java.ApiClient;
 import whispir_sdk_java.ApiException;
+import whispir_wrapped_java.Client;
 
 /**
  *
@@ -23,35 +24,22 @@ public class MessageClient {
   private static String PASSWORD, API_URL, WORKSPACE_ID;
   private static final String CONTENT_TYPE = "application/vnd.whispir.message-v1+json";
   private static final String ACCEPT = "application/vnd.whispir.message-v1+json";
-
-  public MessageClient(
-      String username,
-      String password,
-      String apiUrl,
-      String workspaceId) {
-    MessageClient.USERNAME = username;
-    MessageClient.PASSWORD = password;
-    MessageClient.API_URL = apiUrl;
-    MessageClient.WORKSPACE_ID = workspaceId;
-  }
-
-  public static ApiClient createClient() {
-    ApiClient client;
-    client = new ApiClient();
-
-    client.setBasePath(API_URL);
-    client.setUsername(USERNAME);
-    client.setPassword(PASSWORD);
-    return client;
+  private static ApiClient apiClientInit;
+  
+  public MessageClient(ApiClient client, String workspaceId) {
+     this.apiClientInit = client;
+     this.WORKSPACE_ID = workspaceId;
   }
 
   public static Message postMessage(Message MESSAGE, String API_KEY) {
-    MessagesApi message = new MessagesApi(createClient());
+    MessagesApi message = new MessagesApi(apiClientInit);
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/YYYY HH:mm");
     calendar.add(Calendar.DAY_OF_WEEK, 1);
 
     System.out.println(dateFor.format(calendar.getTime()));
+    
+//    if(MESSAGE.getMessageType().isEmpty()  )
 
     MESSAGE.messageType(Message.MessageTypeEnum.SCHEDULED);
     MESSAGE.scheduleType(Message.ScheduleTypeEnum.ONCE);
