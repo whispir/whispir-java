@@ -14,7 +14,6 @@ import org.openapitools.client.model.MessageStatus;
 import org.whispir.api.MessagesApi;
 import whispir_sdk_java.ApiClient;
 import whispir_sdk_java.ApiException;
-import whispir_wrapped_java.Client;
 
 /**
  *
