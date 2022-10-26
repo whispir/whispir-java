@@ -38,7 +38,7 @@ We have an official Github Discussions where Whispir Java API support and the co
 - [API Documentation](https://developers.whispir.com/)
 - [Github Discussions](https://github.com/whispir/whispir-java/discussions)
 - [Stackoverflow - Whispir related](https://stackoverflow.com/questions/tagged/whispir?sort=Newest)
-- [Submit requests for support](mailto:support@whispir.com) to our API Support team.
+- [Submit requests for support](mailto:support@whispir.com?subject=Whispir%20Java%20SDK%20Support%20Request) to our API Support team.
 
 # How Can I Contribute?
 
