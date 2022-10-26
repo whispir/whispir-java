@@ -20,7 +20,6 @@ The following is a set of guidelines for contributing to Whispir and its project
 
 [How Can I Contribute?](#how-can-i-contribute)
 
-- [Which version of SDK are you using?](#Which-version-of-the-SDK-are-you-using)
 - [Reporting Bugs](#reporting-bugs)
 - [Suggesting Enhancements](#suggesting-enhancements)
 - [Pull Requests](#pull-requests)
