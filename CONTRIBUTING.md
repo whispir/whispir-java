@@ -33,12 +33,12 @@ Please note that this project is released with a [Contributor Code of Conduct](/
 
 > **Note:** Please don't file an issue to ask a question. You'll get faster results by using the resources below.
 
-We have an official [Github Discussions](#) where Whispir Java API support and the community chimes in with helpful advice if you have questions.
+We have an official Github Discussions where Whispir Java API support and the community chimes in with helpful advice if you have questions.
 
 - [API Documentation](https://developers.whispir.com/)
-- [Github Discussions](#)
+- [Github Discussions](https://github.com/whispir/whispir-java/discussions)
 - [Stackoverflow - Whispir related](https://stackoverflow.com/questions/tagged/whispir?sort=Newest)
-- [Submit requests for support](#) to our API Support team.
+- [Submit requests for support](mailto:support@whispir.com) to our API Support team.
 
 # How Can I Contribute?
 
