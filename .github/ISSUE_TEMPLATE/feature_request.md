@@ -2,10 +2,13 @@
 name: Feature request
 about: Suggest an idea for this project
 title: "[FEATURE]"
-labels: ''
-assignees: ''
-
+labels: feature request
+assignees: ""
 ---
+
+**SDK you're using (please complete the following information):**
+
+- Version [e.g. 3.x.x]
 
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
