@@ -13,3 +13,7 @@ jobs:
         with:
           release-type: java
           package-name: whispir-java
+          extra-files: |
+            README.md
+            build.gradle
+            gradle.properties
