@@ -12,7 +12,6 @@ on:
 
 jobs:
   build:
-    name: Build Whispir Platform API
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,7 +29,6 @@ jobs:
       - name: Build artifacts
         run: ./gradlew assemble
   test:
-    name: Test
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
