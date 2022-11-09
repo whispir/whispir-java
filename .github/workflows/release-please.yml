@@ -13,6 +13,7 @@ jobs:
         with:
           release-type: java
           package-name: whispir-java
+          token: ${{ secrets.PAT }}
           extra-files: |
             README.md
             build.gradle
