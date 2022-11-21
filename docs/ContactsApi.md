@@ -45,6 +45,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ContactsApi apiInstance = new ContactsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -78,7 +82,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -134,6 +138,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ContactsApi apiInstance = new ContactsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -164,7 +172,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.contact-v1+json] [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -178,7 +186,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -234,6 +242,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ContactsApi apiInstance = new ContactsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -262,7 +274,7 @@ public class Example {
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
 | **contactId** | **String**| Enter contact id. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.contact-v1+json] [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
 | **fields** | **String**| NOTE: once again, the equal sign must be intended as \&quot;contains\&quot; rather than \&quot;equals\&quot;. So if we search the people whose firstName equals Sam we might be given back e.g. Sam, Samantha, Samuel. Similarly for numbers: if we search Contacts with staffId equal to 1234 we will given back e.g. the contact with staffID equal to 1234 but also e.g. a contact with staffID equal to 98123456. If you need to narrow down please consider applying additional filters | [optional] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
 | **sortFields** | **String**| The fields that you require the ordering to be performed on. Multiple fields can be provided, separated by a comma. | [optional] |
@@ -273,7 +285,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -329,6 +341,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ContactsApi apiInstance = new ContactsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -355,8 +371,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.contact-v1+json] [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.contact-v1+json] [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
 | **contact** | [**Contact**](Contact.md)| Contact object to be created | |
 
 ### Return type
@@ -365,7 +381,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -421,6 +437,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ContactsApi apiInstance = new ContactsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -448,8 +468,8 @@ public class Example {
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
 | **contactId** | **String**| Enter contact id. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.contact-v1+json] [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.contact-v1+json] [enum: application/vnd.whispir.contact-v1+json, application/vnd.whispir.contact-v1+xml] |
 | **contact** | [**Contact**](Contact.md)| contact object that needs to be update contact | |
 
 ### Return type
@@ -458,7 +478,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

@@ -45,6 +45,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -70,7 +74,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.message-v1+json] [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
 | **messageId** | **String**| The identifier for the message. | |
 
 ### Return type
@@ -79,7 +83,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -135,6 +139,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -166,7 +174,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.messageresponse-v1+json, application/vnd.whispir.messageresponse-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.messageresponse-v1+json] [enum: application/vnd.whispir.messageresponse-v1+json, application/vnd.whispir.messageresponse-v1+xml] |
 | **messageId** | **String**| Enter message id | |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
@@ -181,7 +189,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -237,6 +245,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -268,7 +280,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.messagestatus-v1+json, application/vnd.whispir.messagestatus-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.messagestatus-v1+json] [enum: application/vnd.whispir.messagestatus-v1+json, application/vnd.whispir.messagestatus-v1+xml] |
 | **messageId** | **String**| Enter message id | |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
@@ -283,7 +295,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -339,6 +351,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -367,7 +383,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.message-v1+json] [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -379,7 +395,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -435,6 +451,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -461,8 +481,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.message-v1+json] [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.message-v1+json] [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
 | **message** | [**Message**](Message.md)| Message object needed to create message. At least one of the Body fields must be populated [SMS, email, voice or web]. | |
 
 ### Return type
@@ -471,7 +491,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

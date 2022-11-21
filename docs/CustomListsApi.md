@@ -42,6 +42,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     CustomListsApi apiInstance = new CustomListsApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.customlist-v1+json"; // String | Application specific mime-type.
@@ -70,7 +74,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.customlist-v1+json, application/vnd.whispir.customlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.customlist-v1+json] [enum: application/vnd.whispir.customlist-v1+json, application/vnd.whispir.customlist-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -84,7 +88,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -140,6 +144,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     CustomListsApi apiInstance = new CustomListsApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.customlist-v1+json"; // String | Application specific mime-type.
@@ -163,7 +171,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.customlist-v1+json, application/vnd.whispir.customlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.customlist-v1+json] [enum: application/vnd.whispir.customlist-v1+json, application/vnd.whispir.customlist-v1+xml] |
 | **customlistId** | **String**| Enter Id | |
 
 ### Return type
@@ -172,7 +180,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
