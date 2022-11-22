@@ -44,6 +44,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     WorkspacesApi apiInstance = new WorkspacesApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.workspace-v1+json"; // String | Application specific mime-type.
@@ -70,7 +74,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.workspace-v1+json] [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -82,12 +86,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.workspace-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -138,6 +142,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     WorkspacesApi apiInstance = new WorkspacesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -162,7 +170,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.workspace-v1+json] [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
 
 ### Return type
 
@@ -170,12 +178,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.workspace-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -226,6 +234,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     WorkspacesApi apiInstance = new WorkspacesApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String contentType = "application/vnd.whispir.workspace-v1+json"; // String | Application specific mime-type.
@@ -250,8 +262,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.workspace-v1+json] [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.workspace-v1+json] [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
 | **workspace** | [**Workspace**](Workspace.md)| Create a workspace | |
 
 ### Return type
@@ -260,12 +272,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.workspace-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.workspace-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -316,6 +328,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     WorkspacesApi apiInstance = new WorkspacesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -342,8 +358,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.workspace-v1+json] [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.workspace-v1+json] [enum: application/vnd.whispir.workspace-v1+json, application/vnd.whispir.workspace-v1+xml] |
 | **workspace** | [**Workspace**](Workspace.md)| Update a workspace | [optional] |
 
 ### Return type
@@ -352,12 +368,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: application/vnd.whispir.workspace-v1+json
+ - **Accept**: application/vnd.whispir.workspace-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |

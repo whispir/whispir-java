@@ -8,7 +8,7 @@ The summary message response object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**messageresponses** | [**Set&lt;MessageResponseSummaryMessageresponsesInner&gt;**](MessageResponseSummaryMessageresponsesInner.md) | The message response statuses. |  |
+|**messageresponses** | [**Set&lt;MessageResponseSummaryMessageresponsesInner&gt;**](MessageResponseSummaryMessageresponsesInner.md) | The message response statuses. |  [readonly] |
 |**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [readonly] |
 
 
