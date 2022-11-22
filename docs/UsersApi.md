@@ -47,6 +47,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     UsersApi apiInstance = new UsersApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String contentType = "application/vnd.whispir.user-v1+json"; // String | Application specific mime-type.
@@ -69,8 +73,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
-| **accept** | **String**| User accept. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **accept** | **String**| User accept. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
 
 ### Return type
 
@@ -78,7 +82,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -134,6 +138,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     UsersApi apiInstance = new UsersApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String userId = "4821DCC420494A3A"; // String | Enter User id
@@ -158,8 +166,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
 | **userId** | **String**| Enter User id | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
-| **accept** | **String**| User accept. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **accept** | **String**| User accept. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
 
 ### Return type
 
@@ -167,7 +175,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -223,6 +231,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     UsersApi apiInstance = new UsersApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.user-v1+json"; // String | User accept.
@@ -250,7 +262,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| User accept. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **accept** | **String**| User accept. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
 | **fieldname** | **String**| A filter on the User attributes. Only Users with matching attributes will be returned. | [optional] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
 | **sortFields** | **String**| The fields that you require the ordering to be performed on. Multiple fields can be provided, separated by a comma. | [optional] |
@@ -263,12 +275,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.user-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -319,6 +331,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     UsersApi apiInstance = new UsersApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String userId = "4821DCC420494A3A"; // String | The identifier for the User.
@@ -343,7 +359,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
 | **userId** | **String**| The identifier for the User. | |
-| **accept** | **String**| User accept. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **accept** | **String**| User accept. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
 
 ### Return type
 
@@ -351,12 +367,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.user-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -407,6 +423,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     UsersApi apiInstance = new UsersApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -435,7 +455,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| User accept. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **accept** | **String**| User accept. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
 | **sortFields** | **String**| The fields that you require the ordering to be performed on. Multiple fields can be provided, separated by a comma. | [optional] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
@@ -447,12 +467,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.user-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -503,6 +523,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     UsersApi apiInstance = new UsersApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String contentType = "application/vnd.whispir.user-v1+json"; // String | Application specific mime-type.
@@ -527,8 +551,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
-| **accept** | **String**| User accept. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **accept** | **String**| User accept. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
 | **user** | [**User**](User.md)| The User object to create. | |
 
 ### Return type
@@ -537,12 +561,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.user-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.user-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -593,6 +617,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     UsersApi apiInstance = new UsersApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String userId = "4821DCC420494A3A"; // String | Enter Users id.
@@ -618,8 +646,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
 | **userId** | **String**| Enter Users id. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
-| **accept** | **String**| User accept. | [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
+| **accept** | **String**| User accept. | [default to application/vnd.whispir.user-v1+json] [enum: application/vnd.whispir.user-v1+json, application/vnd.whispir.user-v1+xml] |
 | **user** | [**User**](User.md)| Users object that needs to be update Users | |
 
 ### Return type
@@ -628,7 +656,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

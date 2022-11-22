@@ -31,10 +31,20 @@ public class Example {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("https://api.au.whispir.com");
     
+    // Configure API key authorization: ApiKeyAuth
+    ApiKeyAuth ApiKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("ApiKeyAuth");
+    ApiKeyAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKeyAuth.setApiKeyPrefix("Token");
+
     // Configure HTTP basic authorization: BasicAuth
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     AuthApi apiInstance = new AuthApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -57,7 +67,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type | [enum: application/vnd.whispir.auth-v1+json, application/vnd.whispir.auth-v1+xml] |
+| **accept** | **String**| Application specific mime-type | [default to application/vnd.whispir.auth-v1+json] [enum: application/vnd.whispir.auth-v1+json, application/vnd.whispir.auth-v1+xml] |
 
 ### Return type
 
@@ -65,7 +75,7 @@ null (empty response body)
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -110,10 +120,20 @@ public class Example {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("https://api.au.whispir.com");
     
+    // Configure API key authorization: ApiKeyAuth
+    ApiKeyAuth ApiKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("ApiKeyAuth");
+    ApiKeyAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKeyAuth.setApiKeyPrefix("Token");
+
     // Configure HTTP basic authorization: BasicAuth
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     AuthApi apiInstance = new AuthApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -138,8 +158,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type | [enum: application/vnd.whispir.auth-v1+json, application/vnd.whispir.auth-v1+xml] |
-| **accept** | **String**| Application specific mime-type | [enum: application/vnd.whispir.auth-v1+json, application/vnd.whispir.auth-v1+xml] |
+| **contentType** | **String**| Application specific mime-type | [default to application/vnd.whispir.auth-v1+json] [enum: application/vnd.whispir.auth-v1+json, application/vnd.whispir.auth-v1+xml] |
+| **accept** | **String**| Application specific mime-type | [default to application/vnd.whispir.auth-v1+json] [enum: application/vnd.whispir.auth-v1+json, application/vnd.whispir.auth-v1+xml] |
 
 ### Return type
 
@@ -147,7 +167,7 @@ public class Example {
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

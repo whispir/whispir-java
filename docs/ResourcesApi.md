@@ -45,6 +45,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -76,7 +80,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -132,6 +136,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -162,7 +170,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -176,12 +184,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.resource-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -232,6 +240,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -257,7 +269,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
 | **resourceId** | **String**| The identifier for the resource. | |
 
 ### Return type
@@ -266,12 +278,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.resource-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -322,6 +334,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -348,8 +364,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
 | **resource** | [**Resource**](Resource.md)| resources object that needs to be create resources | |
 
 ### Return type
@@ -358,12 +374,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.resource-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.resource-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -414,6 +430,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -441,8 +461,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
 | **resourceId** | **String**| Enter resources id. | |
 | **resource** | [**Resource**](Resource.md)| resources object that needs to be update resources | |
 
@@ -452,12 +472,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.resource-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.resource-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |

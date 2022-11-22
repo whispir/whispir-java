@@ -45,6 +45,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -76,7 +80,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -132,6 +136,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -162,7 +170,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -176,18 +184,18 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.distributionlist-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Example workspace object response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
-| **201** | Example workspace object response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **200** | List distribution lists response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **201** | List distribution lists response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
@@ -201,7 +209,7 @@ public class Example {
 
 <a name="getDistributionListsById"></a>
 # **getDistributionListsById**
-> GetDistributionLists200ResponseDistributionLists getDistributionListsById(workspaceId, xApiKey, accept, distributionlistId)
+> PostDistributionListsRequest getDistributionListsById(workspaceId, xApiKey, accept, distributionlistId)
 
 Retrieve a distribution list
 
@@ -233,13 +241,17 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
     String distributionlistId = "5EFBA89462693D7B"; // String | Enter Distribution id.
     try {
-      GetDistributionLists200ResponseDistributionLists result = apiInstance.getDistributionListsById(workspaceId, xApiKey, accept, distributionlistId);
+      PostDistributionListsRequest result = apiInstance.getDistributionListsById(workspaceId, xApiKey, accept, distributionlistId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DistributionListsApi#getDistributionListsById");
@@ -258,21 +270,21 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
 | **distributionlistId** | **String**| Enter Distribution id. | |
 
 ### Return type
 
-[**GetDistributionLists200ResponseDistributionLists**](GetDistributionLists200ResponseDistributionLists.md)
+[**PostDistributionListsRequest**](PostDistributionListsRequest.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.distributionlist-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -291,7 +303,7 @@ public class Example {
 
 <a name="postDistributionLists"></a>
 # **postDistributionLists**
-> GetDistributionLists200ResponseDistributionLists postDistributionLists(workspaceId, xApiKey, contentType, accept, getDistributionLists200ResponseDistributionLists)
+> PostDistributionListsRequest postDistributionLists(workspaceId, xApiKey, contentType, accept, postDistributionListsRequest)
 
 Create a distribution list
 
@@ -323,14 +335,18 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String contentType = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
     String accept = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
-    GetDistributionLists200ResponseDistributionLists getDistributionLists200ResponseDistributionLists = new GetDistributionLists200ResponseDistributionLists(); // GetDistributionLists200ResponseDistributionLists | Distribution list object that needs to be create Distribution list
+    PostDistributionListsRequest postDistributionListsRequest = new PostDistributionListsRequest(); // PostDistributionListsRequest | Distribution list object that needs to be create Distribution list
     try {
-      GetDistributionLists200ResponseDistributionLists result = apiInstance.postDistributionLists(workspaceId, xApiKey, contentType, accept, getDistributionLists200ResponseDistributionLists);
+      PostDistributionListsRequest result = apiInstance.postDistributionLists(workspaceId, xApiKey, contentType, accept, postDistributionListsRequest);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DistributionListsApi#postDistributionLists");
@@ -349,22 +365,22 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
-| **getDistributionLists200ResponseDistributionLists** | [**GetDistributionLists200ResponseDistributionLists**](GetDistributionLists200ResponseDistributionLists.md)| Distribution list object that needs to be create Distribution list | |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **postDistributionListsRequest** | [**PostDistributionListsRequest**](PostDistributionListsRequest.md)| Distribution list object that needs to be create Distribution list | |
 
 ### Return type
 
-[**GetDistributionLists200ResponseDistributionLists**](GetDistributionLists200ResponseDistributionLists.md)
+[**PostDistributionListsRequest**](PostDistributionListsRequest.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.distributionlist-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.distributionlist-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -383,7 +399,7 @@ public class Example {
 
 <a name="putDistributionListsById"></a>
 # **putDistributionListsById**
-> putDistributionListsById(workspaceId, xApiKey, contentType, accept, distributionlistId, getDistributionLists200ResponseDistributionLists)
+> putDistributionListsById(workspaceId, xApiKey, contentType, accept, distributionlistId, postDistributionListsRequest)
 
 Update a distribution list
 
@@ -415,15 +431,19 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String contentType = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
     String accept = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
     String distributionlistId = "5EFBA89462693D7B"; // String | Enter Distribution id.
-    GetDistributionLists200ResponseDistributionLists getDistributionLists200ResponseDistributionLists = new GetDistributionLists200ResponseDistributionLists(); // GetDistributionLists200ResponseDistributionLists | Distribution list object that needs to be update Distribution list
+    PostDistributionListsRequest postDistributionListsRequest = new PostDistributionListsRequest(); // PostDistributionListsRequest | Distribution list object that needs to be update Distribution list
     try {
-      apiInstance.putDistributionListsById(workspaceId, xApiKey, contentType, accept, distributionlistId, getDistributionLists200ResponseDistributionLists);
+      apiInstance.putDistributionListsById(workspaceId, xApiKey, contentType, accept, distributionlistId, postDistributionListsRequest);
     } catch (ApiException e) {
       System.err.println("Exception when calling DistributionListsApi#putDistributionListsById");
       System.err.println("Status code: " + e.getCode());
@@ -441,10 +461,10 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
 | **distributionlistId** | **String**| Enter Distribution id. | |
-| **getDistributionLists200ResponseDistributionLists** | [**GetDistributionLists200ResponseDistributionLists**](GetDistributionLists200ResponseDistributionLists.md)| Distribution list object that needs to be update Distribution list | |
+| **postDistributionListsRequest** | [**PostDistributionListsRequest**](PostDistributionListsRequest.md)| Distribution list object that needs to be update Distribution list | |
 
 ### Return type
 
@@ -452,7 +472,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

@@ -1,9 +1,8 @@
 # whispir-java
 
 Whispir Platform API
-<!-- x-release-please-start-version -->
-- API version: 1.0.0
-<!-- x-release-please-end -->
+- API version: 1.1.2
+  - Build date: 2022-11-22T09:38:29.014059Z[Etc/UTC]
 
 Whispir Platform API for cross channel and multi channel communications. Documentation on each endpoint is available at https://developers.whispir.com.
 
@@ -23,13 +22,13 @@ Building the API client library requires:
 To install the API client library to your local Maven repository, simply execute:
 
 ```shell
-./gradlew clean build
+mvn clean install
 ```
 
 To deploy it to a remote Maven repository instead, configure the settings of the repository and execute:
 
 ```shell
-./gradlew publishToMavenLocal
+mvn clean deploy
 ```
 
 Refer to the [OSSRH Guide](http://central.sonatype.org/pages/ossrh-guide.html) for more information.
@@ -38,7 +37,6 @@ Refer to the [OSSRH Guide](http://central.sonatype.org/pages/ossrh-guide.html) f
 
 Add this dependency to your project's POM:
 
-<!-- x-release-please-start-version -->
 ```xml
 <dependency>
   <groupId>com.whispir</groupId>
@@ -47,13 +45,11 @@ Add this dependency to your project's POM:
   <scope>compile</scope>
 </dependency>
 ```
-<!-- x-release-please-end -->
 
 ### Gradle users
 
 Add this dependency to your project's build file:
 
-<!-- x-release-please-start-version -->
 ```groovy
   repositories {
     mavenCentral()     // Needed if the 'whispir-java' jar has been published to maven central.
@@ -64,22 +60,19 @@ Add this dependency to your project's build file:
      implementation "com.whispir:whispir-java:1.0.0"
   }
 ```
-<!-- x-release-please-end -->
 
 ### Others
 
 At first generate the JAR by executing:
 
 ```shell
-./gradlew assemble
+mvn clean package
 ```
 
 Then manually install the following JARs:
 
-<!-- x-release-please-start-version -->
 * `target/whispir-java-1.0.0.jar`
 * `target/lib/*.jar`
-<!-- x-release-please-end -->
 
 ## Getting Started
 
@@ -111,6 +104,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ActivitiesApi apiInstance = new ActivitiesApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.activity-v1+json"; // String | Application specific mime-type.
@@ -121,11 +118,11 @@ public class Example {
     String action = "Create"; // String | /activities?action=Map
     String module = "System"; // String | /activities?module=Message
     String user = "james"; // String | /activities?user=james
-    String workspace = "{{workspaceName}}"; // String | /activities?workspace=Whispir.
+    String workspace = "workspace_example"; // String | /activities?workspace=Whispir.
     String status = "Successful"; // String | /activities?status=Successful
     String description = "Sample Activity"; // String | /activities?description=Imported
-    String startTime = "{{startTime}}"; // String | The date and time to start searching from in the format:dd/mm/yyyy hh:mm. This will search on the `time` field <p>/activities?startTime=01/01/2015%2000:00</p>
-    String endTime = "{{endTime}}"; // String | The date and time to start searching from in the format:dd/mm/yyyy hh:mm <p>/activities?endTime=01/01/2015%2000:00</p>
+    String startTime = "startTime_example"; // String | The date and time to start searching from in the format:dd/mm/yyyy hh:mm. This will search on the `time` field <p>/activities?startTime=01/01/2015%2000:00</p>
+    String endTime = "endTime_example"; // String | The date and time to start searching from in the format:dd/mm/yyyy hh:mm <p>/activities?endTime=01/01/2015%2000:00</p>
     try {
       GetActivities200Response result = apiInstance.getActivities(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime);
       System.out.println(result);
@@ -145,74 +142,74 @@ public class Example {
 
 All URIs are relative to *https://api.au.whispir.com*
 
-| Class                  | Method                                                                                      | HTTP request                                                                | Description                       |
-| ---------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------- |
-| *ActivitiesApi*        | [**getActivities**](docs/ActivitiesApi.md#getActivities)                                    | **GET** /activities                                                         | List activities                   |
-| *ActivitiesApi*        | [**getWorkspaceActivities**](docs/ActivitiesApi.md#getWorkspaceActivities)                  | **GET** /workspaces/{workspaceId}/activities                                | List workspace activities         |
-| *ActivitiesApi*        | [**postActivities**](docs/ActivitiesApi.md#postActivities)                                  | **POST** /activities                                                        | Create an activity                |
-| *AuthApi*              | [**getAuthVerification**](docs/AuthApi.md#getAuthVerification)                              | **GET** /auth/verify                                                        | Verify an auth token              |
-| *AuthApi*              | [**postAuth**](docs/AuthApi.md#postAuth)                                                    | **POST** /auth                                                              | Create an auth token              |
-| *CallbacksApi*         | [**deleteCallbackById**](docs/CallbacksApi.md#deleteCallbackById)                           | **DELETE** /callbacks/{callbackId}                                          | Delete a callback                 |
-| *CallbacksApi*         | [**getCallbackById**](docs/CallbacksApi.md#getCallbackById)                                 | **GET** /callbacks/{callbackId}                                             | Get a callback                    |
-| *CallbacksApi*         | [**getCallbackInstances**](docs/CallbacksApi.md#getCallbackInstances)                       | **GET** /callbacks/{callbackId}/calls                                       | List callback instances           |
-| *CallbacksApi*         | [**getCallbacks**](docs/CallbacksApi.md#getCallbacks)                                       | **GET** /callbacks                                                          | List callbacks                    |
-| *CallbacksApi*         | [**postCallbacks**](docs/CallbacksApi.md#postCallbacks)                                     | **POST** /callbacks                                                         | Create a callback                 |
-| *CallbacksApi*         | [**putCallbackById**](docs/CallbacksApi.md#putCallbackById)                                 | **PUT** /callbacks/{callbackId}                                             | Update a callback                 |
-| *CallbacksApi*         | [**putCallbackInstanceStatus**](docs/CallbacksApi.md#putCallbackInstanceStatus)             | **PUT** /callbacks/{callbackId}/calls                                       | Update a callback instance status |
-| *ContactsApi*          | [**deleteContactsById**](docs/ContactsApi.md#deleteContactsById)                            | **DELETE** /workspaces/{workspaceId}/contacts/{contactId}                   | Delete a contact                  |
-| *ContactsApi*          | [**getContacts**](docs/ContactsApi.md#getContacts)                                          | **GET** /workspaces/{workspaceId}/contacts                                  | List contacts                     |
-| *ContactsApi*          | [**getContactsById**](docs/ContactsApi.md#getContactsById)                                  | **GET** /workspaces/{workspaceId}/contacts/{contactId}                      | Retrieve a contact                |
-| *ContactsApi*          | [**postContacts**](docs/ContactsApi.md#postContacts)                                        | **POST** /workspaces/{workspaceId}/contacts                                 | Create a contact                  |
-| *ContactsApi*          | [**putContactsById**](docs/ContactsApi.md#putContactsById)                                  | **PUT** /workspaces/{workspaceId}/contacts/{contactId}                      | Update a contact                  |
-| *CustomListsApi*       | [**getCustomLists**](docs/CustomListsApi.md#getCustomLists)                                 | **GET** /customlists                                                        | List custom lists                 |
-| *CustomListsApi*       | [**getCustomListsById**](docs/CustomListsApi.md#getCustomListsById)                         | **GET** /customlists/{customlistId}                                         | Retrieve a custom list            |
-| *DistributionListsApi* | [**deleteDistributionListsById**](docs/DistributionListsApi.md#deleteDistributionListsById) | **DELETE** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Delete a distribution list        |
-| *DistributionListsApi* | [**getDistributionLists**](docs/DistributionListsApi.md#getDistributionLists)               | **GET** /workspaces/{workspaceId}/distributionlists                         | List distribution lists           |
-| *DistributionListsApi* | [**getDistributionListsById**](docs/DistributionListsApi.md#getDistributionListsById)       | **GET** /workspaces/{workspaceId}/distributionlists/{distributionlistId}    | Retrieve a distribution list      |
-| *DistributionListsApi* | [**postDistributionLists**](docs/DistributionListsApi.md#postDistributionLists)             | **POST** /workspaces/{workspaceId}/distributionlists                        | Create a distribution list        |
-| *DistributionListsApi* | [**putDistributionListsById**](docs/DistributionListsApi.md#putDistributionListsById)       | **PUT** /workspaces/{workspaceId}/distributionlists/{distributionlistId}    | Update a distribution list        |
-| *EventsApi*            | [**createEvent**](docs/EventsApi.md#createEvent)                                            | **POST** /workspaces/{workspaceId}/events                                   | Create an event                   |
-| *EventsApi*            | [**getEventById**](docs/EventsApi.md#getEventById)                                          | **GET** /workspaces/{workspaceId}/events/{eventId}                          | Retrieve an event                 |
-| *EventsApi*            | [**getEvents**](docs/EventsApi.md#getEvents)                                                | **GET** /workspaces/{workspaceId}/events                                    | List events                       |
-| *EventsApi*            | [**putEventById**](docs/EventsApi.md#putEventById)                                          | **PUT** /workspaces/{workspaceId}/events/{eventId}                          | Update an event                   |
-| *ImportsApi*           | [**postImports**](docs/ImportsApi.md#postImports)                                           | **POST** /workspaces/{workspaceId}/imports                                  | Create an import                  |
-| *MessagesApi*          | [**getMessageById**](docs/MessagesApi.md#getMessageById)                                    | **GET** /workspaces/{workspaceId}/messages/{messageId}                      | Retrieve a message                |
-| *MessagesApi*          | [**getMessageResponsesById**](docs/MessagesApi.md#getMessageResponsesById)                  | **GET** /workspaces/{workspaceId}/messages/{messageId}/messageresponses     | Retrieve a message response       |
-| *MessagesApi*          | [**getMessageStatus**](docs/MessagesApi.md#getMessageStatus)                                | **GET** /workspaces/{workspaceId}/messages/{messageId}/messagestatus        | Retrieve a message status         |
-| *MessagesApi*          | [**getMessages**](docs/MessagesApi.md#getMessages)                                          | **GET** /workspaces/{workspaceId}/messages                                  | List messages                     |
-| *MessagesApi*          | [**postMessages**](docs/MessagesApi.md#postMessages)                                        | **POST** /workspaces/{workspaceId}/messages                                 | Send a message                    |
-| *ResourcesApi*         | [**deleteResourcesById**](docs/ResourcesApi.md#deleteResourcesById)                         | **DELETE** /workspaces/{workspaceId}/resources/{resourceId}                 | Delete a resource                 |
-| *ResourcesApi*         | [**getResources**](docs/ResourcesApi.md#getResources)                                       | **GET** /workspaces/{workspaceId}/resources                                 | List resources                    |
-| *ResourcesApi*         | [**getResourcesById**](docs/ResourcesApi.md#getResourcesById)                               | **GET** /workspaces/{workspaceId}/resources/{resourceId}                    | Retrieve a resource               |
-| *ResourcesApi*         | [**postResources**](docs/ResourcesApi.md#postResources)                                     | **POST** /workspaces/{workspaceId}/resources                                | Create a resource                 |
-| *ResourcesApi*         | [**putResourcesById**](docs/ResourcesApi.md#putResourcesById)                               | **PUT** /workspaces/{workspaceId}/resources/{resourceId}                    | Update a resource                 |
-| *ResponseRulesApi*     | [**deleteResponseRulesById**](docs/ResponseRulesApi.md#deleteResponseRulesById)             | **DELETE** /workspaces/{workspaceId}/responserules/{responseRuleId}         | Delete a response rule            |
-| *ResponseRulesApi*     | [**getResponseRules**](docs/ResponseRulesApi.md#getResponseRules)                           | **GET** /workspaces/{workspaceId}/responserules                             | List response rules               |
-| *ResponseRulesApi*     | [**getResponseRulesById**](docs/ResponseRulesApi.md#getResponseRulesById)                   | **GET** /workspaces/{workspaceId}/responserules/{responseRuleId}            | Retrieve a response rule          |
-| *ResponseRulesApi*     | [**postResponseRules**](docs/ResponseRulesApi.md#postResponseRules)                         | **POST** /workspaces/{workspaceId}/responserules                            | Create a response rule            |
-| *ResponseRulesApi*     | [**putResponseRulesById**](docs/ResponseRulesApi.md#putResponseRulesById)                   | **PUT** /workspaces/{workspaceId}/responserules/{responseRuleId}            | Update a response rule            |
-| *ScenariosApi*         | [**deleteScenariosById**](docs/ScenariosApi.md#deleteScenariosById)                         | **DELETE** /workspaces/{workspaceId}/scenarios/{scenarioId}                 | Delete a scenario                 |
-| *ScenariosApi*         | [**getScenarios**](docs/ScenariosApi.md#getScenarios)                                       | **GET** /workspaces/{workspaceId}/scenarios                                 | List scenarios                    |
-| *ScenariosApi*         | [**getScenariosById**](docs/ScenariosApi.md#getScenariosById)                               | **GET** /workspaces/{workspaceId}/scenarios/{scenarioId}                    | Retrieve a scenario               |
-| *ScenariosApi*         | [**postScenarios**](docs/ScenariosApi.md#postScenarios)                                     | **POST** /workspaces/{workspaceId}/scenarios                                | Create a scenario                 |
-| *ScenariosApi*         | [**postScenariosById**](docs/ScenariosApi.md#postScenariosById)                             | **POST** /workspaces/{workspaceId}/scenarios/{scenarioId}                   | Run a scenario                    |
-| *ScenariosApi*         | [**putScenariosById**](docs/ScenariosApi.md#putScenariosById)                               | **PUT** /workspaces/{workspaceId}/scenarios/{scenarioId}                    | Update a scenario                 |
-| *TemplatesApi*         | [**deleteTemplatesById**](docs/TemplatesApi.md#deleteTemplatesById)                         | **DELETE** /workspaces/{workspaceId}/templates/{templateId}                 | Delete a template                 |
-| *TemplatesApi*         | [**getTemplates**](docs/TemplatesApi.md#getTemplates)                                       | **GET** /workspaces/{workspaceId}/templates                                 | List templates                    |
-| *TemplatesApi*         | [**getTemplatesById**](docs/TemplatesApi.md#getTemplatesById)                               | **GET** /workspaces/{workspaceId}/templates/{templateId}                    | Retrieve a template               |
-| *TemplatesApi*         | [**postTemplates**](docs/TemplatesApi.md#postTemplates)                                     | **POST** /workspaces/{workspaceId}/templates                                | Create a template                 |
-| *TemplatesApi*         | [**putTemplatesById**](docs/TemplatesApi.md#putTemplatesById)                               | **PUT** /workspaces/{workspaceId}/templates/{templateId}                    | Update a template                 |
-| *UsersApi*             | [**deleteUsers**](docs/UsersApi.md#deleteUsers)                                             | **DELETE** /users                                                           | Delete all users                  |
-| *UsersApi*             | [**deleteUsersById**](docs/UsersApi.md#deleteUsersById)                                     | **DELETE** /users/{userId}                                                  | Delete a user                     |
-| *UsersApi*             | [**getUsers**](docs/UsersApi.md#getUsers)                                                   | **GET** /users                                                              | List users                        |
-| *UsersApi*             | [**getUsersById**](docs/UsersApi.md#getUsersById)                                           | **GET** /users/{userId}                                                     | Retrieve a user                   |
-| *UsersApi*             | [**getWorkspaceUsers**](docs/UsersApi.md#getWorkspaceUsers)                                 | **GET** /workspaces/{workspaceId}/users                                     | List workspace users              |
-| *UsersApi*             | [**postUsers**](docs/UsersApi.md#postUsers)                                                 | **POST** /users                                                             | Create a user                     |
-| *UsersApi*             | [**putUsersById**](docs/UsersApi.md#putUsersById)                                           | **PUT** /users/{userId}                                                     | Update a user                     |
-| *WorkspacesApi*        | [**getWorkspaces**](docs/WorkspacesApi.md#getWorkspaces)                                    | **GET** /workspaces                                                         | List workspaces                   |
-| *WorkspacesApi*        | [**getWorkspacesById**](docs/WorkspacesApi.md#getWorkspacesById)                            | **GET** /workspaces/{workspaceId}                                           | Retrieve a workspace              |
-| *WorkspacesApi*        | [**postWorkspaces**](docs/WorkspacesApi.md#postWorkspaces)                                  | **POST** /workspaces                                                        | Create a workspace                |
-| *WorkspacesApi*        | [**putWorkspaceById**](docs/WorkspacesApi.md#putWorkspaceById)                              | **PUT** /workspaces/{workspaceId}                                           | Update a workspace                |
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*ActivitiesApi* | [**getActivities**](docs/ActivitiesApi.md#getActivities) | **GET** /activities | List activities
+*ActivitiesApi* | [**getWorkspaceActivities**](docs/ActivitiesApi.md#getWorkspaceActivities) | **GET** /workspaces/{workspaceId}/activities | List workspace activities
+*ActivitiesApi* | [**postActivities**](docs/ActivitiesApi.md#postActivities) | **POST** /activities | Create an activity
+*AuthApi* | [**getAuthVerification**](docs/AuthApi.md#getAuthVerification) | **GET** /auth/verify | Verify an auth token
+*AuthApi* | [**postAuth**](docs/AuthApi.md#postAuth) | **POST** /auth | Create an auth token
+*CallbacksApi* | [**deleteCallbackById**](docs/CallbacksApi.md#deleteCallbackById) | **DELETE** /callbacks/{callbackId} | Delete a callback
+*CallbacksApi* | [**getCallbackById**](docs/CallbacksApi.md#getCallbackById) | **GET** /callbacks/{callbackId} | Retrieve a callback
+*CallbacksApi* | [**getCallbackCalls**](docs/CallbacksApi.md#getCallbackCalls) | **GET** /callbacks/{callbackId}/calls | List callback calls
+*CallbacksApi* | [**getCallbacks**](docs/CallbacksApi.md#getCallbacks) | **GET** /callbacks | List callbacks
+*CallbacksApi* | [**postCallbacks**](docs/CallbacksApi.md#postCallbacks) | **POST** /callbacks | Create a callback
+*CallbacksApi* | [**putCallbackById**](docs/CallbacksApi.md#putCallbackById) | **PUT** /callbacks/{callbackId} | Update a callback
+*CallbacksApi* | [**putCallbackCallStatus**](docs/CallbacksApi.md#putCallbackCallStatus) | **PUT** /callbacks/{callbackId}/calls | Update a callback call status
+*ContactsApi* | [**deleteContactsById**](docs/ContactsApi.md#deleteContactsById) | **DELETE** /workspaces/{workspaceId}/contacts/{contactId} | Delete a contact
+*ContactsApi* | [**getContacts**](docs/ContactsApi.md#getContacts) | **GET** /workspaces/{workspaceId}/contacts | List contacts
+*ContactsApi* | [**getContactsById**](docs/ContactsApi.md#getContactsById) | **GET** /workspaces/{workspaceId}/contacts/{contactId} | Retrieve a contact
+*ContactsApi* | [**postContacts**](docs/ContactsApi.md#postContacts) | **POST** /workspaces/{workspaceId}/contacts | Create a contact
+*ContactsApi* | [**putContactsById**](docs/ContactsApi.md#putContactsById) | **PUT** /workspaces/{workspaceId}/contacts/{contactId} | Update a contact
+*CustomListsApi* | [**getCustomLists**](docs/CustomListsApi.md#getCustomLists) | **GET** /customlists | List custom lists
+*CustomListsApi* | [**getCustomListsById**](docs/CustomListsApi.md#getCustomListsById) | **GET** /customlists/{customlistId} | Retrieve a custom list
+*DistributionListsApi* | [**deleteDistributionListsById**](docs/DistributionListsApi.md#deleteDistributionListsById) | **DELETE** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Delete a distribution list
+*DistributionListsApi* | [**getDistributionLists**](docs/DistributionListsApi.md#getDistributionLists) | **GET** /workspaces/{workspaceId}/distributionlists | List distribution lists
+*DistributionListsApi* | [**getDistributionListsById**](docs/DistributionListsApi.md#getDistributionListsById) | **GET** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Retrieve a distribution list
+*DistributionListsApi* | [**postDistributionLists**](docs/DistributionListsApi.md#postDistributionLists) | **POST** /workspaces/{workspaceId}/distributionlists | Create a distribution list
+*DistributionListsApi* | [**putDistributionListsById**](docs/DistributionListsApi.md#putDistributionListsById) | **PUT** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Update a distribution list
+*EventsApi* | [**createEvent**](docs/EventsApi.md#createEvent) | **POST** /workspaces/{workspaceId}/events | Create an event
+*EventsApi* | [**getEventById**](docs/EventsApi.md#getEventById) | **GET** /workspaces/{workspaceId}/events/{eventId} | Retrieve an event
+*EventsApi* | [**getEvents**](docs/EventsApi.md#getEvents) | **GET** /workspaces/{workspaceId}/events | List events
+*EventsApi* | [**putEventById**](docs/EventsApi.md#putEventById) | **PUT** /workspaces/{workspaceId}/events/{eventId} | Update an event
+*ImportsApi* | [**postImports**](docs/ImportsApi.md#postImports) | **POST** /workspaces/{workspaceId}/imports | Create an import
+*MessagesApi* | [**getMessageById**](docs/MessagesApi.md#getMessageById) | **GET** /workspaces/{workspaceId}/messages/{messageId} | Retrieve a message
+*MessagesApi* | [**getMessageResponsesById**](docs/MessagesApi.md#getMessageResponsesById) | **GET** /workspaces/{workspaceId}/messages/{messageId}/messageresponses | Retrieve a message response
+*MessagesApi* | [**getMessageStatus**](docs/MessagesApi.md#getMessageStatus) | **GET** /workspaces/{workspaceId}/messages/{messageId}/messagestatus | Retrieve a message status
+*MessagesApi* | [**getMessages**](docs/MessagesApi.md#getMessages) | **GET** /workspaces/{workspaceId}/messages | List messages
+*MessagesApi* | [**postMessages**](docs/MessagesApi.md#postMessages) | **POST** /workspaces/{workspaceId}/messages | Send a message
+*ResourcesApi* | [**deleteResourcesById**](docs/ResourcesApi.md#deleteResourcesById) | **DELETE** /workspaces/{workspaceId}/resources/{resourceId} | Delete a resource
+*ResourcesApi* | [**getResources**](docs/ResourcesApi.md#getResources) | **GET** /workspaces/{workspaceId}/resources | List resources
+*ResourcesApi* | [**getResourcesById**](docs/ResourcesApi.md#getResourcesById) | **GET** /workspaces/{workspaceId}/resources/{resourceId} | Retrieve a resource
+*ResourcesApi* | [**postResources**](docs/ResourcesApi.md#postResources) | **POST** /workspaces/{workspaceId}/resources | Create a resource
+*ResourcesApi* | [**putResourcesById**](docs/ResourcesApi.md#putResourcesById) | **PUT** /workspaces/{workspaceId}/resources/{resourceId} | Update a resource
+*ResponseRulesApi* | [**deleteResponseRulesById**](docs/ResponseRulesApi.md#deleteResponseRulesById) | **DELETE** /workspaces/{workspaceId}/responserules/{responseRuleId} | Delete a response rule
+*ResponseRulesApi* | [**getResponseRules**](docs/ResponseRulesApi.md#getResponseRules) | **GET** /workspaces/{workspaceId}/responserules | List response rules
+*ResponseRulesApi* | [**getResponseRulesById**](docs/ResponseRulesApi.md#getResponseRulesById) | **GET** /workspaces/{workspaceId}/responserules/{responseRuleId} | Retrieve a response rule
+*ResponseRulesApi* | [**postResponseRules**](docs/ResponseRulesApi.md#postResponseRules) | **POST** /workspaces/{workspaceId}/responserules | Create a response rule
+*ResponseRulesApi* | [**putResponseRulesById**](docs/ResponseRulesApi.md#putResponseRulesById) | **PUT** /workspaces/{workspaceId}/responserules/{responseRuleId} | Update a response rule
+*ScenariosApi* | [**deleteScenariosById**](docs/ScenariosApi.md#deleteScenariosById) | **DELETE** /workspaces/{workspaceId}/scenarios/{scenarioId} | Delete a scenario
+*ScenariosApi* | [**getScenarios**](docs/ScenariosApi.md#getScenarios) | **GET** /workspaces/{workspaceId}/scenarios | List scenarios
+*ScenariosApi* | [**getScenariosById**](docs/ScenariosApi.md#getScenariosById) | **GET** /workspaces/{workspaceId}/scenarios/{scenarioId} | Retrieve a scenario
+*ScenariosApi* | [**postScenarios**](docs/ScenariosApi.md#postScenarios) | **POST** /workspaces/{workspaceId}/scenarios | Create a scenario
+*ScenariosApi* | [**postScenariosById**](docs/ScenariosApi.md#postScenariosById) | **POST** /workspaces/{workspaceId}/scenarios/{scenarioId} | Run a scenario
+*ScenariosApi* | [**putScenariosById**](docs/ScenariosApi.md#putScenariosById) | **PUT** /workspaces/{workspaceId}/scenarios/{scenarioId} | Update a scenario
+*TemplatesApi* | [**deleteTemplatesById**](docs/TemplatesApi.md#deleteTemplatesById) | **DELETE** /workspaces/{workspaceId}/templates/{templateId} | Delete a template
+*TemplatesApi* | [**getTemplates**](docs/TemplatesApi.md#getTemplates) | **GET** /workspaces/{workspaceId}/templates | List templates
+*TemplatesApi* | [**getTemplatesById**](docs/TemplatesApi.md#getTemplatesById) | **GET** /workspaces/{workspaceId}/templates/{templateId} | Retrieve a template
+*TemplatesApi* | [**postTemplates**](docs/TemplatesApi.md#postTemplates) | **POST** /workspaces/{workspaceId}/templates | Create a template
+*TemplatesApi* | [**putTemplatesById**](docs/TemplatesApi.md#putTemplatesById) | **PUT** /workspaces/{workspaceId}/templates/{templateId} | Update a template
+*UsersApi* | [**deleteUsers**](docs/UsersApi.md#deleteUsers) | **DELETE** /users | Delete all users
+*UsersApi* | [**deleteUsersById**](docs/UsersApi.md#deleteUsersById) | **DELETE** /users/{userId} | Delete a user
+*UsersApi* | [**getUsers**](docs/UsersApi.md#getUsers) | **GET** /users | List users
+*UsersApi* | [**getUsersById**](docs/UsersApi.md#getUsersById) | **GET** /users/{userId} | Retrieve a user
+*UsersApi* | [**getWorkspaceUsers**](docs/UsersApi.md#getWorkspaceUsers) | **GET** /workspaces/{workspaceId}/users | List workspace users
+*UsersApi* | [**postUsers**](docs/UsersApi.md#postUsers) | **POST** /users | Create a user
+*UsersApi* | [**putUsersById**](docs/UsersApi.md#putUsersById) | **PUT** /users/{userId} | Update a user
+*WorkspacesApi* | [**getWorkspaces**](docs/WorkspacesApi.md#getWorkspaces) | **GET** /workspaces | List workspaces
+*WorkspacesApi* | [**getWorkspacesById**](docs/WorkspacesApi.md#getWorkspacesById) | **GET** /workspaces/{workspaceId} | Retrieve a workspace
+*WorkspacesApi* | [**postWorkspaces**](docs/WorkspacesApi.md#postWorkspaces) | **POST** /workspaces | Create a workspace
+*WorkspacesApi* | [**putWorkspaceById**](docs/WorkspacesApi.md#putWorkspaceById) | **PUT** /workspaces/{workspaceId} | Update a workspace
 
 
 ## Documentation for Models
@@ -221,11 +218,11 @@ All URIs are relative to *https://api.au.whispir.com*
  - [Attachment](docs/Attachment.md)
  - [Callback](docs/Callback.md)
  - [CallbackAuth](docs/CallbackAuth.md)
+ - [CallbackCall](docs/CallbackCall.md)
+ - [CallbackCallCallback](docs/CallbackCallCallback.md)
+ - [CallbackCallFrom](docs/CallbackCallFrom.md)
+ - [CallbackCallResponseMessage](docs/CallbackCallResponseMessage.md)
  - [CallbackCallbacks](docs/CallbackCallbacks.md)
- - [CallbackInstance](docs/CallbackInstance.md)
- - [CallbackInstanceCallback](docs/CallbackInstanceCallback.md)
- - [CallbackInstanceFrom](docs/CallbackInstanceFrom.md)
- - [CallbackInstanceResponseMessage](docs/CallbackInstanceResponseMessage.md)
  - [Contact](docs/Contact.md)
  - [CustomList](docs/CustomList.md)
  - [CustomListCustomlabellistsInner](docs/CustomListCustomlabellistsInner.md)
@@ -245,13 +242,13 @@ All URIs are relative to *https://api.au.whispir.com*
  - [FeaturesPushOptionsFcm](docs/FeaturesPushOptionsFcm.md)
  - [FieldMapping](docs/FieldMapping.md)
  - [GetActivities200Response](docs/GetActivities200Response.md)
- - [GetCallbackInstances200Response](docs/GetCallbackInstances200Response.md)
+ - [GetCallbackCalls200Response](docs/GetCallbackCalls200Response.md)
  - [GetCallbacks200Response](docs/GetCallbacks200Response.md)
  - [GetCallbacks200ResponseCallbacksInner](docs/GetCallbacks200ResponseCallbacksInner.md)
  - [GetContacts200Response](docs/GetContacts200Response.md)
  - [GetCustomLists200Response](docs/GetCustomLists200Response.md)
  - [GetDistributionLists200Response](docs/GetDistributionLists200Response.md)
- - [GetDistributionLists200ResponseDistributionLists](docs/GetDistributionLists200ResponseDistributionLists.md)
+ - [GetDistributionLists200ResponseDistributionListsInner](docs/GetDistributionLists200ResponseDistributionListsInner.md)
  - [GetEvents200Response](docs/GetEvents200Response.md)
  - [GetMessageResponsesById200Response](docs/GetMessageResponsesById200Response.md)
  - [GetMessages200Response](docs/GetMessages200Response.md)
@@ -265,10 +262,12 @@ All URIs are relative to *https://api.au.whispir.com*
  - [GetMessages500Response](docs/GetMessages500Response.md)
  - [GetMessages501Response](docs/GetMessages501Response.md)
  - [GetResources200Response](docs/GetResources200Response.md)
+ - [GetResponseRules200Response](docs/GetResponseRules200Response.md)
  - [GetScenarios200Response](docs/GetScenarios200Response.md)
  - [GetTemplates200Response](docs/GetTemplates200Response.md)
  - [GetTemplates200ResponseMessagetemplatesInner](docs/GetTemplates200ResponseMessagetemplatesInner.md)
  - [GetUsers200Response](docs/GetUsers200Response.md)
+ - [GetWorkspaceActivities200Response](docs/GetWorkspaceActivities200Response.md)
  - [GetWorkspaces200Response](docs/GetWorkspaces200Response.md)
  - [LinkInner](docs/LinkInner.md)
  - [ListUsers](docs/ListUsers.md)
@@ -283,11 +282,10 @@ All URIs are relative to *https://api.au.whispir.com*
  - [MessageStatus](docs/MessageStatus.md)
  - [MessageStatusMessageStatusesInner](docs/MessageStatusMessageStatusesInner.md)
  - [MessageStatusMessageStatusesInnerCategoriesInner](docs/MessageStatusMessageStatusesInnerCategoriesInner.md)
- - [MessageStatusMessageStatusesInnerStatusInner](docs/MessageStatusMessageStatusesInnerStatusInner.md)
  - [MessagingoptionsInner](docs/MessagingoptionsInner.md)
  - [ModelImport](docs/ModelImport.md)
  - [PostAuth200Response](docs/PostAuth200Response.md)
- - [PutCallbackInstanceStatusRequest](docs/PutCallbackInstanceStatusRequest.md)
+ - [PostDistributionListsRequest](docs/PostDistributionListsRequest.md)
  - [Resource](docs/Resource.md)
  - [ResponseRule](docs/ResponseRule.md)
  - [ResponseTemplatePattern](docs/ResponseTemplatePattern.md)
@@ -312,6 +310,10 @@ Authentication schemes defined for the API:
 - **Location**: HTTP header
 
 ### BasicAuth
+
+- **Type**: HTTP basic authentication
+
+### BearerAuth
 
 - **Type**: HTTP basic authentication
 

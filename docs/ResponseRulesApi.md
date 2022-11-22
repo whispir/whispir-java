@@ -45,6 +45,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResponseRulesApi apiInstance = new ResponseRulesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -76,7 +80,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -100,7 +104,7 @@ null (empty response body)
 
 <a name="getResponseRules"></a>
 # **getResponseRules**
-> getResponseRules(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields)
+> GetResponseRules200Response getResponseRules(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields)
 
 List response rules
 
@@ -132,6 +136,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResponseRulesApi apiInstance = new ResponseRulesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -141,7 +149,8 @@ public class Example {
     String sortOrder = "asc"; // String | The order in which you require the results to be returned. Either ‘asc’ or ‘desc’
     String sortFields = "lastName,jobTitle"; // String | The fields that you require the ordering to be performed on. Multiple fields can be provided, separated by a comma.
     try {
-      apiInstance.getResponseRules(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+      GetResponseRules200Response result = apiInstance.getResponseRules(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ResponseRulesApi#getResponseRules");
       System.err.println("Status code: " + e.getCode());
@@ -159,7 +168,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.responserule-v1+json] [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -167,16 +176,16 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**GetResponseRules200Response**](GetResponseRules200Response.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.responserule-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -195,7 +204,7 @@ null (empty response body)
 
 <a name="getResponseRulesById"></a>
 # **getResponseRulesById**
-> getResponseRulesById(workspaceId, xApiKey, accept, responseRuleId)
+> ResponseRule getResponseRulesById(workspaceId, xApiKey, accept, responseRuleId)
 
 Retrieve a response rule
 
@@ -227,13 +236,18 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResponseRulesApi apiInstance = new ResponseRulesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.responserule-v1+json"; // String | Application specific mime-type.
     String responseRuleId = "64BC5314665B947B"; // String | Response Rule Id
     try {
-      apiInstance.getResponseRulesById(workspaceId, xApiKey, accept, responseRuleId);
+      ResponseRule result = apiInstance.getResponseRulesById(workspaceId, xApiKey, accept, responseRuleId);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ResponseRulesApi#getResponseRulesById");
       System.err.println("Status code: " + e.getCode());
@@ -251,21 +265,21 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.responserule-v1+json] [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
 | **responseRuleId** | **String**| Response Rule Id | |
 
 ### Return type
 
-null (empty response body)
+[**ResponseRule**](ResponseRule.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.responserule-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -316,6 +330,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResponseRulesApi apiInstance = new ResponseRulesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -341,8 +359,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.responserule-v1+json] [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.responserule-v1+json] [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
 | **responseRule** | [**ResponseRule**](ResponseRule.md)|  | |
 
 ### Return type
@@ -351,7 +369,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -407,6 +425,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResponseRulesApi apiInstance = new ResponseRulesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -433,8 +455,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.responserule-v1+json] [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.responserule-v1+json] [enum: application/vnd.whispir.responserule-v1+json, application/vnd.whispir.responserule-v1+xml] |
 | **responseRuleId** | **String**| Response Rule Id | |
 | **responseRule** | [**ResponseRule**](ResponseRule.md)| Response Rules object used to update Response Rules | |
 
@@ -444,7 +466,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

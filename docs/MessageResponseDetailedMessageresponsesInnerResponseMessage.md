@@ -8,9 +8,9 @@ The message response object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**content** | **String** | The message response content. |  |
-|**acknowledged** | **String** | The message response acknowledgement status. |  |
-|**channel** | [**ChannelEnum**](#ChannelEnum) | The message response channel. |  |
+|**content** | **String** | The message response content. |  [optional] [readonly] |
+|**acknowledged** | **String** | The message response acknowledgement status. |  [optional] [readonly] |
+|**channel** | [**ChannelEnum**](#ChannelEnum) | The message response channel. |  [optional] [readonly] |
 
 
 
