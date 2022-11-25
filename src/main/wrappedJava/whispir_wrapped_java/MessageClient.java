@@ -22,16 +22,18 @@ import whispir_sdk_java.ApiException;
 public class MessageClient {
 
   private static String WORKSPACE_ID;
+  private static String API_KEY;
   private static final String CONTENT_TYPE = "application/vnd.whispir.message-v1+json";
   private static final String ACCEPT = "application/vnd.whispir.message-v1+json";
   private static ApiClient apiClientInit;
 
-  public MessageClient(ApiClient client, String workspaceId) {
+  public MessageClient(ApiClient client, String workspaceId, String apiKey) {
     apiClientInit = client;
     WORKSPACE_ID = workspaceId;
+    API_KEY = apiKey;
   }
 
-  public static Message postMessage(Message MESSAGE, String API_KEY) {
+  public static Message postMessage(Message MESSAGE) {
     MessagesApi message = new MessagesApi(apiClientInit);
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/YYYY HH:mm");
@@ -57,7 +59,6 @@ public class MessageClient {
   }
 
   public static GetMessages200Response listMessages(
-      String API_KEY,
       BigDecimal LIMIT,
       BigDecimal OFFSET,
       String SORT_ORDER,
@@ -78,7 +79,7 @@ public class MessageClient {
     }
   }
 
-  public static Message retrieveMessage(String API_KEY, String MESSAGE_ID) {
+  public static Message retrieveMessage(String MESSAGE_ID) {
     MessagesApi message = new MessagesApi(apiClientInit);
     try {
       return message.getMessageById(WORKSPACE_ID, API_KEY, ACCEPT, MESSAGE_ID);
@@ -88,7 +89,6 @@ public class MessageClient {
   }
 
   public static MessageStatus retrieveMessageStatus(
-      String API_KEY,
       String MESSAGE_ID,
       BigDecimal LIMIT,
       BigDecimal OFFSET,
@@ -116,7 +116,6 @@ public class MessageClient {
   }
 
   public static GetMessageResponsesById200Response retrieveMessageResponse(
-      String API_KEY,
       String MESSAGE_ID,
       BigDecimal LIMIT,
       BigDecimal OFFSET,

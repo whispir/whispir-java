@@ -3,13 +3,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.openapitools.client.model.Message;
 import whispir_sdk_java.ApiException;
-
 class MessagesWrappedApiTest {
 
-  private final MessagesWrappedApi messagesWrappedApi = new MessagesWrappedApi();
+  private final static MessagesWrappedApi messagesWrappedApi = new MessagesWrappedApi();
 
-  @Test
-  void sendMessageTest() throws ApiException {
+  static void sendMessageTest() throws ApiException {
     String workspaceId = null;
     String xApiKey = null;
     String contentType = null;
@@ -23,5 +21,10 @@ class MessagesWrappedApiTest {
       accept,
       message
     );
+  }
+
+  public static void main(String[] args) {
+    System.out.println("this is the main method ");
+    sendMessageTest();
   }
 }
