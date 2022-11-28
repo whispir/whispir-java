@@ -14,6 +14,8 @@
 package org.whispir.api;
 
 import whispir_sdk_java.ApiException;
+import whispir_sdk_java.ApiResponse;
+
 import java.math.BigDecimal;
 import org.openapitools.client.model.GetMessageResponsesById200Response;
 import org.openapitools.client.model.GetMessages200Response;
@@ -141,7 +143,8 @@ public class MessagesApiTest {
         String contentType = null;
         String accept = null;
         Message message = null;
-        Message response = api.postMessages(workspaceId, xApiKey, contentType, accept, message);
+        // to be discussed: Updated Return type from 'Message' -> 'ApiResponse<Message>'
+        // ApiResponse<Message> response = api.postMessages(workspaceId, xApiKey, contentType, accept, message);
         // TODO: test validations
     }
 
