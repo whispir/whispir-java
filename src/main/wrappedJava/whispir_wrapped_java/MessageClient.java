@@ -12,6 +12,8 @@ import org.openapitools.client.model.GetMessages200Response;
 import org.openapitools.client.model.Message;
 import org.openapitools.client.model.MessageStatus;
 import org.whispir.api.MessagesApi;
+
+import whispir_sdk_java.ApiResponse;
 import whispir_sdk_java.ApiClient;
 import whispir_sdk_java.ApiException;
 
@@ -33,32 +35,35 @@ public class MessageClient {
     API_KEY = apiKey;
   }
 
-  public static Message postMessage(Message MESSAGE) {
-    MessagesApi message = new MessagesApi(apiClientInit);
-    Calendar calendar = Calendar.getInstance();
-    SimpleDateFormat dateFor = new SimpleDateFormat("dd/MM/YYYY HH:mm");
-    calendar.add(Calendar.DAY_OF_WEEK, 1);
+  public Message create(String to, String subject, String body) {
+    MessagesApi messageApi = new MessagesApi(apiClientInit);
+    Message payload = new Message();
 
-    if (MESSAGE.getMessageType() == null || MESSAGE.getScheduleType() == null || MESSAGE.getScheduleDate() == null) {
-
-      MESSAGE.messageType(Message.MessageTypeEnum.SCHEDULED);
-      MESSAGE.scheduleType(Message.ScheduleTypeEnum.ONCE);
-      MESSAGE.scheduleDate(dateFor.format(calendar.getTime()));
-    }
+    payload.to(to);
+    payload.subject(subject);
+    payload.body(body);
 
     try {
-      return message.postMessages(
+      Message response = messageApi.postMessages(
           WORKSPACE_ID,
           API_KEY,
           CONTENT_TYPE,
           ACCEPT,
-          MESSAGE);
+          payload
+      );
+
+      return response;
     } catch (ApiException e) {
+      System.err.println("Exception when calling Send SMS Message API");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
       throw new Error(e);
     }
   }
 
-  public static GetMessages200Response listMessages(
+  public GetMessages200Response listMessages(
       BigDecimal LIMIT,
       BigDecimal OFFSET,
       String SORT_ORDER,

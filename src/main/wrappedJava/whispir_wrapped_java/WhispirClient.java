@@ -19,7 +19,7 @@ public class WhispirClient {
     private static String workspaceId;
     private static String apiKey;
 
-    public static MessageClient ClientMessage;
+    public MessageClient ClientMessage;
 
     public WhispirClient(String API_URL, String USERNAME, String PASSWORD, String WORKSPACE_ID, String API_KEY) {
         ApiClient client;
@@ -30,8 +30,6 @@ public class WhispirClient {
         client.setUsername(USERNAME);
         client.setPassword(PASSWORD);
         client.setApiKey(API_KEY);
-
-        System.out.println(client);
         
         ApiKeyAuth auth = (ApiKeyAuth) client.getAuthentication("ApiKeyAuth");
 
