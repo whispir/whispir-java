@@ -846,6 +846,10 @@ public class ApiClient {
             contentType = "application/json";
         }
         if (isJsonMime(contentType)) {
+            // to be discussed: current quick win to bypass deserialization 
+            if(respBody instanceof String){
+                return (T) respBody;
+            }
             return json.deserialize(respBody, returnType);
         } else if (returnType.equals(String.class)) {
             // Expecting string, return the raw response body.
