@@ -48,7 +48,8 @@ import java.util.HashMap;
  */
 public class JSON {
     private static Gson gson;
-    private static boolean isLenientOnJson = false;
+    // does not work :(
+    private static boolean isLenientOnJson = true;
     private static DateTypeAdapter dateTypeAdapter = new DateTypeAdapter();
     private static SqlDateTypeAdapter sqlDateTypeAdapter = new SqlDateTypeAdapter();
     private static OffsetDateTimeTypeAdapter offsetDateTimeTypeAdapter = new OffsetDateTimeTypeAdapter();
@@ -231,6 +232,9 @@ public class JSON {
                 return gson.fromJson(body, returnType);
             }
         } catch (JsonParseException e) {
+            System.out.println("JSON FAILED HAHAHHAHAHAHAHAHA");
+            System.out.println("Body Returned: "+ body);
+            System.out.println("Return Type:" + returnType);
             // Fallback processing when failed to parse JSON form response body:
             // return the response body string directly for the String return type;
             if (returnType.equals(String.class)) {
