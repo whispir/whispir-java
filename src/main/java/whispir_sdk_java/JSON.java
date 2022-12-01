@@ -226,15 +226,11 @@ public class JSON {
             if (isLenientOnJson) {
                 JsonReader jsonReader = new JsonReader(new StringReader(body));
                 // see https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/stream/JsonReader.html#setLenient(boolean)
-                jsonReader.setLenient(true);
                 return gson.fromJson(jsonReader, returnType);
             } else {
                 return gson.fromJson(body, returnType);
             }
         } catch (JsonParseException e) {
-            System.out.println("JSON FAILED HAHAHHAHAHAHAHAHA");
-            System.out.println("Body Returned: "+ body);
-            System.out.println("Return Type:" + returnType);
             // Fallback processing when failed to parse JSON form response body:
             // return the response body string directly for the String return type;
             if (returnType.equals(String.class)) {
