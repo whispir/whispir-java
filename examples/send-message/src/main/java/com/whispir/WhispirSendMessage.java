@@ -24,7 +24,7 @@ public class WhispirSendMessage
 
         try {
             WorkspaceCollection response = Workspace.list();
-            Integer defaultWorkspaceId = response.getWorkspaces().get(0).getId();
+            String defaultWorkspaceId = response.getWorkspaces().get(0).getId();
 
             ContactCreateParams contactParams = ContactCreateParams
                 .builder()
