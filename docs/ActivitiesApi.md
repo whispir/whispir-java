@@ -11,7 +11,7 @@ All URIs are relative to *https://api.au.whispir.com*
 
 <a name="getActivities"></a>
 # **getActivities**
-> GetActivities200Response getActivities(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime)
+> ActivityCollection getActivities(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime)
 
 List activities
 
@@ -20,12 +20,12 @@ List activities
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.ActivitiesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.ActivitiesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -43,6 +43,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ActivitiesApi apiInstance = new ActivitiesApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.activity-v1+json"; // String | Application specific mime-type.
@@ -53,13 +57,13 @@ public class Example {
     String action = "Create"; // String | /activities?action=Map
     String module = "System"; // String | /activities?module=Message
     String user = "james"; // String | /activities?user=james
-    String workspace = "{{workspaceName}}"; // String | /activities?workspace=Whispir.
+    String workspace = "workspace_example"; // String | /activities?workspace=Whispir.
     String status = "Successful"; // String | /activities?status=Successful
     String description = "Sample Activity"; // String | /activities?description=Imported
-    String startTime = "{{startTime}}"; // String | The date and time to start searching from in the format:dd/mm/yyyy hh:mm. This will search on the `time` field <p>/activities?startTime=01/01/2015%2000:00</p>
-    String endTime = "{{endTime}}"; // String | The date and time to start searching from in the format:dd/mm/yyyy hh:mm <p>/activities?endTime=01/01/2015%2000:00</p>
+    String startTime = "startTime_example"; // String | The date and time to start searching from in the format:dd/mm/yyyy hh:mm. This will search on the `time` field <p>/activities?startTime=01/01/2015%2000:00</p>
+    String endTime = "endTime_example"; // String | The date and time to start searching from in the format:dd/mm/yyyy hh:mm <p>/activities?endTime=01/01/2015%2000:00</p>
     try {
-      GetActivities200Response result = apiInstance.getActivities(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime);
+      ActivityCollection result = apiInstance.getActivities(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ActivitiesApi#getActivities");
@@ -77,7 +81,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.activity-v1+json, application/vnd.whispir.activity-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.activity-v1+json] [enum: application/vnd.whispir.activity-v1+json, application/vnd.whispir.activity-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -85,19 +89,19 @@ public class Example {
 | **action** | **String**| /activities?action&#x3D;Map | [optional] [enum: Create, Update, Move, Copy, Draft, Send, Modified, Delete, Contact Import File, Login, Approve, Reject, Dispatch, Register, Accept, Closed, Map, Un-map] |
 | **module** | **String**| /activities?module&#x3D;Message | [optional] [enum: System, Message, Scheduled Message, User, Contact, DistributionList, Template, Workspace, Event, WebService, Settings, Conversation, Gateway, Workspace Mapping, Folders, Team, RSS, API Mapping, Asset, Instruction] |
 | **user** | **String**| /activities?user&#x3D;james | [optional] |
-| **workspace** | **String**| /activities?workspace&#x3D;Whispir. | [optional] [default to {{workspaceName}}] |
+| **workspace** | **String**| /activities?workspace&#x3D;Whispir. | [optional] |
 | **status** | **String**| /activities?status&#x3D;Successful | [optional] [enum: Successful, Failed, Rejected] |
 | **description** | **String**| /activities?description&#x3D;Imported | [optional] |
-| **startTime** | **String**| The date and time to start searching from in the format:dd/mm/yyyy hh:mm. This will search on the &#x60;time&#x60; field &lt;p&gt;/activities?startTime&#x3D;01/01/2015%2000:00&lt;/p&gt; | [optional] [default to {{startTime}}] |
-| **endTime** | **String**| The date and time to start searching from in the format:dd/mm/yyyy hh:mm &lt;p&gt;/activities?endTime&#x3D;01/01/2015%2000:00&lt;/p&gt; | [optional] [default to {{endTime}}] |
+| **startTime** | **String**| The date and time to start searching from in the format:dd/mm/yyyy hh:mm. This will search on the &#x60;time&#x60; field &lt;p&gt;/activities?startTime&#x3D;01/01/2015%2000:00&lt;/p&gt; | [optional] |
+| **endTime** | **String**| The date and time to start searching from in the format:dd/mm/yyyy hh:mm &lt;p&gt;/activities?endTime&#x3D;01/01/2015%2000:00&lt;/p&gt; | [optional] |
 
 ### Return type
 
-[**GetActivities200Response**](GetActivities200Response.md)
+[**ActivityCollection**](ActivityCollection.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -121,7 +125,7 @@ public class Example {
 
 <a name="getWorkspaceActivities"></a>
 # **getWorkspaceActivities**
-> getWorkspaceActivities(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields)
+> ActivityCollection getWorkspaceActivities(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields)
 
 List workspace activities
 
@@ -130,12 +134,12 @@ List workspace activities
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.ActivitiesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.ActivitiesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -153,6 +157,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ActivitiesApi apiInstance = new ActivitiesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -162,7 +170,8 @@ public class Example {
     String sortOrder = "asc"; // String | The order in which you require the results to be returned. Either ‘asc’ or ‘desc’
     String sortFields = "lastName,jobTitle"; // String | The fields that you require the ordering to be performed on. Multiple fields can be provided, separated by a comma.
     try {
-      apiInstance.getWorkspaceActivities(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+      ActivityCollection result = apiInstance.getWorkspaceActivities(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ActivitiesApi#getWorkspaceActivities");
       System.err.println("Status code: " + e.getCode());
@@ -180,7 +189,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.activity-v1+json, application/vnd.whispir.activity-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.activity-v1+json] [enum: application/vnd.whispir.activity-v1+json, application/vnd.whispir.activity-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -188,16 +197,16 @@ public class Example {
 
 ### Return type
 
-null (empty response body)
+[**ActivityCollection**](ActivityCollection.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.activity-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -225,12 +234,12 @@ Activities are all the individual changes, tasks, calls, messages and so on perf
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.ActivitiesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.ActivitiesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -247,6 +256,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     ActivitiesApi apiInstance = new ActivitiesApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -272,8 +285,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.activity-v1+json, application/vnd.whispir.activity-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.activity-v1+json, application/vnd.whispir.activity-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.activity-v1+json] [enum: application/vnd.whispir.activity-v1+json, application/vnd.whispir.activity-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.activity-v1+json] [enum: application/vnd.whispir.activity-v1+json, application/vnd.whispir.activity-v1+xml] |
 | **activity** | [**Activity**](Activity.md)|  | |
 
 ### Return type
@@ -282,12 +295,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.activity-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.activity-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |

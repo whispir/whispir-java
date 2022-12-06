@@ -21,12 +21,12 @@ The bulk of the &#x60;Event&#x60; metadata is from fields that are generic, and 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.EventsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.EventsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -43,6 +43,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     EventsApi apiInstance = new EventsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -70,8 +74,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.event-v1+json] [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.event-v1+json] [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
 | **event** | [**Event**](Event.md)| events object that needs to be create events | [optional] |
 
 ### Return type
@@ -80,17 +84,17 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.event-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.event-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Example Event response |  * Access-Control-Allow-Origin -  <br>  * Expires -  <br>  * Cache-Control -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **201** | Example Event response |  * Access-Control-Allow-Origin -  <br>  * Expires -  <br>  * Cache-Control -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
@@ -108,17 +112,17 @@ public class Example {
 
 Retrieve an event
 
-Get an event object
+Retrieve an event object
 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.EventsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.EventsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -135,6 +139,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     EventsApi apiInstance = new EventsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -166,7 +174,7 @@ public class Example {
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **eventId** | **String**| The identifier for the event. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.event-v1+json] [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -178,17 +186,17 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.event-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Example Event response |  * Access-Control-Allow-Origin -  <br>  * Expires -  <br>  * Cache-Control -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **200** | Example Event response |  * Access-Control-Allow-Origin -  <br>  * Expires -  <br>  * Cache-Control -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
@@ -202,7 +210,7 @@ public class Example {
 
 <a name="getEvents"></a>
 # **getEvents**
-> GetEvents200Response getEvents(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields)
+> EventCollection getEvents(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields)
 
 List events
 
@@ -211,12 +219,12 @@ List event objects
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.EventsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.EventsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -234,6 +242,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     EventsApi apiInstance = new EventsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -244,7 +256,7 @@ public class Example {
     String sortOrder = "asc"; // String | The order in which you require the results to be returned. Either ‘asc’ or ‘desc’
     String sortFields = "lastName,jobTitle"; // String | The fields that you require the ordering to be performed on. Multiple fields can be provided, separated by a comma.
     try {
-      GetEvents200Response result = apiInstance.getEvents(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields);
+      EventCollection result = apiInstance.getEvents(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EventsApi#getEvents");
@@ -263,7 +275,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.event-v1+json] [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
 | **eventType** | **String**| The name of the event template used  | |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
@@ -272,16 +284,16 @@ public class Example {
 
 ### Return type
 
-[**GetEvents200Response**](GetEvents200Response.md)
+[**EventCollection**](EventCollection.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.event-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -309,12 +321,12 @@ Update an event object
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.EventsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.EventsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -331,6 +343,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     EventsApi apiInstance = new EventsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -359,8 +375,8 @@ public class Example {
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **eventId** | **String**| The identifier for the event. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.event-v1+json] [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.event-v1+json] [enum: application/vnd.whispir.event-v1+json, application/vnd.whispir.event-v1+xml] |
 | **event** | [**Event**](Event.md)| events object that needs to be create events | [optional] |
 
 ### Return type
@@ -369,7 +385,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

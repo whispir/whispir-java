@@ -5,12 +5,12 @@ All URIs are relative to *https://api.au.whispir.com*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**deleteCallbackById**](CallbacksApi.md#deleteCallbackById) | **DELETE** /callbacks/{callbackId} | Delete a callback |
-| [**getCallbackById**](CallbacksApi.md#getCallbackById) | **GET** /callbacks/{callbackId} | Get a callback |
-| [**getCallbackInstances**](CallbacksApi.md#getCallbackInstances) | **GET** /callbacks/{callbackId}/calls | List callback instances |
+| [**getCallbackById**](CallbacksApi.md#getCallbackById) | **GET** /callbacks/{callbackId} | Retrieve a callback |
+| [**getCallbackCalls**](CallbacksApi.md#getCallbackCalls) | **GET** /callbacks/{callbackId}/calls | List callback calls |
 | [**getCallbacks**](CallbacksApi.md#getCallbacks) | **GET** /callbacks | List callbacks |
 | [**postCallbacks**](CallbacksApi.md#postCallbacks) | **POST** /callbacks | Create a callback |
 | [**putCallbackById**](CallbacksApi.md#putCallbackById) | **PUT** /callbacks/{callbackId} | Update a callback |
-| [**putCallbackInstanceStatus**](CallbacksApi.md#putCallbackInstanceStatus) | **PUT** /callbacks/{callbackId}/calls | Update a callback instance status |
+| [**putCallbackCallStatus**](CallbacksApi.md#putCallbackCallStatus) | **PUT** /callbacks/{callbackId}/calls | Update a callback call status |
 
 
 <a name="deleteCallbackById"></a>
@@ -24,12 +24,12 @@ Delete a callback object
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.CallbacksApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.CallbacksApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -46,6 +46,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     CallbacksApi apiInstance = new CallbacksApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -71,8 +75,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
 | **callbackId** | **String**| Enter Callback id. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-callback-v1+json] [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-callback-v1+json] [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
 
 ### Return type
 
@@ -80,7 +84,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -103,19 +107,19 @@ null (empty response body)
 # **getCallbackById**
 > Callback getCallbackById(xApiKey, callbackId, accept)
 
-Get a callback
+Retrieve a callback
 
-Get a callback object
+Retrieve a callback object
 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.CallbacksApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.CallbacksApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -132,6 +136,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     CallbacksApi apiInstance = new CallbacksApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -157,7 +165,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
 | **callbackId** | **String**| Enter Callbacks Id | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-callback-v1+json] [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
 
 ### Return type
 
@@ -165,12 +173,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.api-callback-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -187,23 +195,23 @@ public class Example {
 | **500** | An internal error occurred when processing the request.  Attempt the request again and if the HTTP 500 error re-occurs contact the Whispir Support Team. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **501** | The HTTP method being used has not yet been implemented for the requested resource.  The method being used is not implemented for this resource. Check the documentation for the specific resource type. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 
-<a name="getCallbackInstances"></a>
-# **getCallbackInstances**
-> GetCallbackInstances200Response getCallbackInstances(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status)
+<a name="getCallbackCalls"></a>
+# **getCallbackCalls**
+> CallbackCallCollection getCallbackCalls(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status)
 
-List callback instances
+List callback calls
 
-Get a list of callbacks instances
+List of calls to the callback
 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.CallbacksApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.CallbacksApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -221,6 +229,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     CallbacksApi apiInstance = new CallbacksApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String callbackId = "F98A1DD47C3CA1F5"; // String | Enter Callbacks Id
@@ -231,10 +243,10 @@ public class Example {
     String sortFields = "lastName,jobTitle"; // String | The fields that you require the ordering to be performed on. Multiple fields can be provided, separated by a comma.
     String status = "SUCCESS"; // String | To specifically retrieve the FAILED/SUCCESS calls, one can pass a status query param in the URL.
     try {
-      GetCallbackInstances200Response result = apiInstance.getCallbackInstances(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status);
+      CallbackCallCollection result = apiInstance.getCallbackCalls(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CallbacksApi#getCallbackInstances");
+      System.err.println("Exception when calling CallbacksApi#getCallbackCalls");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -250,7 +262,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
 | **callbackId** | **String**| Enter Callbacks Id | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-call-v1+json, application/vnd.whispir.api-call-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-call-v1+json] [enum: application/vnd.whispir.api-call-v1+json, application/vnd.whispir.api-call-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -259,16 +271,16 @@ public class Example {
 
 ### Return type
 
-[**GetCallbackInstances200Response**](GetCallbackInstances200Response.md)
+[**CallbackCallCollection**](CallbackCallCollection.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.api-call-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -287,21 +299,21 @@ public class Example {
 
 <a name="getCallbacks"></a>
 # **getCallbacks**
-> GetCallbacks200Response getCallbacks(xApiKey, accept, limit, offset, sortOrder, sortFields)
+> CallbackCollection getCallbacks(xApiKey, accept, limit, offset, sortOrder, sortFields)
 
 List callbacks
 
-List callbacks 
+List callbacks
 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.CallbacksApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.CallbacksApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -319,6 +331,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     CallbacksApi apiInstance = new CallbacksApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.api-callback-v1+json"; // String | Application specific mime-type.
@@ -327,7 +343,7 @@ public class Example {
     String sortOrder = "asc"; // String | The order in which you require the results to be returned. Either ‘asc’ or ‘desc’
     String sortFields = "lastName,jobTitle"; // String | The fields that you require the ordering to be performed on. Multiple fields can be provided, separated by a comma.
     try {
-      GetCallbacks200Response result = apiInstance.getCallbacks(xApiKey, accept, limit, offset, sortOrder, sortFields);
+      CallbackCollection result = apiInstance.getCallbacks(xApiKey, accept, limit, offset, sortOrder, sortFields);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CallbacksApi#getCallbacks");
@@ -345,7 +361,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-callback-v1+json] [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -353,16 +369,16 @@ public class Example {
 
 ### Return type
 
-[**GetCallbacks200Response**](GetCallbacks200Response.md)
+[**CallbackCollection**](CallbackCollection.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.api-callback-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -390,12 +406,12 @@ Whispir’s callback service can be configured to send simple notifications and 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.CallbacksApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.CallbacksApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -412,6 +428,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     CallbacksApi apiInstance = new CallbacksApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -437,8 +457,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-callback-v1+json] [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-callback-v1+json] [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
 | **callback** | [**Callback**](Callback.md)| Callbacks list object that needs to be create Callbacks | |
 
 ### Return type
@@ -447,12 +467,12 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.api-callback-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.api-callback-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -480,12 +500,12 @@ Update a callback object
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.CallbacksApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.CallbacksApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -502,6 +522,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     CallbacksApi apiInstance = new CallbacksApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -528,8 +552,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
 | **callbackId** | **String**| Enter Callback id. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-callback-v1+json] [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-callback-v1+json] [enum: application/vnd.whispir.api-callback-v1+json, application/vnd.whispir.api-callback-v1+xml] |
 | **callback** | [**Callback**](Callback.md)| The Callback Object | [optional] |
 
 ### Return type
@@ -538,11 +562,11 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/vnd.whispir.callback-v1+json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -560,23 +584,23 @@ null (empty response body)
 | **500** | An internal error occurred when processing the request.  Attempt the request again and if the HTTP 500 error re-occurs contact the Whispir Support Team. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **501** | The HTTP method being used has not yet been implemented for the requested resource.  The method being used is not implemented for this resource. Check the documentation for the specific resource type. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 
-<a name="putCallbackInstanceStatus"></a>
-# **putCallbackInstanceStatus**
-> putCallbackInstanceStatus(xApiKey, callbackId, contentType, accept, id, putCallbackInstanceStatusRequest)
+<a name="putCallbackCallStatus"></a>
+# **putCallbackCallStatus**
+> putCallbackCallStatus(xApiKey, callbackId, contentType, accept, id, callbackCall)
 
-Update a callback instance status
+Update a callback call status
 
 As every call to a callback endpoint is now stored within the calls endpoint, it’s possible that when failed calls are successfully processed through a manual exercise, that these calls will then need to be updated to reflect the current status.  Take the following example: 1.  Callback server becomes unavailable 2.  A message is sent via Whispir with callbacks enabled. 3.  The Message gets a response, and this triggers the callback 4.  The callback server is unavailable, so the response is stored with a status of &#39;FAILED’ 5.  After 24h, the callback server becomes available again. Retries have stopped, so this information will not automatically flow into the callback server. 6.  The customer writes a script to GET all of the calls stored in the /calls endpoint and process them. 7.  Once successfully processed, the customer’s script should update the contents of the /calls endpoint to reflect the current status of &#39;SUCCESS’.  This process can be facilitated with the use of a PUT request to the /calls endpoint in Whispir.  To update a list of attempted API calls from the Whispir API you can execute an HTTP PUT using the /calls endpoint on a specific callback.  Users can specify multiple IDs to be updated using the following notation:  &#x60;/callbacks/:id/calls?id&#x3D;ID1&amp;id&#x3D;ID2&amp;id&#x3D;ID3...&#x60;  This ensures that all callbacks that have been processed can be updated in a single API call, rather than having to make a single API call per callback attempt.  The PUT request takes a single API parameter in the body 
 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.CallbacksApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.CallbacksApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -594,17 +618,21 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     CallbacksApi apiInstance = new CallbacksApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String callbackId = "41048D9483C8CF2A"; // String | Enter Callback id.
     String contentType = "application/vnd.whispir.api-call-v1+json"; // String | Application specific mime-type.
     String accept = "application/vnd.whispir.api-call-v1+json"; // String | Application specific mime-type.
     String id = "C96962B74DC57EF30F00E7097AC81A45"; // String | The unique ID of the specific call within Whispir
-    PutCallbackInstanceStatusRequest putCallbackInstanceStatusRequest = new PutCallbackInstanceStatusRequest(); // PutCallbackInstanceStatusRequest | The Status can be either of SUCCESS or FAILED only, and you can update the status to a singular value for upto 100 ids in a single call by passing the IDs in the URL
+    CallbackCall callbackCall = new CallbackCall(); // CallbackCall | The Status can be either of SUCCESS or FAILED only, and you can update the status to a singular value for upto 100 ids in a single call by passing the IDs in the URL
     try {
-      apiInstance.putCallbackInstanceStatus(xApiKey, callbackId, contentType, accept, id, putCallbackInstanceStatusRequest);
+      apiInstance.putCallbackCallStatus(xApiKey, callbackId, contentType, accept, id, callbackCall);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CallbacksApi#putCallbackInstanceStatus");
+      System.err.println("Exception when calling CallbacksApi#putCallbackCallStatus");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -620,10 +648,10 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
 | **callbackId** | **String**| Enter Callback id. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-call-v1+json, application/vnd.whispir.api-call-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.api-call-v1+json, application/vnd.whispir.api-call-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-call-v1+json] [enum: application/vnd.whispir.api-call-v1+json, application/vnd.whispir.api-call-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.api-call-v1+json] [enum: application/vnd.whispir.api-call-v1+json, application/vnd.whispir.api-call-v1+xml] |
 | **id** | **String**| The unique ID of the specific call within Whispir | |
-| **putCallbackInstanceStatusRequest** | [**PutCallbackInstanceStatusRequest**](PutCallbackInstanceStatusRequest.md)| The Status can be either of SUCCESS or FAILED only, and you can update the status to a singular value for upto 100 ids in a single call by passing the IDs in the URL | [optional] |
+| **callbackCall** | [**CallbackCall**](CallbackCall.md)| The Status can be either of SUCCESS or FAILED only, and you can update the status to a singular value for upto 100 ids in a single call by passing the IDs in the URL | [optional] |
 
 ### Return type
 
@@ -631,11 +659,11 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/vnd.whispir.api-call-v1+json
  - **Accept**: application/json
 
 ### HTTP response details

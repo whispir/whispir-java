@@ -22,12 +22,12 @@ Each of the URLs specified in the response can be accessed using the REL and app
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.MessagesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.MessagesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -44,6 +44,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -70,7 +74,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.message-v1+json] [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
 | **messageId** | **String**| The identifier for the message. | |
 
 ### Return type
@@ -79,7 +83,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -103,7 +107,7 @@ public class Example {
 
 <a name="getMessageResponsesById"></a>
 # **getMessageResponsesById**
-> GetMessageResponsesById200Response getMessageResponsesById(workspaceId, xApiKey, accept, messageId, limit, offset, sortOrder, sortFields, view, filter)
+> MessageResponse getMessageResponsesById(workspaceId, xApiKey, accept, messageId, limit, offset, sortOrder, sortFields, view, filter)
 
 Retrieve a message response
 
@@ -112,12 +116,12 @@ Retrieve a message response
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.MessagesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.MessagesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -135,6 +139,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -147,7 +155,7 @@ public class Example {
     String view = "summary"; // String | The view for the message response.
     String filter = "noresponse"; // String | The filter for the message response.
     try {
-      GetMessageResponsesById200Response result = apiInstance.getMessageResponsesById(workspaceId, xApiKey, accept, messageId, limit, offset, sortOrder, sortFields, view, filter);
+      MessageResponse result = apiInstance.getMessageResponsesById(workspaceId, xApiKey, accept, messageId, limit, offset, sortOrder, sortFields, view, filter);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling MessagesApi#getMessageResponsesById");
@@ -166,7 +174,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.messageresponse-v1+json, application/vnd.whispir.messageresponse-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.messageresponse-v1+json] [enum: application/vnd.whispir.messageresponse-v1+json, application/vnd.whispir.messageresponse-v1+xml] |
 | **messageId** | **String**| Enter message id | |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
@@ -177,16 +185,16 @@ public class Example {
 
 ### Return type
 
-[**GetMessageResponsesById200Response**](GetMessageResponsesById200Response.md)
+[**MessageResponse**](MessageResponse.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/vnd.whispir.message-v1+json, application/json
+ - **Accept**: application/vnd.whispir.messageresponse-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -214,12 +222,12 @@ Whispir will automatically monitor the status of each message after it has been 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.MessagesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.MessagesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -236,6 +244,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -268,7 +280,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.messagestatus-v1+json, application/vnd.whispir.messagestatus-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.messagestatus-v1+json] [enum: application/vnd.whispir.messagestatus-v1+json, application/vnd.whispir.messagestatus-v1+xml] |
 | **messageId** | **String**| Enter message id | |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
@@ -283,7 +295,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -307,7 +319,7 @@ public class Example {
 
 <a name="getMessages"></a>
 # **getMessages**
-> GetMessages200Response getMessages(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields)
+> MessageCollection getMessages(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields)
 
 List messages
 
@@ -316,12 +328,12 @@ List all sent messages for the workspace.  Pagination is available.
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.MessagesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.MessagesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -339,6 +351,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -348,7 +364,7 @@ public class Example {
     String sortOrder = "asc"; // String | The order in which you require the results to be returned. Either ‘asc’ or ‘desc’
     String sortFields = "lastName,jobTitle"; // String | The fields that you require the ordering to be performed on. Multiple fields can be provided, separated by a comma.
     try {
-      GetMessages200Response result = apiInstance.getMessages(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+      MessageCollection result = apiInstance.getMessages(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling MessagesApi#getMessages");
@@ -367,7 +383,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.message-v1+json] [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -375,16 +391,16 @@ public class Example {
 
 ### Return type
 
-[**GetMessages200Response**](GetMessages200Response.md)
+[**MessageCollection**](MessageCollection.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.message-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -412,12 +428,12 @@ Communications are the core of what the Whispir Platform API offers as a service
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.MessagesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.MessagesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -434,6 +450,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     MessagesApi apiInstance = new MessagesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -461,8 +481,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.message-v1+json] [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.message-v1+json] [enum: application/vnd.whispir.message-v1+json, application/vnd.whispir.bulkmessage-v1+json, application/vnd.whispir.message-v1+xml, application/vnd.whispir.bulkmessage-v1+xml] |
 | **message** | [**Message**](Message.md)| Message object needed to create message. At least one of the Body fields must be populated [SMS, email, voice or web]. | |
 
 ### Return type
@@ -471,7 +491,7 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -481,8 +501,8 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | The response code for a message that is accepted for scheduled delivery. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
-| **202** | The response code for a message that is accepted for immediate delivery. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **200** | The response code for a message that is accepted for scheduled delivery. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
+| **202** | The response code for a message that is accepted for immediate delivery. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |

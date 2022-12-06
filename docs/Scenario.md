@@ -16,10 +16,10 @@ Scenarios allows you to simplify the message delivery process through automated,
 |**to** | **String** | Specifies the phone number or MRI or distribution list to which the message has to be sent |  [optional] |
 |**subject** | **String** | Specifies the subject of the message |  [optional] |
 |**label** | **String** | Specifies the label for the message (to view during reporting) |  [optional] |
-|**email** | [**Email**](Email.md) |  |  [optional] |
-|**voice** | [**Voice**](Voice.md) |  |  [optional] |
-|**web** | [**Web**](Web.md) |  |  [optional] |
-|**social** | [**Social**](Social.md) |  |  [optional] |
+|**email** | [**MessageEmail**](MessageEmail.md) |  |  [optional] |
+|**voice** | [**MessageVoice**](MessageVoice.md) |  |  [optional] |
+|**web** | [**MessageWeb**](MessageWeb.md) |  |  [optional] |
+|**social** | [**MessageSocial**](MessageSocial.md) |  |  [optional] |
 
 
 

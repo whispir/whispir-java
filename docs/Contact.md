@@ -65,12 +65,12 @@ The contact object.
 |**teamName2** | **String** | The secondary team name of the contact. |  [optional] |
 |**role1** | **String** | The primary role of the contact. |  [optional] |
 |**role2** | **String** | The secondary role of the contact. |  [optional] |
-|**locations** | [**List&lt;LocationsInner&gt;**](LocationsInner.md) | The locations for the contact. |  [optional] |
-|**messagingoptions** | [**List&lt;MessagingoptionsInner&gt;**](MessagingoptionsInner.md) | The message channel options for the contact. |  [optional] |
+|**locations** | [**List&lt;ContactLocation&gt;**](ContactLocation.md) | The locations for the contact. |  [optional] |
+|**messagingoptions** | [**List&lt;ContactMessagingOption&gt;**](ContactMessagingOption.md) | The message channel options for the contact. |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) | - PROJECT - for Contacts stored in a User-defined workspace - COMPANY - for Contacts stored in the default workspace |  [optional] [readonly] |
 |**mri** | **String** | Specifies the Message Resource Identifier of the Contact in Whispir |  [optional] [readonly] |
 |**devices** | **List&lt;Object&gt;** | Specifies the devices associated to this contact. See Contact Devices for more details about it |  [optional] [readonly] |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 |**lastModifiedTime** | **String** | Last Modified data and time |  [optional] [readonly] |
 
 
