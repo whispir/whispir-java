@@ -11,12 +11,12 @@ Whispir has a maximum API request payload size of 10MB. Whispir will reject the 
 |**to** | **String** | Allows a combination of phone numbers, email address, Whispir Contact MRIs, User MRI, Distribution List MRI, separated by &#x60;,&#x60;.  Whispir will pick the relevant recipients based on the channels provided in the request payload  (including template information).  The maximum payload size rule applies.  When used for bulk messages, this field is optional, as bulk messages has another model to specify the &#x60;to&#x60; field recipients.  |  |
 |**subject** | **String** | The message subject. This is common for both SMS and Email channels.  Read &#x60;body&#x60; notes on limits.  The maximum payload size rule applies.  When used for templates, this field is optional. |  |
 |**body** | **String** | The SMS body.  The maximum payload size rule applies.  IMPORTANT: The total SMS length is 1570 characters for english text and 800 when UTF-8 characters are used (primarily non-english)  The 1570 length is a combination of subject and body. |  [optional] |
-|**email** | [**Email**](Email.md) |  |  [optional] |
-|**voice** | [**Voice**](Voice.md) |  |  [optional] |
-|**web** | [**Web**](Web.md) |  |  [optional] |
-|**social** | [**Social**](Social.md) |  |  [optional] |
+|**email** | [**MessageEmail**](MessageEmail.md) |  |  [optional] |
+|**voice** | [**MessageVoice**](MessageVoice.md) |  |  [optional] |
+|**web** | [**MessageWeb**](MessageWeb.md) |  |  [optional] |
+|**social** | [**MessageSocial**](MessageSocial.md) |  |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) | Allows the user to modify the message behaviour for replies and DLRs (delivery receipts).  - &#x60;defaultNoReply&#x60;: Used to reject any replies to this message. - &#x60;noDlr&#x60;: Used to specify that DLRs should not be enabled for this message. |  [optional] |
-|**features** | [**Features**](Features.md) |  |  [optional] |
+|**features** | [**MessageFeatures**](MessageFeatures.md) |  |  [optional] |
 |**resource** | [**Resource**](Resource.md) |  |  [optional] |
 |**messageTemplateId** | **String** | The identifier for the Message Template. Specification of this attribute is preferred over the &#x60;messageTemplateName&#x60;, to provide an absolute and non-changing reference to the Message Template. |  [optional] |
 |**messageTemplateName** | **String** | A human-readable name for the Message Template. |  [optional] |
@@ -38,8 +38,8 @@ Whispir has a maximum API request payload size of 10MB. Whispir will reject the 
 |**whatsappValidMessage** | **Boolean** | The validity of the WhatsApp channel message. |  [optional] [readonly] |
 |**validBody** | **Boolean** | The validity of the message body. |  [optional] [readonly] |
 |**validSubject** | **Boolean** | The validity of the message subject. |  [optional] [readonly] |
-|**dlr** | [**Dlr**](Dlr.md) |  |  [optional] |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
+|**dlr** | [**MessageDlr**](MessageDlr.md) |  |  [optional] |
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 
 
 

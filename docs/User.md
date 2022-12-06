@@ -70,7 +70,7 @@ The user object.
 |**teamName2** | **String** | The secondary team name of the user. |  [optional] |
 |**role1** | **String** | The primary role of the user. |  [optional] |
 |**role2** | **String** | The secondary role of the user. |  [optional] |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 
 
 

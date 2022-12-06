@@ -18,12 +18,12 @@ Create an import
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.ImportsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.ImportsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -40,6 +40,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     ImportsApi apiInstance = new ImportsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -66,8 +70,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.importcontact-v1+json, application/vnd.whispir.importcontact-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.importcontact-v1+json, application/vnd.whispir.importcontact-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.importcontact-v1+json] [enum: application/vnd.whispir.importcontact-v1+json, application/vnd.whispir.importcontact-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.importcontact-v1+json] [enum: application/vnd.whispir.importcontact-v1+json, application/vnd.whispir.importcontact-v1+xml] |
 | **modelImport** | [**ModelImport**](ModelImport.md)| import object that needs to be create import | [optional] |
 
 ### Return type
@@ -76,7 +80,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

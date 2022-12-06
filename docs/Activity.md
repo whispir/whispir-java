@@ -16,7 +16,7 @@ Activities are all the individual changes, tasks, calls, messages and so on perf
 |**module** | [**ModuleEnum**](#ModuleEnum) | Specifies the module to which this activity belongs to. |  [optional] |
 |**workspaceName** | **String** | The workspace in which this activity is performed. This will usually be the API user’s default workspace |  [optional] |
 |**fullname** | **String** | Fullname of the user |  [optional] |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 
 
 

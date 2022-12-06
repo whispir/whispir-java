@@ -22,12 +22,12 @@ Resources can be deleted after use. These can be both public and private in scop
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.ResourcesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.ResourcesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -44,6 +44,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -76,7 +80,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -100,7 +104,7 @@ null (empty response body)
 
 <a name="getResources"></a>
 # **getResources**
-> GetResources200Response getResources(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name)
+> ResourceCollection getResources(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name)
 
 List resources
 
@@ -109,12 +113,12 @@ Existing resources can be easily retrieved via the GET /resources API call. The 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.ResourcesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.ResourcesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -132,6 +136,10 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -143,7 +151,7 @@ public class Example {
     String scope = "private"; // String | A filter parameter for the visibility of the resource.
     String name = "recipients.json"; // String | A filter parameter for the name of the resource.
     try {
-      GetResources200Response result = apiInstance.getResources(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name);
+      ResourceCollection result = apiInstance.getResources(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ResourcesApi#getResources");
@@ -162,7 +170,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -172,16 +180,16 @@ public class Example {
 
 ### Return type
 
-[**GetResources200Response**](GetResources200Response.md)
+[**ResourceCollection**](ResourceCollection.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.resource-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -209,12 +217,12 @@ A single resource (public|private) can be retrieved from the available resource 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.ResourcesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.ResourcesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -231,6 +239,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -257,7 +269,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
 | **resourceId** | **String**| The identifier for the resource. | |
 
 ### Return type
@@ -266,17 +278,17 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.resource-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Resource endpoint response |  * Content-Type -  <br>  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **200** | Resource endpoint response |  * Content-Type -  <br>  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
@@ -299,12 +311,12 @@ Create a resource
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.ResourcesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.ResourcesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -321,6 +333,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -348,8 +364,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
 | **resource** | [**Resource**](Resource.md)| resources object that needs to be create resources | |
 
 ### Return type
@@ -358,17 +374,17 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.resource-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.resource-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Resource endpoint response |  * Content-Type -  <br>  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **201** | Resource endpoint response |  * Content-Type -  <br>  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
@@ -391,12 +407,12 @@ Updating a resource involves the same process as in creating a resource. The pro
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.ResourcesApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.ResourcesApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -413,6 +429,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     ResourcesApi apiInstance = new ResourcesApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -441,8 +461,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.resource-v1+json] [enum: application/vnd.whispir.resource-v1+json, application/vnd.whispir.resource-v1+xml] |
 | **resourceId** | **String**| Enter resources id. | |
 | **resource** | [**Resource**](Resource.md)| resources object that needs to be update resources | |
 
@@ -452,17 +472,17 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: application/vnd.whispir.resource-v1+json
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.resource-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Resource endpoint response |  * Content-Type -  <br>  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **200** | Resource endpoint response |  * Content-Type -  <br>  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
