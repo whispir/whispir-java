@@ -9,6 +9,7 @@ The callback object, used to configure the callback (also known as webhook).
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** | The id of the callback.   This is the value that should be passed when referring to the callback using the API endpoints |  [optional] [readonly] |
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link array, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 |**name** | **String** | The name of the callback.   This is the value that should be passed in the message payload for triggering the callbacks |  |
 |**url** | **URI** | Specifies the service URL that API Callbacks should be forwarded to. |  |
 |**auth** | [**CallbackAuth**](CallbackAuth.md) |  |  |
@@ -16,8 +17,7 @@ The callback object, used to configure the callback (also known as webhook).
 |**removeHTML** | [**RemoveHTMLEnum**](#RemoveHTMLEnum) | Specifies whether HTML should be stripped from responses. |  |
 |**retriesEnabled** | **Boolean** | Specifies whether Whispir should perform retries in the event there is a failure accessing the callback service. |  |
 |**email** | **String** | Whispir notify this email address that a callback has failed (only when retries are disabled).   The email will contain the details of the callback content. |  |
-|**callbacks** | [**CallbackCallbacks**](CallbackCallbacks.md) |  |  |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
+|**callbacks** | [**CallbackOptions**](CallbackOptions.md) |  |  |
 
 
 

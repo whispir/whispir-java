@@ -4,13 +4,13 @@ All URIs are relative to *https://api.au.whispir.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getCustomLists**](CustomListsApi.md#getCustomLists) | **GET** /customlists | List custom lists |
-| [**getCustomListsById**](CustomListsApi.md#getCustomListsById) | **GET** /customlists/{customlistId} | Retrieve a custom list |
+| [**customListList**](CustomListsApi.md#customListList) | **GET** /customlists | List custom lists |
+| [**customListRetrieve**](CustomListsApi.md#customListRetrieve) | **GET** /customlists/{customlistId} | Retrieve a custom list |
 
 
-<a name="getCustomLists"></a>
-# **getCustomLists**
-> GetCustomLists200Response getCustomLists(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type)
+<a name="customListList"></a>
+# **customListList**
+> CustomListCollection customListList(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type)
 
 List custom lists
 
@@ -19,12 +19,12 @@ List custom lists
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.CustomListsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.CustomListsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -41,6 +41,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     CustomListsApi apiInstance = new CustomListsApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
@@ -52,10 +56,10 @@ public class Example {
     String name = "Category"; // String | Enter search name Eg.Category
     String type = "INCIDENT"; // String | Enter search type Eg.Message
     try {
-      GetCustomLists200Response result = apiInstance.getCustomLists(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type);
+      CustomListCollection result = apiInstance.customListList(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CustomListsApi#getCustomLists");
+      System.err.println("Exception when calling CustomListsApi#customListList");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -70,7 +74,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.customlist-v1+json, application/vnd.whispir.customlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.customlist-v1+json] [enum: application/vnd.whispir.customlist-v1+json, application/vnd.whispir.customlist-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -80,21 +84,21 @@ public class Example {
 
 ### Return type
 
-[**GetCustomLists200Response**](GetCustomLists200Response.md)
+[**CustomListCollection**](CustomListCollection.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.customlist-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Example response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **200** | Example response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
@@ -106,9 +110,9 @@ public class Example {
 | **500** | An internal error occurred when processing the request.  Attempt the request again and if the HTTP 500 error re-occurs contact the Whispir Support Team. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **501** | The HTTP method being used has not yet been implemented for the requested resource.  The method being used is not implemented for this resource. Check the documentation for the specific resource type. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 
-<a name="getCustomListsById"></a>
-# **getCustomListsById**
-> CustomList getCustomListsById(xApiKey, accept, customlistId)
+<a name="customListRetrieve"></a>
+# **customListRetrieve**
+> CustomList customListRetrieve(xApiKey, accept, customlistId)
 
 Retrieve a custom list
 
@@ -117,12 +121,12 @@ Retrieve a custom list
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.CustomListsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.CustomListsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -140,15 +144,19 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     CustomListsApi apiInstance = new CustomListsApi(defaultClient);
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String accept = "application/vnd.whispir.customlist-v1+json"; // String | Application specific mime-type.
     String customlistId = "43E9046401B18269"; // String | Enter Id
     try {
-      CustomList result = apiInstance.getCustomListsById(xApiKey, accept, customlistId);
+      CustomList result = apiInstance.customListRetrieve(xApiKey, accept, customlistId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CustomListsApi#getCustomListsById");
+      System.err.println("Exception when calling CustomListsApi#customListRetrieve");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -163,7 +171,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.customlist-v1+json, application/vnd.whispir.customlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.customlist-v1+json] [enum: application/vnd.whispir.customlist-v1+json, application/vnd.whispir.customlist-v1+xml] |
 | **customlistId** | **String**| Enter Id | |
 
 ### Return type
@@ -172,17 +180,17 @@ public class Example {
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.customlist-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Example responses |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **200** | Example responses |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |

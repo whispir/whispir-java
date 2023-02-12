@@ -9,6 +9,7 @@ The user object.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** | The ID of the user. |  [optional] [readonly] |
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link array, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 |**userName** | **String** | Specifies the username for the account |  |
 |**password** | **String** | Specifies the password for the account &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt;The following are the rules for the password:&lt;/p&gt;&lt;p&gt;&lt;ul&gt;&lt;li&gt;Alpha Numeric [a-zA-Z0-9_]&lt;/li&gt;&lt;li&gt;Must have at least one uppercase and one lowercase character&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt; |  |
 |**firstName** | **String** | The first name of the user. |  |
@@ -70,7 +71,6 @@ The user object.
 |**teamName2** | **String** | The secondary team name of the user. |  [optional] |
 |**role1** | **String** | The primary role of the user. |  [optional] |
 |**role2** | **String** | The secondary role of the user. |  [optional] |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 
 
 

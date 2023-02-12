@@ -8,7 +8,7 @@ Whispir can publish content to your Twitter and Facebook walls. Other socials ca
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**social** | [**List&lt;SocialSocialInner&gt;**](SocialSocialInner.md) | The list of social channel content. |  [optional] |
+|**social** | [**List&lt;Channel&gt;**](Channel.md) | The list of social channel content. |  [optional] |
 
 
 

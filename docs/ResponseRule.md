@@ -10,7 +10,7 @@ Response Rules are useful when your Templates require the end-users to select am
 |------------ | ------------- | ------------- | -------------|
 |**name** | **String** | Specifies the name of the response rule |  |
 |**description** | **String** | Specifies the description of the response rule for others to understand its purpose |  [optional] |
-|**responseTemplatePatterns** | [**ResponseTemplatePattern**](ResponseTemplatePattern.md) |  |  |
+|**responseTemplatePatterns** | [**TemplatePattern**](TemplatePattern.md) |  |  |
 
 
 

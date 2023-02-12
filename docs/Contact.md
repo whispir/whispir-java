@@ -8,6 +8,11 @@ The contact object.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**type** | [**TypeEnum**](#TypeEnum) | - PROJECT - for Contacts stored in a User-defined workspace - COMPANY - for Contacts stored in the default workspace |  [optional] [readonly] |
+|**mri** | **String** | Specifies the Message Resource Identifier of the Contact in Whispir |  [optional] [readonly] |
+|**devices** | **List&lt;Object&gt;** | Specifies the devices associated to this contact. See Contact Devices for more details about it |  [optional] [readonly] |
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link array, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
+|**lastModifiedTime** | **String** | Last Modified data and time |  [optional] [readonly] |
 |**firstName** | **String** | The first name of the contact. |  |
 |**lastName** | **String** | The last name of the contact. |  |
 |**workMobilePhone1** | **String** | The primary work mobile number of the contact. |  |
@@ -65,22 +70,8 @@ The contact object.
 |**teamName2** | **String** | The secondary team name of the contact. |  [optional] |
 |**role1** | **String** | The primary role of the contact. |  [optional] |
 |**role2** | **String** | The secondary role of the contact. |  [optional] |
-|**locations** | [**List&lt;LocationsInner&gt;**](LocationsInner.md) | The locations for the contact. |  [optional] |
-|**messagingoptions** | [**List&lt;MessagingoptionsInner&gt;**](MessagingoptionsInner.md) | The message channel options for the contact. |  [optional] |
-|**type** | [**TypeEnum**](#TypeEnum) | - PROJECT - for Contacts stored in a User-defined workspace - COMPANY - for Contacts stored in the default workspace |  [optional] [readonly] |
-|**mri** | **String** | Specifies the Message Resource Identifier of the Contact in Whispir |  [optional] [readonly] |
-|**devices** | **List&lt;Object&gt;** | Specifies the devices associated to this contact. See Contact Devices for more details about it |  [optional] [readonly] |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
-|**lastModifiedTime** | **String** | Last Modified data and time |  [optional] [readonly] |
-
-
-
-## Enum: StatusEnum
-
-| Name | Value |
-|---- | -----|
-| A | &quot;A&quot; |
-| D | &quot;D&quot; |
+|**locations** | [**List&lt;Location&gt;**](Location.md) | The locations for the contact. |  [optional] |
+|**messagingoptions** | [**List&lt;MessagingOption&gt;**](MessagingOption.md) | The message channel options for the contact. |  [optional] |
 
 
 
@@ -90,6 +81,15 @@ The contact object.
 |---- | -----|
 | PROJECT | &quot;PROJECT&quot; |
 | COMPANY | &quot;COMPANY&quot; |
+
+
+
+## Enum: StatusEnum
+
+| Name | Value |
+|---- | -----|
+| A | &quot;A&quot; |
+| D | &quot;D&quot; |
 
 
 

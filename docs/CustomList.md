@@ -8,14 +8,14 @@ A custom list is a predefined list of options that can be inserted into a messag
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **String** | Specifies the unique ID of the list |  [readonly] |
-|**name** | **String** | Specifies the name of the list |  [readonly] |
-|**type** | [**TypeEnum**](#TypeEnum) | Specifies the type |  [readonly] |
-|**createdDate** | **String** | Specifies the creation date of the list |  [readonly] |
-|**sortType** | [**SortTypeEnum**](#SortTypeEnum) | Specifies the sorting order |  [readonly] |
-|**linked** | [**LinkedEnum**](#LinkedEnum) | Specifies the linked status. When enabled the value selected for one channel is automatically applied on the other channels. |  [readonly] |
-|**customlabellists** | [**List&lt;CustomListCustomlabellistsInner&gt;**](CustomListCustomlabellistsInner.md) | Contains the individual items that make up this list |  [optional] [readonly] |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [readonly] |
+|**id** | **String** | Specifies the unique ID of the list |  [optional] [readonly] |
+|**name** | **String** | Specifies the name of the list |  [optional] [readonly] |
+|**type** | [**TypeEnum**](#TypeEnum) | Specifies the type |  [optional] [readonly] |
+|**createdDate** | **String** | Specifies the creation date of the list |  [optional] [readonly] |
+|**sortType** | [**SortTypeEnum**](#SortTypeEnum) | Specifies the sorting order |  [optional] [readonly] |
+|**linked** | [**LinkedEnum**](#LinkedEnum) | Specifies the linked status. When enabled the value selected for one channel is automatically applied on the other channels. |  [optional] [readonly] |
+|**customlabellists** | [**List&lt;ListLabel&gt;**](ListLabel.md) | Contains the individual items that make up this list |  [optional] [readonly] |
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link array, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 
 
 

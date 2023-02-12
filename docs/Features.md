@@ -8,8 +8,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**pushOptions** | [**FeaturesPushOptions**](FeaturesPushOptions.md) |  |  [optional] |
-|**aliasOption** | [**FeaturesAliasOption**](FeaturesAliasOption.md) |  |  [optional] |
+|**pushOptions** | [**PushOptions**](PushOptions.md) |  |  [optional] |
+|**aliasOption** | [**AliasOption**](AliasOption.md) |  |  [optional] |
 
 
 

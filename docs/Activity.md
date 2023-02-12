@@ -8,6 +8,7 @@ Activities are all the individual changes, tasks, calls, messages and so on perf
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link array, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 |**user** | **String** |  The username of the person who performed this activity. This will usually be the API user invoking the creation. |  [optional] |
 |**time** | **String** | The date and time of the activity in the format:dd/mm/yy hh:mm. This will be defaulted to the time at which this activity is created. |  [optional] |
 |**action** | [**ActionEnum**](#ActionEnum) | Specifies the action performed during this activity. |  [optional] |
@@ -16,7 +17,6 @@ Activities are all the individual changes, tasks, calls, messages and so on perf
 |**module** | [**ModuleEnum**](#ModuleEnum) | Specifies the module to which this activity belongs to. |  [optional] |
 |**workspaceName** | **String** | The workspace in which this activity is performed. This will usually be the API user’s default workspace |  [optional] |
 |**fullname** | **String** | Fullname of the user |  [optional] |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 
 
 

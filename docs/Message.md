@@ -8,6 +8,14 @@ Whispir has a maximum API request payload size of 10MB. Whispir will reject the 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**from** | **String** | The message sender&#39;s Whispir User MRI. |  [optional] [readonly] |
+|**direction** | [**DirectionEnum**](#DirectionEnum) | The direction of the sent message. |  [optional] [readonly] |
+|**responseCount** | **String** | Details the responses received for the sent message across all channels. Refer to &#x60;/messageresponses&#x60; to get the detailed response data. |  [optional] [readonly] |
+|**createdTime** | **BigDecimal** | Epoch time (refers to Unix TimeStamp format starting Jan 1, 1970) denoting the time the message was sent. For bulk messages and messages with multiple recipients this value is tied to the timestamp when the message was received and processed by Whispir. |  [optional] [readonly] |
+|**whatsappValidMessage** | **Boolean** | The validity of the WhatsApp channel message. |  [optional] [readonly] |
+|**validBody** | **Boolean** | The validity of the message body. |  [optional] [readonly] |
+|**validSubject** | **Boolean** | The validity of the message subject. |  [optional] [readonly] |
+|**link** | [**List&lt;Link&gt;**](Link.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link array, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
 |**to** | **String** | Allows a combination of phone numbers, email address, Whispir Contact MRIs, User MRI, Distribution List MRI, separated by &#x60;,&#x60;.  Whispir will pick the relevant recipients based on the channels provided in the request payload  (including template information).  The maximum payload size rule applies.  When used for bulk messages, this field is optional, as bulk messages has another model to specify the &#x60;to&#x60; field recipients.  |  |
 |**subject** | **String** | The message subject. This is common for both SMS and Email channels.  Read &#x60;body&#x60; notes on limits.  The maximum payload size rule applies.  When used for templates, this field is optional. |  |
 |**body** | **String** | The SMS body.  The maximum payload size rule applies.  IMPORTANT: The total SMS length is 1570 characters for english text and 800 when UTF-8 characters are used (primarily non-english)  The 1570 length is a combination of subject and body. |  [optional] |
@@ -31,15 +39,15 @@ Whispir has a maximum API request payload size of 10MB. Whispir will reject the 
 |**repeatDays** | **BigDecimal** | The interval in days between each scheduled message repetition. |  [optional] |
 |**repeatHrs** | **BigDecimal** | The interval in hours between each scheduled message repetition. |  [optional] |
 |**repeatMin** | **BigDecimal** | The interval in minutes between each scheduled message repetition. |  [optional] |
-|**from** | **String** | The message sender&#39;s Whispir User MRI. |  [optional] [readonly] |
-|**direction** | [**DirectionEnum**](#DirectionEnum) | The direction of the sent message. |  [optional] [readonly] |
-|**responseCount** | **String** | Details the responses received for the sent message across all channels. Refer to &#x60;/messageresponses&#x60; to get the detailed response data. |  [optional] [readonly] |
-|**createdTime** | **BigDecimal** | Epoch time (refers to Unix TimeStamp format starting Jan 1, 1970) denoting the time the message was sent. For bulk messages and messages with multiple recipients this value is tied to the timestamp when the message was received and processed by Whispir. |  [optional] [readonly] |
-|**whatsappValidMessage** | **Boolean** | The validity of the WhatsApp channel message. |  [optional] [readonly] |
-|**validBody** | **Boolean** | The validity of the message body. |  [optional] [readonly] |
-|**validSubject** | **Boolean** | The validity of the message subject. |  [optional] [readonly] |
-|**dlr** | [**Dlr**](Dlr.md) |  |  [optional] |
-|**link** | [**List&lt;LinkInner&gt;**](LinkInner.md) | A [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) link object, describing all discoverable resources in relation to the original request. |  [optional] [readonly] |
+|**dlr** | [**DeliveryReceipt**](DeliveryReceipt.md) |  |  [optional] |
+
+
+
+## Enum: DirectionEnum
+
+| Name | Value |
+|---- | -----|
+| OUTGOING | &quot;OUTGOING&quot; |
 
 
 
@@ -67,14 +75,6 @@ Whispir has a maximum API request payload size of 10MB. Whispir will reject the 
 |---- | -----|
 | ONCE | &quot;ONCE&quot; |
 | REPEAT | &quot;REPEAT&quot; |
-
-
-
-## Enum: DirectionEnum
-
-| Name | Value |
-|---- | -----|
-| OUTGOING | &quot;OUTGOING&quot; |
 
 
 

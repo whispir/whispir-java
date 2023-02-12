@@ -11,7 +11,7 @@ The email channel payload, used when sending an email Message.  Not required whe
 |**body** | **String** | The email message body. |  |
 |**footer** | **String** | Plain text or html displayed at the bottom of your email message. |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) | The email Message content type. |  [optional] |
-|**resources** | [**EmailResources**](EmailResources.md) |  |  [optional] |
+|**resources** | [**Attachments**](Attachments.md) |  |  [optional] |
 
 
 

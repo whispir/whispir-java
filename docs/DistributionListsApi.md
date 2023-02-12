@@ -4,30 +4,30 @@ All URIs are relative to *https://api.au.whispir.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**deleteDistributionListsById**](DistributionListsApi.md#deleteDistributionListsById) | **DELETE** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Delete a distribution list |
-| [**getDistributionLists**](DistributionListsApi.md#getDistributionLists) | **GET** /workspaces/{workspaceId}/distributionlists | List distribution lists |
-| [**getDistributionListsById**](DistributionListsApi.md#getDistributionListsById) | **GET** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Retrieve a distribution list |
-| [**postDistributionLists**](DistributionListsApi.md#postDistributionLists) | **POST** /workspaces/{workspaceId}/distributionlists | Create a distribution list |
-| [**putDistributionListsById**](DistributionListsApi.md#putDistributionListsById) | **PUT** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Update a distribution list |
+| [**distributionListCreate**](DistributionListsApi.md#distributionListCreate) | **POST** /workspaces/{workspaceId}/distributionlists | Create a distribution list |
+| [**distributionListDelete**](DistributionListsApi.md#distributionListDelete) | **DELETE** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Delete a distribution list |
+| [**distributionListList**](DistributionListsApi.md#distributionListList) | **GET** /workspaces/{workspaceId}/distributionlists | List distribution lists |
+| [**distributionListRetrieve**](DistributionListsApi.md#distributionListRetrieve) | **GET** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Retrieve a distribution list |
+| [**distributionListUpdate**](DistributionListsApi.md#distributionListUpdate) | **PUT** /workspaces/{workspaceId}/distributionlists/{distributionlistId} | Update a distribution list |
 
 
-<a name="deleteDistributionListsById"></a>
-# **deleteDistributionListsById**
-> deleteDistributionListsById(workspaceId, xApiKey, distributionlistId)
+<a name="distributionListCreate"></a>
+# **distributionListCreate**
+> DistributionList distributionListCreate(workspaceId, xApiKey, contentType, accept, distributionList)
 
-Delete a distribution list
+Create a distribution list
 
-You can only delete the distribution list that you have created or a valid userId associated with the specific distribution list. 
+Distribution lists can be created within the Default Workspace, or within a Specific Workspace. More information on Workspaces will be provided later in this documentation.  The MRI value is important here. It is the required unique identifier for any communications that are to be sent out to this distribution list. 
 
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.DistributionListsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.DistributionListsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -45,14 +45,114 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
+    DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
+    String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
+    String xApiKey = "xApiKey_example"; // String | The API key for authentication.
+    String contentType = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
+    String accept = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
+    DistributionList distributionList = new DistributionList(); // DistributionList | Distribution list object that needs to be create Distribution list
+    try {
+      DistributionList result = apiInstance.distributionListCreate(workspaceId, xApiKey, contentType, accept, distributionList);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DistributionListsApi#distributionListCreate");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workspaceId** | **String**| The identifier for the workspace. | |
+| **xApiKey** | **String**| The API key for authentication. | |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **distributionList** | [**DistributionList**](DistributionList.md)| Distribution list object that needs to be create Distribution list | |
+
+### Return type
+
+[**DistributionList**](DistributionList.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/vnd.whispir.distributionlist-v1+json
+ - **Accept**: application/vnd.whispir.distributionlist-v1+json, application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Example workspace object response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
+| **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+| **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+| **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+| **404** | The requested URL doesn&#39;t exist.  The requested resource was not found. Inspect the ID in the URL that was used and ensure that it&#39;s valid.  Also, inspect the Accept and Content-Type headers that are being used to make sure they’re correct for the URL that is being requested. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+| **405** | The requested resource doesn&#39;t support the supplied verb.  Inspect the HTTP method that was used in the request and ensure that it&#39;s valid for the resource being requested. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+| **413** | The request payload was too large.  The maximum allowable request size is 10MB (10485760 bytes). |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+| **415** | The request was unsuccessful because the requested content type is not supported by the API.  The application client can use this response to determine if it&#39;s asking for a supported version of a resource. On receiving this response, the client can query the developer documentation to determine the appropriate version for the requested resource.  In most cases, this is due to the user not supplying the correct Accept or Content-Type header for the requested URL. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+| **422** | The request is formed correctly but due to some condition it can’t be processed. For example, email is required and it&#39;s not provided in the request.  The request did not contain all the information required to perform this method. Check your request for the required fields to be passed in and try again. The offending fields will be specified in the error text of the response. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+| **500** | An internal error occurred when processing the request.  Attempt the request again and if the HTTP 500 error re-occurs contact the Whispir Support Team. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+| **501** | The HTTP method being used has not yet been implemented for the requested resource.  The method being used is not implemented for this resource. Check the documentation for the specific resource type. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
+
+<a name="distributionListDelete"></a>
+# **distributionListDelete**
+> distributionListDelete(workspaceId, xApiKey, distributionlistId)
+
+Delete a distribution list
+
+You can only delete the distribution list that you have created or a valid userId associated with the specific distribution list. 
+
+### Example
+```java
+// Import classes:
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.DistributionListsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.au.whispir.com");
+    
+    // Configure API key authorization: ApiKeyAuth
+    ApiKeyAuth ApiKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("ApiKeyAuth");
+    ApiKeyAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKeyAuth.setApiKeyPrefix("Token");
+
+    // Configure HTTP basic authorization: BasicAuth
+    HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
+    BasicAuth.setUsername("YOUR USERNAME");
+    BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String distributionlistId = "5EFBA89462693D7B"; // String | The id of the distributionlists to be deleted
     try {
-      apiInstance.deleteDistributionListsById(workspaceId, xApiKey, distributionlistId);
+      apiInstance.distributionListDelete(workspaceId, xApiKey, distributionlistId);
     } catch (ApiException e) {
-      System.err.println("Exception when calling DistributionListsApi#deleteDistributionListsById");
+      System.err.println("Exception when calling DistributionListsApi#distributionListDelete");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -76,7 +176,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -98,9 +198,9 @@ null (empty response body)
 | **500** | An internal error occurred when processing the request.  Attempt the request again and if the HTTP 500 error re-occurs contact the Whispir Support Team. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **501** | The HTTP method being used has not yet been implemented for the requested resource.  The method being used is not implemented for this resource. Check the documentation for the specific resource type. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 
-<a name="getDistributionLists"></a>
-# **getDistributionLists**
-> GetDistributionLists200Response getDistributionLists(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description)
+<a name="distributionListList"></a>
+# **distributionListList**
+> DistributionListCollection distributionListList(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description)
 
 List distribution lists
 
@@ -109,12 +209,12 @@ The distribution list is usually retrieved by its id, but one can also search or
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.DistributionListsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.DistributionListsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -131,6 +231,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -143,10 +247,10 @@ public class Example {
     String name = "My Distribution List"; // String | Specifies the name of the Distribution List to be searched for. It is based on the uniqueness of the name of the Distribution List. If the name contains spaces it is suggested - but not required - to escape them
     String description = "Sample Distribution List"; // String | Specifies the descrition for the Distribution List to be searched for. If the description contains spaces it is suggested - but not required - to escape them
     try {
-      GetDistributionLists200Response result = apiInstance.getDistributionLists(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description);
+      DistributionListCollection result = apiInstance.distributionListList(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling DistributionListsApi#getDistributionLists");
+      System.err.println("Exception when calling DistributionListsApi#distributionListList");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -162,7 +266,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
 | **limit** | **BigDecimal**| The number of records to be returned. | [optional] [default to 20] |
 | **offset** | **BigDecimal**| The record number to start returning from. | [optional] [default to 0] |
 | **sortOrder** | **String**| The order in which you require the results to be returned. Either ‘asc’ or ‘desc’ | [optional] [enum: asc, desc] |
@@ -172,22 +276,22 @@ public class Example {
 
 ### Return type
 
-[**GetDistributionLists200Response**](GetDistributionLists200Response.md)
+[**DistributionListCollection**](DistributionListCollection.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.distributionlist-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Example workspace object response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
-| **201** | Example workspace object response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **200** | List distribution lists response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
+| **201** | List distribution lists response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
@@ -199,9 +303,9 @@ public class Example {
 | **500** | An internal error occurred when processing the request.  Attempt the request again and if the HTTP 500 error re-occurs contact the Whispir Support Team. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **501** | The HTTP method being used has not yet been implemented for the requested resource.  The method being used is not implemented for this resource. Check the documentation for the specific resource type. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 
-<a name="getDistributionListsById"></a>
-# **getDistributionListsById**
-> GetDistributionLists200ResponseDistributionLists getDistributionListsById(workspaceId, xApiKey, accept, distributionlistId)
+<a name="distributionListRetrieve"></a>
+# **distributionListRetrieve**
+> DistributionList distributionListRetrieve(workspaceId, xApiKey, accept, distributionlistId)
 
 Retrieve a distribution list
 
@@ -210,12 +314,12 @@ A distribution list allows you to associate the following:  *   **ContactIds** (
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.DistributionListsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.DistributionListsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -232,6 +336,10 @@ public class Example {
     HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
+
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
 
     DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
@@ -239,10 +347,10 @@ public class Example {
     String accept = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
     String distributionlistId = "5EFBA89462693D7B"; // String | Enter Distribution id.
     try {
-      GetDistributionLists200ResponseDistributionLists result = apiInstance.getDistributionListsById(workspaceId, xApiKey, accept, distributionlistId);
+      DistributionList result = apiInstance.distributionListRetrieve(workspaceId, xApiKey, accept, distributionlistId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling DistributionListsApi#getDistributionListsById");
+      System.err.println("Exception when calling DistributionListsApi#distributionListRetrieve");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -258,26 +366,26 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
 | **distributionlistId** | **String**| Enter Distribution id. | |
 
 ### Return type
 
-[**GetDistributionLists200ResponseDistributionLists**](GetDistributionLists200ResponseDistributionLists.md)
+[**DistributionList**](DistributionList.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/vnd.whispir.distributionlist-v1+json, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Example workspace object response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
+| **200** | Example workspace object response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location -  <br>  |
 | **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
@@ -289,101 +397,9 @@ public class Example {
 | **500** | An internal error occurred when processing the request.  Attempt the request again and if the HTTP 500 error re-occurs contact the Whispir Support Team. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 | **501** | The HTTP method being used has not yet been implemented for the requested resource.  The method being used is not implemented for this resource. Check the documentation for the specific resource type. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
 
-<a name="postDistributionLists"></a>
-# **postDistributionLists**
-> GetDistributionLists200ResponseDistributionLists postDistributionLists(workspaceId, xApiKey, contentType, accept, getDistributionLists200ResponseDistributionLists)
-
-Create a distribution list
-
-Distribution lists can be created within the Default Workspace, or within a Specific Workspace. More information on Workspaces will be provided later in this documentation.  The MRI value is important here. It is the required unique identifier for any communications that are to be sent out to this distribution list. 
-
-### Example
-```java
-// Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.DistributionListsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.au.whispir.com");
-    
-    // Configure API key authorization: ApiKeyAuth
-    ApiKeyAuth ApiKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("ApiKeyAuth");
-    ApiKeyAuth.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //ApiKeyAuth.setApiKeyPrefix("Token");
-
-    // Configure HTTP basic authorization: BasicAuth
-    HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
-    BasicAuth.setUsername("YOUR USERNAME");
-    BasicAuth.setPassword("YOUR PASSWORD");
-
-    DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
-    String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
-    String xApiKey = "xApiKey_example"; // String | The API key for authentication.
-    String contentType = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
-    String accept = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
-    GetDistributionLists200ResponseDistributionLists getDistributionLists200ResponseDistributionLists = new GetDistributionLists200ResponseDistributionLists(); // GetDistributionLists200ResponseDistributionLists | Distribution list object that needs to be create Distribution list
-    try {
-      GetDistributionLists200ResponseDistributionLists result = apiInstance.postDistributionLists(workspaceId, xApiKey, contentType, accept, getDistributionLists200ResponseDistributionLists);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling DistributionListsApi#postDistributionLists");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **workspaceId** | **String**| The identifier for the workspace. | |
-| **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
-| **getDistributionLists200ResponseDistributionLists** | [**GetDistributionLists200ResponseDistributionLists**](GetDistributionLists200ResponseDistributionLists.md)| Distribution list object that needs to be create Distribution list | |
-
-### Return type
-
-[**GetDistributionLists200ResponseDistributionLists**](GetDistributionLists200ResponseDistributionLists.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/vnd.whispir.distributionlist-v1+json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **201** | Example workspace object response |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  * Location - The URI to fetch details of the resource. <br>  |
-| **400** | Invalid or missing request parameters.  Inspect the request parameters and ensure that all required parameters are supplied.  Note the error text in the response and update the request accordingly. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-| **401** | Invalid or no credentials passed in the request.  Inspect the authorisation header and ensure that a valid authentication has been provided. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-| **403** | Authorisation credentials passed and accepted but the account doesn&#39;t have permission.  * Inspect the authorisation header and ensure that a valid authentication has been provided. * Returned when HTTP is used instead of HTTPS. * Returned when invalid API key is used. * Returned when you have tried to make more API calls than your allowed quota (QPS). Refer to API rate limits. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-| **404** | The requested URL doesn&#39;t exist.  The requested resource was not found. Inspect the ID in the URL that was used and ensure that it&#39;s valid.  Also, inspect the Accept and Content-Type headers that are being used to make sure they’re correct for the URL that is being requested. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-| **405** | The requested resource doesn&#39;t support the supplied verb.  Inspect the HTTP method that was used in the request and ensure that it&#39;s valid for the resource being requested. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-| **413** | The request payload was too large.  The maximum allowable request size is 10MB (10485760 bytes). |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-| **415** | The request was unsuccessful because the requested content type is not supported by the API.  The application client can use this response to determine if it&#39;s asking for a supported version of a resource. On receiving this response, the client can query the developer documentation to determine the appropriate version for the requested resource.  In most cases, this is due to the user not supplying the correct Accept or Content-Type header for the requested URL. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-| **422** | The request is formed correctly but due to some condition it can’t be processed. For example, email is required and it&#39;s not provided in the request.  The request did not contain all the information required to perform this method. Check your request for the required fields to be passed in and try again. The offending fields will be specified in the error text of the response. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-| **500** | An internal error occurred when processing the request.  Attempt the request again and if the HTTP 500 error re-occurs contact the Whispir Support Team. |  * Content-Type -  <br>  * Content-Length -  <br>  * Access-Control-Allow-Origin -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-| **501** | The HTTP method being used has not yet been implemented for the requested resource.  The method being used is not implemented for this resource. Check the documentation for the specific resource type. |  * Access-Control-Allow-Origin -  <br>  * Content-Length -  <br>  * Content-Type -  <br>  * Cache-Control -  <br>  * Expires -  <br>  |
-
-<a name="putDistributionListsById"></a>
-# **putDistributionListsById**
-> putDistributionListsById(workspaceId, xApiKey, contentType, accept, distributionlistId, getDistributionLists200ResponseDistributionLists)
+<a name="distributionListUpdate"></a>
+# **distributionListUpdate**
+> distributionListUpdate(workspaceId, xApiKey, contentType, accept, distributionlistId, distributionList)
 
 Update a distribution list
 
@@ -392,12 +408,12 @@ Any or all three of these can be updated via the PUT method along with the DL pr
 ### Example
 ```java
 // Import classes:
-import whispir_sdk_java.ApiClient;
-import whispir_sdk_java.ApiException;
-import whispir_sdk_java.Configuration;
-import whispir_sdk_java.auth.*;
-import whispir_sdk_java.models.*;
-import org.whispir.api.DistributionListsApi;
+import com.whispir.client.ApiClient;
+import com.whispir.client.ApiException;
+import com.whispir.client.Configuration;
+import com.whispir.client.auth.*;
+import com.whispir.client.models.*;
+import com.whispir.api.DistributionListsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -415,17 +431,21 @@ public class Example {
     BasicAuth.setUsername("YOUR USERNAME");
     BasicAuth.setPassword("YOUR PASSWORD");
 
+    // Configure HTTP bearer authorization: BearerAuth
+    HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+    BearerAuth.setBearerToken("BEARER TOKEN");
+
     DistributionListsApi apiInstance = new DistributionListsApi(defaultClient);
     String workspaceId = "9A4C5521FFC7B15B"; // String | The identifier for the workspace.
     String xApiKey = "xApiKey_example"; // String | The API key for authentication.
     String contentType = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
     String accept = "application/vnd.whispir.distributionlist-v1+json"; // String | Application specific mime-type.
     String distributionlistId = "5EFBA89462693D7B"; // String | Enter Distribution id.
-    GetDistributionLists200ResponseDistributionLists getDistributionLists200ResponseDistributionLists = new GetDistributionLists200ResponseDistributionLists(); // GetDistributionLists200ResponseDistributionLists | Distribution list object that needs to be update Distribution list
+    DistributionList distributionList = new DistributionList(); // DistributionList | Distribution list object that needs to be update Distribution list
     try {
-      apiInstance.putDistributionListsById(workspaceId, xApiKey, contentType, accept, distributionlistId, getDistributionLists200ResponseDistributionLists);
+      apiInstance.distributionListUpdate(workspaceId, xApiKey, contentType, accept, distributionlistId, distributionList);
     } catch (ApiException e) {
-      System.err.println("Exception when calling DistributionListsApi#putDistributionListsById");
+      System.err.println("Exception when calling DistributionListsApi#distributionListUpdate");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -441,10 +461,10 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**| The identifier for the workspace. | |
 | **xApiKey** | **String**| The API key for authentication. | |
-| **contentType** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
-| **accept** | **String**| Application specific mime-type. | [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **contentType** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
+| **accept** | **String**| Application specific mime-type. | [default to application/vnd.whispir.distributionlist-v1+json] [enum: application/vnd.whispir.distributionlist-v1+json, application/vnd.whispir.distributionlist-v1+xml] |
 | **distributionlistId** | **String**| Enter Distribution id. | |
-| **getDistributionLists200ResponseDistributionLists** | [**GetDistributionLists200ResponseDistributionLists**](GetDistributionLists200ResponseDistributionLists.md)| Distribution list object that needs to be update Distribution list | |
+| **distributionList** | [**DistributionList**](DistributionList.md)| Distribution list object that needs to be update Distribution list | |
 
 ### Return type
 
@@ -452,7 +472,7 @@ null (empty response body)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
