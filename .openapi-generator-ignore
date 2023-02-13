@@ -33,3 +33,10 @@ pom.xml
 git_push.sh
 build.gradle
 .gitignore
+README.md
+gradle.properties
+docs/*
+api/*
+gradlew
+gradlew.bat
+gradle/wrapper/gradle-wrapper.properties
