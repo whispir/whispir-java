@@ -11,7 +11,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.whispir.com/terms-of-service
   title: Whispir Platform API
-  version: 1.2.1
+  version: 1.2.0
   x-release-please-start-version: true
   x-release-please-end: true
 externalDocs:

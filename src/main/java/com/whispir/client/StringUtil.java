@@ -5,7 +5,7 @@ package com.whispir.client;
 import java.util.Collection;
 import java.util.Iterator;
 
-@javax.annotation.Generated(value = "com.whispir.codegen.JavaCustomClientCodegen", date = "2023-02-12T22:41:59.050974Z[Etc/UTC]")
+@javax.annotation.Generated(value = "com.whispir.codegen.JavaCustomClientCodegen", date = "2023-02-13T11:33:29.412612+13:00[Pacific/Auckland]")
 public class StringUtil {
   /**
    * Check if the given array contains the given value (with case-insensitive comparison).
