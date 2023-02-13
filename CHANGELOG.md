@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/whispir/whispir-java/compare/v1.1.0...v1.1.1) (2023-02-13)
+
+
+### Bug Fixes
+
+* **release-workflow:** Remove task dependencies from release workflow ([#22](https://github.com/whispir/whispir-java/issues/22)) ([48f25ca](https://github.com/whispir/whispir-java/commit/48f25ca5c837b6c57c3eced7402dc598d99e1f08))
+* Use simple release-please strategy ([#23](https://github.com/whispir/whispir-java/issues/23)) ([85d31a9](https://github.com/whispir/whispir-java/commit/85d31a940c461f69ce3e76df035f382b5ba4d132))
+
 ## 1.1.0 (2023-02-13)
 
 
