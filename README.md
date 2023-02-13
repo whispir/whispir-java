@@ -4,7 +4,7 @@
 [![Maven Central](https://img.shields.io/badge/maven--central-v1.0.0-blue)](https://mvnrepository.com/artifact/com.whispir/whispir-java)<!-- x-release-please-end -->
 [![Build Status](https://github.com/whispir/whispir-java/actions/workflows/ci.yml/badge.svg)](https://github.com/whispir/whispir-java/actions?query=branch%3Amaster)
 
-The Whispir Node library provides convenient access to the Whispir API from applications written in Java.
+The Whispir Java library provides convenient access to the Whispir API from applications written in Java.
 
 ## Documentation
 You can find the complete documentation of the Whispir API at [developers.whispir.com](https://developers.whispir.com/).
