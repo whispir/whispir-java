@@ -1,13 +1,16 @@
 package com.whispir;
 
 import com.whispir.Whispir;
-import com.whispir.model.Workspace;
-import com.whispir.model.WorkspaceCollection;
 import com.whispir.model.Contact;
-import com.whispir.param.ContactCreateParams;
 import com.whispir.model.Message;
-import com.whispir.param.MessageCreateParams;
-import com.whispir.param.MessageRetrieveParams;
+import com.whispir.model.WorkspaceCollection;
+import com.whispir.api.ContactsApi;
+import com.whispir.api.MessagesApi;
+import com.whispir.api.MessagesApi.MessageCreateParams;
+import com.whispir.api.WorkspacesApi;
+import com.whispir.api.ContactsApi.ContactCreateParams;
+import com.whispir.api.WorkspacesApi.WorkspaceListParams;
+import com.whispir.client.ApiException;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -23,7 +26,7 @@ public class WhispirSendMessage
         Whispir.host = dotenv.get("WHISPIR_HOST");
 
         try {
-            WorkspaceCollection response = Workspace.list();
+            WorkspaceCollection response = WorkspacesApi.list(new WorkspaceListParams.Builder().build());
             String defaultWorkspaceId = response.getWorkspaces().get(0).getId();
 
             ContactCreateParams contactParams = ContactCreateParams
@@ -37,20 +40,21 @@ public class WhispirSendMessage
                 .setTimezone("Australia/Melbourne")
                 .build();
 
-            Contact contact = Contact.create(contactParams);
+            Contact contact = ContactsApi.create(contactParams);
 
             MessageCreateParams messageParams = MessageCreateParams
                 .builder()
                 .setWorkspaceId(defaultWorkspaceId)
-                .setTo(contact.getMri())
+                .setTo(contact.getWorkMobilePhone1())
                 .setSubject("Welcome!")
-                .setBody(String.format("Hello %s, I hear you're from %s!", contact.getFirstName(), contact.getWorkCountry()))
+                .setBody(String.format("Hello %s, I hear you're from %s!", contact.getFirstName(),
+                        contact.getWorkCountry()))
                 .build();
 
-            Message message = Message.create(messageParams);
+            Message message = MessagesApi.create(messageParams);
 
-            System.out.println(message.getId());
-        } catch (WhispirException e) {
+            System.out.println(message.getDocId());
+        } catch (ApiException e) {
             e.printStackTrace();
         }
     }

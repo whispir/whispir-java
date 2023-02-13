@@ -1,12 +1,14 @@
 package com.whispir;
 
 import com.whispir.Whispir;
-import com.whispir.exception.WhispirException;
-import com.whispir.model.Workspace;
+import com.whispir.model.Message;
 import com.whispir.model.WorkspaceCollection;
-import com.whispir.model.Messages;
-import com.whispir.param.MessageCreateParams;
-import com.whispir.param.MessageRetrieveParams;
+import com.whispir.api.MessagesApi;
+import com.whispir.api.MessagesApi.MessageCreateParams;
+import com.whispir.api.MessagesApi.MessageRetrieveParams;
+import com.whispir.api.WorkspacesApi;
+import com.whispir.api.WorkspacesApi.WorkspaceListParams;
+import com.whispir.client.ApiException;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -22,7 +24,7 @@ public class WhispirGetMessage
         Whispir.host = dotenv.get("WHISPIR_HOST");
 
         try {
-            WorkspaceCollection response = Workspace.list();
+            WorkspaceCollection response = WorkspacesApi.list(new WorkspaceListParams.Builder().build());
             String defaultWorkspaceId = response.getWorkspaces().get(0).getId();
 
             MessageCreateParams createParams = MessageCreateParams
@@ -33,17 +35,18 @@ public class WhispirGetMessage
                 .setBody("Your first message from the Whispir Java SDK. Congrats!")
                 .build();
 
-            Message message = Message.create(createParams);
+            Message message = MessagesApi.create(createParams);
 
             MessageRetrieveParams retrieveParams = MessageRetrieveParams
                 .builder()
-                .setId(message.getId())
+                .setWorkspaceId(defaultWorkspaceId)
+                .setMessageId(message.getDocId())
                 .build();
 
-            Message retrievedMessage = Message.retrieve(retrieveParams);
+            Message retrievedMessage = MessagesApi.retrieve(retrieveParams);
 
             System.out.println(retrievedMessage);
-        } catch (WhispirException e) {
+        } catch (ApiException e) {
             e.printStackTrace();
         }
     }

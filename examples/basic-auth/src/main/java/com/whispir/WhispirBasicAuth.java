@@ -1,9 +1,10 @@
 package com.whispir;
 
 import com.whispir.Whispir;
-import com.whispir.exception.WhispirException;
-import com.whispir.model.User;
 import com.whispir.model.UserCollection;
+import com.whispir.api.UsersApi;
+import com.whispir.api.UsersApi.UserListParams;
+import com.whispir.client.ApiException;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -19,9 +20,9 @@ public class WhispirBasicAuth
         Whispir.host = dotenv.get("WHISPIR_HOST");
 
         try {
-            UserCollection result = User.list();
+            UserCollection result = UsersApi.list(new UserListParams.Builder().build());
             System.out.println(result);
-        } catch (WhispirException e) {
+        } catch (ApiException e) {
             e.printStackTrace();
         }
     }
