@@ -6,9 +6,13 @@
 name: ci
 
 on:
-  pull_request:
+  # pull_request:
+  #   branches:
+  #     - main
+  push:
     branches:
-      - main
+      - ci-updates
+
 
 jobs:
   build:
@@ -41,8 +45,15 @@ jobs:
           - '18'
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Setup Mock Server
+        run: yarn install
 
+      - name: Run Mock Server
+        run: yarn mock:server &
+
+      # - uses: actions/checkout@v2
       - name: Setup Test Java runtime
         id: setup-test-jre
         uses: actions/setup-java@v2
@@ -69,6 +80,7 @@ jobs:
         run: |
           ./gradlew --version
           echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
+
 
       - name: Run test suite
         run: ./gradlew test
