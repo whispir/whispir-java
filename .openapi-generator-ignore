@@ -35,3 +35,5 @@ build.gradle
 .gitignore
 README.md
 gradle.properties
+docs/*
+api/*
