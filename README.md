@@ -1,7 +1,7 @@
 # Whispir Java Library
 
 <!-- x-release-please-start-version -->
-[![Maven Central](https://img.shields.io/badge/maven--central-v1.0.0)](https://mvnrepository.com/artifact/com.whispir/whispir-java)<!-- x-release-please-end -->
+[![Maven Central](https://img.shields.io/static/v1?label=maven-central&message=v1.1.0&color=blue)](https://mvnrepository.com/artifact/com.whispir/whispir-java)<!-- x-release-please-end -->
 [![Build Status](https://github.com/whispir/whispir-java/actions/workflows/ci.yml/badge.svg)](https://github.com/whispir/whispir-java/actions?query=branch%3Amaster)
 
 The Whispir Java library provides convenient access to the Whispir API from applications written in Java.
