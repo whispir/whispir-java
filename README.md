@@ -21,7 +21,7 @@ Add this dependency to your project's build file:
 
 <!-- x-release-please-start-version -->
 ```groovy
-implementation "com.whispir:whispir-java:1.0.0"
+implementation "com.whispir:whispir-java:1.1.0"
 ```
 <!-- x-release-please-end -->
 
@@ -34,7 +34,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.whispir</groupId>
   <artifactId>whispir-java</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 <!-- x-release-please-end -->
@@ -44,7 +44,7 @@ Add this dependency to your project's POM:
 You'll need to manually install the following JARs:
 
 <!-- x-release-please-start-version -->
-- [The Whispir JAR](https://search.maven.org/remotecontent?filepath=com/whispir/whispir-java/1.0.0/whispir-java-1.0.0.jar)<!-- x-release-please-end -->
+- [The Whispir JAR](https://search.maven.org/remotecontent?filepath=com/whispir/whispir-java/1.1.0/whispir-java-1.1.0.jar)<!-- x-release-please-end -->
 - [Google Gson](https://github.com/google/gson) from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.9.0/gson-2.9.0.jar>.
 
 ## Usage
