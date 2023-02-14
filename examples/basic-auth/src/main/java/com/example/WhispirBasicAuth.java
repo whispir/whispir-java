@@ -1,4 +1,4 @@
-package com.whispir;
+package com.example;
 
 import com.whispir.Whispir;
 import com.whispir.model.UserCollection;
@@ -8,10 +8,8 @@ import com.whispir.client.ApiException;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-public class WhispirBasicAuth 
-{
-    public static void main( String[] args )
-    {
+public class WhispirBasicAuth {
+    public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
 
         Whispir.username = dotenv.get("WHISPIR_USERNAME");

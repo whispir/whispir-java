@@ -1,4 +1,4 @@
-package com.whispir;
+package com.example;
 
 import com.whispir.Whispir;
 import com.whispir.model.Contact;
@@ -14,10 +14,8 @@ import com.whispir.client.ApiException;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-public class WhispirSendMessage
-{
-    public static void main( String[] args )
-    {
+public class WhispirSendMessage {
+    public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
 
         Whispir.username = dotenv.get("WHISPIR_USERNAME");
@@ -30,26 +28,26 @@ public class WhispirSendMessage
             String defaultWorkspaceId = response.getWorkspaces().get(0).getId();
 
             ContactCreateParams contactParams = ContactCreateParams
-                .builder()
-                .setWorkspaceId(defaultWorkspaceId)
-                .setFirstName("Joe")
-                .setLastName("Bloggs")
-                .setWorkMobilePhone1("61400400400")
-                .setWorkEmailAddress1("joe@bloggs.com")
-                .setWorkCountry("Australia")
-                .setTimezone("Australia/Melbourne")
-                .build();
+                    .builder()
+                    .setWorkspaceId(defaultWorkspaceId)
+                    .setFirstName("Joe")
+                    .setLastName("Bloggs")
+                    .setWorkMobilePhone1("61400400400")
+                    .setWorkEmailAddress1("joe@bloggs.com")
+                    .setWorkCountry("Australia")
+                    .setTimezone("Australia/Melbourne")
+                    .build();
 
             Contact contact = ContactsApi.create(contactParams);
 
             MessageCreateParams messageParams = MessageCreateParams
-                .builder()
-                .setWorkspaceId(defaultWorkspaceId)
-                .setTo(contact.getWorkMobilePhone1())
-                .setSubject("Welcome!")
-                .setBody(String.format("Hello %s, I hear you're from %s!", contact.getFirstName(),
-                        contact.getWorkCountry()))
-                .build();
+                    .builder()
+                    .setWorkspaceId(defaultWorkspaceId)
+                    .setTo(contact.getWorkMobilePhone1())
+                    .setSubject("Welcome!")
+                    .setBody(String.format("Hello %s, I hear you're from %s!", contact.getFirstName(),
+                            contact.getWorkCountry()))
+                    .build();
 
             Message message = MessagesApi.create(messageParams);
 

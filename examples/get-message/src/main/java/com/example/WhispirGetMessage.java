@@ -1,4 +1,4 @@
-package com.whispir;
+package com.example;
 
 import com.whispir.Whispir;
 import com.whispir.model.Message;
@@ -12,10 +12,8 @@ import com.whispir.client.ApiException;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-public class WhispirGetMessage 
-{
-    public static void main( String[] args )
-    {
+public class WhispirGetMessage {
+    public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
 
         Whispir.username = dotenv.get("WHISPIR_USERNAME");
@@ -28,20 +26,20 @@ public class WhispirGetMessage
             String defaultWorkspaceId = response.getWorkspaces().get(0).getId();
 
             MessageCreateParams createParams = MessageCreateParams
-                .builder()
-                .setWorkspaceId(defaultWorkspaceId)
-                .setTo("61400400400")
-                .setSubject("Hello & Welcome!")
-                .setBody("Your first message from the Whispir Java SDK. Congrats!")
-                .build();
+                    .builder()
+                    .setWorkspaceId(defaultWorkspaceId)
+                    .setTo("61400400400")
+                    .setSubject("Hello & Welcome!")
+                    .setBody("Your first message from the Whispir Java SDK. Congrats!")
+                    .build();
 
             Message message = MessagesApi.create(createParams);
 
             MessageRetrieveParams retrieveParams = MessageRetrieveParams
-                .builder()
-                .setWorkspaceId(defaultWorkspaceId)
-                .setMessageId(message.getDocId())
-                .build();
+                    .builder()
+                    .setWorkspaceId(defaultWorkspaceId)
+                    .setMessageId(message.getDocId())
+                    .build();
 
             Message retrievedMessage = MessagesApi.retrieve(retrieveParams);
 
