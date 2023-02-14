@@ -36,14 +36,14 @@ Update `.env` with your own username, password, [Whispir API key](https://develo
 Compile with Maven:
 
 ```bash
-maven compile
+mvn compile
 ```
 
 and finally, run the code:
 
 
 ```bash
-maven exec:java
+mvn exec:java
 ```
 
 You'll now see a list of your workspaces in the CLI. Congrats!

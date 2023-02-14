@@ -36,14 +36,14 @@ Update `.env` with your own username, password, [Whispir API key](https://develo
 Update [WhispirSendMessage.java](src/main/java/com/whispir/WhispirSendMessage.java) with your mobile number. Then compile with Maven:
 
 ```bash
-maven compile
+mvn compile
 ```
 
 and finally, run the code:
 
 
 ```bash
-maven exec:java
+mvn exec:java
 ```
 
 You'll now see the message id in the CLI, which can be used for further querying on the message status. Congrats!

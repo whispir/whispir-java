@@ -36,14 +36,14 @@ Update `.env` with your own username, password, [Whispir API key](https://develo
 Update [WhispirGetMessage.java](src/main/java/com/whispir/WhispirGetMessage.java) with your mobile number. Then compile with Maven:
 
 ```bash
-maven compile
+mvn compile
 ```
 
 and finally, run the code:
 
 
 ```bash
-maven exec:java
+mvn exec:java
 ```
 
 You'll now see a summary of your sent message in the CLI. Congrats!
