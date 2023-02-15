@@ -47,11 +47,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: Setup Mock Server
-        run: yarn install
-
       - name: Run Mock Server
-        run: yarn mock:server &
+        run: npx -y @stoplight/prism-cli@^4.10.5 mock https://raw.githubusercontent.com/whispir/openapi/fix/prism-spec-update/openapi.yaml &
 
       # - uses: actions/checkout@v2
       - name: Setup Test Java runtime
