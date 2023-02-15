@@ -20,4 +20,6 @@ target
 .gradle
 build
 bin
-node_modules/
+
+# environment files
+.env

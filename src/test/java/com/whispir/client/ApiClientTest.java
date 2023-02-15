@@ -33,10 +33,10 @@ public class ApiClientTest {
             .setWorkspaceId("9EE1EBE2FBA5660B")
             .build();
             Workspace WORKSPACE = WorkspacesApi.retrieve(getparams);
-            System.out.println(">>>>" + WORKSPACE);
+            System.out.println("Workspace found:" + WORKSPACE);
 
         } catch (ApiException e) {
-            System.out.println("Exception when calling MessagesApi#getMessageById");
+            System.out.println("Exception when calling WorkspacesApi#retrieve");
             e.printStackTrace();
         }
     }
