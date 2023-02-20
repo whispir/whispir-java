@@ -73,6 +73,5 @@ jobs:
           ./gradlew --version
           echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
 
-
       - name: Run test suite
         run: ./gradlew test
