@@ -41,7 +41,10 @@ jobs:
           - '18'
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Run Mock Server
+        run: npx -y @stoplight/prism-cli@^4.10.5 mock https://raw.githubusercontent.com/whispir/openapi/fix/prism-spec-update/openapi.yaml &
 
       - name: Setup Test Java runtime
         id: setup-test-jre
