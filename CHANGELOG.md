@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/whispir/whispir-java/compare/v1.1.1...v1.2.0) (2023-02-21)
+
+
+### Features
+
+* ci updates ([#20](https://github.com/whispir/whispir-java/issues/20)) ([318e9f9](https://github.com/whispir/whispir-java/commit/318e9f90160c7129a3db697ddfeb0f889293f89e))
+
 ## [1.1.1](https://github.com/whispir/whispir-java/compare/v1.1.0...v1.1.1) (2023-02-13)
 
 
