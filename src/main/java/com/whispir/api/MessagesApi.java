@@ -13,14 +13,11 @@ import com.whispir.client.auth.ApiKeyAuth;
 import com.whispir.client.Version;
 
 import com.google.gson.reflect.TypeToken;
+import com.whispir.model.*;
 
 import java.io.IOException;
-import com.whispir.model.ApiError;
+
 import java.math.BigDecimal;
-import com.whispir.model.Message;
-import com.whispir.model.MessageCollection;
-import com.whispir.model.MessageResponseCollection;
-import com.whispir.model.MessageStatusCollection;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -1139,6 +1136,7 @@ public class MessagesApi {
         public static class Features {
             private PushOptions pushOptions;
             private AliasOption aliasOption;
+            private com.whispir.model.Features model;
 
             private Features(PushOptions pushOptions, AliasOption aliasOption){
             this.pushOptions = pushOptions;
@@ -1151,10 +1149,25 @@ public class MessagesApi {
             public AliasOption getAliasOption(){
                 return aliasOption;
             }
+            public com.whispir.model.Features getModel() {
+                if (model == null) {
+                    model = new com.whispir.model.Features();
+
+                    if (aliasOption != null) {
+                        model.setAliasOption(aliasOption.getModel());
+                    }
+
+                    if (pushOptions != null) {
+                        model.setPushOptions(pushOptions.getModel());
+                    }
+                }
+
+                return model;
+            }
 
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
 
             public static class Builder {
                 private PushOptions pushOptions;
@@ -1177,28 +1190,30 @@ public class MessagesApi {
             }
 
             public static class PushOptions {
-            private String notifications;
-            private String escalationMins;
-            private String appId;
-            private String priority;
-            private Fcm fcm;
-            private Apns apns;
-            private Object data;
+                private String notifications;
+                private String escalationMins;
+                private String appId;
+                private String priority;
+                private Fcm fcm;
+                private Apns apns;
+                private Object data;
+                private com.whispir.model.PushOptions model;
 
-            private PushOptions(String notifications, String escalationMins, String appId, String priority, Fcm fcm, Apns apns, Object data){
-            this.notifications = notifications;
-            this.escalationMins = escalationMins;
-            this.appId = appId;
-            this.priority = priority;
-            this.fcm = fcm;
-            this.apns = apns;
-            this.data = data;
-            }
+                private PushOptions(String notifications, String escalationMins, String appId, String priority, Fcm fcm, Apns apns, Object data){
+                    this.notifications = notifications;
+                    this.escalationMins = escalationMins;
+                    this.appId = appId;
+                    this.priority = priority;
+                    this.fcm = fcm;
+                    this.apns = apns;
+                    this.data = data;
+                }
 
-            public String getNotifications(){
+                public String getNotifications(){
                 return notifications;
             }
-            public enum NotificationsEnum {
+
+                public enum NotificationsEnum {
                 ENABLED("enabled"),
                 DISABLED("disabled");
                 private String value;
@@ -1271,6 +1286,28 @@ public class MessagesApi {
                 return data;
             }
 
+            public com.whispir.model.PushOptions getModel() {
+                if (model == null) {
+                    model = new com.whispir.model.PushOptions();
+
+                    model.setNotifications(notifications);
+                    model.setEscalationMins(escalationMins);
+                    model.setAppId(appId);
+                    model.setPriority(priority);
+                    model.setData(data);
+
+                    if (apns != null) {
+                        model.setApns(apns.getModel());
+                    }
+
+                    if (fcm != null) {
+                        model.setFcm(fcm.getModel());
+                    }
+                }
+
+                return model;
+            }
+
             public static Builder builder() {
                 return new Builder();
             }   
@@ -1330,8 +1367,9 @@ public class MessagesApi {
             private String sound;
             private String action;
             private String image;
+                private com.whispir.model.Fcm model;
 
-            private Fcm(String androidChannelId, String sound, String action, String image){
+                private Fcm(String androidChannelId, String sound, String action, String image){
             this.androidChannelId = androidChannelId;
             this.sound = sound;
             this.action = action;
@@ -1351,11 +1389,24 @@ public class MessagesApi {
                 return image;
             }
 
+            public com.whispir.model.Fcm getModel() {
+                if (model == null) {
+                    model = new com.whispir.model.Fcm();
+
+                    model.setAndroidChannelId(androidChannelId);
+                    model.setSound(sound);
+                    model.setAction(action);
+                    model.setImage(image);
+                }
+
+                return model;
+            }
+
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
 
-            public static class Builder {
+                public static class Builder {
                 private String androidChannelId;
                 private String sound;
                 private String action;
@@ -1392,6 +1443,7 @@ public class MessagesApi {
         public static class Apns {
             private String sound;
             private String action;
+            private com.whispir.model.Apns model;
 
             private Apns(String sound, String action){
             this.sound = sound;
@@ -1407,7 +1459,18 @@ public class MessagesApi {
 
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
+
+            public com.whispir.model.Apns getModel() {
+                if (model == null) {
+                    model = new com.whispir.model.Apns();
+
+                    model.setSound(sound);
+                    model.setAction(action);
+                }
+
+                return model;
+            }
 
             public static class Builder {
                 private String sound;
@@ -1435,6 +1498,7 @@ public class MessagesApi {
         }
         public static class AliasOption {
             private String aliasName;
+            private com.whispir.model.AliasOption model;
 
             private AliasOption(String aliasName){
             this.aliasName = aliasName;
@@ -1446,7 +1510,16 @@ public class MessagesApi {
 
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
+
+            public com.whispir.model.AliasOption getModel() {
+                if (model != null) {
+                    model = new com.whispir.model.AliasOption();
+
+                    model.setAliasName(aliasName);
+                }
+                return model;
+            }
 
             public static class Builder {
                 private String aliasName;
@@ -1773,8 +1846,11 @@ public class MessagesApi {
         String typeValue = params.getType();
         message.setType(typeValue);
 
-        Object featuresValue = params.getFeatures();
-        message.setFeatures((com.whispir.model.Features) featuresValue);
+//        Object featuresValue = params.getFeatures();
+//        message.setFeatures((com.whispir.model.Features) featuresValue);
+        if (params.getFeatures() != null) {
+            message.setFeatures(params.getFeatures().getModel());
+        }
 
         Object resourceValue = params.getResource();
         message.setResource((com.whispir.model.Resource) resourceValue);
