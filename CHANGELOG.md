@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/whispir/whispir-java/compare/v1.1.1...v1.1.2) (2023-12-18)
+
+
+### Bug Fixes
+
+* Messaging API Casting Fix ([#27](https://github.com/whispir/whispir-java/issues/27)) ([d8bcfbf](https://github.com/whispir/whispir-java/commit/d8bcfbf3bb51b958a6b0522cbbf0571578afb3b2))
+
 ## [1.1.1](https://github.com/whispir/whispir-java/compare/v1.1.0...v1.1.1) (2023-02-13)
 
 
