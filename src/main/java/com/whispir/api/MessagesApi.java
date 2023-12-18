@@ -7,20 +7,12 @@ import com.whispir.client.ApiException;
 import com.whispir.client.ApiResponse;
 import com.whispir.client.Configuration;
 import com.whispir.client.Pair;
-import com.whispir.client.ProgressRequestBody;
-import com.whispir.client.ProgressResponseBody;
-import com.whispir.client.auth.ApiKeyAuth;
 import com.whispir.client.Version;
 
 import com.google.gson.reflect.TypeToken;
+import com.whispir.model.*;
 
-import java.io.IOException;
-import com.whispir.model.ApiError;
 import java.math.BigDecimal;
-import com.whispir.model.Message;
-import com.whispir.model.MessageCollection;
-import com.whispir.model.MessageResponseCollection;
-import com.whispir.model.MessageStatusCollection;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -29,9 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Arrays;
-import javax.ws.rs.core.GenericType;
-import java.net.URI;
 import java.util.stream.Collectors;
 
 public class MessagesApi {
@@ -578,12 +567,23 @@ public class MessagesApi {
             private String footer;
             private String type;
             private Attachments resources;
+            private com.whispir.model.Email model;
 
             private Email(String body, String footer, String type, Attachments resources){
-            this.body = body;
-            this.footer = footer;
-            this.type = type;
-            this.resources = resources;
+                this.body = body;
+                this.footer = footer;
+                this.type = type;
+                this.resources = resources;
+
+                model = new com.whispir.model.Email();
+
+                model.setBody(body);
+                model.setFooter(footer);
+                model.setType(type);
+
+                if (!(resources == null || resources.getAttachments().isEmpty())) {
+                    model.setResources(resources.getModel());
+                }
             }
 
             public String getBody(){
@@ -626,6 +626,10 @@ public class MessagesApi {
                 return resources;
             }
 
+            public com.whispir.model.Email getModel() {
+                return model;
+            }
+
             public static Builder builder() {
                 return new Builder();
             }   
@@ -664,18 +668,29 @@ public class MessagesApi {
 
             public static class Attachments {
             private List<Attachment> attachments;
+            private com.whispir.model.Attachments model;
 
             private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+              this.attachments = attachments;
+
+              model = new com.whispir.model.Attachments();
+
+              List<com.whispir.model.Attachment> list = attachments.stream().map(Attachment::getModel)
+                  .collect(Collectors.toList());
+              model.setAttachments(list);
             }
 
             public List<Attachment> getAttachments(){
                 return attachments;
             }
 
+            public com.whispir.model.Attachments getModel() {
+                return model;
+            }
+
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
 
             public static class Builder {
                 private List<Attachment> attachments;
@@ -706,11 +721,17 @@ public class MessagesApi {
         private String attachmentName;
         private String derefUri;
         private String attachmentDesc;
+        private com.whispir.model.Attachment model;
 
         private Attachment(String attachmentName,String derefUri,String attachmentDesc){
-            this.attachmentName = attachmentName;
-            this.derefUri = derefUri;
-            this.attachmentDesc = attachmentDesc;
+          this.attachmentName = attachmentName;
+          this.derefUri = derefUri;
+          this.attachmentDesc = attachmentDesc;
+          model = new com.whispir.model.Attachment();
+
+          model.setAttachmentDesc(attachmentDesc);
+          model.setAttachmentName(attachmentName);
+          model.setDerefUri(derefUri);
         }
 
         public String getAttachmentName(){
@@ -723,9 +744,12 @@ public class MessagesApi {
             return attachmentDesc;
         }
 
+        public com.whispir.model.Attachment getModel() {
+            return model;
+        }
         public static Builder builder() {
             return new Builder();
-        }   
+        }
 
         public static class Builder {
             private String attachmentName;
@@ -764,12 +788,23 @@ public class MessagesApi {
             private String body;
             private String type;
             private Attachments resources;
+            private com.whispir.model.Voice model;
 
             private Voice(String header, String body, String type, Attachments resources){
-            this.header = header;
-            this.body = body;
-            this.type = type;
-            this.resources = resources;
+              this.header = header;
+              this.body = body;
+              this.type = type;
+              this.resources = resources;
+
+              model = new com.whispir.model.Voice();
+
+              model.setBody(body);
+              model.setType(type);
+              model.setHeader(header);
+
+              if (!(resources == null || resources.getAttachments().isEmpty())) {
+                model.setResources(resources.getModel());
+              }
             }
 
             public String getHeader(){
@@ -787,7 +822,11 @@ public class MessagesApi {
 
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
+
+            public com.whispir.model.Voice getModel() {
+                return model;
+            }
 
             public static class Builder {
                 private String header;
@@ -823,9 +862,14 @@ public class MessagesApi {
 
             public static class Attachments {
             private List<Attachment> attachments;
+            private com.whispir.model.Attachments model;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private Attachments(List<Attachment> attachments) {
+              this.attachments = attachments;
+              model = new com.whispir.model.Attachments();
+
+              model.setAttachments(attachments.stream().map(Attachment::getModel)
+                  .collect(Collectors.toList()));
             }
 
             public List<Attachment> getAttachments(){
@@ -834,7 +878,11 @@ public class MessagesApi {
 
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
+
+            public com.whispir.model.Attachments getModel() {
+                return model;
+            }
 
             public static class Builder {
                 private List<Attachment> attachments;
@@ -865,11 +913,18 @@ public class MessagesApi {
         private String attachmentName;
         private String derefUri;
         private String attachmentDesc;
+        private com.whispir.model.Attachment model;
 
         private Attachment(String attachmentName,String derefUri,String attachmentDesc){
             this.attachmentName = attachmentName;
             this.derefUri = derefUri;
             this.attachmentDesc = attachmentDesc;
+
+            model = new com.whispir.model.Attachment();
+
+            model.setAttachmentDesc(attachmentDesc);
+            model.setAttachmentName(attachmentName);
+            model.setDerefUri(derefUri);
         }
 
         public String getAttachmentName(){
@@ -882,9 +937,12 @@ public class MessagesApi {
             return attachmentDesc;
         }
 
+        public com.whispir.model.Attachment getModel() {
+            return model;
+        }
         public static Builder builder() {
             return new Builder();
-        }   
+        }
 
         public static class Builder {
             private String attachmentName;
@@ -921,10 +979,16 @@ public class MessagesApi {
         public static class Web {
             private String body;
             private String type;
+            private com.whispir.model.Web model;
 
             private Web(String body, String type){
-            this.body = body;
-            this.type = type;
+              this.body = body;
+              this.type = type;
+
+              model = new com.whispir.model.Web();
+
+              model.setBody(body);
+              model.setType(type);
             }
 
             public String getBody(){
@@ -961,6 +1025,10 @@ public class MessagesApi {
 
             }
 
+            public com.whispir.model.Web getModel() {
+                return model;
+            }
+
             public static Builder builder() {
                 return new Builder();
             }   
@@ -989,18 +1057,30 @@ public class MessagesApi {
         }
         public static class Social {
             private List<Channel> social;
+            private com.whispir.model.Social model;
 
             private Social(List<Channel> social){
-            this.social = social;
+              this.social = social;
+
+              model = new com.whispir.model.Social();
+
+              if (!(social == null || social.isEmpty())) {
+                model.setSocial(social.stream().map(Channel::getModel).collect(Collectors.toList()));
+              }
+
             }
 
             public List<Channel> getSocial(){
                 return social;
             }
 
+            public com.whispir.model.Social getModel() {
+                return model;
+            }
+
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
 
             public static class Builder {
                 private List<Channel> social;
@@ -1028,14 +1108,20 @@ public class MessagesApi {
             }
 
         public static class Channel {
-        private String id;
-        private String body;
-        private String type;
+          private String id;
+          private String body;
+          private String type;
+          private com.whispir.model.Channel model;
 
-        private Channel(String id,String body,String type){
+          private Channel(String id, String body, String type) {
             this.id = id;
             this.body = body;
             this.type = type;
+
+            model = new com.whispir.model.Channel();
+
+            model.setBody(body);
+            model.setType(type);
         }
 
         public String getId(){
@@ -1052,7 +1138,7 @@ public class MessagesApi {
                 public String getValue() {
                     return value;
                 }
-                
+
                 @Override
                 public String toString() {
                     return String.valueOf(value);
@@ -1102,6 +1188,10 @@ public class MessagesApi {
 
             }
 
+        public com.whispir.model.Channel getModel() {
+             return model;
+        }
+
         public static Builder builder() {
             return new Builder();
         }   
@@ -1139,10 +1229,21 @@ public class MessagesApi {
         public static class Features {
             private PushOptions pushOptions;
             private AliasOption aliasOption;
+            private com.whispir.model.Features model;
 
             private Features(PushOptions pushOptions, AliasOption aliasOption){
-            this.pushOptions = pushOptions;
-            this.aliasOption = aliasOption;
+                this.pushOptions = pushOptions;
+                this.aliasOption = aliasOption;
+
+                this.model = new com.whispir.model.Features();
+
+                if (aliasOption != null) {
+                    model.setAliasOption(aliasOption.getModel());
+                }
+
+                if (pushOptions != null) {
+                    model.setPushOptions(pushOptions.getModel());
+                }
             }
 
             public PushOptions getPushOptions(){
@@ -1151,10 +1252,13 @@ public class MessagesApi {
             public AliasOption getAliasOption(){
                 return aliasOption;
             }
+            public com.whispir.model.Features getModel() {
+                return model;
+            }
 
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
 
             public static class Builder {
                 private PushOptions pushOptions;
@@ -1177,28 +1281,46 @@ public class MessagesApi {
             }
 
             public static class PushOptions {
-            private String notifications;
-            private String escalationMins;
-            private String appId;
-            private String priority;
-            private Fcm fcm;
-            private Apns apns;
-            private Object data;
+                private String notifications;
+                private String escalationMins;
+                private String appId;
+                private String priority;
+                private Fcm fcm;
+                private Apns apns;
+                private Object data;
+                private com.whispir.model.PushOptions model;
 
-            private PushOptions(String notifications, String escalationMins, String appId, String priority, Fcm fcm, Apns apns, Object data){
-            this.notifications = notifications;
-            this.escalationMins = escalationMins;
-            this.appId = appId;
-            this.priority = priority;
-            this.fcm = fcm;
-            this.apns = apns;
-            this.data = data;
-            }
+                private PushOptions(String notifications, String escalationMins, String appId, String priority, Fcm fcm, Apns apns, Object data){
+                  this.notifications = notifications;
+                  this.escalationMins = escalationMins;
+                  this.appId = appId;
+                  this.priority = priority;
+                  this.fcm = fcm;
+                  this.apns = apns;
+                  this.data = data;
 
-            public String getNotifications(){
+                  model = new com.whispir.model.PushOptions();
+
+                  model.setNotifications(notifications);
+                  model.setEscalationMins(escalationMins);
+                  model.setAppId(appId);
+                  model.setPriority(priority);
+                  model.setData(data);
+
+                  if (apns != null) {
+                    model.setApns(apns.getModel());
+                  }
+
+                  if (fcm != null) {
+                    model.setFcm(fcm.getModel());
+                  }
+                }
+
+                public String getNotifications(){
                 return notifications;
             }
-            public enum NotificationsEnum {
+
+                public enum NotificationsEnum {
                 ENABLED("enabled"),
                 DISABLED("disabled");
                 private String value;
@@ -1271,6 +1393,10 @@ public class MessagesApi {
                 return data;
             }
 
+            public com.whispir.model.PushOptions getModel() {
+                return model;
+            }
+
             public static Builder builder() {
                 return new Builder();
             }   
@@ -1326,16 +1452,24 @@ public class MessagesApi {
             }
 
             public static class Fcm {
-            private String androidChannelId;
-            private String sound;
-            private String action;
-            private String image;
+              private String androidChannelId;
+              private String sound;
+              private String action;
+              private String image;
+              private com.whispir.model.Fcm model;
 
-            private Fcm(String androidChannelId, String sound, String action, String image){
-            this.androidChannelId = androidChannelId;
-            this.sound = sound;
-            this.action = action;
-            this.image = image;
+              private Fcm(String androidChannelId, String sound, String action, String image) {
+                this.androidChannelId = androidChannelId;
+                this.sound = sound;
+                this.action = action;
+                this.image = image;
+
+                model = new com.whispir.model.Fcm();
+
+                model.setAndroidChannelId(androidChannelId);
+                model.setSound(sound);
+                model.setAction(action);
+                model.setImage(image);
             }
 
             public String getAndroidChannelId(){
@@ -1351,11 +1485,15 @@ public class MessagesApi {
                 return image;
             }
 
+            public com.whispir.model.Fcm getModel() {
+                return model;
+            }
+
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
 
-            public static class Builder {
+                public static class Builder {
                 private String androidChannelId;
                 private String sound;
                 private String action;
@@ -1392,10 +1530,16 @@ public class MessagesApi {
         public static class Apns {
             private String sound;
             private String action;
+            private com.whispir.model.Apns model;
 
             private Apns(String sound, String action){
-            this.sound = sound;
-            this.action = action;
+              this.sound = sound;
+              this.action = action;
+
+              model = new com.whispir.model.Apns();
+
+              model.setSound(sound);
+              model.setAction(action);
             }
 
             public String getSound(){
@@ -1407,7 +1551,11 @@ public class MessagesApi {
 
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
+
+            public com.whispir.model.Apns getModel() {
+                return model;
+            }
 
             public static class Builder {
                 private String sound;
@@ -1435,9 +1583,14 @@ public class MessagesApi {
         }
         public static class AliasOption {
             private String aliasName;
+            private com.whispir.model.AliasOption model;
 
             private AliasOption(String aliasName){
-            this.aliasName = aliasName;
+              this.aliasName = aliasName;
+
+              model = new com.whispir.model.AliasOption();
+
+              model.setAliasName(aliasName);
             }
 
             public String getAliasName(){
@@ -1446,7 +1599,11 @@ public class MessagesApi {
 
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
+
+            public com.whispir.model.AliasOption getModel() {
+                return model;
+            }
 
             public static class Builder {
                 private String aliasName;
@@ -1471,12 +1628,20 @@ public class MessagesApi {
             private String scope;
             private String mimeType;
             private String derefUri;
+            private com.whispir.model.Resource model;
 
             private Resource(String name, String scope, String mimeType, String derefUri){
-            this.name = name;
-            this.scope = scope;
-            this.mimeType = mimeType;
-            this.derefUri = derefUri;
+              this.name = name;
+              this.scope = scope;
+              this.mimeType = mimeType;
+              this.derefUri = derefUri;
+
+              model = new com.whispir.model.Resource();
+
+              model.setName(name);
+              model.setScope(scope);
+              model.setMimeType(mimeType);
+              model.setDerefUri(derefUri);
             }
 
             public String getName(){
@@ -1485,6 +1650,7 @@ public class MessagesApi {
             public String getScope(){
                 return scope;
             }
+
             public enum ScopeEnum {
                 PRIVATE("private"),
                 PUBLIC("public");
@@ -1517,6 +1683,10 @@ public class MessagesApi {
             }
             public String getDerefUri(){
                 return derefUri;
+            }
+
+            public com.whispir.model.Resource getModel() {
+                return model;
             }
 
             public static Builder builder() {
@@ -1559,13 +1729,19 @@ public class MessagesApi {
         }
         public static class DeliveryReceipt {
 
+            private com.whispir.model.DeliveryReceipt model;
+
             private DeliveryReceipt(){
+              // FIXME: Possibly erroneous structure compared to rest of the classes
+              model = new com.whispir.model.DeliveryReceipt();
             }
 
-
+            public com.whispir.model.DeliveryReceipt getModel() {
+                return model;
+            }
             public static Builder builder() {
                 return new Builder();
-            }   
+            }
 
             public static class Builder {
 
@@ -1758,26 +1934,32 @@ public class MessagesApi {
         String bodyValue = params.getBody();
         message.setBody(bodyValue);
 
-        Object emailValue = params.getEmail();
-        message.setEmail((com.whispir.model.Email) emailValue);
+        if (params.getEmail() != null) {
+            message.setEmail(params.getEmail().getModel());
+        }
 
-        Object voiceValue = params.getVoice();
-        message.setVoice((com.whispir.model.Voice) voiceValue);
+        if (params.getVoice() != null) {
+            message.setVoice(params.getVoice().getModel());
+        }
 
-        Object webValue = params.getWeb();
-        message.setWeb((com.whispir.model.Web) webValue);
+        if (params.getWeb() != null) {
+            message.setWeb(params.getWeb().getModel());
+        }
 
-        Object socialValue = params.getSocial();
-        message.setSocial((com.whispir.model.Social) socialValue);
+        if (params.getSocial() != null) {
+            message.setSocial(params.getSocial().getModel());
+        }
 
         String typeValue = params.getType();
         message.setType(typeValue);
 
-        Object featuresValue = params.getFeatures();
-        message.setFeatures((com.whispir.model.Features) featuresValue);
+        if (params.getFeatures() != null) {
+            message.setFeatures(params.getFeatures().getModel());
+        }
 
-        Object resourceValue = params.getResource();
-        message.setResource((com.whispir.model.Resource) resourceValue);
+        if (params.getResource() != null) {
+            message.setResource(params.getResource().getModel());
+        }
 
         String messageTemplateIdValue = params.getMessageTemplateId();
         message.setMessageTemplateId(messageTemplateIdValue);
@@ -1817,9 +1999,10 @@ public class MessagesApi {
 
         BigDecimal repeatMinValue = params.getRepeatMin();
         message.setRepeatMin(repeatMinValue);
-
-        Object dlrValue = params.getDlr();
-        message.setDlr((com.whispir.model.DeliveryReceipt) dlrValue);
+        
+        if (params.getDlr() != null) {
+            message.setDlr(params.getDlr().getModel());
+        }
 
         MessageCreateRequest request = new MessageCreateRequest(workspaceId, xApiKey, contentType, accept, message);
 
