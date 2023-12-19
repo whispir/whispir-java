@@ -23,3 +23,9 @@ bin
 
 # environment files
 .env
+
+# jdtls (nvim lsp)
+.classpath
+.project
+**/.idea
+**/.settings
