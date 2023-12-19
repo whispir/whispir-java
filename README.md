@@ -44,7 +44,7 @@ Add this dependency to your project's POM:
 You'll need to manually install the following JARs:
 
 <!-- x-release-please-start-version -->
-- [The Whispir JAR](https://search.maven.org/remotecontent?filepath=com/whispir/whispir-java/1.1.2/whispir-java-1.1.0.jar)<!-- x-release-please-end -->
+- [The Whispir JAR](https://search.maven.org/remotecontent?filepath=com/whispir/whispir-java/1.1.2/whispir-java-1.1.2.jar)<!-- x-release-please-end -->
 - [Google Gson](https://github.com/google/gson) from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.9.0/gson-2.9.0.jar>.
 
 ## Usage
