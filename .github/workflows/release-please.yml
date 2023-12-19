@@ -18,3 +18,7 @@ jobs:
             README.md
             build.gradle
             gradle.properties
+            examples/basic-auth/pom.xml
+            examples/get-message/pom.xml
+            examples/send-message/pom.xml
+            examples/send-message-with-alias/pom.xml
