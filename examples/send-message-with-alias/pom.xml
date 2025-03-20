@@ -22,7 +22,7 @@
     <dependency>
       <groupId>com.whispir</groupId>
       <artifactId>whispir-java</artifactId>
-      <version>3</version>
+      <version>1.1.3</version>
     </dependency>
     <!-- x-release-please-end -->
     <dependency>
