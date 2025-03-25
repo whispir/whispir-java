@@ -4,7 +4,7 @@
 
 ### Dependency Upgrade
 
-* Upgrade Dependency ([#31](https://github.com/whispir/whispir-java/pull/31)) ([3c16339](https://github.com/whispir/whispir-java/pull/31/commits/3c16339d49bd5c555cf1582ec8b3504d22f7bda3)
+* Upgrade Dependency ([#31](https://github.com/whispir/whispir-java/pull/31)) ([3c16339](https://github.com/whispir/whispir-java/pull/31/commits/3c16339d49bd5c555cf1582ec8b3504d22f7bda3))
 
 ## [1.1.2](https://github.com/whispir/whispir-java/compare/v1.1.1...v1.1.2) (2023-12-18)
 
