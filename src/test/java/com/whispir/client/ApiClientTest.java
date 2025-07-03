@@ -38,7 +38,7 @@ public class ApiClientTest {
     }
 
     @Test
-    public void testDeserialize_shouldNotLogErrorForNonJsonResponse() throws ApiException {
+    public void testDeserialize_shouldReturnRawOutputIfResponseTypeIsMessage() throws ApiException {
         ApiClient apiClient = new ApiClient();
 
         Response response = createMockResponse("http://localhost:4010/api/v1/workspaces", 200,
