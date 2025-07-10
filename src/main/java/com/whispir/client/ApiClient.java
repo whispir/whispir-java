@@ -1,5 +1,7 @@
 package com.whispir.client;
 
+import static javax.ws.rs.HttpMethod.POST;
+
 import okhttp3.*;
 import okhttp3.internal.http.HttpMethod;
 import okhttp3.internal.tls.OkHostnameVerifier;
@@ -39,8 +41,6 @@ import java.util.regex.Pattern;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.whispir.client.auth.Authentication;
 import com.whispir.client.auth.HttpBasicAuth;
@@ -112,6 +112,11 @@ public class ApiClient {
     private JSON json;
 
     private HttpLoggingInterceptor loggingInterceptor;
+
+    private static final List<String> NON_JSON_MIME_RESPONSE_TYPES = Arrays.asList(
+            "application/vnd.whispir.message-v1+json",
+            "application/vnd.whispir.bulkmessage-v1+json"
+    );
 
     /**
      * Basic constructor for ApiClient
@@ -918,7 +923,10 @@ public class ApiClient {
             // ensuring a default content type
             contentType = "application/json";
         }
-        if (isJsonMime(contentType)) {
+
+        if (isNonJsonMimeResponse(response.request(), contentType)) {
+            return getRawResponse(respBody, returnType);
+        } else if (isJsonMime(contentType)) {
             // retrieve location from headers
             String location = response.headers().get("Location");
             if (location != null) {
@@ -932,9 +940,7 @@ public class ApiClient {
                     return JSON.deserialize(jsonObject.toString(), returnType);
                 } catch (Exception e) {
                     System.out.println("Expected JSON response body was not received. Actual response body was `" + respBody + "`");
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("rawOutput", respBody);
-                    return JSON.deserialize(jsonObject.toString(), returnType);
+                    return getRawResponse(respBody, returnType);
                 }
             } else {
                 return JSON.deserialize(respBody, returnType);
@@ -1438,10 +1444,10 @@ public class ApiClient {
     /**
      * Add a Content-Disposition Header for the given key and file to the MultipartBody Builder.
      *
-     * @param mpBuilder MultipartBody.Builder 
+     * @param mpBuilder MultipartBody.Builder
      * @param key The key of the Header element
      * @param file The file to add to the Header
-     */ 
+     */
     private void addPartToMultiPartBuilder(MultipartBody.Builder mpBuilder, String key, File file) {
         Headers partHeaders = Headers.of("Content-Disposition", "form-data; name=\"" + key + "\"; filename=\"" + file.getName() + "\"");
         MediaType mediaType = MediaType.parse(guessContentTypeFromFile(file));
@@ -1590,5 +1596,15 @@ public class ApiClient {
 
         // empty http request body
         return "";
+    }
+
+    private Boolean isNonJsonMimeResponse(Request request, String contentType) {
+        return POST.equals(request.method()) && NON_JSON_MIME_RESPONSE_TYPES.contains(contentType);
+    }
+
+    private <T> T getRawResponse(String responseBody, Type returnType) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("rawOutput", responseBody);
+        return JSON.deserialize(jsonObject.toString(), returnType);
     }
 }

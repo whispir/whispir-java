@@ -1,22 +1,18 @@
 package com.whispir.client;
-import org.junit.jupiter.api.Disabled;
-import com.whispir.client.ApiException;
+
+import com.google.gson.reflect.TypeToken;
+import com.whispir.model.Message;
+import com.whispir.model.Workspace;
+import com.whispir.model.WorkspaceCollection;
+import okhttp3.*;
 import org.junit.jupiter.api.Test;
 import com.whispir.Whispir;
 import com.whispir.api.WorkspacesApi;
 import com.whispir.api.WorkspacesApi.WorkspaceRetrieveParams;
-import com.whispir.api.ContactsApi;
-import com.whispir.api.MessagesApi;
-import com.whispir.api.ContactsApi.ContactCreateParams;
-import com.whispir.api.ContactsApi.ContactCreateParams.MessagingOption.ChannelEnum;
-import com.whispir.api.MessagesApi.MessageCreateParams;
 import com.whispir.api.WorkspacesApi.WorkspaceListParams;
-import com.whispir.client.ApiClient;
-import com.whispir.client.ApiException;
-import com.whispir.client.Configuration;
-import com.whispir.client.auth.*;
+import java.util.Objects;
 
-import com.whispir.model.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ApiClientTest {
     @Test
@@ -30,8 +26,8 @@ public class ApiClientTest {
             WorkspaceListParams params = new WorkspaceListParams.Builder().build();
             WorkspaceCollection workspaces = WorkspacesApi.list(params);
             WorkspaceRetrieveParams getparams = new WorkspaceRetrieveParams.Builder()
-            .setWorkspaceId("9EE1EBE2FBA5660B")
-            .build();
+                    .setWorkspaceId("9EE1EBE2FBA5660B")
+                    .build();
             Workspace WORKSPACE = WorkspacesApi.retrieve(getparams);
             System.out.println("Workspace found:" + WORKSPACE);
 
@@ -40,4 +36,36 @@ public class ApiClientTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testDeserialize_shouldReturnRawOutputIfResponseTypeIsMessage() throws ApiException {
+        ApiClient apiClient = new ApiClient();
+
+        Response response = createMockResponse("http://localhost:4010/api/v1/workspaces", 200,
+                "some text non json response", Objects.requireNonNull(MediaType.parse("application/vnd.whispir.message-v1+json")));
+
+        Message deserialized = apiClient.deserialize(response,  new TypeToken<Message>(){}.getType());
+        assertEquals("some text non json response", deserialized.getRawOutput());
+    }
+
+
+    private Response createMockResponse(String url, int code, String bodyContent, MediaType mediaType) {
+        Request request = new Request.Builder()
+                .url(url)
+                .post(RequestBody.create(new byte[0]))
+                .build();
+
+        return new Response.Builder()
+                .request(request)
+                .addHeader("Content-Type", mediaType.toString())
+                .protocol(Protocol.HTTP_1_1)
+                .code(code)
+                .message("OK")
+                .body(ResponseBody.create(
+                        bodyContent,
+                        mediaType
+                ))
+                .build();
+    }
+
 }
