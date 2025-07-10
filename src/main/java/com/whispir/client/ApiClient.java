@@ -1,5 +1,7 @@
 package com.whispir.client;
 
+import static javax.ws.rs.HttpMethod.POST;
+
 import okhttp3.*;
 import okhttp3.internal.http.HttpMethod;
 import okhttp3.internal.tls.OkHostnameVerifier;
@@ -922,7 +924,7 @@ public class ApiClient {
             contentType = "application/json";
         }
 
-        if (isNonJsonMimeResponse(contentType)) {
+        if (isNonJsonMimeResponse(response.request(), contentType)) {
             return getRawResponse(respBody, returnType);
         } else if (isJsonMime(contentType)) {
             // retrieve location from headers
@@ -1596,8 +1598,8 @@ public class ApiClient {
         return "";
     }
 
-    private Boolean isNonJsonMimeResponse(String contentType) {
-        return NON_JSON_MIME_RESPONSE_TYPES.contains(contentType);
+    private Boolean isNonJsonMimeResponse(Request request, String contentType) {
+        return POST.equals(request.method()) && NON_JSON_MIME_RESPONSE_TYPES.contains(contentType);
     }
 
     private <T> T getRawResponse(String responseBody, Type returnType) {

@@ -50,8 +50,13 @@ public class ApiClientTest {
 
 
     private Response createMockResponse(String url, int code, String bodyContent, MediaType mediaType) {
+        Request request = new Request.Builder()
+                .url(url)
+                .post(RequestBody.create(new byte[0]))
+                .build();
+
         return new Response.Builder()
-                .request(new Request.Builder().url(url).build())
+                .request(request)
                 .addHeader("Content-Type", mediaType.toString())
                 .protocol(Protocol.HTTP_1_1)
                 .code(code)
