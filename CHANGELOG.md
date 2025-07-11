@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/whispir/whispir-java/compare/v1.1.3...v1.1.4) (2025-07-10)
+
+
+### Bug Fixes
+
+* exception logging on message response ([#34](https://github.com/whispir/whispir-java/issues/34)) ([f23d3e4](https://github.com/whispir/whispir-java/commit/f23d3e490a025e273ca13d05ffdf8f31c0260085))
+
 ## [1.1.3](https://github.com/whispir/whispir-java/compare/v1.1.2...v1.1.3) (2025-03-26)
 
 ### Dependency Upgrade
