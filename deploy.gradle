@@ -9,21 +9,21 @@
 apply plugin: 'java'
 apply plugin: "maven-publish"
 apply plugin: "signing"
-apply plugin: "io.codearte.nexus-staging"
+apply plugin: "io.github.gradle-nexus.publish-plugin"
 
  // taken from https://github.com/stripe/stripe-java/blob/master/deploy.gradle
 def isReleaseBuild() {
     return VERSION_NAME.contains("SNAPSHOT") == false
 }
 
-def getReleaseRepositoryUrl() {
+def getNexusReleaseRepositoryUrl() {
     return hasProperty("RELEASE_REPOSITORY_URL") ? RELEASE_REPOSITORY_URL
-            : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            : "https://ossrh-staging-api.central.sonatype.com/service/local/"
 }
 
-def getSnapshotRepositoryUrl() {
+def getNexusSnapshotRepositoryUrl() {
     return hasProperty("SNAPSHOT_REPOSITORY_URL") ? SNAPSHOT_REPOSITORY_URL
-            : "https://oss.sonatype.org/content/repositories/snapshots/"
+            : "https://central.sonatype.com/repository/maven-snapshots/"
 }
 
 def getRepositoryUsername() {
@@ -32,6 +32,18 @@ def getRepositoryUsername() {
 
 def getRepositoryPassword() {
     return hasProperty("NEXUS_PASSWORD") ? NEXUS_PASSWORD : ""
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl = uri(nexusReleaseRepositoryUrl)
+            snapshotRepositoryUrl = uri(nexusSnapshotRepositoryUrl)
+            username = repositoryUsername
+            password = repositoryPassword
+            stagingProfileId = "whispirJavaNexusStaging"
+        }
+    }
 }
 
 afterEvaluate { project ->
@@ -55,14 +67,6 @@ afterEvaluate { project ->
         required { isReleaseBuild() && gradle.taskGraph.hasTask("publish") }
         useGpgCmd()
         sign publishing.publications
-    }
-
-    nexusStaging {
-        packageGroup = GROUP
-        numberOfRetries = 40
-        delayBetweenRetriesInMillis = 4000
-        username = getRepositoryUsername()
-        password = getRepositoryPassword()
     }
 
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -105,18 +109,6 @@ afterEvaluate { project ->
                         developerConnection = POM_SCM_DEV_CONNECTION
                         url = POM_SCM_URL
                     }
-                }
-            }
-        }
-        repositories {
-            maven {
-                name = "nexus"
-                def releasesRepoUrl = getReleaseRepositoryUrl()
-                def snapshotsRepoUrl = getSnapshotRepositoryUrl()
-                url = isReleaseBuild() ? releasesRepoUrl : snapshotsRepoUrl
-                credentials {
-                    username = getRepositoryUsername()
-                    password = getRepositoryPassword()
                 }
             }
         }
