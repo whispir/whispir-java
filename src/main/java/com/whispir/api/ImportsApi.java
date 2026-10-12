@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 public class ImportsApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call importCreateCall(String workspaceId, String xApiKey, String contentType, String accept, ModelImport modelImport, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call importCreateCall(String workspaceId, String contentType, String accept, ModelImport modelImport, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -52,10 +52,6 @@ public class ImportsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -86,15 +82,10 @@ public class ImportsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call importCreateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, ModelImport modelImport, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call importCreateValidateBeforeCall(String workspaceId, String contentType, String accept, ModelImport modelImport, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling importCreate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling importCreate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -107,16 +98,16 @@ public class ImportsApi {
             throw new ApiException("Missing the required parameter 'accept' when calling importCreate(Async)");
         }
 
-        return importCreateCall(workspaceId, xApiKey, contentType, accept, modelImport, _callback);
+        return importCreateCall(workspaceId, contentType, accept, modelImport, _callback);
     }
 
-    private static ApiResponse<Void> importCreateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, ModelImport modelImport) throws ApiException {
-        okhttp3.Call localVarCall = importCreateCall(workspaceId, xApiKey, contentType, accept, modelImport, null);
+    private static ApiResponse<Void> importCreateWithHttpInfo(String workspaceId, String contentType, String accept, ModelImport modelImport) throws ApiException {
+        okhttp3.Call localVarCall = importCreateCall(workspaceId, contentType, accept, modelImport, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call importCreateAsync(String workspaceId, String xApiKey, String contentType, String accept, ModelImport modelImport, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = importCreateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, modelImport, _callback);
+    private static okhttp3.Call importCreateAsync(String workspaceId, String contentType, String accept, ModelImport modelImport, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = importCreateValidateBeforeCall(workspaceId, contentType, accept, modelImport, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -168,15 +159,13 @@ public class ImportsApi {
 
     public static class ImportCreateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private ModelImport modelImport;
         ApiResponse _lastResponse;
 
-        private ImportCreateRequest(String workspaceId, String xApiKey, String contentType, String accept) {
+        private ImportCreateRequest(String workspaceId, String contentType, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
         }
@@ -198,7 +187,7 @@ public class ImportsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return importCreateCall(workspaceId, xApiKey, contentType, accept, modelImport, _callback);
+            return importCreateCall(workspaceId, contentType, accept, modelImport, _callback);
         }
 
         /**
@@ -206,7 +195,7 @@ public class ImportsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            importCreateWithHttpInfo(workspaceId, xApiKey, contentType, accept, modelImport);
+            importCreateWithHttpInfo(workspaceId, contentType, accept, modelImport);
         }
         /**
          * Return the last executed API response
@@ -224,7 +213,7 @@ public class ImportsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return importCreateAsync(workspaceId, xApiKey, contentType, accept, modelImport, _callback);
+            return importCreateAsync(workspaceId, contentType, accept, modelImport, _callback);
         }
     }
 
@@ -265,12 +254,11 @@ public class ImportsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.importcontact-v1+json";
 
         String accept = "application/vnd.whispir.importcontact-v1+json";
 
-        ImportCreateRequest request = new ImportCreateRequest(workspaceId, xApiKey, contentType, accept);
+        ImportCreateRequest request = new ImportCreateRequest(workspaceId, contentType, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.modelImport != null){

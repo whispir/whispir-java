@@ -61,32 +61,32 @@ public class Attachments {
     return rawOutput;
   }
   public ApiResponse lastResponse;
-  @SerializedName("attachments")
-  private List<Attachment> attachments;
+  @SerializedName("attachment")
+  private List<Attachment> attachment;
 
   public Attachments() {
     super();
   }
 
 
-  public Attachments addAttachmentsItem(Attachment attachmentsItem) {
-    if (this.attachments == null) {
-      this.attachments = new ArrayList<>();
+  public Attachments addAttachmentItem(Attachment attachmentItem) {
+    if (this.attachment == null) {
+      this.attachment = new ArrayList<>();
     }
-    this.attachments.add(attachmentsItem);
+    this.attachment.add(attachmentItem);
     return this;
   }
 
    /**
    * A list of attachments to attach to the Message.
-   * @return attachments
+   * @return attachment
   **/
   @javax.annotation.Nullable
-  public List<Attachment> getAttachments() {
-    return attachments;
+  public List<Attachment> getAttachment() {
+    return attachment;
   }
-  public void setAttachments(List<Attachment> attachments) {
-    this.attachments = attachments;
+  public void setAttachment(List<Attachment> attachment) {
+    this.attachment = attachment;
   }
 
   @Override
@@ -98,17 +98,17 @@ public class Attachments {
       return false;
     }
     Attachments attachments = (Attachments) o;
-    return Objects.equals(this.attachments, attachments.attachments);
+    return Objects.equals(this.attachment, attachments.attachment);
   }
   @Override
   public int hashCode() {
-    return Objects.hash(attachments);
+    return Objects.hash(attachment);
   }
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Attachments {\n");
-    sb.append("    attachments: ").append(toIndentedString(attachments)).append("\n");
+    sb.append("    attachment: ").append(toIndentedString(attachment)).append("\n");
     sb.append("}");
     return sb.toString();
   }

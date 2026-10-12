@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.whispir.model.Attachments;
+import com.whispir.model.OptOutOption;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -68,6 +69,9 @@ public class Email {
   @SerializedName("type")
   private String type;
 
+  @SerializedName("optOutOption")
+  private OptOutOption optOutOption;
+
   @SerializedName("resources")
   private Attachments resources;
 
@@ -113,6 +117,18 @@ public class Email {
   }
 
    /**
+   * Get optOutOption
+   * @return optOutOption
+  **/
+  @javax.annotation.Nullable
+  public OptOutOption getOptOutOption() {
+    return optOutOption;
+  }
+  public void setOptOutOption(OptOutOption optOutOption) {
+    this.optOutOption = optOutOption;
+  }
+
+   /**
    * Get resources
    * @return resources
   **/
@@ -136,11 +152,12 @@ public class Email {
     return Objects.equals(this.body, email.body) &&
         Objects.equals(this.footer, email.footer) &&
         Objects.equals(this.type, email.type) &&
+        Objects.equals(this.optOutOption, email.optOutOption) &&
         Objects.equals(this.resources, email.resources);
   }
   @Override
   public int hashCode() {
-    return Objects.hash(body, footer, type, resources);
+    return Objects.hash(body, footer, type, optOutOption, resources);
   }
   @Override
   public String toString() {
@@ -149,6 +166,7 @@ public class Email {
     sb.append("    body: ").append(toIndentedString(body)).append("\n");
     sb.append("    footer: ").append(toIndentedString(footer)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    optOutOption: ").append(toIndentedString(optOutOption)).append("\n");
     sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
     sb.append("}");
     return sb.toString();

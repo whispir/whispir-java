@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class TemplatesApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call templateCreateCall(String workspaceId, String xApiKey, String contentType, String accept, Template template, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateCreateCall(String workspaceId, String contentType, String accept, Template template, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -53,10 +53,6 @@ public class TemplatesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -88,15 +84,10 @@ public class TemplatesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call templateCreateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, Template template, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateCreateValidateBeforeCall(String workspaceId, String contentType, String accept, Template template, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling templateCreate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling templateCreate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -114,17 +105,17 @@ public class TemplatesApi {
             throw new ApiException("Missing the required parameter 'template' when calling templateCreate(Async)");
         }
 
-        return templateCreateCall(workspaceId, xApiKey, contentType, accept, template, _callback);
+        return templateCreateCall(workspaceId, contentType, accept, template, _callback);
     }
 
-    private static ApiResponse<Template> templateCreateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, Template template) throws ApiException {
-        okhttp3.Call localVarCall = templateCreateCall(workspaceId, xApiKey, contentType, accept, template, null);
+    private static ApiResponse<Template> templateCreateWithHttpInfo(String workspaceId, String contentType, String accept, Template template) throws ApiException {
+        okhttp3.Call localVarCall = templateCreateCall(workspaceId, contentType, accept, template, null);
         Type localVarReturnType = new TypeToken<Template>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call templateCreateAsync(String workspaceId, String xApiKey, String contentType, String accept, Template template, final ApiCallback<Template> _callback) throws ApiException {
-        okhttp3.Call localVarCall = templateCreateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, template, _callback);
+    private static okhttp3.Call templateCreateAsync(String workspaceId, String contentType, String accept, Template template, final ApiCallback<Template> _callback) throws ApiException {
+        okhttp3.Call localVarCall = templateCreateValidateBeforeCall(workspaceId, contentType, accept, template, _callback);
         Type localVarReturnType = new TypeToken<Template>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -309,12 +300,14 @@ public class TemplatesApi {
             private String body;
             private String footer;
             private String type;
+            private OptOutOption optOutOption;
             private Attachments resources;
 
-            private Email(String body, String footer, String type, Attachments resources){
+            private Email(String body, String footer, String type, OptOutOption optOutOption, Attachments resources){
             this.body = body;
             this.footer = footer;
             this.type = type;
+            this.optOutOption = optOutOption;
             this.resources = resources;
             }
 
@@ -354,6 +347,9 @@ public class TemplatesApi {
                 }
 
             }
+            public OptOutOption getOptOutOption(){
+                return optOutOption;
+            }
             public Attachments getResources(){
                 return resources;
             }
@@ -366,6 +362,7 @@ public class TemplatesApi {
                 private String body;
                 private String footer;
                 private String type;
+                private OptOutOption optOutOption;
                 private Attachments resources;
 
                 public Email build() {
@@ -373,6 +370,7 @@ public class TemplatesApi {
                         this.body,
                         this.footer,
                         this.type,
+                        this.optOutOption,
                         this.resources
                     );
                 }
@@ -388,21 +386,30 @@ public class TemplatesApi {
                     this.type = type.getValue();
                     return this;
                 }
+                public Builder setOptOutOption(OptOutOption optOutOption) {
+                    this.optOutOption = optOutOption;
+                    return this;
+                }
                 public Builder setResources(Attachments resources) {
                     this.resources = resources;
                     return this;
                 }
             }
 
-            public static class Attachments {
-            private List<Attachment> attachments;
+            public static class OptOutOption {
+            private String rmsUnsubscribeUrl;
+            private String oneClickApiMapping;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private OptOutOption(String rmsUnsubscribeUrl, String oneClickApiMapping){
+            this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+            this.oneClickApiMapping = oneClickApiMapping;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public String getRmsUnsubscribeUrl(){
+                return rmsUnsubscribeUrl;
+            }
+            public String getOneClickApiMapping(){
+                return oneClickApiMapping;
             }
 
             public static Builder builder() {
@@ -410,26 +417,63 @@ public class TemplatesApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private String rmsUnsubscribeUrl;
+                private String oneClickApiMapping;
+
+                public OptOutOption build() {
+                    return new OptOutOption(
+                        this.rmsUnsubscribeUrl,
+                        this.oneClickApiMapping
+                    );
+                }
+                public Builder setRmsUnsubscribeUrl(String rmsUnsubscribeUrl) {
+                    this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+                    return this;
+                }
+                public Builder setOneClickApiMapping(String oneClickApiMapping) {
+                    this.oneClickApiMapping = oneClickApiMapping;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Attachments {
+            private List<Attachment> attachment;
+
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
+            }
+
+            public List<Attachment> getAttachment(){
+                return attachment;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -554,14 +598,14 @@ public class TemplatesApi {
             }
 
             public static class Attachments {
-            private List<Attachment> attachments;
+            private List<Attachment> attachment;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public List<Attachment> getAttachment(){
+                return attachment;
             }
 
             public static Builder builder() {
@@ -569,26 +613,26 @@ public class TemplatesApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -871,10 +915,12 @@ public class TemplatesApi {
         public static class Features {
             private PushOptions pushOptions;
             private AliasOption aliasOption;
+            private FeaturesFallback fallback;
 
-            private Features(PushOptions pushOptions, AliasOption aliasOption){
+            private Features(PushOptions pushOptions, AliasOption aliasOption, FeaturesFallback fallback){
             this.pushOptions = pushOptions;
             this.aliasOption = aliasOption;
+            this.fallback = fallback;
             }
 
             public PushOptions getPushOptions(){
@@ -882,6 +928,9 @@ public class TemplatesApi {
             }
             public AliasOption getAliasOption(){
                 return aliasOption;
+            }
+            public FeaturesFallback getFallback(){
+                return fallback;
             }
 
             public static Builder builder() {
@@ -891,11 +940,13 @@ public class TemplatesApi {
             public static class Builder {
                 private PushOptions pushOptions;
                 private AliasOption aliasOption;
+                private FeaturesFallback fallback;
 
                 public Features build() {
                     return new Features(
                         this.pushOptions,
-                        this.aliasOption
+                        this.aliasOption,
+                        this.fallback
                     );
                 }
                 public Builder setPushOptions(PushOptions pushOptions) {
@@ -904,6 +955,10 @@ public class TemplatesApi {
                 }
                 public Builder setAliasOption(AliasOption aliasOption) {
                     this.aliasOption = aliasOption;
+                    return this;
+                }
+                public Builder setFallback(FeaturesFallback fallback) {
+                    this.fallback = fallback;
                     return this;
                 }
             }
@@ -1196,6 +1251,74 @@ public class TemplatesApi {
 
     
         }
+        public static class FeaturesFallback {
+            private String channel;
+            private String templateName;
+
+            private FeaturesFallback(String channel, String templateName){
+            this.channel = channel;
+            this.templateName = templateName;
+            }
+
+            public String getChannel(){
+                return channel;
+            }
+            public enum ChannelEnum {
+                SMS("SMS");
+                private String value;
+                ChannelEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static ChannelEnum fromValue(String value) {
+                    for (ChannelEnum b : ChannelEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public String getTemplateName(){
+                return templateName;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String channel;
+                private String templateName;
+
+                public FeaturesFallback build() {
+                    return new FeaturesFallback(
+                        this.channel,
+                        this.templateName
+                    );
+                }
+                public Builder setChannel(ChannelEnum channel) {
+                    this.channel = channel.getValue();
+                    return this;
+                }
+                public Builder setTemplateName(String templateName) {
+                    this.templateName = templateName;
+                    return this;
+                }
+            }
+
+    
+        }
 
         }
         public static class DeliveryReceipt {
@@ -1223,15 +1346,13 @@ public class TemplatesApi {
 
     public static class TemplateCreateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final Template template;
         ApiResponse _lastResponse;
 
-        private TemplateCreateRequest(String workspaceId, String xApiKey, String contentType, String accept, Template template) {
+        private TemplateCreateRequest(String workspaceId, String contentType, String accept, Template template) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.template = template;
@@ -1244,7 +1365,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return templateCreateCall(workspaceId, xApiKey, contentType, accept, template, _callback);
+            return templateCreateCall(workspaceId, contentType, accept, template, _callback);
         }
 
         /**
@@ -1253,7 +1374,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Template execute() throws ApiException {
-            ApiResponse<Template> localVarResp = templateCreateWithHttpInfo(workspaceId, xApiKey, contentType, accept, template);
+            ApiResponse<Template> localVarResp = templateCreateWithHttpInfo(workspaceId, contentType, accept, template);
             _lastResponse = localVarResp;
             Template data = localVarResp.getData();
 
@@ -1286,7 +1407,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Template> _callback) throws ApiException {
-            return templateCreateAsync(workspaceId, xApiKey, contentType, accept, template, _callback);
+            return templateCreateAsync(workspaceId, contentType, accept, template, _callback);
         }
     }
 
@@ -1350,7 +1471,6 @@ public class TemplatesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.template-v1+json";
 
         String accept = "application/vnd.whispir.template-v1+json";
@@ -1397,13 +1517,13 @@ public class TemplatesApi {
         Object dlrValue = params.getDlr();
         template.setDlr((com.whispir.model.DeliveryReceipt) dlrValue);
 
-        TemplateCreateRequest request = new TemplateCreateRequest(workspaceId, xApiKey, contentType, accept, template);
+        TemplateCreateRequest request = new TemplateCreateRequest(workspaceId, contentType, accept, template);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call templateDeleteCall(String workspaceId, String xApiKey, String contentType, String accept, String templateId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateDeleteCall(String workspaceId, String contentType, String accept, String templateId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1422,10 +1542,6 @@ public class TemplatesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -1455,15 +1571,10 @@ public class TemplatesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call templateDeleteValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, String templateId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateDeleteValidateBeforeCall(String workspaceId, String contentType, String accept, String templateId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling templateDelete(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling templateDelete(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -1481,16 +1592,16 @@ public class TemplatesApi {
             throw new ApiException("Missing the required parameter 'templateId' when calling templateDelete(Async)");
         }
 
-        return templateDeleteCall(workspaceId, xApiKey, contentType, accept, templateId, _callback);
+        return templateDeleteCall(workspaceId, contentType, accept, templateId, _callback);
     }
 
-    private static ApiResponse<Void> templateDeleteWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, String templateId) throws ApiException {
-        okhttp3.Call localVarCall = templateDeleteCall(workspaceId, xApiKey, contentType, accept, templateId, null);
+    private static ApiResponse<Void> templateDeleteWithHttpInfo(String workspaceId, String contentType, String accept, String templateId) throws ApiException {
+        okhttp3.Call localVarCall = templateDeleteCall(workspaceId, contentType, accept, templateId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call templateDeleteAsync(String workspaceId, String xApiKey, String contentType, String accept, String templateId, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = templateDeleteValidateBeforeCall(workspaceId, xApiKey, contentType, accept, templateId, _callback);
+    private static okhttp3.Call templateDeleteAsync(String workspaceId, String contentType, String accept, String templateId, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = templateDeleteValidateBeforeCall(workspaceId, contentType, accept, templateId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1542,15 +1653,13 @@ public class TemplatesApi {
 
     public static class TemplateDeleteRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String templateId;
         ApiResponse _lastResponse;
 
-        private TemplateDeleteRequest(String workspaceId, String xApiKey, String contentType, String accept, String templateId) {
+        private TemplateDeleteRequest(String workspaceId, String contentType, String accept, String templateId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.templateId = templateId;
@@ -1563,7 +1672,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return templateDeleteCall(workspaceId, xApiKey, contentType, accept, templateId, _callback);
+            return templateDeleteCall(workspaceId, contentType, accept, templateId, _callback);
         }
 
         /**
@@ -1571,7 +1680,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            templateDeleteWithHttpInfo(workspaceId, xApiKey, contentType, accept, templateId);
+            templateDeleteWithHttpInfo(workspaceId, contentType, accept, templateId);
         }
         /**
          * Return the last executed API response
@@ -1589,7 +1698,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return templateDeleteAsync(workspaceId, xApiKey, contentType, accept, templateId, _callback);
+            return templateDeleteAsync(workspaceId, contentType, accept, templateId, _callback);
         }
     }
 
@@ -1631,7 +1740,6 @@ public class TemplatesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.template-v1+json";
 
         String accept = "application/vnd.whispir.template-v1+json";
@@ -1642,13 +1750,13 @@ public class TemplatesApi {
         if(templateId == null || templateId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'templateId'");
         }
-        TemplateDeleteRequest request = new TemplateDeleteRequest(workspaceId, xApiKey, contentType, accept, templateId);
+        TemplateDeleteRequest request = new TemplateDeleteRequest(workspaceId, contentType, accept, templateId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call templateListCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateListCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1683,10 +1791,6 @@ public class TemplatesApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortFields", sortFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -1712,15 +1816,10 @@ public class TemplatesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call templateListValidateBeforeCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateListValidateBeforeCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling templateList(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling templateList(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -1728,17 +1827,17 @@ public class TemplatesApi {
             throw new ApiException("Missing the required parameter 'accept' when calling templateList(Async)");
         }
 
-        return templateListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+        return templateListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
     }
 
-    private static ApiResponse<TemplateCollection> templateListWithHttpInfo(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
-        okhttp3.Call localVarCall = templateListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, null);
+    private static ApiResponse<TemplateCollection> templateListWithHttpInfo(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
+        okhttp3.Call localVarCall = templateListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, null);
         Type localVarReturnType = new TypeToken<TemplateCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call templateListAsync(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<TemplateCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = templateListValidateBeforeCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+    private static okhttp3.Call templateListAsync(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<TemplateCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = templateListValidateBeforeCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         Type localVarReturnType = new TypeToken<TemplateCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1827,7 +1926,6 @@ public class TemplatesApi {
 
     public static class TemplateListRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -1835,9 +1933,8 @@ public class TemplatesApi {
         private String sortFields;
         ApiResponse _lastResponse;
 
-        private TemplateListRequest(String workspaceId, String xApiKey, String accept) {
+        private TemplateListRequest(String workspaceId, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
         }
 
@@ -1888,7 +1985,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return templateListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return templateListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
 
         /**
@@ -1897,7 +1994,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public TemplateCollection execute() throws ApiException {
-            ApiResponse<TemplateCollection> localVarResp = templateListWithHttpInfo(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+            ApiResponse<TemplateCollection> localVarResp = templateListWithHttpInfo(workspaceId, accept, limit, offset, sortOrder, sortFields);
             _lastResponse = localVarResp;
             TemplateCollection data = localVarResp.getData();
 
@@ -1921,7 +2018,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<TemplateCollection> _callback) throws ApiException {
-            return templateListAsync(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return templateListAsync(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
     }
 
@@ -1977,10 +2074,9 @@ public class TemplatesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.template-v1+json";
 
-        TemplateListRequest request = new TemplateListRequest(workspaceId, xApiKey, accept);
+        TemplateListRequest request = new TemplateListRequest(workspaceId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -2002,7 +2098,7 @@ public class TemplatesApi {
 
         return request.execute();
     }
-    private static okhttp3.Call templateRetrieveCall(String workspaceId, String xApiKey, String accept, String templateId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateRetrieveCall(String workspaceId, String accept, String templateId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -2021,10 +2117,6 @@ public class TemplatesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -2051,15 +2143,10 @@ public class TemplatesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call templateRetrieveValidateBeforeCall(String workspaceId, String xApiKey, String accept, String templateId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateRetrieveValidateBeforeCall(String workspaceId, String accept, String templateId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling templateRetrieve(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling templateRetrieve(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -2072,17 +2159,17 @@ public class TemplatesApi {
             throw new ApiException("Missing the required parameter 'templateId' when calling templateRetrieve(Async)");
         }
 
-        return templateRetrieveCall(workspaceId, xApiKey, accept, templateId, _callback);
+        return templateRetrieveCall(workspaceId, accept, templateId, _callback);
     }
 
-    private static ApiResponse<Template> templateRetrieveWithHttpInfo(String workspaceId, String xApiKey, String accept, String templateId) throws ApiException {
-        okhttp3.Call localVarCall = templateRetrieveCall(workspaceId, xApiKey, accept, templateId, null);
+    private static ApiResponse<Template> templateRetrieveWithHttpInfo(String workspaceId, String accept, String templateId) throws ApiException {
+        okhttp3.Call localVarCall = templateRetrieveCall(workspaceId, accept, templateId, null);
         Type localVarReturnType = new TypeToken<Template>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call templateRetrieveAsync(String workspaceId, String xApiKey, String accept, String templateId, final ApiCallback<Template> _callback) throws ApiException {
-        okhttp3.Call localVarCall = templateRetrieveValidateBeforeCall(workspaceId, xApiKey, accept, templateId, _callback);
+    private static okhttp3.Call templateRetrieveAsync(String workspaceId, String accept, String templateId, final ApiCallback<Template> _callback) throws ApiException {
+        okhttp3.Call localVarCall = templateRetrieveValidateBeforeCall(workspaceId, accept, templateId, _callback);
         Type localVarReturnType = new TypeToken<Template>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2135,14 +2222,12 @@ public class TemplatesApi {
 
     public static class TemplateRetrieveRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private final String templateId;
         ApiResponse _lastResponse;
 
-        private TemplateRetrieveRequest(String workspaceId, String xApiKey, String accept, String templateId) {
+        private TemplateRetrieveRequest(String workspaceId, String accept, String templateId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
             this.templateId = templateId;
         }
@@ -2154,7 +2239,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return templateRetrieveCall(workspaceId, xApiKey, accept, templateId, _callback);
+            return templateRetrieveCall(workspaceId, accept, templateId, _callback);
         }
 
         /**
@@ -2163,7 +2248,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Template execute() throws ApiException {
-            ApiResponse<Template> localVarResp = templateRetrieveWithHttpInfo(workspaceId, xApiKey, accept, templateId);
+            ApiResponse<Template> localVarResp = templateRetrieveWithHttpInfo(workspaceId, accept, templateId);
             _lastResponse = localVarResp;
             Template data = localVarResp.getData();
 
@@ -2187,7 +2272,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Template> _callback) throws ApiException {
-            return templateRetrieveAsync(workspaceId, xApiKey, accept, templateId, _callback);
+            return templateRetrieveAsync(workspaceId, accept, templateId, _callback);
         }
     }
 
@@ -2229,7 +2314,6 @@ public class TemplatesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.template-v1+json";
 
 
@@ -2238,13 +2322,13 @@ public class TemplatesApi {
         if(templateId == null || templateId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'templateId'");
         }
-        TemplateRetrieveRequest request = new TemplateRetrieveRequest(workspaceId, xApiKey, accept, templateId);
+        TemplateRetrieveRequest request = new TemplateRetrieveRequest(workspaceId, accept, templateId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call templateUpdateCall(String workspaceId, String xApiKey, String contentType, String accept, String templateId, Template template, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateUpdateCall(String workspaceId, String contentType, String accept, String templateId, Template template, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -2263,10 +2347,6 @@ public class TemplatesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -2297,15 +2377,10 @@ public class TemplatesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call templateUpdateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, String templateId, Template template, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call templateUpdateValidateBeforeCall(String workspaceId, String contentType, String accept, String templateId, Template template, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling templateUpdate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling templateUpdate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -2328,16 +2403,16 @@ public class TemplatesApi {
             throw new ApiException("Missing the required parameter 'template' when calling templateUpdate(Async)");
         }
 
-        return templateUpdateCall(workspaceId, xApiKey, contentType, accept, templateId, template, _callback);
+        return templateUpdateCall(workspaceId, contentType, accept, templateId, template, _callback);
     }
 
-    private static ApiResponse<Void> templateUpdateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, String templateId, Template template) throws ApiException {
-        okhttp3.Call localVarCall = templateUpdateCall(workspaceId, xApiKey, contentType, accept, templateId, template, null);
+    private static ApiResponse<Void> templateUpdateWithHttpInfo(String workspaceId, String contentType, String accept, String templateId, Template template) throws ApiException {
+        okhttp3.Call localVarCall = templateUpdateCall(workspaceId, contentType, accept, templateId, template, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call templateUpdateAsync(String workspaceId, String xApiKey, String contentType, String accept, String templateId, Template template, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = templateUpdateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, templateId, template, _callback);
+    private static okhttp3.Call templateUpdateAsync(String workspaceId, String contentType, String accept, String templateId, Template template, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = templateUpdateValidateBeforeCall(workspaceId, contentType, accept, templateId, template, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -2533,12 +2608,14 @@ public class TemplatesApi {
             private String body;
             private String footer;
             private String type;
+            private OptOutOption optOutOption;
             private Attachments resources;
 
-            private Email(String body, String footer, String type, Attachments resources){
+            private Email(String body, String footer, String type, OptOutOption optOutOption, Attachments resources){
             this.body = body;
             this.footer = footer;
             this.type = type;
+            this.optOutOption = optOutOption;
             this.resources = resources;
             }
 
@@ -2578,6 +2655,9 @@ public class TemplatesApi {
                 }
 
             }
+            public OptOutOption getOptOutOption(){
+                return optOutOption;
+            }
             public Attachments getResources(){
                 return resources;
             }
@@ -2590,6 +2670,7 @@ public class TemplatesApi {
                 private String body;
                 private String footer;
                 private String type;
+                private OptOutOption optOutOption;
                 private Attachments resources;
 
                 public Email build() {
@@ -2597,6 +2678,7 @@ public class TemplatesApi {
                         this.body,
                         this.footer,
                         this.type,
+                        this.optOutOption,
                         this.resources
                     );
                 }
@@ -2612,21 +2694,30 @@ public class TemplatesApi {
                     this.type = type.getValue();
                     return this;
                 }
+                public Builder setOptOutOption(OptOutOption optOutOption) {
+                    this.optOutOption = optOutOption;
+                    return this;
+                }
                 public Builder setResources(Attachments resources) {
                     this.resources = resources;
                     return this;
                 }
             }
 
-            public static class Attachments {
-            private List<Attachment> attachments;
+            public static class OptOutOption {
+            private String rmsUnsubscribeUrl;
+            private String oneClickApiMapping;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private OptOutOption(String rmsUnsubscribeUrl, String oneClickApiMapping){
+            this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+            this.oneClickApiMapping = oneClickApiMapping;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public String getRmsUnsubscribeUrl(){
+                return rmsUnsubscribeUrl;
+            }
+            public String getOneClickApiMapping(){
+                return oneClickApiMapping;
             }
 
             public static Builder builder() {
@@ -2634,26 +2725,63 @@ public class TemplatesApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private String rmsUnsubscribeUrl;
+                private String oneClickApiMapping;
+
+                public OptOutOption build() {
+                    return new OptOutOption(
+                        this.rmsUnsubscribeUrl,
+                        this.oneClickApiMapping
+                    );
+                }
+                public Builder setRmsUnsubscribeUrl(String rmsUnsubscribeUrl) {
+                    this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+                    return this;
+                }
+                public Builder setOneClickApiMapping(String oneClickApiMapping) {
+                    this.oneClickApiMapping = oneClickApiMapping;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Attachments {
+            private List<Attachment> attachment;
+
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
+            }
+
+            public List<Attachment> getAttachment(){
+                return attachment;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -2778,14 +2906,14 @@ public class TemplatesApi {
             }
 
             public static class Attachments {
-            private List<Attachment> attachments;
+            private List<Attachment> attachment;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public List<Attachment> getAttachment(){
+                return attachment;
             }
 
             public static Builder builder() {
@@ -2793,26 +2921,26 @@ public class TemplatesApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -3095,10 +3223,12 @@ public class TemplatesApi {
         public static class Features {
             private PushOptions pushOptions;
             private AliasOption aliasOption;
+            private FeaturesFallback fallback;
 
-            private Features(PushOptions pushOptions, AliasOption aliasOption){
+            private Features(PushOptions pushOptions, AliasOption aliasOption, FeaturesFallback fallback){
             this.pushOptions = pushOptions;
             this.aliasOption = aliasOption;
+            this.fallback = fallback;
             }
 
             public PushOptions getPushOptions(){
@@ -3106,6 +3236,9 @@ public class TemplatesApi {
             }
             public AliasOption getAliasOption(){
                 return aliasOption;
+            }
+            public FeaturesFallback getFallback(){
+                return fallback;
             }
 
             public static Builder builder() {
@@ -3115,11 +3248,13 @@ public class TemplatesApi {
             public static class Builder {
                 private PushOptions pushOptions;
                 private AliasOption aliasOption;
+                private FeaturesFallback fallback;
 
                 public Features build() {
                     return new Features(
                         this.pushOptions,
-                        this.aliasOption
+                        this.aliasOption,
+                        this.fallback
                     );
                 }
                 public Builder setPushOptions(PushOptions pushOptions) {
@@ -3128,6 +3263,10 @@ public class TemplatesApi {
                 }
                 public Builder setAliasOption(AliasOption aliasOption) {
                     this.aliasOption = aliasOption;
+                    return this;
+                }
+                public Builder setFallback(FeaturesFallback fallback) {
+                    this.fallback = fallback;
                     return this;
                 }
             }
@@ -3420,6 +3559,74 @@ public class TemplatesApi {
 
     
         }
+        public static class FeaturesFallback {
+            private String channel;
+            private String templateName;
+
+            private FeaturesFallback(String channel, String templateName){
+            this.channel = channel;
+            this.templateName = templateName;
+            }
+
+            public String getChannel(){
+                return channel;
+            }
+            public enum ChannelEnum {
+                SMS("SMS");
+                private String value;
+                ChannelEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static ChannelEnum fromValue(String value) {
+                    for (ChannelEnum b : ChannelEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public String getTemplateName(){
+                return templateName;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String channel;
+                private String templateName;
+
+                public FeaturesFallback build() {
+                    return new FeaturesFallback(
+                        this.channel,
+                        this.templateName
+                    );
+                }
+                public Builder setChannel(ChannelEnum channel) {
+                    this.channel = channel.getValue();
+                    return this;
+                }
+                public Builder setTemplateName(String templateName) {
+                    this.templateName = templateName;
+                    return this;
+                }
+            }
+
+    
+        }
 
         }
         public static class DeliveryReceipt {
@@ -3447,16 +3654,14 @@ public class TemplatesApi {
 
     public static class TemplateUpdateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String templateId;
         private final Template template;
         ApiResponse _lastResponse;
 
-        private TemplateUpdateRequest(String workspaceId, String xApiKey, String contentType, String accept, String templateId, Template template) {
+        private TemplateUpdateRequest(String workspaceId, String contentType, String accept, String templateId, Template template) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.templateId = templateId;
@@ -3470,7 +3675,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return templateUpdateCall(workspaceId, xApiKey, contentType, accept, templateId, template, _callback);
+            return templateUpdateCall(workspaceId, contentType, accept, templateId, template, _callback);
         }
 
         /**
@@ -3478,7 +3683,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            templateUpdateWithHttpInfo(workspaceId, xApiKey, contentType, accept, templateId, template);
+            templateUpdateWithHttpInfo(workspaceId, contentType, accept, templateId, template);
         }
         /**
          * Return the last executed API response
@@ -3496,7 +3701,7 @@ public class TemplatesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return templateUpdateAsync(workspaceId, xApiKey, contentType, accept, templateId, template, _callback);
+            return templateUpdateAsync(workspaceId, contentType, accept, templateId, template, _callback);
         }
     }
 
@@ -3566,7 +3771,6 @@ public class TemplatesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.template-v1+json";
 
         String accept = "application/vnd.whispir.template-v1+json";
@@ -3619,7 +3823,7 @@ public class TemplatesApi {
         Object dlrValue = params.getDlr();
         template.setDlr((com.whispir.model.DeliveryReceipt) dlrValue);
 
-        TemplateUpdateRequest request = new TemplateUpdateRequest(workspaceId, xApiKey, contentType, accept, templateId, template);
+        TemplateUpdateRequest request = new TemplateUpdateRequest(workspaceId, contentType, accept, templateId, template);
 
         // Ensure to include all of the 'optionalParams' that are passed
 

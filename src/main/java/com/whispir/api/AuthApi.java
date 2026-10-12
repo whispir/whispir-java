@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 public class AuthApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call authCreateCall(String xApiKey, String contentType, String accept, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call authCreateCall(String contentType, String accept, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -51,10 +51,6 @@ public class AuthApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -80,17 +76,12 @@ public class AuthApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth", "BasicAuth", "BearerAuth" };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth", "BasicAuth" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call authCreateValidateBeforeCall(String xApiKey, String contentType, String accept, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling authCreate(Async)");
-        }
-
+    private static okhttp3.Call authCreateValidateBeforeCall(String contentType, String accept, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling authCreate(Async)");
@@ -101,17 +92,17 @@ public class AuthApi {
             throw new ApiException("Missing the required parameter 'accept' when calling authCreate(Async)");
         }
 
-        return authCreateCall(xApiKey, contentType, accept, _callback);
+        return authCreateCall(contentType, accept, _callback);
     }
 
-    private static ApiResponse<Auth> authCreateWithHttpInfo(String xApiKey, String contentType, String accept) throws ApiException {
-        okhttp3.Call localVarCall = authCreateCall(xApiKey, contentType, accept, null);
+    private static ApiResponse<Auth> authCreateWithHttpInfo(String contentType, String accept) throws ApiException {
+        okhttp3.Call localVarCall = authCreateCall(contentType, accept, null);
         Type localVarReturnType = new TypeToken<Auth>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call authCreateAsync(String xApiKey, String contentType, String accept, final ApiCallback<Auth> _callback) throws ApiException {
-        okhttp3.Call localVarCall = authCreateValidateBeforeCall(xApiKey, contentType, accept, _callback);
+    private static okhttp3.Call authCreateAsync(String contentType, String accept, final ApiCallback<Auth> _callback) throws ApiException {
+        okhttp3.Call localVarCall = authCreateValidateBeforeCall(contentType, accept, _callback);
         Type localVarReturnType = new TypeToken<Auth>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -139,13 +130,11 @@ public class AuthApi {
     }
 
     public static class AuthCreateRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         ApiResponse _lastResponse;
 
-        private AuthCreateRequest(String xApiKey, String contentType, String accept) {
-            this.xApiKey = xApiKey;
+        private AuthCreateRequest(String contentType, String accept) {
             this.contentType = contentType;
             this.accept = accept;
         }
@@ -157,7 +146,7 @@ public class AuthApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return authCreateCall(xApiKey, contentType, accept, _callback);
+            return authCreateCall(contentType, accept, _callback);
         }
 
         /**
@@ -166,7 +155,7 @@ public class AuthApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Auth execute() throws ApiException {
-            ApiResponse<Auth> localVarResp = authCreateWithHttpInfo(xApiKey, contentType, accept);
+            ApiResponse<Auth> localVarResp = authCreateWithHttpInfo(contentType, accept);
             _lastResponse = localVarResp;
             Auth data = localVarResp.getData();
 
@@ -199,7 +188,7 @@ public class AuthApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Auth> _callback) throws ApiException {
-            return authCreateAsync(xApiKey, contentType, accept, _callback);
+            return authCreateAsync(contentType, accept, _callback);
         }
     }
 
@@ -223,18 +212,17 @@ public class AuthApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String contentType = "application/vnd.whispir.auth-v1+json";
 
         String accept = "application/vnd.whispir.auth-v1+json";
 
-        AuthCreateRequest request = new AuthCreateRequest(xApiKey, contentType, accept);
+        AuthCreateRequest request = new AuthCreateRequest(contentType, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call authVerificationRetrieveCall(String xApiKey, String accept, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call authVerificationRetrieveCall(String accept, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -251,10 +239,6 @@ public class AuthApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -275,32 +259,27 @@ public class AuthApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth", "BasicAuth", "BearerAuth" };
+        String[] localVarAuthNames = new String[] { "BearerAuth" };
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call authVerificationRetrieveValidateBeforeCall(String xApiKey, String accept, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling authVerificationRetrieve(Async)");
-        }
-
+    private static okhttp3.Call authVerificationRetrieveValidateBeforeCall(String accept, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling authVerificationRetrieve(Async)");
         }
 
-        return authVerificationRetrieveCall(xApiKey, accept, _callback);
+        return authVerificationRetrieveCall(accept, _callback);
     }
 
-    private static ApiResponse<Void> authVerificationRetrieveWithHttpInfo(String xApiKey, String accept) throws ApiException {
-        okhttp3.Call localVarCall = authVerificationRetrieveCall(xApiKey, accept, null);
+    private static ApiResponse<Void> authVerificationRetrieveWithHttpInfo(String accept) throws ApiException {
+        okhttp3.Call localVarCall = authVerificationRetrieveCall(accept, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call authVerificationRetrieveAsync(String xApiKey, String accept, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = authVerificationRetrieveValidateBeforeCall(xApiKey, accept, _callback);
+    private static okhttp3.Call authVerificationRetrieveAsync(String accept, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = authVerificationRetrieveValidateBeforeCall(accept, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -327,12 +306,10 @@ public class AuthApi {
     }
 
     public static class AuthVerificationRetrieveRequest {
-        private final String xApiKey;
         private final String accept;
         ApiResponse _lastResponse;
 
-        private AuthVerificationRetrieveRequest(String xApiKey, String accept) {
-            this.xApiKey = xApiKey;
+        private AuthVerificationRetrieveRequest(String accept) {
             this.accept = accept;
         }
 
@@ -343,7 +320,7 @@ public class AuthApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return authVerificationRetrieveCall(xApiKey, accept, _callback);
+            return authVerificationRetrieveCall(accept, _callback);
         }
 
         /**
@@ -351,7 +328,7 @@ public class AuthApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            authVerificationRetrieveWithHttpInfo(xApiKey, accept);
+            authVerificationRetrieveWithHttpInfo(accept);
         }
         /**
          * Return the last executed API response
@@ -369,7 +346,7 @@ public class AuthApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return authVerificationRetrieveAsync(xApiKey, accept, _callback);
+            return authVerificationRetrieveAsync(accept, _callback);
         }
     }
 
@@ -393,10 +370,9 @@ public class AuthApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.auth-v1+json";
 
-        AuthVerificationRetrieveRequest request = new AuthVerificationRetrieveRequest(xApiKey, accept);
+        AuthVerificationRetrieveRequest request = new AuthVerificationRetrieveRequest(accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
 

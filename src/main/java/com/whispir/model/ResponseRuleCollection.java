@@ -37,7 +37,7 @@ import com.whispir.client.ApiResponse;
 import com.whispir.client.JSON;
 
 /**
- * ResponseRuleCollection
+ * A collection of Response Rules.
  */
 
 public class ResponseRuleCollection {

@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.whispir.model.AliasOption;
+import com.whispir.model.FeaturesFallback;
 import com.whispir.model.PushOptions;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -66,6 +67,9 @@ public class Features {
   @SerializedName("aliasOption")
   private AliasOption aliasOption;
 
+  @SerializedName("fallback")
+  private FeaturesFallback fallback;
+
   public Features() {
     super();
   }
@@ -95,6 +99,18 @@ public class Features {
     this.aliasOption = aliasOption;
   }
 
+   /**
+   * Get fallback
+   * @return fallback
+  **/
+  @javax.annotation.Nullable
+  public FeaturesFallback getFallback() {
+    return fallback;
+  }
+  public void setFallback(FeaturesFallback fallback) {
+    this.fallback = fallback;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -105,11 +121,12 @@ public class Features {
     }
     Features features = (Features) o;
     return Objects.equals(this.pushOptions, features.pushOptions) &&
-        Objects.equals(this.aliasOption, features.aliasOption);
+        Objects.equals(this.aliasOption, features.aliasOption) &&
+        Objects.equals(this.fallback, features.fallback);
   }
   @Override
   public int hashCode() {
-    return Objects.hash(pushOptions, aliasOption);
+    return Objects.hash(pushOptions, aliasOption, fallback);
   }
   @Override
   public String toString() {
@@ -117,6 +134,7 @@ public class Features {
     sb.append("class Features {\n");
     sb.append("    pushOptions: ").append(toIndentedString(pushOptions)).append("\n");
     sb.append("    aliasOption: ").append(toIndentedString(aliasOption)).append("\n");
+    sb.append("    fallback: ").append(toIndentedString(fallback)).append("\n");
     sb.append("}");
     return sb.toString();
   }

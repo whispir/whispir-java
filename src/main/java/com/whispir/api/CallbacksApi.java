@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 public class CallbacksApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call callbackCallListCall(String xApiKey, String callbackId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String status, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call callbackCallListCall(String callbackId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String status, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -76,10 +76,6 @@ public class CallbacksApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -105,12 +101,7 @@ public class CallbacksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call callbackCallListValidateBeforeCall(String xApiKey, String callbackId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String status, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling callbackCallList(Async)");
-        }
-
+    private static okhttp3.Call callbackCallListValidateBeforeCall(String callbackId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String status, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'callbackId' is set
         if (callbackId == null) {
             throw new ApiException("Missing the required parameter 'callbackId' when calling callbackCallList(Async)");
@@ -121,17 +112,17 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'accept' when calling callbackCallList(Async)");
         }
 
-        return callbackCallListCall(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status, _callback);
+        return callbackCallListCall(callbackId, accept, limit, offset, sortOrder, sortFields, status, _callback);
     }
 
-    private static ApiResponse<CallbackCallCollection> callbackCallListWithHttpInfo(String xApiKey, String callbackId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String status) throws ApiException {
-        okhttp3.Call localVarCall = callbackCallListCall(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status, null);
+    private static ApiResponse<CallbackCallCollection> callbackCallListWithHttpInfo(String callbackId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String status) throws ApiException {
+        okhttp3.Call localVarCall = callbackCallListCall(callbackId, accept, limit, offset, sortOrder, sortFields, status, null);
         Type localVarReturnType = new TypeToken<CallbackCallCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call callbackCallListAsync(String xApiKey, String callbackId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String status, final ApiCallback<CallbackCallCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = callbackCallListValidateBeforeCall(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status, _callback);
+    private static okhttp3.Call callbackCallListAsync(String callbackId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String status, final ApiCallback<CallbackCallCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = callbackCallListValidateBeforeCall(callbackId, accept, limit, offset, sortOrder, sortFields, status, _callback);
         Type localVarReturnType = new TypeToken<CallbackCallCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -231,7 +222,6 @@ public class CallbacksApi {
     }
 
     public static class CallbackCallListRequest {
-        private final String xApiKey;
         private final String callbackId;
         private final String accept;
         private BigDecimal limit;
@@ -241,8 +231,7 @@ public class CallbacksApi {
         private String status;
         ApiResponse _lastResponse;
 
-        private CallbackCallListRequest(String xApiKey, String callbackId, String accept) {
-            this.xApiKey = xApiKey;
+        private CallbackCallListRequest(String callbackId, String accept) {
             this.callbackId = callbackId;
             this.accept = accept;
         }
@@ -304,7 +293,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return callbackCallListCall(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status, _callback);
+            return callbackCallListCall(callbackId, accept, limit, offset, sortOrder, sortFields, status, _callback);
         }
 
         /**
@@ -313,7 +302,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public CallbackCallCollection execute() throws ApiException {
-            ApiResponse<CallbackCallCollection> localVarResp = callbackCallListWithHttpInfo(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status);
+            ApiResponse<CallbackCallCollection> localVarResp = callbackCallListWithHttpInfo(callbackId, accept, limit, offset, sortOrder, sortFields, status);
             _lastResponse = localVarResp;
             CallbackCallCollection data = localVarResp.getData();
 
@@ -337,7 +326,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<CallbackCallCollection> _callback) throws ApiException {
-            return callbackCallListAsync(xApiKey, callbackId, accept, limit, offset, sortOrder, sortFields, status, _callback);
+            return callbackCallListAsync(callbackId, accept, limit, offset, sortOrder, sortFields, status, _callback);
         }
     }
 
@@ -393,7 +382,6 @@ public class CallbacksApi {
         }
 
 
-
         String callbackId = params.getCallbackId();
 
         if(callbackId == null || callbackId.isEmpty()) {
@@ -401,7 +389,7 @@ public class CallbacksApi {
         }
         String accept = "application/vnd.whispir.api-call-v1+json";
 
-        CallbackCallListRequest request = new CallbackCallListRequest(xApiKey, callbackId, accept);
+        CallbackCallListRequest request = new CallbackCallListRequest(callbackId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -427,7 +415,7 @@ public class CallbacksApi {
 
         return request.execute();
     }
-    private static okhttp3.Call callbackCallUpdateCall(String xApiKey, String callbackId, String contentType, String accept, String id, CallbackCall callbackCall, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call callbackCallUpdateCall(String callbackId, String contentType, String accept, String id, CallbackCall callbackCall, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -448,10 +436,6 @@ public class CallbacksApi {
 
         if (id != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("id", id));
-        }
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
         }
 
         if (contentType != null) {
@@ -483,12 +467,7 @@ public class CallbacksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call callbackCallUpdateValidateBeforeCall(String xApiKey, String callbackId, String contentType, String accept, String id, CallbackCall callbackCall, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling callbackCallUpdate(Async)");
-        }
-
+    private static okhttp3.Call callbackCallUpdateValidateBeforeCall(String callbackId, String contentType, String accept, String id, CallbackCall callbackCall, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'callbackId' is set
         if (callbackId == null) {
             throw new ApiException("Missing the required parameter 'callbackId' when calling callbackCallUpdate(Async)");
@@ -509,16 +488,16 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'id' when calling callbackCallUpdate(Async)");
         }
 
-        return callbackCallUpdateCall(xApiKey, callbackId, contentType, accept, id, callbackCall, _callback);
+        return callbackCallUpdateCall(callbackId, contentType, accept, id, callbackCall, _callback);
     }
 
-    private static ApiResponse<Void> callbackCallUpdateWithHttpInfo(String xApiKey, String callbackId, String contentType, String accept, String id, CallbackCall callbackCall) throws ApiException {
-        okhttp3.Call localVarCall = callbackCallUpdateCall(xApiKey, callbackId, contentType, accept, id, callbackCall, null);
+    private static ApiResponse<Void> callbackCallUpdateWithHttpInfo(String callbackId, String contentType, String accept, String id, CallbackCall callbackCall) throws ApiException {
+        okhttp3.Call localVarCall = callbackCallUpdateCall(callbackId, contentType, accept, id, callbackCall, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call callbackCallUpdateAsync(String xApiKey, String callbackId, String contentType, String accept, String id, CallbackCall callbackCall, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = callbackCallUpdateValidateBeforeCall(xApiKey, callbackId, contentType, accept, id, callbackCall, _callback);
+    private static okhttp3.Call callbackCallUpdateAsync(String callbackId, String contentType, String accept, String id, CallbackCall callbackCall, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = callbackCallUpdateValidateBeforeCall(callbackId, contentType, accept, id, callbackCall, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -581,7 +560,6 @@ public class CallbacksApi {
     }
 
     public static class CallbackCallUpdateRequest {
-        private final String xApiKey;
         private final String callbackId;
         private final String contentType;
         private final String accept;
@@ -589,8 +567,7 @@ public class CallbacksApi {
         private CallbackCall callbackCall;
         ApiResponse _lastResponse;
 
-        private CallbackCallUpdateRequest(String xApiKey, String callbackId, String contentType, String accept, String id) {
-            this.xApiKey = xApiKey;
+        private CallbackCallUpdateRequest(String callbackId, String contentType, String accept, String id) {
             this.callbackId = callbackId;
             this.contentType = contentType;
             this.accept = accept;
@@ -614,7 +591,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return callbackCallUpdateCall(xApiKey, callbackId, contentType, accept, id, callbackCall, _callback);
+            return callbackCallUpdateCall(callbackId, contentType, accept, id, callbackCall, _callback);
         }
 
         /**
@@ -622,7 +599,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            callbackCallUpdateWithHttpInfo(xApiKey, callbackId, contentType, accept, id, callbackCall);
+            callbackCallUpdateWithHttpInfo(callbackId, contentType, accept, id, callbackCall);
         }
         /**
          * Return the last executed API response
@@ -640,7 +617,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return callbackCallUpdateAsync(xApiKey, callbackId, contentType, accept, id, callbackCall, _callback);
+            return callbackCallUpdateAsync(callbackId, contentType, accept, id, callbackCall, _callback);
         }
     }
 
@@ -682,7 +659,6 @@ public class CallbacksApi {
         }
 
 
-
         String callbackId = params.getCallbackId();
 
         if(callbackId == null || callbackId.isEmpty()) {
@@ -698,7 +674,7 @@ public class CallbacksApi {
         if(id == null || id.isEmpty()) {
             throw new ApiException("Missing the required parameter 'id'");
         }
-        CallbackCallUpdateRequest request = new CallbackCallUpdateRequest(xApiKey, callbackId, contentType, accept, id);
+        CallbackCallUpdateRequest request = new CallbackCallUpdateRequest(callbackId, contentType, accept, id);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.callbackCall != null){
@@ -708,7 +684,7 @@ public class CallbacksApi {
 
         request.execute();
     }
-    private static okhttp3.Call callbackCreateCall(String xApiKey, String contentType, String accept, Callback callback, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call callbackCreateCall(String contentType, String accept, Callback callback, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -725,10 +701,6 @@ public class CallbacksApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -760,12 +732,7 @@ public class CallbacksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call callbackCreateValidateBeforeCall(String xApiKey, String contentType, String accept, Callback callback, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling callbackCreate(Async)");
-        }
-
+    private static okhttp3.Call callbackCreateValidateBeforeCall(String contentType, String accept, Callback callback, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling callbackCreate(Async)");
@@ -781,17 +748,17 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'callback' when calling callbackCreate(Async)");
         }
 
-        return callbackCreateCall(xApiKey, contentType, accept, callback, _callback);
+        return callbackCreateCall(contentType, accept, callback, _callback);
     }
 
-    private static ApiResponse<Callback> callbackCreateWithHttpInfo(String xApiKey, String contentType, String accept, Callback callback) throws ApiException {
-        okhttp3.Call localVarCall = callbackCreateCall(xApiKey, contentType, accept, callback, null);
+    private static ApiResponse<Callback> callbackCreateWithHttpInfo(String contentType, String accept, Callback callback) throws ApiException {
+        okhttp3.Call localVarCall = callbackCreateCall(contentType, accept, callback, null);
         Type localVarReturnType = new TypeToken<Callback>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call callbackCreateAsync(String xApiKey, String contentType, String accept, Callback callback, final ApiCallback<Callback> _callback) throws ApiException {
-        okhttp3.Call localVarCall = callbackCreateValidateBeforeCall(xApiKey, contentType, accept, callback, _callback);
+    private static okhttp3.Call callbackCreateAsync(String contentType, String accept, Callback callback, final ApiCallback<Callback> _callback) throws ApiException {
+        okhttp3.Call localVarCall = callbackCreateValidateBeforeCall(contentType, accept, callback, _callback);
         Type localVarReturnType = new TypeToken<Callback>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1151,14 +1118,12 @@ public class CallbacksApi {
     }
 
     public static class CallbackCreateRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final Callback callback;
         ApiResponse _lastResponse;
 
-        private CallbackCreateRequest(String xApiKey, String contentType, String accept, Callback callback) {
-            this.xApiKey = xApiKey;
+        private CallbackCreateRequest(String contentType, String accept, Callback callback) {
             this.contentType = contentType;
             this.accept = accept;
             this.callback = callback;
@@ -1171,7 +1136,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return callbackCreateCall(xApiKey, contentType, accept, callback, _callback);
+            return callbackCreateCall(contentType, accept, callback, _callback);
         }
 
         /**
@@ -1180,7 +1145,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Callback execute() throws ApiException {
-            ApiResponse<Callback> localVarResp = callbackCreateWithHttpInfo(xApiKey, contentType, accept, callback);
+            ApiResponse<Callback> localVarResp = callbackCreateWithHttpInfo(contentType, accept, callback);
             _lastResponse = localVarResp;
             Callback data = localVarResp.getData();
 
@@ -1213,7 +1178,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Callback> _callback) throws ApiException {
-            return callbackCreateAsync(xApiKey, contentType, accept, callback, _callback);
+            return callbackCreateAsync(contentType, accept, callback, _callback);
         }
     }
 
@@ -1277,7 +1242,6 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String contentType = "application/vnd.whispir.api-callback-v1+json";
 
         String accept = "application/vnd.whispir.api-callback-v1+json";
@@ -1333,13 +1297,13 @@ public class CallbacksApi {
         }
         callback.setCallbacks((com.whispir.model.CallbackOptions) callbacksValue);
 
-        CallbackCreateRequest request = new CallbackCreateRequest(xApiKey, contentType, accept, callback);
+        CallbackCreateRequest request = new CallbackCreateRequest(contentType, accept, callback);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call callbackDeleteCall(String xApiKey, String contentType, String accept, String callbackId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call callbackDeleteCall(String contentType, String accept, String callbackId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1357,10 +1321,6 @@ public class CallbacksApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -1390,12 +1350,7 @@ public class CallbacksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call callbackDeleteValidateBeforeCall(String xApiKey, String contentType, String accept, String callbackId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling callbackDelete(Async)");
-        }
-
+    private static okhttp3.Call callbackDeleteValidateBeforeCall(String contentType, String accept, String callbackId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling callbackDelete(Async)");
@@ -1411,16 +1366,16 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'callbackId' when calling callbackDelete(Async)");
         }
 
-        return callbackDeleteCall(xApiKey, contentType, accept, callbackId, _callback);
+        return callbackDeleteCall(contentType, accept, callbackId, _callback);
     }
 
-    private static ApiResponse<Void> callbackDeleteWithHttpInfo(String xApiKey, String contentType, String accept, String callbackId) throws ApiException {
-        okhttp3.Call localVarCall = callbackDeleteCall(xApiKey, contentType, accept, callbackId, null);
+    private static ApiResponse<Void> callbackDeleteWithHttpInfo(String contentType, String accept, String callbackId) throws ApiException {
+        okhttp3.Call localVarCall = callbackDeleteCall(contentType, accept, callbackId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call callbackDeleteAsync(String xApiKey, String contentType, String accept, String callbackId, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = callbackDeleteValidateBeforeCall(xApiKey, contentType, accept, callbackId, _callback);
+    private static okhttp3.Call callbackDeleteAsync(String contentType, String accept, String callbackId, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = callbackDeleteValidateBeforeCall(contentType, accept, callbackId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1459,14 +1414,12 @@ public class CallbacksApi {
     }
 
     public static class CallbackDeleteRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String callbackId;
         ApiResponse _lastResponse;
 
-        private CallbackDeleteRequest(String xApiKey, String contentType, String accept, String callbackId) {
-            this.xApiKey = xApiKey;
+        private CallbackDeleteRequest(String contentType, String accept, String callbackId) {
             this.contentType = contentType;
             this.accept = accept;
             this.callbackId = callbackId;
@@ -1479,7 +1432,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return callbackDeleteCall(xApiKey, contentType, accept, callbackId, _callback);
+            return callbackDeleteCall(contentType, accept, callbackId, _callback);
         }
 
         /**
@@ -1487,7 +1440,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            callbackDeleteWithHttpInfo(xApiKey, contentType, accept, callbackId);
+            callbackDeleteWithHttpInfo(contentType, accept, callbackId);
         }
         /**
          * Return the last executed API response
@@ -1505,7 +1458,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return callbackDeleteAsync(xApiKey, contentType, accept, callbackId, _callback);
+            return callbackDeleteAsync(contentType, accept, callbackId, _callback);
         }
     }
 
@@ -1535,7 +1488,6 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String contentType = "application/vnd.whispir.api-callback-v1+json";
 
         String accept = "application/vnd.whispir.api-callback-v1+json";
@@ -1546,13 +1498,13 @@ public class CallbacksApi {
         if(callbackId == null || callbackId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'callbackId'");
         }
-        CallbackDeleteRequest request = new CallbackDeleteRequest(xApiKey, contentType, accept, callbackId);
+        CallbackDeleteRequest request = new CallbackDeleteRequest(contentType, accept, callbackId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call callbackListCall(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call callbackListCall(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1586,10 +1538,6 @@ public class CallbacksApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortFields", sortFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -1615,28 +1563,23 @@ public class CallbacksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call callbackListValidateBeforeCall(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling callbackList(Async)");
-        }
-
+    private static okhttp3.Call callbackListValidateBeforeCall(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling callbackList(Async)");
         }
 
-        return callbackListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+        return callbackListCall(accept, limit, offset, sortOrder, sortFields, _callback);
     }
 
-    private static ApiResponse<CallbackCollection> callbackListWithHttpInfo(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
-        okhttp3.Call localVarCall = callbackListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, null);
+    private static ApiResponse<CallbackCollection> callbackListWithHttpInfo(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
+        okhttp3.Call localVarCall = callbackListCall(accept, limit, offset, sortOrder, sortFields, null);
         Type localVarReturnType = new TypeToken<CallbackCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call callbackListAsync(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<CallbackCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = callbackListValidateBeforeCall(xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+    private static okhttp3.Call callbackListAsync(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<CallbackCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = callbackListValidateBeforeCall(accept, limit, offset, sortOrder, sortFields, _callback);
         Type localVarReturnType = new TypeToken<CallbackCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1712,7 +1655,6 @@ public class CallbacksApi {
     }
 
     public static class CallbackListRequest {
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -1720,8 +1662,7 @@ public class CallbacksApi {
         private String sortFields;
         ApiResponse _lastResponse;
 
-        private CallbackListRequest(String xApiKey, String accept) {
-            this.xApiKey = xApiKey;
+        private CallbackListRequest(String accept) {
             this.accept = accept;
         }
 
@@ -1772,7 +1713,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return callbackListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return callbackListCall(accept, limit, offset, sortOrder, sortFields, _callback);
         }
 
         /**
@@ -1781,7 +1722,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public CallbackCollection execute() throws ApiException {
-            ApiResponse<CallbackCollection> localVarResp = callbackListWithHttpInfo(xApiKey, accept, limit, offset, sortOrder, sortFields);
+            ApiResponse<CallbackCollection> localVarResp = callbackListWithHttpInfo(accept, limit, offset, sortOrder, sortFields);
             _lastResponse = localVarResp;
             CallbackCollection data = localVarResp.getData();
 
@@ -1805,7 +1746,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<CallbackCollection> _callback) throws ApiException {
-            return callbackListAsync(xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return callbackListAsync(accept, limit, offset, sortOrder, sortFields, _callback);
         }
     }
 
@@ -1849,10 +1790,9 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.api-callback-v1+json";
 
-        CallbackListRequest request = new CallbackListRequest(xApiKey, accept);
+        CallbackListRequest request = new CallbackListRequest(accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -1874,7 +1814,7 @@ public class CallbacksApi {
 
         return request.execute();
     }
-    private static okhttp3.Call callbackRetrieveCall(String xApiKey, String accept, String callbackId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call callbackRetrieveCall(String accept, String callbackId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1892,10 +1832,6 @@ public class CallbacksApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -1922,12 +1858,7 @@ public class CallbacksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call callbackRetrieveValidateBeforeCall(String xApiKey, String accept, String callbackId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling callbackRetrieve(Async)");
-        }
-
+    private static okhttp3.Call callbackRetrieveValidateBeforeCall(String accept, String callbackId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling callbackRetrieve(Async)");
@@ -1938,17 +1869,17 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'callbackId' when calling callbackRetrieve(Async)");
         }
 
-        return callbackRetrieveCall(xApiKey, accept, callbackId, _callback);
+        return callbackRetrieveCall(accept, callbackId, _callback);
     }
 
-    private static ApiResponse<Callback> callbackRetrieveWithHttpInfo(String xApiKey, String accept, String callbackId) throws ApiException {
-        okhttp3.Call localVarCall = callbackRetrieveCall(xApiKey, accept, callbackId, null);
+    private static ApiResponse<Callback> callbackRetrieveWithHttpInfo(String accept, String callbackId) throws ApiException {
+        okhttp3.Call localVarCall = callbackRetrieveCall(accept, callbackId, null);
         Type localVarReturnType = new TypeToken<Callback>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call callbackRetrieveAsync(String xApiKey, String accept, String callbackId, final ApiCallback<Callback> _callback) throws ApiException {
-        okhttp3.Call localVarCall = callbackRetrieveValidateBeforeCall(xApiKey, accept, callbackId, _callback);
+    private static okhttp3.Call callbackRetrieveAsync(String accept, String callbackId, final ApiCallback<Callback> _callback) throws ApiException {
+        okhttp3.Call localVarCall = callbackRetrieveValidateBeforeCall(accept, callbackId, _callback);
         Type localVarReturnType = new TypeToken<Callback>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1988,13 +1919,11 @@ public class CallbacksApi {
     }
 
     public static class CallbackRetrieveRequest {
-        private final String xApiKey;
         private final String accept;
         private final String callbackId;
         ApiResponse _lastResponse;
 
-        private CallbackRetrieveRequest(String xApiKey, String accept, String callbackId) {
-            this.xApiKey = xApiKey;
+        private CallbackRetrieveRequest(String accept, String callbackId) {
             this.accept = accept;
             this.callbackId = callbackId;
         }
@@ -2006,7 +1935,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return callbackRetrieveCall(xApiKey, accept, callbackId, _callback);
+            return callbackRetrieveCall(accept, callbackId, _callback);
         }
 
         /**
@@ -2015,7 +1944,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Callback execute() throws ApiException {
-            ApiResponse<Callback> localVarResp = callbackRetrieveWithHttpInfo(xApiKey, accept, callbackId);
+            ApiResponse<Callback> localVarResp = callbackRetrieveWithHttpInfo(accept, callbackId);
             _lastResponse = localVarResp;
             Callback data = localVarResp.getData();
 
@@ -2039,7 +1968,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Callback> _callback) throws ApiException {
-            return callbackRetrieveAsync(xApiKey, accept, callbackId, _callback);
+            return callbackRetrieveAsync(accept, callbackId, _callback);
         }
     }
 
@@ -2069,7 +1998,6 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.api-callback-v1+json";
 
 
@@ -2078,13 +2006,13 @@ public class CallbacksApi {
         if(callbackId == null || callbackId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'callbackId'");
         }
-        CallbackRetrieveRequest request = new CallbackRetrieveRequest(xApiKey, accept, callbackId);
+        CallbackRetrieveRequest request = new CallbackRetrieveRequest(accept, callbackId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call callbackUpdateCall(String xApiKey, String callbackId, String contentType, String accept, Callback callback, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call callbackUpdateCall(String callbackId, String contentType, String accept, Callback callback, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -2102,10 +2030,6 @@ public class CallbacksApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -2136,12 +2060,7 @@ public class CallbacksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call callbackUpdateValidateBeforeCall(String xApiKey, String callbackId, String contentType, String accept, Callback callback, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling callbackUpdate(Async)");
-        }
-
+    private static okhttp3.Call callbackUpdateValidateBeforeCall(String callbackId, String contentType, String accept, Callback callback, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'callbackId' is set
         if (callbackId == null) {
             throw new ApiException("Missing the required parameter 'callbackId' when calling callbackUpdate(Async)");
@@ -2157,16 +2076,16 @@ public class CallbacksApi {
             throw new ApiException("Missing the required parameter 'accept' when calling callbackUpdate(Async)");
         }
 
-        return callbackUpdateCall(xApiKey, callbackId, contentType, accept, callback, _callback);
+        return callbackUpdateCall(callbackId, contentType, accept, callback, _callback);
     }
 
-    private static ApiResponse<Void> callbackUpdateWithHttpInfo(String xApiKey, String callbackId, String contentType, String accept, Callback callback) throws ApiException {
-        okhttp3.Call localVarCall = callbackUpdateCall(xApiKey, callbackId, contentType, accept, callback, null);
+    private static ApiResponse<Void> callbackUpdateWithHttpInfo(String callbackId, String contentType, String accept, Callback callback) throws ApiException {
+        okhttp3.Call localVarCall = callbackUpdateCall(callbackId, contentType, accept, callback, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call callbackUpdateAsync(String xApiKey, String callbackId, String contentType, String accept, Callback callback, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = callbackUpdateValidateBeforeCall(xApiKey, callbackId, contentType, accept, callback, _callback);
+    private static okhttp3.Call callbackUpdateAsync(String callbackId, String contentType, String accept, Callback callback, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = callbackUpdateValidateBeforeCall(callbackId, contentType, accept, callback, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -2217,15 +2136,13 @@ public class CallbacksApi {
     }
 
     public static class CallbackUpdateRequest {
-        private final String xApiKey;
         private final String callbackId;
         private final String contentType;
         private final String accept;
         private Callback callback;
         ApiResponse _lastResponse;
 
-        private CallbackUpdateRequest(String xApiKey, String callbackId, String contentType, String accept) {
-            this.xApiKey = xApiKey;
+        private CallbackUpdateRequest(String callbackId, String contentType, String accept) {
             this.callbackId = callbackId;
             this.contentType = contentType;
             this.accept = accept;
@@ -2248,7 +2165,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return callbackUpdateCall(xApiKey, callbackId, contentType, accept, callback, _callback);
+            return callbackUpdateCall(callbackId, contentType, accept, callback, _callback);
         }
 
         /**
@@ -2256,7 +2173,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            callbackUpdateWithHttpInfo(xApiKey, callbackId, contentType, accept, callback);
+            callbackUpdateWithHttpInfo(callbackId, contentType, accept, callback);
         }
         /**
          * Return the last executed API response
@@ -2274,7 +2191,7 @@ public class CallbacksApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return callbackUpdateAsync(xApiKey, callbackId, contentType, accept, callback, _callback);
+            return callbackUpdateAsync(callbackId, contentType, accept, callback, _callback);
         }
     }
 
@@ -2310,7 +2227,6 @@ public class CallbacksApi {
         }
 
 
-
         String callbackId = params.getCallbackId();
 
         if(callbackId == null || callbackId.isEmpty()) {
@@ -2320,7 +2236,7 @@ public class CallbacksApi {
 
         String accept = "application/vnd.whispir.api-callback-v1+json";
 
-        CallbackUpdateRequest request = new CallbackUpdateRequest(xApiKey, callbackId, contentType, accept);
+        CallbackUpdateRequest request = new CallbackUpdateRequest(callbackId, contentType, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.callback != null){

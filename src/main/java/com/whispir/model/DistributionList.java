@@ -68,6 +68,9 @@ public class DistributionList {
   @SerializedName("mri")
   private String mri;
 
+  @SerializedName("memberCount")
+  private String memberCount;
+
   @SerializedName("distlistdetails")
   private List<DistributionListContacts> distlistdetails;
 
@@ -79,9 +82,6 @@ public class DistributionList {
 
   @SerializedName("description")
   private String description;
-
-  @SerializedName("memberCount")
-  private String memberCount;
 
   @SerializedName("access")
   private String access;
@@ -111,12 +111,14 @@ public class DistributionList {
   public DistributionList(
     String id, 
     String mri, 
+    String memberCount, 
     List<DistributionListContacts> distlistdetails, 
     List<Link> link
   ) {
     this();
     this.id = id;
     this.mri = mri;
+    this.memberCount = memberCount;
     this.distlistdetails = distlistdetails;
     this.link = link;
   }
@@ -135,6 +137,14 @@ public class DistributionList {
   @javax.annotation.Nullable
   public String getMri() {
     return mri;
+  }
+   /**
+   * Total number of contacts in a Distribution List
+   * @return memberCount
+  **/
+  @javax.annotation.Nullable
+  public String getMemberCount() {
+    return memberCount;
   }
    /**
    * Details of Contacts included in the Distribution List
@@ -175,18 +185,6 @@ public class DistributionList {
   }
   public void setDescription(String description) {
     this.description = description;
-  }
-
-   /**
-   * Total number of contacts in a Distribution List
-   * @return memberCount
-  **/
-  @javax.annotation.Nullable
-  public String getMemberCount() {
-    return memberCount;
-  }
-  public void setMemberCount(String memberCount) {
-    this.memberCount = memberCount;
   }
 
    /**
@@ -284,11 +282,11 @@ public class DistributionList {
     DistributionList distributionList = (DistributionList) o;
     return Objects.equals(this.id, distributionList.id) &&
         Objects.equals(this.mri, distributionList.mri) &&
+        Objects.equals(this.memberCount, distributionList.memberCount) &&
         Objects.equals(this.distlistdetails, distributionList.distlistdetails) &&
         Objects.equals(this.link, distributionList.link) &&
         Objects.equals(this.name, distributionList.name) &&
         Objects.equals(this.description, distributionList.description) &&
-        Objects.equals(this.memberCount, distributionList.memberCount) &&
         Objects.equals(this.access, distributionList.access) &&
         Objects.equals(this.visibility, distributionList.visibility) &&
         Objects.equals(this.contactIds, distributionList.contactIds) &&
@@ -299,7 +297,7 @@ public class DistributionList {
   }
   @Override
   public int hashCode() {
-    return Objects.hash(id, mri, distlistdetails, link, name, description, memberCount, access, visibility, contactIds, userIds, distListIds, type, rules);
+    return Objects.hash(id, mri, memberCount, distlistdetails, link, name, description, access, visibility, contactIds, userIds, distListIds, type, rules);
   }
   @Override
   public String toString() {
@@ -307,11 +305,11 @@ public class DistributionList {
     sb.append("class DistributionList {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    mri: ").append(toIndentedString(mri)).append("\n");
+    sb.append("    memberCount: ").append(toIndentedString(memberCount)).append("\n");
     sb.append("    distlistdetails: ").append(toIndentedString(distlistdetails)).append("\n");
     sb.append("    link: ").append(toIndentedString(link)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    memberCount: ").append(toIndentedString(memberCount)).append("\n");
     sb.append("    access: ").append(toIndentedString(access)).append("\n");
     sb.append("    visibility: ").append(toIndentedString(visibility)).append("\n");
     sb.append("    contactIds: ").append(toIndentedString(contactIds)).append("\n");

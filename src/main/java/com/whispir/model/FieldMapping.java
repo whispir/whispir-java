@@ -6,6 +6,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.whispir.model.FieldMappingFieldMapping;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -58,20 +59,8 @@ public class FieldMapping {
     return rawOutput;
   }
   public ApiResponse lastResponse;
-  @SerializedName("firstName")
-  private String firstName;
-
-  @SerializedName("lastName")
-  private String lastName;
-
-  @SerializedName("workMobilePhone1")
-  private String workMobilePhone1;
-
-  @SerializedName("workCountry")
-  private String workCountry;
-
-  @SerializedName("timezone")
-  private String timezone;
+  @SerializedName("fieldMapping")
+  private FieldMappingFieldMapping fieldMapping;
 
   public FieldMapping() {
     super();
@@ -79,63 +68,15 @@ public class FieldMapping {
 
 
    /**
-   * First Name of the Contact. Value of this field is used to map the field within the resource.
-   * @return firstName
+   * Get fieldMapping
+   * @return fieldMapping
   **/
   @javax.annotation.Nonnull
-  public String getFirstName() {
-    return firstName;
+  public FieldMappingFieldMapping getFieldMapping() {
+    return fieldMapping;
   }
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-   /**
-   * Last Name of the Contact. Value of this field is used to map the field within the resource.
-   * @return lastName
-  **/
-  @javax.annotation.Nonnull
-  public String getLastName() {
-    return lastName;
-  }
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-   /**
-   * The mobile phone number of the Contact. Value of this field is used to map the field within the newly created resource.
-   * @return workMobilePhone1
-  **/
-  @javax.annotation.Nonnull
-  public String getWorkMobilePhone1() {
-    return workMobilePhone1;
-  }
-  public void setWorkMobilePhone1(String workMobilePhone1) {
-    this.workMobilePhone1 = workMobilePhone1;
-  }
-
-   /**
-   * The country field of the contact. The value of this field is used to map to the field within the newly created contact.
-   * @return workCountry
-  **/
-  @javax.annotation.Nonnull
-  public String getWorkCountry() {
-    return workCountry;
-  }
-  public void setWorkCountry(String workCountry) {
-    this.workCountry = workCountry;
-  }
-
-   /**
-   * The timezone field of the contact. The value of this field is used to map to the timezone field within the newly created contact.
-   * @return timezone
-  **/
-  @javax.annotation.Nonnull
-  public String getTimezone() {
-    return timezone;
-  }
-  public void setTimezone(String timezone) {
-    this.timezone = timezone;
+  public void setFieldMapping(FieldMappingFieldMapping fieldMapping) {
+    this.fieldMapping = fieldMapping;
   }
 
   @Override
@@ -147,25 +88,17 @@ public class FieldMapping {
       return false;
     }
     FieldMapping fieldMapping = (FieldMapping) o;
-    return Objects.equals(this.firstName, fieldMapping.firstName) &&
-        Objects.equals(this.lastName, fieldMapping.lastName) &&
-        Objects.equals(this.workMobilePhone1, fieldMapping.workMobilePhone1) &&
-        Objects.equals(this.workCountry, fieldMapping.workCountry) &&
-        Objects.equals(this.timezone, fieldMapping.timezone);
+    return Objects.equals(this.fieldMapping, fieldMapping.fieldMapping);
   }
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName, workMobilePhone1, workCountry, timezone);
+    return Objects.hash(fieldMapping);
   }
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class FieldMapping {\n");
-    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
-    sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
-    sb.append("    workMobilePhone1: ").append(toIndentedString(workMobilePhone1)).append("\n");
-    sb.append("    workCountry: ").append(toIndentedString(workCountry)).append("\n");
-    sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
+    sb.append("    fieldMapping: ").append(toIndentedString(fieldMapping)).append("\n");
     sb.append("}");
     return sb.toString();
   }

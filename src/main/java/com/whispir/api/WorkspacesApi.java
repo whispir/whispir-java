@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class WorkspacesApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call workspaceCreateCall(String xApiKey, String contentType, String accept, Workspace workspace, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call workspaceCreateCall(String contentType, String accept, Workspace workspace, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -52,10 +52,6 @@ public class WorkspacesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -87,12 +83,7 @@ public class WorkspacesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call workspaceCreateValidateBeforeCall(String xApiKey, String contentType, String accept, Workspace workspace, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling workspaceCreate(Async)");
-        }
-
+    private static okhttp3.Call workspaceCreateValidateBeforeCall(String contentType, String accept, Workspace workspace, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling workspaceCreate(Async)");
@@ -108,17 +99,17 @@ public class WorkspacesApi {
             throw new ApiException("Missing the required parameter 'workspace' when calling workspaceCreate(Async)");
         }
 
-        return workspaceCreateCall(xApiKey, contentType, accept, workspace, _callback);
+        return workspaceCreateCall(contentType, accept, workspace, _callback);
     }
 
-    private static ApiResponse<Workspace> workspaceCreateWithHttpInfo(String xApiKey, String contentType, String accept, Workspace workspace) throws ApiException {
-        okhttp3.Call localVarCall = workspaceCreateCall(xApiKey, contentType, accept, workspace, null);
+    private static ApiResponse<Workspace> workspaceCreateWithHttpInfo(String contentType, String accept, Workspace workspace) throws ApiException {
+        okhttp3.Call localVarCall = workspaceCreateCall(contentType, accept, workspace, null);
         Type localVarReturnType = new TypeToken<Workspace>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call workspaceCreateAsync(String xApiKey, String contentType, String accept, Workspace workspace, final ApiCallback<Workspace> _callback) throws ApiException {
-        okhttp3.Call localVarCall = workspaceCreateValidateBeforeCall(xApiKey, contentType, accept, workspace, _callback);
+    private static okhttp3.Call workspaceCreateAsync(String contentType, String accept, Workspace workspace, final ApiCallback<Workspace> _callback) throws ApiException {
+        okhttp3.Call localVarCall = workspaceCreateValidateBeforeCall(contentType, accept, workspace, _callback);
         Type localVarReturnType = new TypeToken<Workspace>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -207,14 +198,12 @@ public class WorkspacesApi {
     }
 
     public static class WorkspaceCreateRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final Workspace workspace;
         ApiResponse _lastResponse;
 
-        private WorkspaceCreateRequest(String xApiKey, String contentType, String accept, Workspace workspace) {
-            this.xApiKey = xApiKey;
+        private WorkspaceCreateRequest(String contentType, String accept, Workspace workspace) {
             this.contentType = contentType;
             this.accept = accept;
             this.workspace = workspace;
@@ -227,7 +216,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return workspaceCreateCall(xApiKey, contentType, accept, workspace, _callback);
+            return workspaceCreateCall(contentType, accept, workspace, _callback);
         }
 
         /**
@@ -236,7 +225,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Workspace execute() throws ApiException {
-            ApiResponse<Workspace> localVarResp = workspaceCreateWithHttpInfo(xApiKey, contentType, accept, workspace);
+            ApiResponse<Workspace> localVarResp = workspaceCreateWithHttpInfo(contentType, accept, workspace);
             _lastResponse = localVarResp;
             Workspace data = localVarResp.getData();
 
@@ -269,7 +258,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Workspace> _callback) throws ApiException {
-            return workspaceCreateAsync(xApiKey, contentType, accept, workspace, _callback);
+            return workspaceCreateAsync(contentType, accept, workspace, _callback);
         }
     }
 
@@ -307,7 +296,6 @@ public class WorkspacesApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String contentType = "application/vnd.whispir.workspace-v1+json";
 
         String accept = "application/vnd.whispir.workspace-v1+json";
@@ -333,13 +321,13 @@ public class WorkspacesApi {
         String billingcostcentreValue = params.getBillingcostcentre();
         workspace.setBillingcostcentre(billingcostcentreValue);
 
-        WorkspaceCreateRequest request = new WorkspaceCreateRequest(xApiKey, contentType, accept, workspace);
+        WorkspaceCreateRequest request = new WorkspaceCreateRequest(contentType, accept, workspace);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call workspaceListCall(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call workspaceListCall(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -373,10 +361,6 @@ public class WorkspacesApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortFields", sortFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -402,28 +386,23 @@ public class WorkspacesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call workspaceListValidateBeforeCall(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling workspaceList(Async)");
-        }
-
+    private static okhttp3.Call workspaceListValidateBeforeCall(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling workspaceList(Async)");
         }
 
-        return workspaceListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+        return workspaceListCall(accept, limit, offset, sortOrder, sortFields, _callback);
     }
 
-    private static ApiResponse<WorkspaceCollection> workspaceListWithHttpInfo(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
-        okhttp3.Call localVarCall = workspaceListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, null);
+    private static ApiResponse<WorkspaceCollection> workspaceListWithHttpInfo(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
+        okhttp3.Call localVarCall = workspaceListCall(accept, limit, offset, sortOrder, sortFields, null);
         Type localVarReturnType = new TypeToken<WorkspaceCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call workspaceListAsync(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<WorkspaceCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = workspaceListValidateBeforeCall(xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+    private static okhttp3.Call workspaceListAsync(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<WorkspaceCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = workspaceListValidateBeforeCall(accept, limit, offset, sortOrder, sortFields, _callback);
         Type localVarReturnType = new TypeToken<WorkspaceCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -499,7 +478,6 @@ public class WorkspacesApi {
     }
 
     public static class WorkspaceListRequest {
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -507,8 +485,7 @@ public class WorkspacesApi {
         private String sortFields;
         ApiResponse _lastResponse;
 
-        private WorkspaceListRequest(String xApiKey, String accept) {
-            this.xApiKey = xApiKey;
+        private WorkspaceListRequest(String accept) {
             this.accept = accept;
         }
 
@@ -559,7 +536,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return workspaceListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return workspaceListCall(accept, limit, offset, sortOrder, sortFields, _callback);
         }
 
         /**
@@ -568,7 +545,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public WorkspaceCollection execute() throws ApiException {
-            ApiResponse<WorkspaceCollection> localVarResp = workspaceListWithHttpInfo(xApiKey, accept, limit, offset, sortOrder, sortFields);
+            ApiResponse<WorkspaceCollection> localVarResp = workspaceListWithHttpInfo(accept, limit, offset, sortOrder, sortFields);
             _lastResponse = localVarResp;
             WorkspaceCollection data = localVarResp.getData();
 
@@ -592,7 +569,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<WorkspaceCollection> _callback) throws ApiException {
-            return workspaceListAsync(xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return workspaceListAsync(accept, limit, offset, sortOrder, sortFields, _callback);
         }
     }
 
@@ -636,10 +613,9 @@ public class WorkspacesApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.workspace-v1+json";
 
-        WorkspaceListRequest request = new WorkspaceListRequest(xApiKey, accept);
+        WorkspaceListRequest request = new WorkspaceListRequest(accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -661,7 +637,7 @@ public class WorkspacesApi {
 
         return request.execute();
     }
-    private static okhttp3.Call workspaceRetrieveCall(String xApiKey, String accept, String workspaceId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call workspaceRetrieveCall(String accept, String workspaceId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -679,10 +655,6 @@ public class WorkspacesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -709,12 +681,7 @@ public class WorkspacesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call workspaceRetrieveValidateBeforeCall(String xApiKey, String accept, String workspaceId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling workspaceRetrieve(Async)");
-        }
-
+    private static okhttp3.Call workspaceRetrieveValidateBeforeCall(String accept, String workspaceId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling workspaceRetrieve(Async)");
@@ -725,17 +692,17 @@ public class WorkspacesApi {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling workspaceRetrieve(Async)");
         }
 
-        return workspaceRetrieveCall(xApiKey, accept, workspaceId, _callback);
+        return workspaceRetrieveCall(accept, workspaceId, _callback);
     }
 
-    private static ApiResponse<Workspace> workspaceRetrieveWithHttpInfo(String xApiKey, String accept, String workspaceId) throws ApiException {
-        okhttp3.Call localVarCall = workspaceRetrieveCall(xApiKey, accept, workspaceId, null);
+    private static ApiResponse<Workspace> workspaceRetrieveWithHttpInfo(String accept, String workspaceId) throws ApiException {
+        okhttp3.Call localVarCall = workspaceRetrieveCall(accept, workspaceId, null);
         Type localVarReturnType = new TypeToken<Workspace>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call workspaceRetrieveAsync(String xApiKey, String accept, String workspaceId, final ApiCallback<Workspace> _callback) throws ApiException {
-        okhttp3.Call localVarCall = workspaceRetrieveValidateBeforeCall(xApiKey, accept, workspaceId, _callback);
+    private static okhttp3.Call workspaceRetrieveAsync(String accept, String workspaceId, final ApiCallback<Workspace> _callback) throws ApiException {
+        okhttp3.Call localVarCall = workspaceRetrieveValidateBeforeCall(accept, workspaceId, _callback);
         Type localVarReturnType = new TypeToken<Workspace>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -775,13 +742,11 @@ public class WorkspacesApi {
     }
 
     public static class WorkspaceRetrieveRequest {
-        private final String xApiKey;
         private final String accept;
         private final String workspaceId;
         ApiResponse _lastResponse;
 
-        private WorkspaceRetrieveRequest(String xApiKey, String accept, String workspaceId) {
-            this.xApiKey = xApiKey;
+        private WorkspaceRetrieveRequest(String accept, String workspaceId) {
             this.accept = accept;
             this.workspaceId = workspaceId;
         }
@@ -793,7 +758,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return workspaceRetrieveCall(xApiKey, accept, workspaceId, _callback);
+            return workspaceRetrieveCall(accept, workspaceId, _callback);
         }
 
         /**
@@ -802,7 +767,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Workspace execute() throws ApiException {
-            ApiResponse<Workspace> localVarResp = workspaceRetrieveWithHttpInfo(xApiKey, accept, workspaceId);
+            ApiResponse<Workspace> localVarResp = workspaceRetrieveWithHttpInfo(accept, workspaceId);
             _lastResponse = localVarResp;
             Workspace data = localVarResp.getData();
 
@@ -826,7 +791,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Workspace> _callback) throws ApiException {
-            return workspaceRetrieveAsync(xApiKey, accept, workspaceId, _callback);
+            return workspaceRetrieveAsync(accept, workspaceId, _callback);
         }
     }
 
@@ -856,7 +821,6 @@ public class WorkspacesApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.workspace-v1+json";
 
 
@@ -865,13 +829,13 @@ public class WorkspacesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-        WorkspaceRetrieveRequest request = new WorkspaceRetrieveRequest(xApiKey, accept, workspaceId);
+        WorkspaceRetrieveRequest request = new WorkspaceRetrieveRequest(accept, workspaceId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call workspaceUpdateCall(String xApiKey, String contentType, String accept, String workspaceId, Workspace workspace, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call workspaceUpdateCall(String contentType, String accept, String workspaceId, Workspace workspace, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -889,10 +853,6 @@ public class WorkspacesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -924,12 +884,7 @@ public class WorkspacesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call workspaceUpdateValidateBeforeCall(String xApiKey, String contentType, String accept, String workspaceId, Workspace workspace, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling workspaceUpdate(Async)");
-        }
-
+    private static okhttp3.Call workspaceUpdateValidateBeforeCall(String contentType, String accept, String workspaceId, Workspace workspace, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling workspaceUpdate(Async)");
@@ -945,17 +900,17 @@ public class WorkspacesApi {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling workspaceUpdate(Async)");
         }
 
-        return workspaceUpdateCall(xApiKey, contentType, accept, workspaceId, workspace, _callback);
+        return workspaceUpdateCall(contentType, accept, workspaceId, workspace, _callback);
     }
 
-    private static ApiResponse<Workspace> workspaceUpdateWithHttpInfo(String xApiKey, String contentType, String accept, String workspaceId, Workspace workspace) throws ApiException {
-        okhttp3.Call localVarCall = workspaceUpdateCall(xApiKey, contentType, accept, workspaceId, workspace, null);
+    private static ApiResponse<Workspace> workspaceUpdateWithHttpInfo(String contentType, String accept, String workspaceId, Workspace workspace) throws ApiException {
+        okhttp3.Call localVarCall = workspaceUpdateCall(contentType, accept, workspaceId, workspace, null);
         Type localVarReturnType = new TypeToken<Workspace>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call workspaceUpdateAsync(String xApiKey, String contentType, String accept, String workspaceId, Workspace workspace, final ApiCallback<Workspace> _callback) throws ApiException {
-        okhttp3.Call localVarCall = workspaceUpdateValidateBeforeCall(xApiKey, contentType, accept, workspaceId, workspace, _callback);
+    private static okhttp3.Call workspaceUpdateAsync(String contentType, String accept, String workspaceId, Workspace workspace, final ApiCallback<Workspace> _callback) throws ApiException {
+        okhttp3.Call localVarCall = workspaceUpdateValidateBeforeCall(contentType, accept, workspaceId, workspace, _callback);
         Type localVarReturnType = new TypeToken<Workspace>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1007,15 +962,13 @@ public class WorkspacesApi {
     }
 
     public static class WorkspaceUpdateRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String workspaceId;
         private Workspace workspace;
         ApiResponse _lastResponse;
 
-        private WorkspaceUpdateRequest(String xApiKey, String contentType, String accept, String workspaceId) {
-            this.xApiKey = xApiKey;
+        private WorkspaceUpdateRequest(String contentType, String accept, String workspaceId) {
             this.contentType = contentType;
             this.accept = accept;
             this.workspaceId = workspaceId;
@@ -1038,7 +991,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return workspaceUpdateCall(xApiKey, contentType, accept, workspaceId, workspace, _callback);
+            return workspaceUpdateCall(contentType, accept, workspaceId, workspace, _callback);
         }
 
         /**
@@ -1047,7 +1000,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Workspace execute() throws ApiException {
-            ApiResponse<Workspace> localVarResp = workspaceUpdateWithHttpInfo(xApiKey, contentType, accept, workspaceId, workspace);
+            ApiResponse<Workspace> localVarResp = workspaceUpdateWithHttpInfo(contentType, accept, workspaceId, workspace);
             _lastResponse = localVarResp;
             Workspace data = localVarResp.getData();
 
@@ -1071,7 +1024,7 @@ public class WorkspacesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Workspace> _callback) throws ApiException {
-            return workspaceUpdateAsync(xApiKey, contentType, accept, workspaceId, workspace, _callback);
+            return workspaceUpdateAsync(contentType, accept, workspaceId, workspace, _callback);
         }
     }
 
@@ -1106,7 +1059,6 @@ public class WorkspacesApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String contentType = "application/vnd.whispir.workspace-v1+json";
 
         String accept = "application/vnd.whispir.workspace-v1+json";
@@ -1117,7 +1069,7 @@ public class WorkspacesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-        WorkspaceUpdateRequest request = new WorkspaceUpdateRequest(xApiKey, contentType, accept, workspaceId);
+        WorkspaceUpdateRequest request = new WorkspaceUpdateRequest(contentType, accept, workspaceId);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.workspace != null){

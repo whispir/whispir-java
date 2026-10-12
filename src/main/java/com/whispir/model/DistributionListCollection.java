@@ -6,7 +6,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.whispir.model.DistributionList;
+import com.whispir.model.DistributionListCollectionDistributionListsInner;
 import com.whispir.model.Link;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -69,7 +69,7 @@ public class DistributionListCollection {
   private List<Link> link;
 
   @SerializedName("distributionLists")
-  private List<DistributionList> distributionLists;
+  private List<DistributionListCollectionDistributionListsInner> distributionLists;
 
   public DistributionListCollection() {
     super();
@@ -100,7 +100,7 @@ public class DistributionListCollection {
     return link;
   }
 
-  public DistributionListCollection addDistributionListsItem(DistributionList distributionListsItem) {
+  public DistributionListCollection addDistributionListsItem(DistributionListCollectionDistributionListsInner distributionListsItem) {
     if (this.distributionLists == null) {
       this.distributionLists = new ArrayList<>();
     }
@@ -113,10 +113,10 @@ public class DistributionListCollection {
    * @return distributionLists
   **/
   @javax.annotation.Nullable
-  public List<DistributionList> getDistributionLists() {
+  public List<DistributionListCollectionDistributionListsInner> getDistributionLists() {
     return distributionLists;
   }
-  public void setDistributionLists(List<DistributionList> distributionLists) {
+  public void setDistributionLists(List<DistributionListCollectionDistributionListsInner> distributionLists) {
     this.distributionLists = distributionLists;
   }
 

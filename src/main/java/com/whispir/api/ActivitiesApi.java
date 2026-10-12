@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class ActivitiesApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call activityCreateCall(String xApiKey, String contentType, String accept, Activity activity, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call activityCreateCall(String contentType, String accept, Activity activity, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -52,10 +52,6 @@ public class ActivitiesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -87,12 +83,7 @@ public class ActivitiesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call activityCreateValidateBeforeCall(String xApiKey, String contentType, String accept, Activity activity, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling activityCreate(Async)");
-        }
-
+    private static okhttp3.Call activityCreateValidateBeforeCall(String contentType, String accept, Activity activity, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling activityCreate(Async)");
@@ -108,17 +99,17 @@ public class ActivitiesApi {
             throw new ApiException("Missing the required parameter 'activity' when calling activityCreate(Async)");
         }
 
-        return activityCreateCall(xApiKey, contentType, accept, activity, _callback);
+        return activityCreateCall(contentType, accept, activity, _callback);
     }
 
-    private static ApiResponse<Activity> activityCreateWithHttpInfo(String xApiKey, String contentType, String accept, Activity activity) throws ApiException {
-        okhttp3.Call localVarCall = activityCreateCall(xApiKey, contentType, accept, activity, null);
+    private static ApiResponse<Activity> activityCreateWithHttpInfo(String contentType, String accept, Activity activity) throws ApiException {
+        okhttp3.Call localVarCall = activityCreateCall(contentType, accept, activity, null);
         Type localVarReturnType = new TypeToken<Activity>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call activityCreateAsync(String xApiKey, String contentType, String accept, Activity activity, final ApiCallback<Activity> _callback) throws ApiException {
-        okhttp3.Call localVarCall = activityCreateValidateBeforeCall(xApiKey, contentType, accept, activity, _callback);
+    private static okhttp3.Call activityCreateAsync(String contentType, String accept, Activity activity, final ApiCallback<Activity> _callback) throws ApiException {
+        okhttp3.Call localVarCall = activityCreateValidateBeforeCall(contentType, accept, activity, _callback);
         Type localVarReturnType = new TypeToken<Activity>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -381,14 +372,12 @@ public class ActivitiesApi {
     }
 
     public static class ActivityCreateRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final Activity activity;
         ApiResponse _lastResponse;
 
-        private ActivityCreateRequest(String xApiKey, String contentType, String accept, Activity activity) {
-            this.xApiKey = xApiKey;
+        private ActivityCreateRequest(String contentType, String accept, Activity activity) {
             this.contentType = contentType;
             this.accept = accept;
             this.activity = activity;
@@ -401,7 +390,7 @@ public class ActivitiesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return activityCreateCall(xApiKey, contentType, accept, activity, _callback);
+            return activityCreateCall(contentType, accept, activity, _callback);
         }
 
         /**
@@ -410,7 +399,7 @@ public class ActivitiesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Activity execute() throws ApiException {
-            ApiResponse<Activity> localVarResp = activityCreateWithHttpInfo(xApiKey, contentType, accept, activity);
+            ApiResponse<Activity> localVarResp = activityCreateWithHttpInfo(contentType, accept, activity);
             _lastResponse = localVarResp;
             Activity data = localVarResp.getData();
 
@@ -443,7 +432,7 @@ public class ActivitiesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Activity> _callback) throws ApiException {
-            return activityCreateAsync(xApiKey, contentType, accept, activity, _callback);
+            return activityCreateAsync(contentType, accept, activity, _callback);
         }
     }
 
@@ -483,7 +472,6 @@ public class ActivitiesApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String contentType = "application/vnd.whispir.activity-v1+json";
 
         String accept = "application/vnd.whispir.activity-v1+json";
@@ -515,13 +503,13 @@ public class ActivitiesApi {
         String fullnameValue = params.getFullname();
         activity.setFullname(fullnameValue);
 
-        ActivityCreateRequest request = new ActivityCreateRequest(xApiKey, contentType, accept, activity);
+        ActivityCreateRequest request = new ActivityCreateRequest(contentType, accept, activity);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call activityListCall(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String action, String module, String user, String workspace, String status, String description, String startTime, String endTime, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call activityListCall(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String action, String module, String user, String workspace, String status, String description, String startTime, String endTime, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -587,10 +575,6 @@ public class ActivitiesApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("End time", endTime));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -616,28 +600,23 @@ public class ActivitiesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call activityListValidateBeforeCall(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String action, String module, String user, String workspace, String status, String description, String startTime, String endTime, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling activityList(Async)");
-        }
-
+    private static okhttp3.Call activityListValidateBeforeCall(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String action, String module, String user, String workspace, String status, String description, String startTime, String endTime, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling activityList(Async)");
         }
 
-        return activityListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, _callback);
+        return activityListCall(accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, _callback);
     }
 
-    private static ApiResponse<ActivityCollection> activityListWithHttpInfo(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String action, String module, String user, String workspace, String status, String description, String startTime, String endTime) throws ApiException {
-        okhttp3.Call localVarCall = activityListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, null);
+    private static ApiResponse<ActivityCollection> activityListWithHttpInfo(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String action, String module, String user, String workspace, String status, String description, String startTime, String endTime) throws ApiException {
+        okhttp3.Call localVarCall = activityListCall(accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, null);
         Type localVarReturnType = new TypeToken<ActivityCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call activityListAsync(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String action, String module, String user, String workspace, String status, String description, String startTime, String endTime, final ApiCallback<ActivityCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = activityListValidateBeforeCall(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, _callback);
+    private static okhttp3.Call activityListAsync(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String action, String module, String user, String workspace, String status, String description, String startTime, String endTime, final ApiCallback<ActivityCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = activityListValidateBeforeCall(accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, _callback);
         Type localVarReturnType = new TypeToken<ActivityCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -809,7 +788,6 @@ public class ActivitiesApi {
     }
 
     public static class ActivityListRequest {
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -825,8 +803,7 @@ public class ActivitiesApi {
         private String endTime;
         ApiResponse _lastResponse;
 
-        private ActivityListRequest(String xApiKey, String accept) {
-            this.xApiKey = xApiKey;
+        private ActivityListRequest(String accept) {
             this.accept = accept;
         }
 
@@ -957,7 +934,7 @@ public class ActivitiesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return activityListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, _callback);
+            return activityListCall(accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, _callback);
         }
 
         /**
@@ -966,7 +943,7 @@ public class ActivitiesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public ActivityCollection execute() throws ApiException {
-            ApiResponse<ActivityCollection> localVarResp = activityListWithHttpInfo(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime);
+            ApiResponse<ActivityCollection> localVarResp = activityListWithHttpInfo(accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime);
             _lastResponse = localVarResp;
             ActivityCollection data = localVarResp.getData();
 
@@ -990,7 +967,7 @@ public class ActivitiesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<ActivityCollection> _callback) throws ApiException {
-            return activityListAsync(xApiKey, accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, _callback);
+            return activityListAsync(accept, limit, offset, sortOrder, sortFields, action, module, user, workspace, status, description, startTime, endTime, _callback);
         }
     }
 
@@ -1074,10 +1051,9 @@ public class ActivitiesApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.activity-v1+json";
 
-        ActivityListRequest request = new ActivityListRequest(xApiKey, accept);
+        ActivityListRequest request = new ActivityListRequest(accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -1131,7 +1107,7 @@ public class ActivitiesApi {
 
         return request.execute();
     }
-    private static okhttp3.Call activityWorkspaceListCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call activityWorkspaceListCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1166,10 +1142,6 @@ public class ActivitiesApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortFields", sortFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -1195,15 +1167,10 @@ public class ActivitiesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call activityWorkspaceListValidateBeforeCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call activityWorkspaceListValidateBeforeCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling activityWorkspaceList(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling activityWorkspaceList(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -1211,17 +1178,17 @@ public class ActivitiesApi {
             throw new ApiException("Missing the required parameter 'accept' when calling activityWorkspaceList(Async)");
         }
 
-        return activityWorkspaceListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+        return activityWorkspaceListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
     }
 
-    private static ApiResponse<ActivityCollection> activityWorkspaceListWithHttpInfo(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
-        okhttp3.Call localVarCall = activityWorkspaceListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, null);
+    private static ApiResponse<ActivityCollection> activityWorkspaceListWithHttpInfo(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
+        okhttp3.Call localVarCall = activityWorkspaceListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, null);
         Type localVarReturnType = new TypeToken<ActivityCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call activityWorkspaceListAsync(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<ActivityCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = activityWorkspaceListValidateBeforeCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+    private static okhttp3.Call activityWorkspaceListAsync(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<ActivityCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = activityWorkspaceListValidateBeforeCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         Type localVarReturnType = new TypeToken<ActivityCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1310,7 +1277,6 @@ public class ActivitiesApi {
 
     public static class ActivityWorkspaceListRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -1318,9 +1284,8 @@ public class ActivitiesApi {
         private String sortFields;
         ApiResponse _lastResponse;
 
-        private ActivityWorkspaceListRequest(String workspaceId, String xApiKey, String accept) {
+        private ActivityWorkspaceListRequest(String workspaceId, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
         }
 
@@ -1371,7 +1336,7 @@ public class ActivitiesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return activityWorkspaceListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return activityWorkspaceListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
 
         /**
@@ -1380,7 +1345,7 @@ public class ActivitiesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public ActivityCollection execute() throws ApiException {
-            ApiResponse<ActivityCollection> localVarResp = activityWorkspaceListWithHttpInfo(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+            ApiResponse<ActivityCollection> localVarResp = activityWorkspaceListWithHttpInfo(workspaceId, accept, limit, offset, sortOrder, sortFields);
             _lastResponse = localVarResp;
             ActivityCollection data = localVarResp.getData();
 
@@ -1404,7 +1369,7 @@ public class ActivitiesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<ActivityCollection> _callback) throws ApiException {
-            return activityWorkspaceListAsync(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return activityWorkspaceListAsync(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
     }
 
@@ -1460,10 +1425,9 @@ public class ActivitiesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.activity-v1+json";
 
-        ActivityWorkspaceListRequest request = new ActivityWorkspaceListRequest(workspaceId, xApiKey, accept);
+        ActivityWorkspaceListRequest request = new ActivityWorkspaceListRequest(workspaceId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){

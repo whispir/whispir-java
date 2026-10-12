@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class CustomListsApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call customListListCall(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String type, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call customListListCall(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String type, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -77,10 +77,6 @@ public class CustomListsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("type", type));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -106,28 +102,23 @@ public class CustomListsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call customListListValidateBeforeCall(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String type, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling customListList(Async)");
-        }
-
+    private static okhttp3.Call customListListValidateBeforeCall(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String type, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling customListList(Async)");
         }
 
-        return customListListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type, _callback);
+        return customListListCall(accept, limit, offset, sortOrder, sortFields, name, type, _callback);
     }
 
-    private static ApiResponse<CustomListCollection> customListListWithHttpInfo(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String type) throws ApiException {
-        okhttp3.Call localVarCall = customListListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type, null);
+    private static ApiResponse<CustomListCollection> customListListWithHttpInfo(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String type) throws ApiException {
+        okhttp3.Call localVarCall = customListListCall(accept, limit, offset, sortOrder, sortFields, name, type, null);
         Type localVarReturnType = new TypeToken<CustomListCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call customListListAsync(String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String type, final ApiCallback<CustomListCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = customListListValidateBeforeCall(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type, _callback);
+    private static okhttp3.Call customListListAsync(String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String type, final ApiCallback<CustomListCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = customListListValidateBeforeCall(accept, limit, offset, sortOrder, sortFields, name, type, _callback);
         Type localVarReturnType = new TypeToken<CustomListCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -227,7 +218,6 @@ public class CustomListsApi {
     }
 
     public static class CustomListListRequest {
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -237,8 +227,7 @@ public class CustomListsApi {
         private String type;
         ApiResponse _lastResponse;
 
-        private CustomListListRequest(String xApiKey, String accept) {
-            this.xApiKey = xApiKey;
+        private CustomListListRequest(String accept) {
             this.accept = accept;
         }
 
@@ -309,7 +298,7 @@ public class CustomListsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return customListListCall(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type, _callback);
+            return customListListCall(accept, limit, offset, sortOrder, sortFields, name, type, _callback);
         }
 
         /**
@@ -318,7 +307,7 @@ public class CustomListsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public CustomListCollection execute() throws ApiException {
-            ApiResponse<CustomListCollection> localVarResp = customListListWithHttpInfo(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type);
+            ApiResponse<CustomListCollection> localVarResp = customListListWithHttpInfo(accept, limit, offset, sortOrder, sortFields, name, type);
             _lastResponse = localVarResp;
             CustomListCollection data = localVarResp.getData();
 
@@ -342,7 +331,7 @@ public class CustomListsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<CustomListCollection> _callback) throws ApiException {
-            return customListListAsync(xApiKey, accept, limit, offset, sortOrder, sortFields, name, type, _callback);
+            return customListListAsync(accept, limit, offset, sortOrder, sortFields, name, type, _callback);
         }
     }
 
@@ -396,10 +385,9 @@ public class CustomListsApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.customlist-v1+json";
 
-        CustomListListRequest request = new CustomListListRequest(xApiKey, accept);
+        CustomListListRequest request = new CustomListListRequest(accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -429,7 +417,7 @@ public class CustomListsApi {
 
         return request.execute();
     }
-    private static okhttp3.Call customListRetrieveCall(String xApiKey, String accept, String customlistId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call customListRetrieveCall(String accept, String customlistId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -447,10 +435,6 @@ public class CustomListsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -477,12 +461,7 @@ public class CustomListsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call customListRetrieveValidateBeforeCall(String xApiKey, String accept, String customlistId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling customListRetrieve(Async)");
-        }
-
+    private static okhttp3.Call customListRetrieveValidateBeforeCall(String accept, String customlistId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling customListRetrieve(Async)");
@@ -493,17 +472,17 @@ public class CustomListsApi {
             throw new ApiException("Missing the required parameter 'customlistId' when calling customListRetrieve(Async)");
         }
 
-        return customListRetrieveCall(xApiKey, accept, customlistId, _callback);
+        return customListRetrieveCall(accept, customlistId, _callback);
     }
 
-    private static ApiResponse<CustomList> customListRetrieveWithHttpInfo(String xApiKey, String accept, String customlistId) throws ApiException {
-        okhttp3.Call localVarCall = customListRetrieveCall(xApiKey, accept, customlistId, null);
+    private static ApiResponse<CustomList> customListRetrieveWithHttpInfo(String accept, String customlistId) throws ApiException {
+        okhttp3.Call localVarCall = customListRetrieveCall(accept, customlistId, null);
         Type localVarReturnType = new TypeToken<CustomList>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call customListRetrieveAsync(String xApiKey, String accept, String customlistId, final ApiCallback<CustomList> _callback) throws ApiException {
-        okhttp3.Call localVarCall = customListRetrieveValidateBeforeCall(xApiKey, accept, customlistId, _callback);
+    private static okhttp3.Call customListRetrieveAsync(String accept, String customlistId, final ApiCallback<CustomList> _callback) throws ApiException {
+        okhttp3.Call localVarCall = customListRetrieveValidateBeforeCall(accept, customlistId, _callback);
         Type localVarReturnType = new TypeToken<CustomList>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -543,13 +522,11 @@ public class CustomListsApi {
     }
 
     public static class CustomListRetrieveRequest {
-        private final String xApiKey;
         private final String accept;
         private final String customlistId;
         ApiResponse _lastResponse;
 
-        private CustomListRetrieveRequest(String xApiKey, String accept, String customlistId) {
-            this.xApiKey = xApiKey;
+        private CustomListRetrieveRequest(String accept, String customlistId) {
             this.accept = accept;
             this.customlistId = customlistId;
         }
@@ -561,7 +538,7 @@ public class CustomListsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return customListRetrieveCall(xApiKey, accept, customlistId, _callback);
+            return customListRetrieveCall(accept, customlistId, _callback);
         }
 
         /**
@@ -570,7 +547,7 @@ public class CustomListsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public CustomList execute() throws ApiException {
-            ApiResponse<CustomList> localVarResp = customListRetrieveWithHttpInfo(xApiKey, accept, customlistId);
+            ApiResponse<CustomList> localVarResp = customListRetrieveWithHttpInfo(accept, customlistId);
             _lastResponse = localVarResp;
             CustomList data = localVarResp.getData();
 
@@ -594,7 +571,7 @@ public class CustomListsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<CustomList> _callback) throws ApiException {
-            return customListRetrieveAsync(xApiKey, accept, customlistId, _callback);
+            return customListRetrieveAsync(accept, customlistId, _callback);
         }
     }
 
@@ -624,7 +601,6 @@ public class CustomListsApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.customlist-v1+json";
 
 
@@ -633,7 +609,7 @@ public class CustomListsApi {
         if(customlistId == null || customlistId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'customlistId'");
         }
-        CustomListRetrieveRequest request = new CustomListRetrieveRequest(xApiKey, accept, customlistId);
+        CustomListRetrieveRequest request = new CustomListRetrieveRequest(accept, customlistId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
