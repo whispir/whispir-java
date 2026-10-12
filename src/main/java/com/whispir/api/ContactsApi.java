@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class ContactsApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call contactCreateCall(String workspaceId, String xApiKey, String accept, String contentType, Contact contact, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactCreateCall(String workspaceId, String accept, String contentType, Contact contact, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -53,10 +53,6 @@ public class ContactsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -89,15 +85,10 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call contactCreateValidateBeforeCall(String workspaceId, String xApiKey, String accept, String contentType, Contact contact, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactCreateValidateBeforeCall(String workspaceId, String accept, String contentType, Contact contact, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling contactCreate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling contactCreate(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -115,17 +106,17 @@ public class ContactsApi {
             throw new ApiException("Missing the required parameter 'contact' when calling contactCreate(Async)");
         }
 
-        return contactCreateCall(workspaceId, xApiKey, accept, contentType, contact, _callback);
+        return contactCreateCall(workspaceId, accept, contentType, contact, _callback);
     }
 
-    private static ApiResponse<Contact> contactCreateWithHttpInfo(String workspaceId, String xApiKey, String accept, String contentType, Contact contact) throws ApiException {
-        okhttp3.Call localVarCall = contactCreateCall(workspaceId, xApiKey, accept, contentType, contact, null);
+    private static ApiResponse<Contact> contactCreateWithHttpInfo(String workspaceId, String accept, String contentType, Contact contact) throws ApiException {
+        okhttp3.Call localVarCall = contactCreateCall(workspaceId, accept, contentType, contact, null);
         Type localVarReturnType = new TypeToken<Contact>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call contactCreateAsync(String workspaceId, String xApiKey, String accept, String contentType, Contact contact, final ApiCallback<Contact> _callback) throws ApiException {
-        okhttp3.Call localVarCall = contactCreateValidateBeforeCall(workspaceId, xApiKey, accept, contentType, contact, _callback);
+    private static okhttp3.Call contactCreateAsync(String workspaceId, String accept, String contentType, Contact contact, final ApiCallback<Contact> _callback) throws ApiException {
+        okhttp3.Call localVarCall = contactCreateValidateBeforeCall(workspaceId, accept, contentType, contact, _callback);
         Type localVarReturnType = new TypeToken<Contact>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1192,15 +1183,13 @@ public class ContactsApi {
 
     public static class ContactCreateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private final String contentType;
         private final Contact contact;
         ApiResponse _lastResponse;
 
-        private ContactCreateRequest(String workspaceId, String xApiKey, String accept, String contentType, Contact contact) {
+        private ContactCreateRequest(String workspaceId, String accept, String contentType, Contact contact) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
             this.contentType = contentType;
             this.contact = contact;
@@ -1213,7 +1202,7 @@ public class ContactsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return contactCreateCall(workspaceId, xApiKey, accept, contentType, contact, _callback);
+            return contactCreateCall(workspaceId, accept, contentType, contact, _callback);
         }
 
         /**
@@ -1222,7 +1211,7 @@ public class ContactsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Contact execute() throws ApiException {
-            ApiResponse<Contact> localVarResp = contactCreateWithHttpInfo(workspaceId, xApiKey, accept, contentType, contact);
+            ApiResponse<Contact> localVarResp = contactCreateWithHttpInfo(workspaceId, accept, contentType, contact);
             _lastResponse = localVarResp;
             Contact data = localVarResp.getData();
 
@@ -1255,7 +1244,7 @@ public class ContactsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Contact> _callback) throws ApiException {
-            return contactCreateAsync(workspaceId, xApiKey, accept, contentType, contact, _callback);
+            return contactCreateAsync(workspaceId, accept, contentType, contact, _callback);
         }
     }
 
@@ -1437,7 +1426,6 @@ public class ContactsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.contact-v1+json";
 
         String contentType = "application/vnd.whispir.contact-v1+json";
@@ -1652,13 +1640,13 @@ public class ContactsApi {
         }
         contact.setMessagingoptions(messagingoptionsValue);
 
-        ContactCreateRequest request = new ContactCreateRequest(workspaceId, xApiKey, accept, contentType, contact);
+        ContactCreateRequest request = new ContactCreateRequest(workspaceId, accept, contentType, contact);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call contactDeleteCall(String workspaceId, String xApiKey, String contactId, String action, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactDeleteCall(String workspaceId, String contactId, String action, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1682,10 +1670,6 @@ public class ContactsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("action", action));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1706,15 +1690,10 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call contactDeleteValidateBeforeCall(String workspaceId, String xApiKey, String contactId, String action, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactDeleteValidateBeforeCall(String workspaceId, String contactId, String action, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling contactDelete(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling contactDelete(Async)");
         }
 
         // verify the required parameter 'contactId' is set
@@ -1722,16 +1701,16 @@ public class ContactsApi {
             throw new ApiException("Missing the required parameter 'contactId' when calling contactDelete(Async)");
         }
 
-        return contactDeleteCall(workspaceId, xApiKey, contactId, action, _callback);
+        return contactDeleteCall(workspaceId, contactId, action, _callback);
     }
 
-    private static ApiResponse<Void> contactDeleteWithHttpInfo(String workspaceId, String xApiKey, String contactId, String action) throws ApiException {
-        okhttp3.Call localVarCall = contactDeleteCall(workspaceId, xApiKey, contactId, action, null);
+    private static ApiResponse<Void> contactDeleteWithHttpInfo(String workspaceId, String contactId, String action) throws ApiException {
+        okhttp3.Call localVarCall = contactDeleteCall(workspaceId, contactId, action, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call contactDeleteAsync(String workspaceId, String xApiKey, String contactId, String action, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = contactDeleteValidateBeforeCall(workspaceId, xApiKey, contactId, action, _callback);
+    private static okhttp3.Call contactDeleteAsync(String workspaceId, String contactId, String action, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = contactDeleteValidateBeforeCall(workspaceId, contactId, action, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1795,14 +1774,12 @@ public class ContactsApi {
 
     public static class ContactDeleteRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contactId;
         private String action;
         ApiResponse _lastResponse;
 
-        private ContactDeleteRequest(String workspaceId, String xApiKey, String contactId) {
+        private ContactDeleteRequest(String workspaceId, String contactId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contactId = contactId;
         }
 
@@ -1823,7 +1800,7 @@ public class ContactsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return contactDeleteCall(workspaceId, xApiKey, contactId, action, _callback);
+            return contactDeleteCall(workspaceId, contactId, action, _callback);
         }
 
         /**
@@ -1831,7 +1808,7 @@ public class ContactsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            contactDeleteWithHttpInfo(workspaceId, xApiKey, contactId, action);
+            contactDeleteWithHttpInfo(workspaceId, contactId, action);
         }
         /**
          * Return the last executed API response
@@ -1849,7 +1826,7 @@ public class ContactsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return contactDeleteAsync(workspaceId, xApiKey, contactId, action, _callback);
+            return contactDeleteAsync(workspaceId, contactId, action, _callback);
         }
     }
 
@@ -1874,7 +1851,6 @@ public class ContactsApi {
         if(contactId == null || contactId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'contactId'");
         }
-        ContactDeleteParams tempParams = ContactDeleteParams.builder()
             .setWorkspaceId(workspaceId)
             .setContactId(contactId)
             .setAction(action).build();
@@ -1897,13 +1873,12 @@ public class ContactsApi {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
 
-
         String contactId = params.getContactId();
 
         if(contactId == null || contactId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'contactId'");
         }
-        ContactDeleteRequest request = new ContactDeleteRequest(workspaceId, xApiKey, contactId);
+        ContactDeleteRequest request = new ContactDeleteRequest(workspaceId, contactId);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.action != null){
@@ -1913,7 +1888,7 @@ public class ContactsApi {
 
         request.execute();
     }
-    private static okhttp3.Call contactListCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String fieldname, Boolean customFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactListCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String fieldname, Boolean customFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1956,10 +1931,6 @@ public class ContactsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("customFields", customFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -1985,15 +1956,10 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call contactListValidateBeforeCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String fieldname, Boolean customFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactListValidateBeforeCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String fieldname, Boolean customFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling contactList(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling contactList(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -2001,17 +1967,17 @@ public class ContactsApi {
             throw new ApiException("Missing the required parameter 'accept' when calling contactList(Async)");
         }
 
-        return contactListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, _callback);
+        return contactListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, _callback);
     }
 
-    private static ApiResponse<ContactCollection> contactListWithHttpInfo(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String fieldname, Boolean customFields) throws ApiException {
-        okhttp3.Call localVarCall = contactListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, null);
+    private static ApiResponse<ContactCollection> contactListWithHttpInfo(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String fieldname, Boolean customFields) throws ApiException {
+        okhttp3.Call localVarCall = contactListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, null);
         Type localVarReturnType = new TypeToken<ContactCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call contactListAsync(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String fieldname, Boolean customFields, final ApiCallback<ContactCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = contactListValidateBeforeCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, _callback);
+    private static okhttp3.Call contactListAsync(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String fieldname, Boolean customFields, final ApiCallback<ContactCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = contactListValidateBeforeCall(workspaceId, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, _callback);
         Type localVarReturnType = new TypeToken<ContactCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2124,7 +2090,6 @@ public class ContactsApi {
 
     public static class ContactListRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -2134,9 +2099,8 @@ public class ContactsApi {
         private Boolean customFields;
         ApiResponse _lastResponse;
 
-        private ContactListRequest(String workspaceId, String xApiKey, String accept) {
+        private ContactListRequest(String workspaceId, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
         }
 
@@ -2207,7 +2171,7 @@ public class ContactsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return contactListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, _callback);
+            return contactListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, _callback);
         }
 
         /**
@@ -2216,7 +2180,7 @@ public class ContactsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public ContactCollection execute() throws ApiException {
-            ApiResponse<ContactCollection> localVarResp = contactListWithHttpInfo(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, fieldname, customFields);
+            ApiResponse<ContactCollection> localVarResp = contactListWithHttpInfo(workspaceId, accept, limit, offset, sortOrder, sortFields, fieldname, customFields);
             _lastResponse = localVarResp;
             ContactCollection data = localVarResp.getData();
 
@@ -2240,7 +2204,7 @@ public class ContactsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<ContactCollection> _callback) throws ApiException {
-            return contactListAsync(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, _callback);
+            return contactListAsync(workspaceId, accept, limit, offset, sortOrder, sortFields, fieldname, customFields, _callback);
         }
     }
 
@@ -2306,10 +2270,9 @@ public class ContactsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.contact-v1+json";
 
-        ContactListRequest request = new ContactListRequest(workspaceId, xApiKey, accept);
+        ContactListRequest request = new ContactListRequest(workspaceId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -2339,7 +2302,7 @@ public class ContactsApi {
 
         return request.execute();
     }
-    private static okhttp3.Call contactRetrieveCall(String workspaceId, String xApiKey, String contactId, String accept, String fields, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactRetrieveCall(String workspaceId, String contactId, String accept, String fields, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -2371,10 +2334,6 @@ public class ContactsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortFields", sortFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -2400,15 +2359,10 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call contactRetrieveValidateBeforeCall(String workspaceId, String xApiKey, String contactId, String accept, String fields, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactRetrieveValidateBeforeCall(String workspaceId, String contactId, String accept, String fields, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling contactRetrieve(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling contactRetrieve(Async)");
         }
 
         // verify the required parameter 'contactId' is set
@@ -2421,17 +2375,17 @@ public class ContactsApi {
             throw new ApiException("Missing the required parameter 'accept' when calling contactRetrieve(Async)");
         }
 
-        return contactRetrieveCall(workspaceId, xApiKey, contactId, accept, fields, sortOrder, sortFields, _callback);
+        return contactRetrieveCall(workspaceId, contactId, accept, fields, sortOrder, sortFields, _callback);
     }
 
-    private static ApiResponse<Contact> contactRetrieveWithHttpInfo(String workspaceId, String xApiKey, String contactId, String accept, String fields, String sortOrder, String sortFields) throws ApiException {
-        okhttp3.Call localVarCall = contactRetrieveCall(workspaceId, xApiKey, contactId, accept, fields, sortOrder, sortFields, null);
+    private static ApiResponse<Contact> contactRetrieveWithHttpInfo(String workspaceId, String contactId, String accept, String fields, String sortOrder, String sortFields) throws ApiException {
+        okhttp3.Call localVarCall = contactRetrieveCall(workspaceId, contactId, accept, fields, sortOrder, sortFields, null);
         Type localVarReturnType = new TypeToken<Contact>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call contactRetrieveAsync(String workspaceId, String xApiKey, String contactId, String accept, String fields, String sortOrder, String sortFields, final ApiCallback<Contact> _callback) throws ApiException {
-        okhttp3.Call localVarCall = contactRetrieveValidateBeforeCall(workspaceId, xApiKey, contactId, accept, fields, sortOrder, sortFields, _callback);
+    private static okhttp3.Call contactRetrieveAsync(String workspaceId, String contactId, String accept, String fields, String sortOrder, String sortFields, final ApiCallback<Contact> _callback) throws ApiException {
+        okhttp3.Call localVarCall = contactRetrieveValidateBeforeCall(workspaceId, contactId, accept, fields, sortOrder, sortFields, _callback);
         Type localVarReturnType = new TypeToken<Contact>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2520,7 +2474,6 @@ public class ContactsApi {
 
     public static class ContactRetrieveRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contactId;
         private final String accept;
         private String fields;
@@ -2528,9 +2481,8 @@ public class ContactsApi {
         private String sortFields;
         ApiResponse _lastResponse;
 
-        private ContactRetrieveRequest(String workspaceId, String xApiKey, String contactId, String accept) {
+        private ContactRetrieveRequest(String workspaceId, String contactId, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contactId = contactId;
             this.accept = accept;
         }
@@ -2572,7 +2524,7 @@ public class ContactsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return contactRetrieveCall(workspaceId, xApiKey, contactId, accept, fields, sortOrder, sortFields, _callback);
+            return contactRetrieveCall(workspaceId, contactId, accept, fields, sortOrder, sortFields, _callback);
         }
 
         /**
@@ -2581,7 +2533,7 @@ public class ContactsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Contact execute() throws ApiException {
-            ApiResponse<Contact> localVarResp = contactRetrieveWithHttpInfo(workspaceId, xApiKey, contactId, accept, fields, sortOrder, sortFields);
+            ApiResponse<Contact> localVarResp = contactRetrieveWithHttpInfo(workspaceId, contactId, accept, fields, sortOrder, sortFields);
             _lastResponse = localVarResp;
             Contact data = localVarResp.getData();
 
@@ -2605,7 +2557,7 @@ public class ContactsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Contact> _callback) throws ApiException {
-            return contactRetrieveAsync(workspaceId, xApiKey, contactId, accept, fields, sortOrder, sortFields, _callback);
+            return contactRetrieveAsync(workspaceId, contactId, accept, fields, sortOrder, sortFields, _callback);
         }
     }
 
@@ -2663,7 +2615,6 @@ public class ContactsApi {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
 
-
         String contactId = params.getContactId();
 
         if(contactId == null || contactId.isEmpty()) {
@@ -2671,7 +2622,7 @@ public class ContactsApi {
         }
         String accept = "application/vnd.whispir.contact-v1+json";
 
-        ContactRetrieveRequest request = new ContactRetrieveRequest(workspaceId, xApiKey, contactId, accept);
+        ContactRetrieveRequest request = new ContactRetrieveRequest(workspaceId, contactId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.fields != null){
@@ -2689,7 +2640,7 @@ public class ContactsApi {
 
         return request.execute();
     }
-    private static okhttp3.Call contactUpdateCall(String workspaceId, String xApiKey, String contactId, String accept, String contentType, Contact contact, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactUpdateCall(String workspaceId, String contactId, String accept, String contentType, Contact contact, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -2708,10 +2659,6 @@ public class ContactsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -2743,15 +2690,10 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call contactUpdateValidateBeforeCall(String workspaceId, String xApiKey, String contactId, String accept, String contentType, Contact contact, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call contactUpdateValidateBeforeCall(String workspaceId, String contactId, String accept, String contentType, Contact contact, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling contactUpdate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling contactUpdate(Async)");
         }
 
         // verify the required parameter 'contactId' is set
@@ -2774,16 +2716,16 @@ public class ContactsApi {
             throw new ApiException("Missing the required parameter 'contact' when calling contactUpdate(Async)");
         }
 
-        return contactUpdateCall(workspaceId, xApiKey, contactId, accept, contentType, contact, _callback);
+        return contactUpdateCall(workspaceId, contactId, accept, contentType, contact, _callback);
     }
 
-    private static ApiResponse<Void> contactUpdateWithHttpInfo(String workspaceId, String xApiKey, String contactId, String accept, String contentType, Contact contact) throws ApiException {
-        okhttp3.Call localVarCall = contactUpdateCall(workspaceId, xApiKey, contactId, accept, contentType, contact, null);
+    private static ApiResponse<Void> contactUpdateWithHttpInfo(String workspaceId, String contactId, String accept, String contentType, Contact contact) throws ApiException {
+        okhttp3.Call localVarCall = contactUpdateCall(workspaceId, contactId, accept, contentType, contact, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call contactUpdateAsync(String workspaceId, String xApiKey, String contactId, String accept, String contentType, Contact contact, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = contactUpdateValidateBeforeCall(workspaceId, xApiKey, contactId, accept, contentType, contact, _callback);
+    private static okhttp3.Call contactUpdateAsync(String workspaceId, String contactId, String accept, String contentType, Contact contact, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = contactUpdateValidateBeforeCall(workspaceId, contactId, accept, contentType, contact, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -3861,16 +3803,14 @@ public class ContactsApi {
 
     public static class ContactUpdateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contactId;
         private final String accept;
         private final String contentType;
         private final Contact contact;
         ApiResponse _lastResponse;
 
-        private ContactUpdateRequest(String workspaceId, String xApiKey, String contactId, String accept, String contentType, Contact contact) {
+        private ContactUpdateRequest(String workspaceId, String contactId, String accept, String contentType, Contact contact) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contactId = contactId;
             this.accept = accept;
             this.contentType = contentType;
@@ -3884,7 +3824,7 @@ public class ContactsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return contactUpdateCall(workspaceId, xApiKey, contactId, accept, contentType, contact, _callback);
+            return contactUpdateCall(workspaceId, contactId, accept, contentType, contact, _callback);
         }
 
         /**
@@ -3892,7 +3832,7 @@ public class ContactsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            contactUpdateWithHttpInfo(workspaceId, xApiKey, contactId, accept, contentType, contact);
+            contactUpdateWithHttpInfo(workspaceId, contactId, accept, contentType, contact);
         }
         /**
          * Return the last executed API response
@@ -3910,7 +3850,7 @@ public class ContactsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return contactUpdateAsync(workspaceId, xApiKey, contactId, accept, contentType, contact, _callback);
+            return contactUpdateAsync(workspaceId, contactId, accept, contentType, contact, _callback);
         }
     }
 
@@ -4098,7 +4038,6 @@ public class ContactsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
 
         String contactId = params.getContactId();
 
@@ -4319,7 +4258,7 @@ public class ContactsApi {
         }
         contact.setMessagingoptions(messagingoptionsValue);
 
-        ContactUpdateRequest request = new ContactUpdateRequest(workspaceId, xApiKey, contactId, accept, contentType, contact);
+        ContactUpdateRequest request = new ContactUpdateRequest(workspaceId, contactId, accept, contentType, contact);
 
         // Ensure to include all of the 'optionalParams' that are passed
 

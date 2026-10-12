@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class DistributionListsApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call distributionListCreateCall(String workspaceId, String xApiKey, String contentType, String accept, DistributionList distributionList, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListCreateCall(String workspaceId, String contentType, String accept, DistributionList distributionList, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -53,10 +53,6 @@ public class DistributionListsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -88,15 +84,10 @@ public class DistributionListsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call distributionListCreateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, DistributionList distributionList, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListCreateValidateBeforeCall(String workspaceId, String contentType, String accept, DistributionList distributionList, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling distributionListCreate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling distributionListCreate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -114,17 +105,17 @@ public class DistributionListsApi {
             throw new ApiException("Missing the required parameter 'distributionList' when calling distributionListCreate(Async)");
         }
 
-        return distributionListCreateCall(workspaceId, xApiKey, contentType, accept, distributionList, _callback);
+        return distributionListCreateCall(workspaceId, contentType, accept, distributionList, _callback);
     }
 
-    private static ApiResponse<DistributionList> distributionListCreateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, DistributionList distributionList) throws ApiException {
-        okhttp3.Call localVarCall = distributionListCreateCall(workspaceId, xApiKey, contentType, accept, distributionList, null);
+    private static ApiResponse<DistributionList> distributionListCreateWithHttpInfo(String workspaceId, String contentType, String accept, DistributionList distributionList) throws ApiException {
+        okhttp3.Call localVarCall = distributionListCreateCall(workspaceId, contentType, accept, distributionList, null);
         Type localVarReturnType = new TypeToken<DistributionList>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call distributionListCreateAsync(String workspaceId, String xApiKey, String contentType, String accept, DistributionList distributionList, final ApiCallback<DistributionList> _callback) throws ApiException {
-        okhttp3.Call localVarCall = distributionListCreateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, distributionList, _callback);
+    private static okhttp3.Call distributionListCreateAsync(String workspaceId, String contentType, String accept, DistributionList distributionList, final ApiCallback<DistributionList> _callback) throws ApiException {
+        okhttp3.Call localVarCall = distributionListCreateValidateBeforeCall(workspaceId, contentType, accept, distributionList, _callback);
         Type localVarReturnType = new TypeToken<DistributionList>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -135,7 +126,6 @@ public class DistributionListsApi {
         private DistributionList distributionList;
         private String name;
         private String description;
-        private String memberCount;
         private String access;
         private String visibility;
         private String contactIds;
@@ -149,7 +139,6 @@ public class DistributionListsApi {
             DistributionList distributionList,
             String name,
             String description,
-            String memberCount,
             String access,
             String visibility,
             String contactIds,
@@ -162,7 +151,6 @@ public class DistributionListsApi {
             this.distributionList = distributionList;
             this.name = name;
             this.description = description;
-            this.memberCount = memberCount;
             this.access = access;
             this.visibility = visibility;
             this.contactIds = contactIds;
@@ -182,9 +170,6 @@ public class DistributionListsApi {
             }
             public String getDescription() {
                 return description;
-            }
-            public String getMemberCount() {
-                return memberCount;
             }
             public String getAccess() {
                 return access;
@@ -245,7 +230,6 @@ public class DistributionListsApi {
             private DistributionList distributionList;
             private String name;
             private String description;
-            private String memberCount;
             private String access;
             private String visibility;
             private String contactIds;
@@ -260,7 +244,6 @@ public class DistributionListsApi {
                     distributionList,
                     name,
                     description,
-                    memberCount,
                     access,
                     visibility,
                     contactIds,
@@ -285,10 +268,6 @@ public class DistributionListsApi {
             }
             public Builder setDescription(String description) {
                 this.description = description;
-                return this;
-            }
-            public Builder setMemberCount(String memberCount) {
-                this.memberCount = memberCount;
                 return this;
             }
             public Builder setAccess(String access) {
@@ -326,15 +305,13 @@ public class DistributionListsApi {
 
     public static class DistributionListCreateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final DistributionList distributionList;
         ApiResponse _lastResponse;
 
-        private DistributionListCreateRequest(String workspaceId, String xApiKey, String contentType, String accept, DistributionList distributionList) {
+        private DistributionListCreateRequest(String workspaceId, String contentType, String accept, DistributionList distributionList) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.distributionList = distributionList;
@@ -347,7 +324,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return distributionListCreateCall(workspaceId, xApiKey, contentType, accept, distributionList, _callback);
+            return distributionListCreateCall(workspaceId, contentType, accept, distributionList, _callback);
         }
 
         /**
@@ -356,7 +333,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public DistributionList execute() throws ApiException {
-            ApiResponse<DistributionList> localVarResp = distributionListCreateWithHttpInfo(workspaceId, xApiKey, contentType, accept, distributionList);
+            ApiResponse<DistributionList> localVarResp = distributionListCreateWithHttpInfo(workspaceId, contentType, accept, distributionList);
             _lastResponse = localVarResp;
             DistributionList data = localVarResp.getData();
 
@@ -389,7 +366,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<DistributionList> _callback) throws ApiException {
-            return distributionListCreateAsync(workspaceId, xApiKey, contentType, accept, distributionList, _callback);
+            return distributionListCreateAsync(workspaceId, contentType, accept, distributionList, _callback);
         }
     }
 
@@ -410,7 +387,6 @@ public class DistributionListsApi {
             throw new ApiException("Missing the required property value of 'name'");
         }
         String descriptionValue = (String) params.get("description");
-        String memberCountValue = (String) params.get("memberCount");
         String accessValue = (String) params.get("access");
         String visibilityValue = (String) params.get("visibility");
         String contactIdsValue = (String) params.get("contactIds");
@@ -422,7 +398,6 @@ public class DistributionListsApi {
             .setWorkspaceId(workspaceId)
             .setName(nameValue)
             .setDescription(descriptionValue)
-            .setMemberCount(memberCountValue)
             .setAccess(accessValue)
             .setVisibility(visibilityValue)
             .setContactIds(contactIdsValue)
@@ -448,7 +423,6 @@ public class DistributionListsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.distributionlist-v1+json";
 
         String accept = "application/vnd.whispir.distributionlist-v1+json";
@@ -464,9 +438,6 @@ public class DistributionListsApi {
 
         String descriptionValue = params.getDescription();
         distributionList.setDescription(descriptionValue);
-
-        String memberCountValue = params.getMemberCount();
-        distributionList.setMemberCount(memberCountValue);
 
         String accessValue = params.getAccess();
         distributionList.setAccess(accessValue);
@@ -489,13 +460,13 @@ public class DistributionListsApi {
         String rulesValue = params.getRules();
         distributionList.setRules(rulesValue);
 
-        DistributionListCreateRequest request = new DistributionListCreateRequest(workspaceId, xApiKey, contentType, accept, distributionList);
+        DistributionListCreateRequest request = new DistributionListCreateRequest(workspaceId, contentType, accept, distributionList);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call distributionListDeleteCall(String workspaceId, String xApiKey, String distributionlistId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListDeleteCall(String workspaceId, String distributionlistId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -514,10 +485,6 @@ public class DistributionListsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         final String[] localVarAccepts = {
             "application/json"
@@ -539,15 +506,10 @@ public class DistributionListsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call distributionListDeleteValidateBeforeCall(String workspaceId, String xApiKey, String distributionlistId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListDeleteValidateBeforeCall(String workspaceId, String distributionlistId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling distributionListDelete(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling distributionListDelete(Async)");
         }
 
         // verify the required parameter 'distributionlistId' is set
@@ -555,16 +517,16 @@ public class DistributionListsApi {
             throw new ApiException("Missing the required parameter 'distributionlistId' when calling distributionListDelete(Async)");
         }
 
-        return distributionListDeleteCall(workspaceId, xApiKey, distributionlistId, _callback);
+        return distributionListDeleteCall(workspaceId, distributionlistId, _callback);
     }
 
-    private static ApiResponse<Void> distributionListDeleteWithHttpInfo(String workspaceId, String xApiKey, String distributionlistId) throws ApiException {
-        okhttp3.Call localVarCall = distributionListDeleteCall(workspaceId, xApiKey, distributionlistId, null);
+    private static ApiResponse<Void> distributionListDeleteWithHttpInfo(String workspaceId, String distributionlistId) throws ApiException {
+        okhttp3.Call localVarCall = distributionListDeleteCall(workspaceId, distributionlistId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call distributionListDeleteAsync(String workspaceId, String xApiKey, String distributionlistId, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = distributionListDeleteValidateBeforeCall(workspaceId, xApiKey, distributionlistId, _callback);
+    private static okhttp3.Call distributionListDeleteAsync(String workspaceId, String distributionlistId, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = distributionListDeleteValidateBeforeCall(workspaceId, distributionlistId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -616,13 +578,11 @@ public class DistributionListsApi {
 
     public static class DistributionListDeleteRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String distributionlistId;
         ApiResponse _lastResponse;
 
-        private DistributionListDeleteRequest(String workspaceId, String xApiKey, String distributionlistId) {
+        private DistributionListDeleteRequest(String workspaceId, String distributionlistId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.distributionlistId = distributionlistId;
         }
 
@@ -633,7 +593,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return distributionListDeleteCall(workspaceId, xApiKey, distributionlistId, _callback);
+            return distributionListDeleteCall(workspaceId, distributionlistId, _callback);
         }
 
         /**
@@ -641,7 +601,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            distributionListDeleteWithHttpInfo(workspaceId, xApiKey, distributionlistId);
+            distributionListDeleteWithHttpInfo(workspaceId, distributionlistId);
         }
         /**
          * Return the last executed API response
@@ -659,7 +619,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return distributionListDeleteAsync(workspaceId, xApiKey, distributionlistId, _callback);
+            return distributionListDeleteAsync(workspaceId, distributionlistId, _callback);
         }
     }
 
@@ -680,7 +640,6 @@ public class DistributionListsApi {
         if(distributionlistId == null || distributionlistId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'distributionlistId'");
         }
-        DistributionListDeleteParams tempParams = DistributionListDeleteParams.builder()
             .setWorkspaceId(workspaceId)
             .setDistributionlistId(distributionlistId).build();
 
@@ -702,19 +661,18 @@ public class DistributionListsApi {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
 
-
         String distributionlistId = params.getDistributionlistId();
 
         if(distributionlistId == null || distributionlistId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'distributionlistId'");
         }
-        DistributionListDeleteRequest request = new DistributionListDeleteRequest(workspaceId, xApiKey, distributionlistId);
+        DistributionListDeleteRequest request = new DistributionListDeleteRequest(workspaceId, distributionlistId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call distributionListListCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String description, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListListCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String description, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -757,10 +715,6 @@ public class DistributionListsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("description", description));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -786,15 +740,10 @@ public class DistributionListsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call distributionListListValidateBeforeCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String description, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListListValidateBeforeCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String description, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling distributionListList(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling distributionListList(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -802,17 +751,17 @@ public class DistributionListsApi {
             throw new ApiException("Missing the required parameter 'accept' when calling distributionListList(Async)");
         }
 
-        return distributionListListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description, _callback);
+        return distributionListListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, name, description, _callback);
     }
 
-    private static ApiResponse<DistributionListCollection> distributionListListWithHttpInfo(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String description) throws ApiException {
-        okhttp3.Call localVarCall = distributionListListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description, null);
+    private static ApiResponse<DistributionListCollection> distributionListListWithHttpInfo(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String description) throws ApiException {
+        okhttp3.Call localVarCall = distributionListListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, name, description, null);
         Type localVarReturnType = new TypeToken<DistributionListCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call distributionListListAsync(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String description, final ApiCallback<DistributionListCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = distributionListListValidateBeforeCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description, _callback);
+    private static okhttp3.Call distributionListListAsync(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String name, String description, final ApiCallback<DistributionListCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = distributionListListValidateBeforeCall(workspaceId, accept, limit, offset, sortOrder, sortFields, name, description, _callback);
         Type localVarReturnType = new TypeToken<DistributionListCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -925,7 +874,6 @@ public class DistributionListsApi {
 
     public static class DistributionListListRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -935,9 +883,8 @@ public class DistributionListsApi {
         private String description;
         ApiResponse _lastResponse;
 
-        private DistributionListListRequest(String workspaceId, String xApiKey, String accept) {
+        private DistributionListListRequest(String workspaceId, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
         }
 
@@ -1008,7 +955,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return distributionListListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description, _callback);
+            return distributionListListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, name, description, _callback);
         }
 
         /**
@@ -1017,7 +964,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public DistributionListCollection execute() throws ApiException {
-            ApiResponse<DistributionListCollection> localVarResp = distributionListListWithHttpInfo(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description);
+            ApiResponse<DistributionListCollection> localVarResp = distributionListListWithHttpInfo(workspaceId, accept, limit, offset, sortOrder, sortFields, name, description);
             _lastResponse = localVarResp;
             DistributionListCollection data = localVarResp.getData();
 
@@ -1041,7 +988,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<DistributionListCollection> _callback) throws ApiException {
-            return distributionListListAsync(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, name, description, _callback);
+            return distributionListListAsync(workspaceId, accept, limit, offset, sortOrder, sortFields, name, description, _callback);
         }
     }
 
@@ -1107,10 +1054,9 @@ public class DistributionListsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.distributionlist-v1+json";
 
-        DistributionListListRequest request = new DistributionListListRequest(workspaceId, xApiKey, accept);
+        DistributionListListRequest request = new DistributionListListRequest(workspaceId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -1140,7 +1086,7 @@ public class DistributionListsApi {
 
         return request.execute();
     }
-    private static okhttp3.Call distributionListRetrieveCall(String workspaceId, String xApiKey, String accept, String distributionlistId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListRetrieveCall(String workspaceId, String accept, String distributionlistId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1159,10 +1105,6 @@ public class DistributionListsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -1189,15 +1131,10 @@ public class DistributionListsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call distributionListRetrieveValidateBeforeCall(String workspaceId, String xApiKey, String accept, String distributionlistId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListRetrieveValidateBeforeCall(String workspaceId, String accept, String distributionlistId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling distributionListRetrieve(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling distributionListRetrieve(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -1210,17 +1147,17 @@ public class DistributionListsApi {
             throw new ApiException("Missing the required parameter 'distributionlistId' when calling distributionListRetrieve(Async)");
         }
 
-        return distributionListRetrieveCall(workspaceId, xApiKey, accept, distributionlistId, _callback);
+        return distributionListRetrieveCall(workspaceId, accept, distributionlistId, _callback);
     }
 
-    private static ApiResponse<DistributionList> distributionListRetrieveWithHttpInfo(String workspaceId, String xApiKey, String accept, String distributionlistId) throws ApiException {
-        okhttp3.Call localVarCall = distributionListRetrieveCall(workspaceId, xApiKey, accept, distributionlistId, null);
+    private static ApiResponse<DistributionList> distributionListRetrieveWithHttpInfo(String workspaceId, String accept, String distributionlistId) throws ApiException {
+        okhttp3.Call localVarCall = distributionListRetrieveCall(workspaceId, accept, distributionlistId, null);
         Type localVarReturnType = new TypeToken<DistributionList>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call distributionListRetrieveAsync(String workspaceId, String xApiKey, String accept, String distributionlistId, final ApiCallback<DistributionList> _callback) throws ApiException {
-        okhttp3.Call localVarCall = distributionListRetrieveValidateBeforeCall(workspaceId, xApiKey, accept, distributionlistId, _callback);
+    private static okhttp3.Call distributionListRetrieveAsync(String workspaceId, String accept, String distributionlistId, final ApiCallback<DistributionList> _callback) throws ApiException {
+        okhttp3.Call localVarCall = distributionListRetrieveValidateBeforeCall(workspaceId, accept, distributionlistId, _callback);
         Type localVarReturnType = new TypeToken<DistributionList>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1273,14 +1210,12 @@ public class DistributionListsApi {
 
     public static class DistributionListRetrieveRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private final String distributionlistId;
         ApiResponse _lastResponse;
 
-        private DistributionListRetrieveRequest(String workspaceId, String xApiKey, String accept, String distributionlistId) {
+        private DistributionListRetrieveRequest(String workspaceId, String accept, String distributionlistId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
             this.distributionlistId = distributionlistId;
         }
@@ -1292,7 +1227,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return distributionListRetrieveCall(workspaceId, xApiKey, accept, distributionlistId, _callback);
+            return distributionListRetrieveCall(workspaceId, accept, distributionlistId, _callback);
         }
 
         /**
@@ -1301,7 +1236,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public DistributionList execute() throws ApiException {
-            ApiResponse<DistributionList> localVarResp = distributionListRetrieveWithHttpInfo(workspaceId, xApiKey, accept, distributionlistId);
+            ApiResponse<DistributionList> localVarResp = distributionListRetrieveWithHttpInfo(workspaceId, accept, distributionlistId);
             _lastResponse = localVarResp;
             DistributionList data = localVarResp.getData();
 
@@ -1325,7 +1260,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<DistributionList> _callback) throws ApiException {
-            return distributionListRetrieveAsync(workspaceId, xApiKey, accept, distributionlistId, _callback);
+            return distributionListRetrieveAsync(workspaceId, accept, distributionlistId, _callback);
         }
     }
 
@@ -1367,7 +1302,6 @@ public class DistributionListsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.distributionlist-v1+json";
 
 
@@ -1376,13 +1310,13 @@ public class DistributionListsApi {
         if(distributionlistId == null || distributionlistId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'distributionlistId'");
         }
-        DistributionListRetrieveRequest request = new DistributionListRetrieveRequest(workspaceId, xApiKey, accept, distributionlistId);
+        DistributionListRetrieveRequest request = new DistributionListRetrieveRequest(workspaceId, accept, distributionlistId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call distributionListUpdateCall(String workspaceId, String xApiKey, String contentType, String accept, String distributionlistId, DistributionList distributionList, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListUpdateCall(String workspaceId, String contentType, String accept, String distributionlistId, DistributionList distributionList, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1401,10 +1335,6 @@ public class DistributionListsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -1435,15 +1365,10 @@ public class DistributionListsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call distributionListUpdateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, String distributionlistId, DistributionList distributionList, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call distributionListUpdateValidateBeforeCall(String workspaceId, String contentType, String accept, String distributionlistId, DistributionList distributionList, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling distributionListUpdate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling distributionListUpdate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -1466,16 +1391,16 @@ public class DistributionListsApi {
             throw new ApiException("Missing the required parameter 'distributionList' when calling distributionListUpdate(Async)");
         }
 
-        return distributionListUpdateCall(workspaceId, xApiKey, contentType, accept, distributionlistId, distributionList, _callback);
+        return distributionListUpdateCall(workspaceId, contentType, accept, distributionlistId, distributionList, _callback);
     }
 
-    private static ApiResponse<Void> distributionListUpdateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, String distributionlistId, DistributionList distributionList) throws ApiException {
-        okhttp3.Call localVarCall = distributionListUpdateCall(workspaceId, xApiKey, contentType, accept, distributionlistId, distributionList, null);
+    private static ApiResponse<Void> distributionListUpdateWithHttpInfo(String workspaceId, String contentType, String accept, String distributionlistId, DistributionList distributionList) throws ApiException {
+        okhttp3.Call localVarCall = distributionListUpdateCall(workspaceId, contentType, accept, distributionlistId, distributionList, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call distributionListUpdateAsync(String workspaceId, String xApiKey, String contentType, String accept, String distributionlistId, DistributionList distributionList, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = distributionListUpdateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, distributionlistId, distributionList, _callback);
+    private static okhttp3.Call distributionListUpdateAsync(String workspaceId, String contentType, String accept, String distributionlistId, DistributionList distributionList, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = distributionListUpdateValidateBeforeCall(workspaceId, contentType, accept, distributionlistId, distributionList, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1486,7 +1411,6 @@ public class DistributionListsApi {
         private DistributionList distributionList;
         private String name;
         private String description;
-        private String memberCount;
         private String access;
         private String visibility;
         private String contactIds;
@@ -1501,7 +1425,6 @@ public class DistributionListsApi {
             DistributionList distributionList,
             String name,
             String description,
-            String memberCount,
             String access,
             String visibility,
             String contactIds,
@@ -1515,7 +1438,6 @@ public class DistributionListsApi {
             this.distributionList = distributionList;
             this.name = name;
             this.description = description;
-            this.memberCount = memberCount;
             this.access = access;
             this.visibility = visibility;
             this.contactIds = contactIds;
@@ -1538,9 +1460,6 @@ public class DistributionListsApi {
             }
             public String getDescription() {
                 return description;
-            }
-            public String getMemberCount() {
-                return memberCount;
             }
             public String getAccess() {
                 return access;
@@ -1602,7 +1521,6 @@ public class DistributionListsApi {
             private DistributionList distributionList;
             private String name;
             private String description;
-            private String memberCount;
             private String access;
             private String visibility;
             private String contactIds;
@@ -1618,7 +1536,6 @@ public class DistributionListsApi {
                     distributionList,
                     name,
                     description,
-                    memberCount,
                     access,
                     visibility,
                     contactIds,
@@ -1647,10 +1564,6 @@ public class DistributionListsApi {
             }
             public Builder setDescription(String description) {
                 this.description = description;
-                return this;
-            }
-            public Builder setMemberCount(String memberCount) {
-                this.memberCount = memberCount;
                 return this;
             }
             public Builder setAccess(String access) {
@@ -1688,16 +1601,14 @@ public class DistributionListsApi {
 
     public static class DistributionListUpdateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String distributionlistId;
         private final DistributionList distributionList;
         ApiResponse _lastResponse;
 
-        private DistributionListUpdateRequest(String workspaceId, String xApiKey, String contentType, String accept, String distributionlistId, DistributionList distributionList) {
+        private DistributionListUpdateRequest(String workspaceId, String contentType, String accept, String distributionlistId, DistributionList distributionList) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.distributionlistId = distributionlistId;
@@ -1711,7 +1622,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return distributionListUpdateCall(workspaceId, xApiKey, contentType, accept, distributionlistId, distributionList, _callback);
+            return distributionListUpdateCall(workspaceId, contentType, accept, distributionlistId, distributionList, _callback);
         }
 
         /**
@@ -1719,7 +1630,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            distributionListUpdateWithHttpInfo(workspaceId, xApiKey, contentType, accept, distributionlistId, distributionList);
+            distributionListUpdateWithHttpInfo(workspaceId, contentType, accept, distributionlistId, distributionList);
         }
         /**
          * Return the last executed API response
@@ -1737,7 +1648,7 @@ public class DistributionListsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return distributionListUpdateAsync(workspaceId, xApiKey, contentType, accept, distributionlistId, distributionList, _callback);
+            return distributionListUpdateAsync(workspaceId, contentType, accept, distributionlistId, distributionList, _callback);
         }
     }
 
@@ -1763,7 +1674,6 @@ public class DistributionListsApi {
             throw new ApiException("Missing the required property value of 'name'");
         }
         String descriptionValue = (String) params.get("description");
-        String memberCountValue = (String) params.get("memberCount");
         String accessValue = (String) params.get("access");
         String visibilityValue = (String) params.get("visibility");
         String contactIdsValue = (String) params.get("contactIds");
@@ -1776,7 +1686,6 @@ public class DistributionListsApi {
             .setDistributionlistId(distributionlistId)
             .setName(nameValue)
             .setDescription(descriptionValue)
-            .setMemberCount(memberCountValue)
             .setAccess(accessValue)
             .setVisibility(visibilityValue)
             .setContactIds(contactIdsValue)
@@ -1802,7 +1711,6 @@ public class DistributionListsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.distributionlist-v1+json";
 
         String accept = "application/vnd.whispir.distributionlist-v1+json";
@@ -1825,9 +1733,6 @@ public class DistributionListsApi {
         String descriptionValue = params.getDescription();
         distributionList.setDescription(descriptionValue);
 
-        String memberCountValue = params.getMemberCount();
-        distributionList.setMemberCount(memberCountValue);
-
         String accessValue = params.getAccess();
         distributionList.setAccess(accessValue);
 
@@ -1849,7 +1754,7 @@ public class DistributionListsApi {
         String rulesValue = params.getRules();
         distributionList.setRules(rulesValue);
 
-        DistributionListUpdateRequest request = new DistributionListUpdateRequest(workspaceId, xApiKey, contentType, accept, distributionlistId, distributionList);
+        DistributionListUpdateRequest request = new DistributionListUpdateRequest(workspaceId, contentType, accept, distributionlistId, distributionList);
 
         // Ensure to include all of the 'optionalParams' that are passed
 

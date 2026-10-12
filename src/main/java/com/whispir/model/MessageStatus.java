@@ -41,7 +41,7 @@ import com.whispir.client.ApiResponse;
 import com.whispir.client.JSON;
 
 /**
- * MessageStatus
+ * The object describing the delivery status of the message.
  */
 
 public class MessageStatus {

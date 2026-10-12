@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class ScenariosApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call scenarioCreateCall(String workspaceId, String xApiKey, String contentType, String accept, Scenario scenario, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioCreateCall(String workspaceId, String contentType, String accept, Scenario scenario, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -53,10 +53,6 @@ public class ScenariosApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -87,15 +83,10 @@ public class ScenariosApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call scenarioCreateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, Scenario scenario, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioCreateValidateBeforeCall(String workspaceId, String contentType, String accept, Scenario scenario, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling scenarioCreate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling scenarioCreate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -113,16 +104,16 @@ public class ScenariosApi {
             throw new ApiException("Missing the required parameter 'scenario' when calling scenarioCreate(Async)");
         }
 
-        return scenarioCreateCall(workspaceId, xApiKey, contentType, accept, scenario, _callback);
+        return scenarioCreateCall(workspaceId, contentType, accept, scenario, _callback);
     }
 
-    private static ApiResponse<Void> scenarioCreateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, Scenario scenario) throws ApiException {
-        okhttp3.Call localVarCall = scenarioCreateCall(workspaceId, xApiKey, contentType, accept, scenario, null);
+    private static ApiResponse<Void> scenarioCreateWithHttpInfo(String workspaceId, String contentType, String accept, Scenario scenario) throws ApiException {
+        okhttp3.Call localVarCall = scenarioCreateCall(workspaceId, contentType, accept, scenario, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call scenarioCreateAsync(String workspaceId, String xApiKey, String contentType, String accept, Scenario scenario, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = scenarioCreateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, scenario, _callback);
+    private static okhttp3.Call scenarioCreateAsync(String workspaceId, String contentType, String accept, Scenario scenario, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = scenarioCreateValidateBeforeCall(workspaceId, contentType, accept, scenario, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -350,6 +341,8 @@ public class ScenariosApi {
             private Voice voice;
             private Web web;
             private Social social;
+            private WhatsApp whatsapp;
+            private RCS rcs;
             private String type;
             private Features features;
             private Resource resource;
@@ -368,7 +361,7 @@ public class ScenariosApi {
             private BigDecimal repeatMin;
             private DeliveryReceipt dlr;
 
-            private Message(String to, String subject, String body, Email email, Voice voice, Web web, Social social, String type, Features features, Resource resource, String messageTemplateId, String messageTemplateName, String callbackId, Object callbackParameters, String label, String eventId, String messageType, String scheduleType, String scheduleDate, BigDecimal repetitionCount, BigDecimal repeatDays, BigDecimal repeatHrs, BigDecimal repeatMin, DeliveryReceipt dlr){
+            private Message(String to, String subject, String body, Email email, Voice voice, Web web, Social social, WhatsApp whatsapp, RCS rcs, String type, Features features, Resource resource, String messageTemplateId, String messageTemplateName, String callbackId, Object callbackParameters, String label, String eventId, String messageType, String scheduleType, String scheduleDate, BigDecimal repetitionCount, BigDecimal repeatDays, BigDecimal repeatHrs, BigDecimal repeatMin, DeliveryReceipt dlr){
             this.to = to;
             this.subject = subject;
             this.body = body;
@@ -376,6 +369,8 @@ public class ScenariosApi {
             this.voice = voice;
             this.web = web;
             this.social = social;
+            this.whatsapp = whatsapp;
+            this.rcs = rcs;
             this.type = type;
             this.features = features;
             this.resource = resource;
@@ -415,6 +410,12 @@ public class ScenariosApi {
             }
             public Social getSocial(){
                 return social;
+            }
+            public WhatsApp getWhatsapp(){
+                return whatsapp;
+            }
+            public RCS getRcs(){
+                return rcs;
             }
             public String getType(){
                 return type;
@@ -561,6 +562,8 @@ public class ScenariosApi {
                 private Voice voice;
                 private Web web;
                 private Social social;
+                private WhatsApp whatsapp;
+                private RCS rcs;
                 private String type;
                 private Features features;
                 private Resource resource;
@@ -588,6 +591,8 @@ public class ScenariosApi {
                         this.voice,
                         this.web,
                         this.social,
+                        this.whatsapp,
+                        this.rcs,
                         this.type,
                         this.features,
                         this.resource,
@@ -633,6 +638,14 @@ public class ScenariosApi {
                 }
                 public Builder setSocial(Social social) {
                     this.social = social;
+                    return this;
+                }
+                public Builder setWhatsapp(WhatsApp whatsapp) {
+                    this.whatsapp = whatsapp;
+                    return this;
+                }
+                public Builder setRcs(RCS rcs) {
+                    this.rcs = rcs;
                     return this;
                 }
                 public Builder setType(TypeEnum type) {
@@ -709,12 +722,14 @@ public class ScenariosApi {
             private String body;
             private String footer;
             private String type;
+            private OptOutOption optOutOption;
             private Attachments resources;
 
-            private Email(String body, String footer, String type, Attachments resources){
+            private Email(String body, String footer, String type, OptOutOption optOutOption, Attachments resources){
             this.body = body;
             this.footer = footer;
             this.type = type;
+            this.optOutOption = optOutOption;
             this.resources = resources;
             }
 
@@ -754,6 +769,9 @@ public class ScenariosApi {
                 }
 
             }
+            public OptOutOption getOptOutOption(){
+                return optOutOption;
+            }
             public Attachments getResources(){
                 return resources;
             }
@@ -766,6 +784,7 @@ public class ScenariosApi {
                 private String body;
                 private String footer;
                 private String type;
+                private OptOutOption optOutOption;
                 private Attachments resources;
 
                 public Email build() {
@@ -773,6 +792,7 @@ public class ScenariosApi {
                         this.body,
                         this.footer,
                         this.type,
+                        this.optOutOption,
                         this.resources
                     );
                 }
@@ -788,21 +808,30 @@ public class ScenariosApi {
                     this.type = type.getValue();
                     return this;
                 }
+                public Builder setOptOutOption(OptOutOption optOutOption) {
+                    this.optOutOption = optOutOption;
+                    return this;
+                }
                 public Builder setResources(Attachments resources) {
                     this.resources = resources;
                     return this;
                 }
             }
 
-            public static class Attachments {
-            private List<Attachment> attachments;
+            public static class OptOutOption {
+            private String rmsUnsubscribeUrl;
+            private String oneClickApiMapping;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private OptOutOption(String rmsUnsubscribeUrl, String oneClickApiMapping){
+            this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+            this.oneClickApiMapping = oneClickApiMapping;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public String getRmsUnsubscribeUrl(){
+                return rmsUnsubscribeUrl;
+            }
+            public String getOneClickApiMapping(){
+                return oneClickApiMapping;
             }
 
             public static Builder builder() {
@@ -810,26 +839,63 @@ public class ScenariosApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private String rmsUnsubscribeUrl;
+                private String oneClickApiMapping;
+
+                public OptOutOption build() {
+                    return new OptOutOption(
+                        this.rmsUnsubscribeUrl,
+                        this.oneClickApiMapping
+                    );
+                }
+                public Builder setRmsUnsubscribeUrl(String rmsUnsubscribeUrl) {
+                    this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+                    return this;
+                }
+                public Builder setOneClickApiMapping(String oneClickApiMapping) {
+                    this.oneClickApiMapping = oneClickApiMapping;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Attachments {
+            private List<Attachment> attachment;
+
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
+            }
+
+            public List<Attachment> getAttachment(){
+                return attachment;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -954,14 +1020,14 @@ public class ScenariosApi {
             }
 
             public static class Attachments {
-            private List<Attachment> attachments;
+            private List<Attachment> attachment;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public List<Attachment> getAttachment(){
+                return attachment;
             }
 
             public static Builder builder() {
@@ -969,26 +1035,26 @@ public class ScenariosApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -1268,13 +1334,1364 @@ public class ScenariosApi {
     }
 
         }
+        public static class WhatsApp {
+            private String type;
+            private String name;
+            private String language;
+            private List<String> parameters;
+            private WAContent content;
+
+            private WhatsApp(String type, String name, String language, List<String> parameters, WAContent content){
+            this.type = type;
+            this.name = name;
+            this.language = language;
+            this.parameters = parameters;
+            this.content = content;
+            }
+
+            public String getType(){
+                return type;
+            }
+            public enum TypeEnum {
+                TEMPLATE("template");
+                private String value;
+                TypeEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static TypeEnum fromValue(String value) {
+                    for (TypeEnum b : TypeEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public String getName(){
+                return name;
+            }
+            public String getLanguage(){
+                return language;
+            }
+            public List<String> getParameters(){
+                return parameters;
+            }
+            public WAContent getContent(){
+                return content;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String type;
+                private String name;
+                private String language;
+                private List<String> parameters;
+                private WAContent content;
+
+                public WhatsApp build() {
+                    return new WhatsApp(
+                        this.type,
+                        this.name,
+                        this.language,
+                        this.parameters,
+                        this.content
+                    );
+                }
+                public Builder setType(TypeEnum type) {
+                    this.type = type.getValue();
+                    return this;
+                }
+                public Builder setName(String name) {
+                    this.name = name;
+                    return this;
+                }
+                public Builder setLanguage(String language) {
+                    this.language = language;
+                    return this;
+                }
+                public Builder add( element) {
+                    if (this.parameters == null) {
+                            this.parameters = new ArrayList<>();
+                    }
+                    this.parameters.add(element);
+                    return this;
+                }
+
+                public Builder addAll(List<String> elements) {
+                    if (this.parameters == null) {
+                            this.parameters = new ArrayList<>();
+                    }
+                    this.parameters.addAll(elements);
+                    return this;
+                }
+                public Builder setContent(WAContent content) {
+                    this.content = content;
+                    return this;
+                }
+            }
+
+        public static class String {
+
+        private String(){
+        }
+
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+
+            public String build() {
+                return new String(
+                );
+            }
+        }
+
+    
+    }
+        public static class WAContent {
+            private WAContentHeader header;
+            private List<Object> body;
+            private List<WAContentButton> button;
+
+            private WAContent(WAContentHeader header, List<Object> body, List<WAContentButton> button){
+            this.header = header;
+            this.body = body;
+            this.button = button;
+            }
+
+            public WAContentHeader getHeader(){
+                return header;
+            }
+            public List<Object> getBody(){
+                return body;
+            }
+            public List<WAContentButton> getButton(){
+                return button;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private WAContentHeader header;
+                private List<Object> body;
+                private List<WAContentButton> button;
+
+                public WAContent build() {
+                    return new WAContent(
+                        this.header,
+                        this.body,
+                        this.button
+                    );
+                }
+                public Builder setHeader(WAContentHeader header) {
+                    this.header = header;
+                    return this;
+                }
+                public Builder add( element) {
+                    if (this.body == null) {
+                            this.body = new ArrayList<>();
+                    }
+                    this.body.add(element);
+                    return this;
+                }
+
+                public Builder addAll(List<Object> elements) {
+                    if (this.body == null) {
+                            this.body = new ArrayList<>();
+                    }
+                    this.body.addAll(elements);
+                    return this;
+                }
+                public Builder addWAContentButton(WAContentButton element) {
+                    if (this.button == null) {
+                            this.button = new ArrayList<>();
+                    }
+                    this.button.add(element);
+                    return this;
+                }
+
+                public Builder addAllWAContentButton(List<WAContentButton> elements) {
+                    if (this.button == null) {
+                            this.button = new ArrayList<>();
+                    }
+                    this.button.addAll(elements);
+                    return this;
+                }
+            }
+
+            public static class WAContentHeader {
+            private ModelObject image;
+            private Object1 video;
+            private Object2 document;
+            private Object3 location;
+
+            private WAContentHeader(ModelObject image, Object1 video, Object2 document, Object3 location){
+            this.image = image;
+            this.video = video;
+            this.document = document;
+            this.location = location;
+            }
+
+            public ModelObject getImage(){
+                return image;
+            }
+            public Object1 getVideo(){
+                return video;
+            }
+            public Object2 getDocument(){
+                return document;
+            }
+            public Object3 getLocation(){
+                return location;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private ModelObject image;
+                private Object1 video;
+                private Object2 document;
+                private Object3 location;
+
+                public WAContentHeader build() {
+                    return new WAContentHeader(
+                        this.image,
+                        this.video,
+                        this.document,
+                        this.location
+                    );
+                }
+                public Builder setImage(ModelObject image) {
+                    this.image = image;
+                    return this;
+                }
+                public Builder setVideo(Object1 video) {
+                    this.video = video;
+                    return this;
+                }
+                public Builder setDocument(Object2 document) {
+                    this.document = document;
+                    return this;
+                }
+                public Builder setLocation(Object3 location) {
+                    this.location = location;
+                    return this;
+                }
+            }
+
+            public static class ModelObject {
+
+            private ModelObject(){
+            }
+
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+
+                public ModelObject build() {
+                    return new ModelObject(
+                    );
+                }
+            }
+
+    
+        }
+        public static class Object1 {
+            private String link;
+
+            private Object1(String link){
+            this.link = link;
+            }
+
+            public String getLink(){
+                return link;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String link;
+
+                public Object1 build() {
+                    return new Object1(
+                        this.link
+                    );
+                }
+                public Builder setLink(String link) {
+                    this.link = link;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Object2 {
+            private String link;
+
+            private Object2(String link){
+            this.link = link;
+            }
+
+            public String getLink(){
+                return link;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String link;
+
+                public Object2 build() {
+                    return new Object2(
+                        this.link
+                    );
+                }
+                public Builder setLink(String link) {
+                    this.link = link;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Object3 {
+            private BigDecimal longitude;
+            private BigDecimal latitude;
+            private String name;
+            private String address;
+
+            private Object3(BigDecimal longitude, BigDecimal latitude, String name, String address){
+            this.longitude = longitude;
+            this.latitude = latitude;
+            this.name = name;
+            this.address = address;
+            }
+
+            public BigDecimal getLongitude(){
+                return longitude;
+            }
+            public BigDecimal getLatitude(){
+                return latitude;
+            }
+            public String getName(){
+                return name;
+            }
+            public String getAddress(){
+                return address;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private BigDecimal longitude;
+                private BigDecimal latitude;
+                private String name;
+                private String address;
+
+                public Object3 build() {
+                    return new Object3(
+                        this.longitude,
+                        this.latitude,
+                        this.name,
+                        this.address
+                    );
+                }
+                public Builder setLongitude(BigDecimal longitude) {
+                    this.longitude = longitude;
+                    return this;
+                }
+                public Builder setLatitude(BigDecimal latitude) {
+                    this.latitude = latitude;
+                    return this;
+                }
+                public Builder setName(String name) {
+                    this.name = name;
+                    return this;
+                }
+                public Builder setAddress(String address) {
+                    this.address = address;
+                    return this;
+                }
+            }
+
+    
+        }
+
+        }
+    public static class Object {
+
+        private Object(){
+        }
+
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+
+            public Object build() {
+                return new Object(
+                );
+            }
+        }
+
+    
+    }
+    public static class WAContentButton {
+        private String index;
+        private String sub_type;
+        private String text;
+        private String payload;
+
+        private WAContentButton(String index,String sub_type,String text,String payload){
+            this.index = index;
+            this.sub_type = sub_type;
+            this.text = text;
+            this.payload = payload;
+        }
+
+        public String getIndex(){
+            return index;
+        }
+        public String getSubType(){
+            return sub_type;
+        }
+            public enum SubTypeEnum {
+                QUICK_REPLY("quick_reply"),
+                URL("url");
+                SubTypeEnum(String value){
+                    this.value = value;
+                }
+
+                private String value;
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static SubTypeEnum fromValue(String value) {
+                    for (SubTypeEnum b : SubTypeEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+        public String getText(){
+            return text;
+        }
+        public String getPayload(){
+            return payload;
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+            private String index;
+            private String sub_type;
+            private String text;
+            private String payload;
+
+            public WAContentButton build() {
+                return new WAContentButton(
+                   this.index,
+                   this.sub_type,
+                   this.text,
+                   this.payload
+                );
+            }
+            public Builder setIndex(String index) {
+                this.index = index;
+                return this;
+            }
+            public Builder setSubType(SubTypeEnum sub_type) {
+                this.sub_type = sub_type.getValue();
+                return this;
+            }
+            public Builder setText(String text) {
+                this.text = text;
+                return this;
+            }
+            public Builder setPayload(String payload) {
+                this.payload = payload;
+                return this;
+            }
+        }
+
+    
+    }
+
+        }
+
+        }
+        public static class RCS {
+            private String text;
+            private RCSMedia media;
+            private RCSRichCard richCard;
+            private List<RCSSuggestion> suggestions;
+
+            private RCS(String text, RCSMedia media, RCSRichCard richCard, List<RCSSuggestion> suggestions){
+            this.text = text;
+            this.media = media;
+            this.richCard = richCard;
+            this.suggestions = suggestions;
+            }
+
+            public String getText(){
+                return text;
+            }
+            public RCSMedia getMedia(){
+                return media;
+            }
+            public RCSRichCard getRichCard(){
+                return richCard;
+            }
+            public List<RCSSuggestion> getSuggestions(){
+                return suggestions;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String text;
+                private RCSMedia media;
+                private RCSRichCard richCard;
+                private List<RCSSuggestion> suggestions;
+
+                public RCS build() {
+                    return new RCS(
+                        this.text,
+                        this.media,
+                        this.richCard,
+                        this.suggestions
+                    );
+                }
+                public Builder setText(String text) {
+                    this.text = text;
+                    return this;
+                }
+                public Builder setMedia(RCSMedia media) {
+                    this.media = media;
+                    return this;
+                }
+                public Builder setRichCard(RCSRichCard richCard) {
+                    this.richCard = richCard;
+                    return this;
+                }
+                public Builder addRCSSuggestion(RCSSuggestion element) {
+                    if (this.suggestions == null) {
+                            this.suggestions = new ArrayList<>();
+                    }
+                    this.suggestions.add(element);
+                    return this;
+                }
+
+                public Builder addAllRCSSuggestion(List<RCSSuggestion> elements) {
+                    if (this.suggestions == null) {
+                            this.suggestions = new ArrayList<>();
+                    }
+                    this.suggestions.addAll(elements);
+                    return this;
+                }
+            }
+
+            public static class RCSMedia {
+            private String fileUrl;
+            private String height;
+
+            private RCSMedia(String fileUrl, String height){
+            this.fileUrl = fileUrl;
+            this.height = height;
+            }
+
+            public String getFileUrl(){
+                return fileUrl;
+            }
+            public String getHeight(){
+                return height;
+            }
+            public enum HeightEnum {
+                SHORT("SHORT"),
+                MEDIUM("MEDIUM"),
+                TALL("TALL");
+                private String value;
+                HeightEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static HeightEnum fromValue(String value) {
+                    for (HeightEnum b : HeightEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String fileUrl;
+                private String height;
+
+                public RCSMedia build() {
+                    return new RCSMedia(
+                        this.fileUrl,
+                        this.height
+                    );
+                }
+                public Builder setFileUrl(String fileUrl) {
+                    this.fileUrl = fileUrl;
+                    return this;
+                }
+                public Builder setHeight(HeightEnum height) {
+                    this.height = height.getValue();
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSRichCard {
+            private String cardOrientation;
+            private String cardWidth;
+            private List<RCSCard> cards;
+
+            private RCSRichCard(String cardOrientation, String cardWidth, List<RCSCard> cards){
+            this.cardOrientation = cardOrientation;
+            this.cardWidth = cardWidth;
+            this.cards = cards;
+            }
+
+            public String getCardOrientation(){
+                return cardOrientation;
+            }
+            public enum CardOrientationEnum {
+                VERTICAL("VERTICAL"),
+                HORIZONTAL("HORIZONTAL");
+                private String value;
+                CardOrientationEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static CardOrientationEnum fromValue(String value) {
+                    for (CardOrientationEnum b : CardOrientationEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public String getCardWidth(){
+                return cardWidth;
+            }
+            public enum CardWidthEnum {
+                SMALL("SMALL"),
+                MEDIUM("MEDIUM");
+                private String value;
+                CardWidthEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static CardWidthEnum fromValue(String value) {
+                    for (CardWidthEnum b : CardWidthEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public List<RCSCard> getCards(){
+                return cards;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String cardOrientation;
+                private String cardWidth;
+                private List<RCSCard> cards;
+
+                public RCSRichCard build() {
+                    return new RCSRichCard(
+                        this.cardOrientation,
+                        this.cardWidth,
+                        this.cards
+                    );
+                }
+                public Builder setCardOrientation(CardOrientationEnum cardOrientation) {
+                    this.cardOrientation = cardOrientation.getValue();
+                    return this;
+                }
+                public Builder setCardWidth(CardWidthEnum cardWidth) {
+                    this.cardWidth = cardWidth.getValue();
+                    return this;
+                }
+                public Builder addRCSCard(RCSCard element) {
+                    if (this.cards == null) {
+                            this.cards = new ArrayList<>();
+                    }
+                    this.cards.add(element);
+                    return this;
+                }
+
+                public Builder addAllRCSCard(List<RCSCard> elements) {
+                    if (this.cards == null) {
+                            this.cards = new ArrayList<>();
+                    }
+                    this.cards.addAll(elements);
+                    return this;
+                }
+            }
+
+        public static class RCSCard {
+        private String title;
+        private String description;
+        private RCSMedia media;
+        private List<RCSSuggestion> suggestions;
+
+        private RCSCard(String title,String description,RCSMedia media,List<RCSSuggestion> suggestions){
+            this.title = title;
+            this.description = description;
+            this.media = media;
+            this.suggestions = suggestions;
+        }
+
+        public String getTitle(){
+            return title;
+        }
+        public String getDescription(){
+            return description;
+        }
+        public RCSMedia getMedia(){
+            return media;
+        }
+        public List<RCSSuggestion> getSuggestions(){
+            return suggestions;
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+            private String title;
+            private String description;
+            private RCSMedia media;
+            private List<RCSSuggestion> suggestions;
+
+            public RCSCard build() {
+                return new RCSCard(
+                   this.title,
+                   this.description,
+                   this.media,
+                   this.suggestions
+                );
+            }
+            public Builder setTitle(String title) {
+                this.title = title;
+                return this;
+            }
+            public Builder setDescription(String description) {
+                this.description = description;
+                return this;
+            }
+            public Builder setMedia(RCSMedia media) {
+                this.media = media;
+                return this;
+            }
+            public Builder setSuggestions(List<RCSSuggestion> suggestions) {
+                this.suggestions = suggestions;
+                return this;
+            }
+        }
+
+            public static class RCSMedia {
+            private String fileUrl;
+            private String height;
+
+            private RCSMedia(String fileUrl, String height){
+            this.fileUrl = fileUrl;
+            this.height = height;
+            }
+
+            public String getFileUrl(){
+                return fileUrl;
+            }
+            public String getHeight(){
+                return height;
+            }
+            public enum HeightEnum {
+                SHORT("SHORT"),
+                MEDIUM("MEDIUM"),
+                TALL("TALL");
+                private String value;
+                HeightEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static HeightEnum fromValue(String value) {
+                    for (HeightEnum b : HeightEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String fileUrl;
+                private String height;
+
+                public RCSMedia build() {
+                    return new RCSMedia(
+                        this.fileUrl,
+                        this.height
+                    );
+                }
+                public Builder setFileUrl(String fileUrl) {
+                    this.fileUrl = fileUrl;
+                    return this;
+                }
+                public Builder setHeight(HeightEnum height) {
+                    this.height = height.getValue();
+                    return this;
+                }
+            }
+
+    
+        }
+    public static class RCSSuggestion {
+        private String text;
+        private String postbackData;
+        private RCSSuggestionUrlAction urlAction;
+        private RCSSuggestionDialAction dialAction;
+        private Object shareLocationAction;
+        private RCSSuggestionViewLocationAction viewLocationAction;
+
+        private RCSSuggestion(String text,String postbackData,RCSSuggestionUrlAction urlAction,RCSSuggestionDialAction dialAction,Object shareLocationAction,RCSSuggestionViewLocationAction viewLocationAction){
+            this.text = text;
+            this.postbackData = postbackData;
+            this.urlAction = urlAction;
+            this.dialAction = dialAction;
+            this.shareLocationAction = shareLocationAction;
+            this.viewLocationAction = viewLocationAction;
+        }
+
+        public String getText(){
+            return text;
+        }
+        public String getPostbackData(){
+            return postbackData;
+        }
+        public RCSSuggestionUrlAction getUrlAction(){
+            return urlAction;
+        }
+        public RCSSuggestionDialAction getDialAction(){
+            return dialAction;
+        }
+        public Object getShareLocationAction(){
+            return shareLocationAction;
+        }
+        public RCSSuggestionViewLocationAction getViewLocationAction(){
+            return viewLocationAction;
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+            private String text;
+            private String postbackData;
+            private RCSSuggestionUrlAction urlAction;
+            private RCSSuggestionDialAction dialAction;
+            private Object shareLocationAction;
+            private RCSSuggestionViewLocationAction viewLocationAction;
+
+            public RCSSuggestion build() {
+                return new RCSSuggestion(
+                   this.text,
+                   this.postbackData,
+                   this.urlAction,
+                   this.dialAction,
+                   this.shareLocationAction,
+                   this.viewLocationAction
+                );
+            }
+            public Builder setText(String text) {
+                this.text = text;
+                return this;
+            }
+            public Builder setPostbackData(String postbackData) {
+                this.postbackData = postbackData;
+                return this;
+            }
+            public Builder setUrlAction(RCSSuggestionUrlAction urlAction) {
+                this.urlAction = urlAction;
+                return this;
+            }
+            public Builder setDialAction(RCSSuggestionDialAction dialAction) {
+                this.dialAction = dialAction;
+                return this;
+            }
+            public Builder setShareLocationAction(Object shareLocationAction) {
+                this.shareLocationAction = shareLocationAction;
+                return this;
+            }
+            public Builder setViewLocationAction(RCSSuggestionViewLocationAction viewLocationAction) {
+                this.viewLocationAction = viewLocationAction;
+                return this;
+            }
+        }
+
+            public static class RCSSuggestionUrlAction {
+            private String url;
+
+            private RCSSuggestionUrlAction(String url){
+            this.url = url;
+            }
+
+            public String getUrl(){
+                return url;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String url;
+
+                public RCSSuggestionUrlAction build() {
+                    return new RCSSuggestionUrlAction(
+                        this.url
+                    );
+                }
+                public Builder setUrl(String url) {
+                    this.url = url;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSSuggestionDialAction {
+            private String phoneNumber;
+
+            private RCSSuggestionDialAction(String phoneNumber){
+            this.phoneNumber = phoneNumber;
+            }
+
+            public String getPhoneNumber(){
+                return phoneNumber;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String phoneNumber;
+
+                public RCSSuggestionDialAction build() {
+                    return new RCSSuggestionDialAction(
+                        this.phoneNumber
+                    );
+                }
+                public Builder setPhoneNumber(String phoneNumber) {
+                    this.phoneNumber = phoneNumber;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSSuggestionViewLocationAction {
+            private BigDecimal latitude;
+            private BigDecimal longitude;
+            private String label;
+            private String query;
+
+            private RCSSuggestionViewLocationAction(BigDecimal latitude, BigDecimal longitude, String label, String query){
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.label = label;
+            this.query = query;
+            }
+
+            public BigDecimal getLatitude(){
+                return latitude;
+            }
+            public BigDecimal getLongitude(){
+                return longitude;
+            }
+            public String getLabel(){
+                return label;
+            }
+            public String getQuery(){
+                return query;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private BigDecimal latitude;
+                private BigDecimal longitude;
+                private String label;
+                private String query;
+
+                public RCSSuggestionViewLocationAction build() {
+                    return new RCSSuggestionViewLocationAction(
+                        this.latitude,
+                        this.longitude,
+                        this.label,
+                        this.query
+                    );
+                }
+                public Builder setLatitude(BigDecimal latitude) {
+                    this.latitude = latitude;
+                    return this;
+                }
+                public Builder setLongitude(BigDecimal longitude) {
+                    this.longitude = longitude;
+                    return this;
+                }
+                public Builder setLabel(String label) {
+                    this.label = label;
+                    return this;
+                }
+                public Builder setQuery(String query) {
+                    this.query = query;
+                    return this;
+                }
+            }
+
+    
+        }
+
+    }
+
+    }
+
+        }
+    public static class RCSSuggestion {
+        private String text;
+        private String postbackData;
+        private RCSSuggestionUrlAction urlAction;
+        private RCSSuggestionDialAction dialAction;
+        private Object shareLocationAction;
+        private RCSSuggestionViewLocationAction viewLocationAction;
+
+        private RCSSuggestion(String text,String postbackData,RCSSuggestionUrlAction urlAction,RCSSuggestionDialAction dialAction,Object shareLocationAction,RCSSuggestionViewLocationAction viewLocationAction){
+            this.text = text;
+            this.postbackData = postbackData;
+            this.urlAction = urlAction;
+            this.dialAction = dialAction;
+            this.shareLocationAction = shareLocationAction;
+            this.viewLocationAction = viewLocationAction;
+        }
+
+        public String getText(){
+            return text;
+        }
+        public String getPostbackData(){
+            return postbackData;
+        }
+        public RCSSuggestionUrlAction getUrlAction(){
+            return urlAction;
+        }
+        public RCSSuggestionDialAction getDialAction(){
+            return dialAction;
+        }
+        public Object getShareLocationAction(){
+            return shareLocationAction;
+        }
+        public RCSSuggestionViewLocationAction getViewLocationAction(){
+            return viewLocationAction;
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+            private String text;
+            private String postbackData;
+            private RCSSuggestionUrlAction urlAction;
+            private RCSSuggestionDialAction dialAction;
+            private Object shareLocationAction;
+            private RCSSuggestionViewLocationAction viewLocationAction;
+
+            public RCSSuggestion build() {
+                return new RCSSuggestion(
+                   this.text,
+                   this.postbackData,
+                   this.urlAction,
+                   this.dialAction,
+                   this.shareLocationAction,
+                   this.viewLocationAction
+                );
+            }
+            public Builder setText(String text) {
+                this.text = text;
+                return this;
+            }
+            public Builder setPostbackData(String postbackData) {
+                this.postbackData = postbackData;
+                return this;
+            }
+            public Builder setUrlAction(RCSSuggestionUrlAction urlAction) {
+                this.urlAction = urlAction;
+                return this;
+            }
+            public Builder setDialAction(RCSSuggestionDialAction dialAction) {
+                this.dialAction = dialAction;
+                return this;
+            }
+            public Builder setShareLocationAction(Object shareLocationAction) {
+                this.shareLocationAction = shareLocationAction;
+                return this;
+            }
+            public Builder setViewLocationAction(RCSSuggestionViewLocationAction viewLocationAction) {
+                this.viewLocationAction = viewLocationAction;
+                return this;
+            }
+        }
+
+            public static class RCSSuggestionUrlAction {
+            private String url;
+
+            private RCSSuggestionUrlAction(String url){
+            this.url = url;
+            }
+
+            public String getUrl(){
+                return url;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String url;
+
+                public RCSSuggestionUrlAction build() {
+                    return new RCSSuggestionUrlAction(
+                        this.url
+                    );
+                }
+                public Builder setUrl(String url) {
+                    this.url = url;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSSuggestionDialAction {
+            private String phoneNumber;
+
+            private RCSSuggestionDialAction(String phoneNumber){
+            this.phoneNumber = phoneNumber;
+            }
+
+            public String getPhoneNumber(){
+                return phoneNumber;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String phoneNumber;
+
+                public RCSSuggestionDialAction build() {
+                    return new RCSSuggestionDialAction(
+                        this.phoneNumber
+                    );
+                }
+                public Builder setPhoneNumber(String phoneNumber) {
+                    this.phoneNumber = phoneNumber;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSSuggestionViewLocationAction {
+            private BigDecimal latitude;
+            private BigDecimal longitude;
+            private String label;
+            private String query;
+
+            private RCSSuggestionViewLocationAction(BigDecimal latitude, BigDecimal longitude, String label, String query){
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.label = label;
+            this.query = query;
+            }
+
+            public BigDecimal getLatitude(){
+                return latitude;
+            }
+            public BigDecimal getLongitude(){
+                return longitude;
+            }
+            public String getLabel(){
+                return label;
+            }
+            public String getQuery(){
+                return query;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private BigDecimal latitude;
+                private BigDecimal longitude;
+                private String label;
+                private String query;
+
+                public RCSSuggestionViewLocationAction build() {
+                    return new RCSSuggestionViewLocationAction(
+                        this.latitude,
+                        this.longitude,
+                        this.label,
+                        this.query
+                    );
+                }
+                public Builder setLatitude(BigDecimal latitude) {
+                    this.latitude = latitude;
+                    return this;
+                }
+                public Builder setLongitude(BigDecimal longitude) {
+                    this.longitude = longitude;
+                    return this;
+                }
+                public Builder setLabel(String label) {
+                    this.label = label;
+                    return this;
+                }
+                public Builder setQuery(String query) {
+                    this.query = query;
+                    return this;
+                }
+            }
+
+    
+        }
+
+    }
+
+        }
         public static class Features {
             private PushOptions pushOptions;
             private AliasOption aliasOption;
+            private FeaturesFallback fallback;
 
-            private Features(PushOptions pushOptions, AliasOption aliasOption){
+            private Features(PushOptions pushOptions, AliasOption aliasOption, FeaturesFallback fallback){
             this.pushOptions = pushOptions;
             this.aliasOption = aliasOption;
+            this.fallback = fallback;
             }
 
             public PushOptions getPushOptions(){
@@ -1282,6 +2699,9 @@ public class ScenariosApi {
             }
             public AliasOption getAliasOption(){
                 return aliasOption;
+            }
+            public FeaturesFallback getFallback(){
+                return fallback;
             }
 
             public static Builder builder() {
@@ -1291,11 +2711,13 @@ public class ScenariosApi {
             public static class Builder {
                 private PushOptions pushOptions;
                 private AliasOption aliasOption;
+                private FeaturesFallback fallback;
 
                 public Features build() {
                     return new Features(
                         this.pushOptions,
-                        this.aliasOption
+                        this.aliasOption,
+                        this.fallback
                     );
                 }
                 public Builder setPushOptions(PushOptions pushOptions) {
@@ -1304,6 +2726,10 @@ public class ScenariosApi {
                 }
                 public Builder setAliasOption(AliasOption aliasOption) {
                     this.aliasOption = aliasOption;
+                    return this;
+                }
+                public Builder setFallback(FeaturesFallback fallback) {
+                    this.fallback = fallback;
                     return this;
                 }
             }
@@ -1596,6 +3022,74 @@ public class ScenariosApi {
 
     
         }
+        public static class FeaturesFallback {
+            private String channel;
+            private String templateName;
+
+            private FeaturesFallback(String channel, String templateName){
+            this.channel = channel;
+            this.templateName = templateName;
+            }
+
+            public String getChannel(){
+                return channel;
+            }
+            public enum ChannelEnum {
+                SMS("SMS");
+                private String value;
+                ChannelEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static ChannelEnum fromValue(String value) {
+                    for (ChannelEnum b : ChannelEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public String getTemplateName(){
+                return templateName;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String channel;
+                private String templateName;
+
+                public FeaturesFallback build() {
+                    return new FeaturesFallback(
+                        this.channel,
+                        this.templateName
+                    );
+                }
+                public Builder setChannel(ChannelEnum channel) {
+                    this.channel = channel.getValue();
+                    return this;
+                }
+                public Builder setTemplateName(String templateName) {
+                    this.templateName = templateName;
+                    return this;
+                }
+            }
+
+    
+        }
 
         }
         public static class Resource {
@@ -1715,12 +3209,14 @@ public class ScenariosApi {
             private String body;
             private String footer;
             private String type;
+            private OptOutOption optOutOption;
             private Attachments resources;
 
-            private Email(String body, String footer, String type, Attachments resources){
+            private Email(String body, String footer, String type, OptOutOption optOutOption, Attachments resources){
             this.body = body;
             this.footer = footer;
             this.type = type;
+            this.optOutOption = optOutOption;
             this.resources = resources;
             }
 
@@ -1760,6 +3256,9 @@ public class ScenariosApi {
                 }
 
             }
+            public OptOutOption getOptOutOption(){
+                return optOutOption;
+            }
             public Attachments getResources(){
                 return resources;
             }
@@ -1772,6 +3271,7 @@ public class ScenariosApi {
                 private String body;
                 private String footer;
                 private String type;
+                private OptOutOption optOutOption;
                 private Attachments resources;
 
                 public Email build() {
@@ -1779,6 +3279,7 @@ public class ScenariosApi {
                         this.body,
                         this.footer,
                         this.type,
+                        this.optOutOption,
                         this.resources
                     );
                 }
@@ -1794,21 +3295,30 @@ public class ScenariosApi {
                     this.type = type.getValue();
                     return this;
                 }
+                public Builder setOptOutOption(OptOutOption optOutOption) {
+                    this.optOutOption = optOutOption;
+                    return this;
+                }
                 public Builder setResources(Attachments resources) {
                     this.resources = resources;
                     return this;
                 }
             }
 
-            public static class Attachments {
-            private List<Attachment> attachments;
+            public static class OptOutOption {
+            private String rmsUnsubscribeUrl;
+            private String oneClickApiMapping;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private OptOutOption(String rmsUnsubscribeUrl, String oneClickApiMapping){
+            this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+            this.oneClickApiMapping = oneClickApiMapping;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public String getRmsUnsubscribeUrl(){
+                return rmsUnsubscribeUrl;
+            }
+            public String getOneClickApiMapping(){
+                return oneClickApiMapping;
             }
 
             public static Builder builder() {
@@ -1816,26 +3326,63 @@ public class ScenariosApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private String rmsUnsubscribeUrl;
+                private String oneClickApiMapping;
+
+                public OptOutOption build() {
+                    return new OptOutOption(
+                        this.rmsUnsubscribeUrl,
+                        this.oneClickApiMapping
+                    );
+                }
+                public Builder setRmsUnsubscribeUrl(String rmsUnsubscribeUrl) {
+                    this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+                    return this;
+                }
+                public Builder setOneClickApiMapping(String oneClickApiMapping) {
+                    this.oneClickApiMapping = oneClickApiMapping;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Attachments {
+            private List<Attachment> attachment;
+
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
+            }
+
+            public List<Attachment> getAttachment(){
+                return attachment;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -1960,14 +3507,14 @@ public class ScenariosApi {
             }
 
             public static class Attachments {
-            private List<Attachment> attachments;
+            private List<Attachment> attachment;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public List<Attachment> getAttachment(){
+                return attachment;
             }
 
             public static Builder builder() {
@@ -1975,26 +3522,26 @@ public class ScenariosApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -2279,15 +3826,13 @@ public class ScenariosApi {
 
     public static class ScenarioCreateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final Scenario scenario;
         ApiResponse _lastResponse;
 
-        private ScenarioCreateRequest(String workspaceId, String xApiKey, String contentType, String accept, Scenario scenario) {
+        private ScenarioCreateRequest(String workspaceId, String contentType, String accept, Scenario scenario) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.scenario = scenario;
@@ -2300,7 +3845,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return scenarioCreateCall(workspaceId, xApiKey, contentType, accept, scenario, _callback);
+            return scenarioCreateCall(workspaceId, contentType, accept, scenario, _callback);
         }
 
         /**
@@ -2308,7 +3853,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            scenarioCreateWithHttpInfo(workspaceId, xApiKey, contentType, accept, scenario);
+            scenarioCreateWithHttpInfo(workspaceId, contentType, accept, scenario);
         }
         /**
          * Return the last executed API response
@@ -2326,7 +3871,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return scenarioCreateAsync(workspaceId, xApiKey, contentType, accept, scenario, _callback);
+            return scenarioCreateAsync(workspaceId, contentType, accept, scenario, _callback);
         }
     }
 
@@ -2395,7 +3940,6 @@ public class ScenariosApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.scenario-v1+json";
 
         String accept = "application/vnd.whispir.scenario-v1+json";
@@ -2448,13 +3992,13 @@ public class ScenariosApi {
         Object socialValue = params.getSocial();
         scenario.setSocial((com.whispir.model.Social) socialValue);
 
-        ScenarioCreateRequest request = new ScenarioCreateRequest(workspaceId, xApiKey, contentType, accept, scenario);
+        ScenarioCreateRequest request = new ScenarioCreateRequest(workspaceId, contentType, accept, scenario);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call scenarioDeleteCall(String workspaceId, String xApiKey, String scenarioId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioDeleteCall(String workspaceId, String scenarioId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -2473,10 +4017,6 @@ public class ScenariosApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         final String[] localVarAccepts = {
             "application/json"
@@ -2498,15 +4038,10 @@ public class ScenariosApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call scenarioDeleteValidateBeforeCall(String workspaceId, String xApiKey, String scenarioId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioDeleteValidateBeforeCall(String workspaceId, String scenarioId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling scenarioDelete(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling scenarioDelete(Async)");
         }
 
         // verify the required parameter 'scenarioId' is set
@@ -2514,16 +4049,16 @@ public class ScenariosApi {
             throw new ApiException("Missing the required parameter 'scenarioId' when calling scenarioDelete(Async)");
         }
 
-        return scenarioDeleteCall(workspaceId, xApiKey, scenarioId, _callback);
+        return scenarioDeleteCall(workspaceId, scenarioId, _callback);
     }
 
-    private static ApiResponse<Void> scenarioDeleteWithHttpInfo(String workspaceId, String xApiKey, String scenarioId) throws ApiException {
-        okhttp3.Call localVarCall = scenarioDeleteCall(workspaceId, xApiKey, scenarioId, null);
+    private static ApiResponse<Void> scenarioDeleteWithHttpInfo(String workspaceId, String scenarioId) throws ApiException {
+        okhttp3.Call localVarCall = scenarioDeleteCall(workspaceId, scenarioId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call scenarioDeleteAsync(String workspaceId, String xApiKey, String scenarioId, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = scenarioDeleteValidateBeforeCall(workspaceId, xApiKey, scenarioId, _callback);
+    private static okhttp3.Call scenarioDeleteAsync(String workspaceId, String scenarioId, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = scenarioDeleteValidateBeforeCall(workspaceId, scenarioId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -2575,13 +4110,11 @@ public class ScenariosApi {
 
     public static class ScenarioDeleteRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String scenarioId;
         ApiResponse _lastResponse;
 
-        private ScenarioDeleteRequest(String workspaceId, String xApiKey, String scenarioId) {
+        private ScenarioDeleteRequest(String workspaceId, String scenarioId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.scenarioId = scenarioId;
         }
 
@@ -2592,7 +4125,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return scenarioDeleteCall(workspaceId, xApiKey, scenarioId, _callback);
+            return scenarioDeleteCall(workspaceId, scenarioId, _callback);
         }
 
         /**
@@ -2600,7 +4133,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            scenarioDeleteWithHttpInfo(workspaceId, xApiKey, scenarioId);
+            scenarioDeleteWithHttpInfo(workspaceId, scenarioId);
         }
         /**
          * Return the last executed API response
@@ -2618,7 +4151,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return scenarioDeleteAsync(workspaceId, xApiKey, scenarioId, _callback);
+            return scenarioDeleteAsync(workspaceId, scenarioId, _callback);
         }
     }
 
@@ -2639,7 +4172,6 @@ public class ScenariosApi {
         if(scenarioId == null || scenarioId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'scenarioId'");
         }
-        ScenarioDeleteParams tempParams = ScenarioDeleteParams.builder()
             .setWorkspaceId(workspaceId)
             .setScenarioId(scenarioId).build();
 
@@ -2661,19 +4193,18 @@ public class ScenariosApi {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
 
-
         String scenarioId = params.getScenarioId();
 
         if(scenarioId == null || scenarioId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'scenarioId'");
         }
-        ScenarioDeleteRequest request = new ScenarioDeleteRequest(workspaceId, xApiKey, scenarioId);
+        ScenarioDeleteRequest request = new ScenarioDeleteRequest(workspaceId, scenarioId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call scenarioListCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioListCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -2708,10 +4239,6 @@ public class ScenariosApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortFields", sortFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -2737,15 +4264,10 @@ public class ScenariosApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call scenarioListValidateBeforeCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioListValidateBeforeCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling scenarioList(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling scenarioList(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -2753,17 +4275,17 @@ public class ScenariosApi {
             throw new ApiException("Missing the required parameter 'accept' when calling scenarioList(Async)");
         }
 
-        return scenarioListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+        return scenarioListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
     }
 
-    private static ApiResponse<ScenarioCollection> scenarioListWithHttpInfo(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
-        okhttp3.Call localVarCall = scenarioListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, null);
+    private static ApiResponse<ScenarioCollection> scenarioListWithHttpInfo(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
+        okhttp3.Call localVarCall = scenarioListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, null);
         Type localVarReturnType = new TypeToken<ScenarioCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call scenarioListAsync(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<ScenarioCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = scenarioListValidateBeforeCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+    private static okhttp3.Call scenarioListAsync(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<ScenarioCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = scenarioListValidateBeforeCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         Type localVarReturnType = new TypeToken<ScenarioCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2852,7 +4374,6 @@ public class ScenariosApi {
 
     public static class ScenarioListRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -2860,9 +4381,8 @@ public class ScenariosApi {
         private String sortFields;
         ApiResponse _lastResponse;
 
-        private ScenarioListRequest(String workspaceId, String xApiKey, String accept) {
+        private ScenarioListRequest(String workspaceId, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
         }
 
@@ -2913,7 +4433,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return scenarioListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return scenarioListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
 
         /**
@@ -2922,7 +4442,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public ScenarioCollection execute() throws ApiException {
-            ApiResponse<ScenarioCollection> localVarResp = scenarioListWithHttpInfo(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+            ApiResponse<ScenarioCollection> localVarResp = scenarioListWithHttpInfo(workspaceId, accept, limit, offset, sortOrder, sortFields);
             _lastResponse = localVarResp;
             ScenarioCollection data = localVarResp.getData();
 
@@ -2946,7 +4466,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<ScenarioCollection> _callback) throws ApiException {
-            return scenarioListAsync(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return scenarioListAsync(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
     }
 
@@ -3002,10 +4522,9 @@ public class ScenariosApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.scenario-v1+json";
 
-        ScenarioListRequest request = new ScenarioListRequest(workspaceId, xApiKey, accept);
+        ScenarioListRequest request = new ScenarioListRequest(workspaceId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -3027,7 +4546,7 @@ public class ScenariosApi {
 
         return request.execute();
     }
-    private static okhttp3.Call scenarioRetrieveCall(String workspaceId, String xApiKey, String accept, String scenarioId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioRetrieveCall(String workspaceId, String accept, String scenarioId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -3046,10 +4565,6 @@ public class ScenariosApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -3076,15 +4591,10 @@ public class ScenariosApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call scenarioRetrieveValidateBeforeCall(String workspaceId, String xApiKey, String accept, String scenarioId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioRetrieveValidateBeforeCall(String workspaceId, String accept, String scenarioId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling scenarioRetrieve(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling scenarioRetrieve(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -3097,17 +4607,17 @@ public class ScenariosApi {
             throw new ApiException("Missing the required parameter 'scenarioId' when calling scenarioRetrieve(Async)");
         }
 
-        return scenarioRetrieveCall(workspaceId, xApiKey, accept, scenarioId, _callback);
+        return scenarioRetrieveCall(workspaceId, accept, scenarioId, _callback);
     }
 
-    private static ApiResponse<Scenario> scenarioRetrieveWithHttpInfo(String workspaceId, String xApiKey, String accept, String scenarioId) throws ApiException {
-        okhttp3.Call localVarCall = scenarioRetrieveCall(workspaceId, xApiKey, accept, scenarioId, null);
+    private static ApiResponse<Scenario> scenarioRetrieveWithHttpInfo(String workspaceId, String accept, String scenarioId) throws ApiException {
+        okhttp3.Call localVarCall = scenarioRetrieveCall(workspaceId, accept, scenarioId, null);
         Type localVarReturnType = new TypeToken<Scenario>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call scenarioRetrieveAsync(String workspaceId, String xApiKey, String accept, String scenarioId, final ApiCallback<Scenario> _callback) throws ApiException {
-        okhttp3.Call localVarCall = scenarioRetrieveValidateBeforeCall(workspaceId, xApiKey, accept, scenarioId, _callback);
+    private static okhttp3.Call scenarioRetrieveAsync(String workspaceId, String accept, String scenarioId, final ApiCallback<Scenario> _callback) throws ApiException {
+        okhttp3.Call localVarCall = scenarioRetrieveValidateBeforeCall(workspaceId, accept, scenarioId, _callback);
         Type localVarReturnType = new TypeToken<Scenario>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -3160,14 +4670,12 @@ public class ScenariosApi {
 
     public static class ScenarioRetrieveRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private final String scenarioId;
         ApiResponse _lastResponse;
 
-        private ScenarioRetrieveRequest(String workspaceId, String xApiKey, String accept, String scenarioId) {
+        private ScenarioRetrieveRequest(String workspaceId, String accept, String scenarioId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
             this.scenarioId = scenarioId;
         }
@@ -3179,7 +4687,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return scenarioRetrieveCall(workspaceId, xApiKey, accept, scenarioId, _callback);
+            return scenarioRetrieveCall(workspaceId, accept, scenarioId, _callback);
         }
 
         /**
@@ -3188,7 +4696,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Scenario execute() throws ApiException {
-            ApiResponse<Scenario> localVarResp = scenarioRetrieveWithHttpInfo(workspaceId, xApiKey, accept, scenarioId);
+            ApiResponse<Scenario> localVarResp = scenarioRetrieveWithHttpInfo(workspaceId, accept, scenarioId);
             _lastResponse = localVarResp;
             Scenario data = localVarResp.getData();
 
@@ -3212,7 +4720,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Scenario> _callback) throws ApiException {
-            return scenarioRetrieveAsync(workspaceId, xApiKey, accept, scenarioId, _callback);
+            return scenarioRetrieveAsync(workspaceId, accept, scenarioId, _callback);
         }
     }
 
@@ -3254,7 +4762,6 @@ public class ScenariosApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.scenario-v1+json";
 
 
@@ -3263,13 +4770,13 @@ public class ScenariosApi {
         if(scenarioId == null || scenarioId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'scenarioId'");
         }
-        ScenarioRetrieveRequest request = new ScenarioRetrieveRequest(workspaceId, xApiKey, accept, scenarioId);
+        ScenarioRetrieveRequest request = new ScenarioRetrieveRequest(workspaceId, accept, scenarioId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call scenarioRunCreateCall(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioRunCreateCall(String workspaceId, String contentType, String accept, String scenarioId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -3288,10 +4795,6 @@ public class ScenariosApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -3321,15 +4824,10 @@ public class ScenariosApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call scenarioRunCreateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioRunCreateValidateBeforeCall(String workspaceId, String contentType, String accept, String scenarioId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling scenarioRunCreate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling scenarioRunCreate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -3347,16 +4845,16 @@ public class ScenariosApi {
             throw new ApiException("Missing the required parameter 'scenarioId' when calling scenarioRunCreate(Async)");
         }
 
-        return scenarioRunCreateCall(workspaceId, xApiKey, contentType, accept, scenarioId, _callback);
+        return scenarioRunCreateCall(workspaceId, contentType, accept, scenarioId, _callback);
     }
 
-    private static ApiResponse<Void> scenarioRunCreateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId) throws ApiException {
-        okhttp3.Call localVarCall = scenarioRunCreateCall(workspaceId, xApiKey, contentType, accept, scenarioId, null);
+    private static ApiResponse<Void> scenarioRunCreateWithHttpInfo(String workspaceId, String contentType, String accept, String scenarioId) throws ApiException {
+        okhttp3.Call localVarCall = scenarioRunCreateCall(workspaceId, contentType, accept, scenarioId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call scenarioRunCreateAsync(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = scenarioRunCreateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, scenarioId, _callback);
+    private static okhttp3.Call scenarioRunCreateAsync(String workspaceId, String contentType, String accept, String scenarioId, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = scenarioRunCreateValidateBeforeCall(workspaceId, contentType, accept, scenarioId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -3408,15 +4906,13 @@ public class ScenariosApi {
 
     public static class ScenarioRunCreateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String scenarioId;
         ApiResponse _lastResponse;
 
-        private ScenarioRunCreateRequest(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId) {
+        private ScenarioRunCreateRequest(String workspaceId, String contentType, String accept, String scenarioId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.scenarioId = scenarioId;
@@ -3429,7 +4925,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return scenarioRunCreateCall(workspaceId, xApiKey, contentType, accept, scenarioId, _callback);
+            return scenarioRunCreateCall(workspaceId, contentType, accept, scenarioId, _callback);
         }
 
         /**
@@ -3437,7 +4933,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            scenarioRunCreateWithHttpInfo(workspaceId, xApiKey, contentType, accept, scenarioId);
+            scenarioRunCreateWithHttpInfo(workspaceId, contentType, accept, scenarioId);
         }
         /**
          * Return the last executed API response
@@ -3455,7 +4951,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return scenarioRunCreateAsync(workspaceId, xApiKey, contentType, accept, scenarioId, _callback);
+            return scenarioRunCreateAsync(workspaceId, contentType, accept, scenarioId, _callback);
         }
     }
 
@@ -3497,7 +4993,6 @@ public class ScenariosApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.scenario-v1+json";
 
         String accept = "application/vnd.whispir.scenario-v1+json";
@@ -3508,13 +5003,13 @@ public class ScenariosApi {
         if(scenarioId == null || scenarioId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'scenarioId'");
         }
-        ScenarioRunCreateRequest request = new ScenarioRunCreateRequest(workspaceId, xApiKey, contentType, accept, scenarioId);
+        ScenarioRunCreateRequest request = new ScenarioRunCreateRequest(workspaceId, contentType, accept, scenarioId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call scenarioUpdateCall(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId, Scenario scenario, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioUpdateCall(String workspaceId, String contentType, String accept, String scenarioId, Scenario scenario, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -3533,10 +5028,6 @@ public class ScenariosApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -3567,15 +5058,10 @@ public class ScenariosApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call scenarioUpdateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId, Scenario scenario, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call scenarioUpdateValidateBeforeCall(String workspaceId, String contentType, String accept, String scenarioId, Scenario scenario, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling scenarioUpdate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling scenarioUpdate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -3598,16 +5084,16 @@ public class ScenariosApi {
             throw new ApiException("Missing the required parameter 'scenario' when calling scenarioUpdate(Async)");
         }
 
-        return scenarioUpdateCall(workspaceId, xApiKey, contentType, accept, scenarioId, scenario, _callback);
+        return scenarioUpdateCall(workspaceId, contentType, accept, scenarioId, scenario, _callback);
     }
 
-    private static ApiResponse<Void> scenarioUpdateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId, Scenario scenario) throws ApiException {
-        okhttp3.Call localVarCall = scenarioUpdateCall(workspaceId, xApiKey, contentType, accept, scenarioId, scenario, null);
+    private static ApiResponse<Void> scenarioUpdateWithHttpInfo(String workspaceId, String contentType, String accept, String scenarioId, Scenario scenario) throws ApiException {
+        okhttp3.Call localVarCall = scenarioUpdateCall(workspaceId, contentType, accept, scenarioId, scenario, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call scenarioUpdateAsync(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId, Scenario scenario, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = scenarioUpdateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, scenarioId, scenario, _callback);
+    private static okhttp3.Call scenarioUpdateAsync(String workspaceId, String contentType, String accept, String scenarioId, Scenario scenario, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = scenarioUpdateValidateBeforeCall(workspaceId, contentType, accept, scenarioId, scenario, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -3847,6 +5333,8 @@ public class ScenariosApi {
             private Voice voice;
             private Web web;
             private Social social;
+            private WhatsApp whatsapp;
+            private RCS rcs;
             private String type;
             private Features features;
             private Resource resource;
@@ -3865,7 +5353,7 @@ public class ScenariosApi {
             private BigDecimal repeatMin;
             private DeliveryReceipt dlr;
 
-            private Message(String to, String subject, String body, Email email, Voice voice, Web web, Social social, String type, Features features, Resource resource, String messageTemplateId, String messageTemplateName, String callbackId, Object callbackParameters, String label, String eventId, String messageType, String scheduleType, String scheduleDate, BigDecimal repetitionCount, BigDecimal repeatDays, BigDecimal repeatHrs, BigDecimal repeatMin, DeliveryReceipt dlr){
+            private Message(String to, String subject, String body, Email email, Voice voice, Web web, Social social, WhatsApp whatsapp, RCS rcs, String type, Features features, Resource resource, String messageTemplateId, String messageTemplateName, String callbackId, Object callbackParameters, String label, String eventId, String messageType, String scheduleType, String scheduleDate, BigDecimal repetitionCount, BigDecimal repeatDays, BigDecimal repeatHrs, BigDecimal repeatMin, DeliveryReceipt dlr){
             this.to = to;
             this.subject = subject;
             this.body = body;
@@ -3873,6 +5361,8 @@ public class ScenariosApi {
             this.voice = voice;
             this.web = web;
             this.social = social;
+            this.whatsapp = whatsapp;
+            this.rcs = rcs;
             this.type = type;
             this.features = features;
             this.resource = resource;
@@ -3912,6 +5402,12 @@ public class ScenariosApi {
             }
             public Social getSocial(){
                 return social;
+            }
+            public WhatsApp getWhatsapp(){
+                return whatsapp;
+            }
+            public RCS getRcs(){
+                return rcs;
             }
             public String getType(){
                 return type;
@@ -4058,6 +5554,8 @@ public class ScenariosApi {
                 private Voice voice;
                 private Web web;
                 private Social social;
+                private WhatsApp whatsapp;
+                private RCS rcs;
                 private String type;
                 private Features features;
                 private Resource resource;
@@ -4085,6 +5583,8 @@ public class ScenariosApi {
                         this.voice,
                         this.web,
                         this.social,
+                        this.whatsapp,
+                        this.rcs,
                         this.type,
                         this.features,
                         this.resource,
@@ -4130,6 +5630,14 @@ public class ScenariosApi {
                 }
                 public Builder setSocial(Social social) {
                     this.social = social;
+                    return this;
+                }
+                public Builder setWhatsapp(WhatsApp whatsapp) {
+                    this.whatsapp = whatsapp;
+                    return this;
+                }
+                public Builder setRcs(RCS rcs) {
+                    this.rcs = rcs;
                     return this;
                 }
                 public Builder setType(TypeEnum type) {
@@ -4206,12 +5714,14 @@ public class ScenariosApi {
             private String body;
             private String footer;
             private String type;
+            private OptOutOption optOutOption;
             private Attachments resources;
 
-            private Email(String body, String footer, String type, Attachments resources){
+            private Email(String body, String footer, String type, OptOutOption optOutOption, Attachments resources){
             this.body = body;
             this.footer = footer;
             this.type = type;
+            this.optOutOption = optOutOption;
             this.resources = resources;
             }
 
@@ -4251,6 +5761,9 @@ public class ScenariosApi {
                 }
 
             }
+            public OptOutOption getOptOutOption(){
+                return optOutOption;
+            }
             public Attachments getResources(){
                 return resources;
             }
@@ -4263,6 +5776,7 @@ public class ScenariosApi {
                 private String body;
                 private String footer;
                 private String type;
+                private OptOutOption optOutOption;
                 private Attachments resources;
 
                 public Email build() {
@@ -4270,6 +5784,7 @@ public class ScenariosApi {
                         this.body,
                         this.footer,
                         this.type,
+                        this.optOutOption,
                         this.resources
                     );
                 }
@@ -4285,21 +5800,30 @@ public class ScenariosApi {
                     this.type = type.getValue();
                     return this;
                 }
+                public Builder setOptOutOption(OptOutOption optOutOption) {
+                    this.optOutOption = optOutOption;
+                    return this;
+                }
                 public Builder setResources(Attachments resources) {
                     this.resources = resources;
                     return this;
                 }
             }
 
-            public static class Attachments {
-            private List<Attachment> attachments;
+            public static class OptOutOption {
+            private String rmsUnsubscribeUrl;
+            private String oneClickApiMapping;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private OptOutOption(String rmsUnsubscribeUrl, String oneClickApiMapping){
+            this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+            this.oneClickApiMapping = oneClickApiMapping;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public String getRmsUnsubscribeUrl(){
+                return rmsUnsubscribeUrl;
+            }
+            public String getOneClickApiMapping(){
+                return oneClickApiMapping;
             }
 
             public static Builder builder() {
@@ -4307,26 +5831,63 @@ public class ScenariosApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private String rmsUnsubscribeUrl;
+                private String oneClickApiMapping;
+
+                public OptOutOption build() {
+                    return new OptOutOption(
+                        this.rmsUnsubscribeUrl,
+                        this.oneClickApiMapping
+                    );
+                }
+                public Builder setRmsUnsubscribeUrl(String rmsUnsubscribeUrl) {
+                    this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+                    return this;
+                }
+                public Builder setOneClickApiMapping(String oneClickApiMapping) {
+                    this.oneClickApiMapping = oneClickApiMapping;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Attachments {
+            private List<Attachment> attachment;
+
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
+            }
+
+            public List<Attachment> getAttachment(){
+                return attachment;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -4451,14 +6012,14 @@ public class ScenariosApi {
             }
 
             public static class Attachments {
-            private List<Attachment> attachments;
+            private List<Attachment> attachment;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public List<Attachment> getAttachment(){
+                return attachment;
             }
 
             public static Builder builder() {
@@ -4466,26 +6027,26 @@ public class ScenariosApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -4765,13 +6326,1364 @@ public class ScenariosApi {
     }
 
         }
+        public static class WhatsApp {
+            private String type;
+            private String name;
+            private String language;
+            private List<String> parameters;
+            private WAContent content;
+
+            private WhatsApp(String type, String name, String language, List<String> parameters, WAContent content){
+            this.type = type;
+            this.name = name;
+            this.language = language;
+            this.parameters = parameters;
+            this.content = content;
+            }
+
+            public String getType(){
+                return type;
+            }
+            public enum TypeEnum {
+                TEMPLATE("template");
+                private String value;
+                TypeEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static TypeEnum fromValue(String value) {
+                    for (TypeEnum b : TypeEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public String getName(){
+                return name;
+            }
+            public String getLanguage(){
+                return language;
+            }
+            public List<String> getParameters(){
+                return parameters;
+            }
+            public WAContent getContent(){
+                return content;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String type;
+                private String name;
+                private String language;
+                private List<String> parameters;
+                private WAContent content;
+
+                public WhatsApp build() {
+                    return new WhatsApp(
+                        this.type,
+                        this.name,
+                        this.language,
+                        this.parameters,
+                        this.content
+                    );
+                }
+                public Builder setType(TypeEnum type) {
+                    this.type = type.getValue();
+                    return this;
+                }
+                public Builder setName(String name) {
+                    this.name = name;
+                    return this;
+                }
+                public Builder setLanguage(String language) {
+                    this.language = language;
+                    return this;
+                }
+                public Builder add( element) {
+                    if (this.parameters == null) {
+                            this.parameters = new ArrayList<>();
+                    }
+                    this.parameters.add(element);
+                    return this;
+                }
+
+                public Builder addAll(List<String> elements) {
+                    if (this.parameters == null) {
+                            this.parameters = new ArrayList<>();
+                    }
+                    this.parameters.addAll(elements);
+                    return this;
+                }
+                public Builder setContent(WAContent content) {
+                    this.content = content;
+                    return this;
+                }
+            }
+
+        public static class String {
+
+        private String(){
+        }
+
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+
+            public String build() {
+                return new String(
+                );
+            }
+        }
+
+    
+    }
+        public static class WAContent {
+            private WAContentHeader header;
+            private List<Object> body;
+            private List<WAContentButton> button;
+
+            private WAContent(WAContentHeader header, List<Object> body, List<WAContentButton> button){
+            this.header = header;
+            this.body = body;
+            this.button = button;
+            }
+
+            public WAContentHeader getHeader(){
+                return header;
+            }
+            public List<Object> getBody(){
+                return body;
+            }
+            public List<WAContentButton> getButton(){
+                return button;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private WAContentHeader header;
+                private List<Object> body;
+                private List<WAContentButton> button;
+
+                public WAContent build() {
+                    return new WAContent(
+                        this.header,
+                        this.body,
+                        this.button
+                    );
+                }
+                public Builder setHeader(WAContentHeader header) {
+                    this.header = header;
+                    return this;
+                }
+                public Builder add( element) {
+                    if (this.body == null) {
+                            this.body = new ArrayList<>();
+                    }
+                    this.body.add(element);
+                    return this;
+                }
+
+                public Builder addAll(List<Object> elements) {
+                    if (this.body == null) {
+                            this.body = new ArrayList<>();
+                    }
+                    this.body.addAll(elements);
+                    return this;
+                }
+                public Builder addWAContentButton(WAContentButton element) {
+                    if (this.button == null) {
+                            this.button = new ArrayList<>();
+                    }
+                    this.button.add(element);
+                    return this;
+                }
+
+                public Builder addAllWAContentButton(List<WAContentButton> elements) {
+                    if (this.button == null) {
+                            this.button = new ArrayList<>();
+                    }
+                    this.button.addAll(elements);
+                    return this;
+                }
+            }
+
+            public static class WAContentHeader {
+            private ModelObject image;
+            private Object1 video;
+            private Object2 document;
+            private Object3 location;
+
+            private WAContentHeader(ModelObject image, Object1 video, Object2 document, Object3 location){
+            this.image = image;
+            this.video = video;
+            this.document = document;
+            this.location = location;
+            }
+
+            public ModelObject getImage(){
+                return image;
+            }
+            public Object1 getVideo(){
+                return video;
+            }
+            public Object2 getDocument(){
+                return document;
+            }
+            public Object3 getLocation(){
+                return location;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private ModelObject image;
+                private Object1 video;
+                private Object2 document;
+                private Object3 location;
+
+                public WAContentHeader build() {
+                    return new WAContentHeader(
+                        this.image,
+                        this.video,
+                        this.document,
+                        this.location
+                    );
+                }
+                public Builder setImage(ModelObject image) {
+                    this.image = image;
+                    return this;
+                }
+                public Builder setVideo(Object1 video) {
+                    this.video = video;
+                    return this;
+                }
+                public Builder setDocument(Object2 document) {
+                    this.document = document;
+                    return this;
+                }
+                public Builder setLocation(Object3 location) {
+                    this.location = location;
+                    return this;
+                }
+            }
+
+            public static class ModelObject {
+
+            private ModelObject(){
+            }
+
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+
+                public ModelObject build() {
+                    return new ModelObject(
+                    );
+                }
+            }
+
+    
+        }
+        public static class Object1 {
+            private String link;
+
+            private Object1(String link){
+            this.link = link;
+            }
+
+            public String getLink(){
+                return link;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String link;
+
+                public Object1 build() {
+                    return new Object1(
+                        this.link
+                    );
+                }
+                public Builder setLink(String link) {
+                    this.link = link;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Object2 {
+            private String link;
+
+            private Object2(String link){
+            this.link = link;
+            }
+
+            public String getLink(){
+                return link;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String link;
+
+                public Object2 build() {
+                    return new Object2(
+                        this.link
+                    );
+                }
+                public Builder setLink(String link) {
+                    this.link = link;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Object3 {
+            private BigDecimal longitude;
+            private BigDecimal latitude;
+            private String name;
+            private String address;
+
+            private Object3(BigDecimal longitude, BigDecimal latitude, String name, String address){
+            this.longitude = longitude;
+            this.latitude = latitude;
+            this.name = name;
+            this.address = address;
+            }
+
+            public BigDecimal getLongitude(){
+                return longitude;
+            }
+            public BigDecimal getLatitude(){
+                return latitude;
+            }
+            public String getName(){
+                return name;
+            }
+            public String getAddress(){
+                return address;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private BigDecimal longitude;
+                private BigDecimal latitude;
+                private String name;
+                private String address;
+
+                public Object3 build() {
+                    return new Object3(
+                        this.longitude,
+                        this.latitude,
+                        this.name,
+                        this.address
+                    );
+                }
+                public Builder setLongitude(BigDecimal longitude) {
+                    this.longitude = longitude;
+                    return this;
+                }
+                public Builder setLatitude(BigDecimal latitude) {
+                    this.latitude = latitude;
+                    return this;
+                }
+                public Builder setName(String name) {
+                    this.name = name;
+                    return this;
+                }
+                public Builder setAddress(String address) {
+                    this.address = address;
+                    return this;
+                }
+            }
+
+    
+        }
+
+        }
+    public static class Object {
+
+        private Object(){
+        }
+
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+
+            public Object build() {
+                return new Object(
+                );
+            }
+        }
+
+    
+    }
+    public static class WAContentButton {
+        private String index;
+        private String sub_type;
+        private String text;
+        private String payload;
+
+        private WAContentButton(String index,String sub_type,String text,String payload){
+            this.index = index;
+            this.sub_type = sub_type;
+            this.text = text;
+            this.payload = payload;
+        }
+
+        public String getIndex(){
+            return index;
+        }
+        public String getSubType(){
+            return sub_type;
+        }
+            public enum SubTypeEnum {
+                QUICK_REPLY("quick_reply"),
+                URL("url");
+                SubTypeEnum(String value){
+                    this.value = value;
+                }
+
+                private String value;
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static SubTypeEnum fromValue(String value) {
+                    for (SubTypeEnum b : SubTypeEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+        public String getText(){
+            return text;
+        }
+        public String getPayload(){
+            return payload;
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+            private String index;
+            private String sub_type;
+            private String text;
+            private String payload;
+
+            public WAContentButton build() {
+                return new WAContentButton(
+                   this.index,
+                   this.sub_type,
+                   this.text,
+                   this.payload
+                );
+            }
+            public Builder setIndex(String index) {
+                this.index = index;
+                return this;
+            }
+            public Builder setSubType(SubTypeEnum sub_type) {
+                this.sub_type = sub_type.getValue();
+                return this;
+            }
+            public Builder setText(String text) {
+                this.text = text;
+                return this;
+            }
+            public Builder setPayload(String payload) {
+                this.payload = payload;
+                return this;
+            }
+        }
+
+    
+    }
+
+        }
+
+        }
+        public static class RCS {
+            private String text;
+            private RCSMedia media;
+            private RCSRichCard richCard;
+            private List<RCSSuggestion> suggestions;
+
+            private RCS(String text, RCSMedia media, RCSRichCard richCard, List<RCSSuggestion> suggestions){
+            this.text = text;
+            this.media = media;
+            this.richCard = richCard;
+            this.suggestions = suggestions;
+            }
+
+            public String getText(){
+                return text;
+            }
+            public RCSMedia getMedia(){
+                return media;
+            }
+            public RCSRichCard getRichCard(){
+                return richCard;
+            }
+            public List<RCSSuggestion> getSuggestions(){
+                return suggestions;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String text;
+                private RCSMedia media;
+                private RCSRichCard richCard;
+                private List<RCSSuggestion> suggestions;
+
+                public RCS build() {
+                    return new RCS(
+                        this.text,
+                        this.media,
+                        this.richCard,
+                        this.suggestions
+                    );
+                }
+                public Builder setText(String text) {
+                    this.text = text;
+                    return this;
+                }
+                public Builder setMedia(RCSMedia media) {
+                    this.media = media;
+                    return this;
+                }
+                public Builder setRichCard(RCSRichCard richCard) {
+                    this.richCard = richCard;
+                    return this;
+                }
+                public Builder addRCSSuggestion(RCSSuggestion element) {
+                    if (this.suggestions == null) {
+                            this.suggestions = new ArrayList<>();
+                    }
+                    this.suggestions.add(element);
+                    return this;
+                }
+
+                public Builder addAllRCSSuggestion(List<RCSSuggestion> elements) {
+                    if (this.suggestions == null) {
+                            this.suggestions = new ArrayList<>();
+                    }
+                    this.suggestions.addAll(elements);
+                    return this;
+                }
+            }
+
+            public static class RCSMedia {
+            private String fileUrl;
+            private String height;
+
+            private RCSMedia(String fileUrl, String height){
+            this.fileUrl = fileUrl;
+            this.height = height;
+            }
+
+            public String getFileUrl(){
+                return fileUrl;
+            }
+            public String getHeight(){
+                return height;
+            }
+            public enum HeightEnum {
+                SHORT("SHORT"),
+                MEDIUM("MEDIUM"),
+                TALL("TALL");
+                private String value;
+                HeightEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static HeightEnum fromValue(String value) {
+                    for (HeightEnum b : HeightEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String fileUrl;
+                private String height;
+
+                public RCSMedia build() {
+                    return new RCSMedia(
+                        this.fileUrl,
+                        this.height
+                    );
+                }
+                public Builder setFileUrl(String fileUrl) {
+                    this.fileUrl = fileUrl;
+                    return this;
+                }
+                public Builder setHeight(HeightEnum height) {
+                    this.height = height.getValue();
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSRichCard {
+            private String cardOrientation;
+            private String cardWidth;
+            private List<RCSCard> cards;
+
+            private RCSRichCard(String cardOrientation, String cardWidth, List<RCSCard> cards){
+            this.cardOrientation = cardOrientation;
+            this.cardWidth = cardWidth;
+            this.cards = cards;
+            }
+
+            public String getCardOrientation(){
+                return cardOrientation;
+            }
+            public enum CardOrientationEnum {
+                VERTICAL("VERTICAL"),
+                HORIZONTAL("HORIZONTAL");
+                private String value;
+                CardOrientationEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static CardOrientationEnum fromValue(String value) {
+                    for (CardOrientationEnum b : CardOrientationEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public String getCardWidth(){
+                return cardWidth;
+            }
+            public enum CardWidthEnum {
+                SMALL("SMALL"),
+                MEDIUM("MEDIUM");
+                private String value;
+                CardWidthEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static CardWidthEnum fromValue(String value) {
+                    for (CardWidthEnum b : CardWidthEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public List<RCSCard> getCards(){
+                return cards;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String cardOrientation;
+                private String cardWidth;
+                private List<RCSCard> cards;
+
+                public RCSRichCard build() {
+                    return new RCSRichCard(
+                        this.cardOrientation,
+                        this.cardWidth,
+                        this.cards
+                    );
+                }
+                public Builder setCardOrientation(CardOrientationEnum cardOrientation) {
+                    this.cardOrientation = cardOrientation.getValue();
+                    return this;
+                }
+                public Builder setCardWidth(CardWidthEnum cardWidth) {
+                    this.cardWidth = cardWidth.getValue();
+                    return this;
+                }
+                public Builder addRCSCard(RCSCard element) {
+                    if (this.cards == null) {
+                            this.cards = new ArrayList<>();
+                    }
+                    this.cards.add(element);
+                    return this;
+                }
+
+                public Builder addAllRCSCard(List<RCSCard> elements) {
+                    if (this.cards == null) {
+                            this.cards = new ArrayList<>();
+                    }
+                    this.cards.addAll(elements);
+                    return this;
+                }
+            }
+
+        public static class RCSCard {
+        private String title;
+        private String description;
+        private RCSMedia media;
+        private List<RCSSuggestion> suggestions;
+
+        private RCSCard(String title,String description,RCSMedia media,List<RCSSuggestion> suggestions){
+            this.title = title;
+            this.description = description;
+            this.media = media;
+            this.suggestions = suggestions;
+        }
+
+        public String getTitle(){
+            return title;
+        }
+        public String getDescription(){
+            return description;
+        }
+        public RCSMedia getMedia(){
+            return media;
+        }
+        public List<RCSSuggestion> getSuggestions(){
+            return suggestions;
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+            private String title;
+            private String description;
+            private RCSMedia media;
+            private List<RCSSuggestion> suggestions;
+
+            public RCSCard build() {
+                return new RCSCard(
+                   this.title,
+                   this.description,
+                   this.media,
+                   this.suggestions
+                );
+            }
+            public Builder setTitle(String title) {
+                this.title = title;
+                return this;
+            }
+            public Builder setDescription(String description) {
+                this.description = description;
+                return this;
+            }
+            public Builder setMedia(RCSMedia media) {
+                this.media = media;
+                return this;
+            }
+            public Builder setSuggestions(List<RCSSuggestion> suggestions) {
+                this.suggestions = suggestions;
+                return this;
+            }
+        }
+
+            public static class RCSMedia {
+            private String fileUrl;
+            private String height;
+
+            private RCSMedia(String fileUrl, String height){
+            this.fileUrl = fileUrl;
+            this.height = height;
+            }
+
+            public String getFileUrl(){
+                return fileUrl;
+            }
+            public String getHeight(){
+                return height;
+            }
+            public enum HeightEnum {
+                SHORT("SHORT"),
+                MEDIUM("MEDIUM"),
+                TALL("TALL");
+                private String value;
+                HeightEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static HeightEnum fromValue(String value) {
+                    for (HeightEnum b : HeightEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String fileUrl;
+                private String height;
+
+                public RCSMedia build() {
+                    return new RCSMedia(
+                        this.fileUrl,
+                        this.height
+                    );
+                }
+                public Builder setFileUrl(String fileUrl) {
+                    this.fileUrl = fileUrl;
+                    return this;
+                }
+                public Builder setHeight(HeightEnum height) {
+                    this.height = height.getValue();
+                    return this;
+                }
+            }
+
+    
+        }
+    public static class RCSSuggestion {
+        private String text;
+        private String postbackData;
+        private RCSSuggestionUrlAction urlAction;
+        private RCSSuggestionDialAction dialAction;
+        private Object shareLocationAction;
+        private RCSSuggestionViewLocationAction viewLocationAction;
+
+        private RCSSuggestion(String text,String postbackData,RCSSuggestionUrlAction urlAction,RCSSuggestionDialAction dialAction,Object shareLocationAction,RCSSuggestionViewLocationAction viewLocationAction){
+            this.text = text;
+            this.postbackData = postbackData;
+            this.urlAction = urlAction;
+            this.dialAction = dialAction;
+            this.shareLocationAction = shareLocationAction;
+            this.viewLocationAction = viewLocationAction;
+        }
+
+        public String getText(){
+            return text;
+        }
+        public String getPostbackData(){
+            return postbackData;
+        }
+        public RCSSuggestionUrlAction getUrlAction(){
+            return urlAction;
+        }
+        public RCSSuggestionDialAction getDialAction(){
+            return dialAction;
+        }
+        public Object getShareLocationAction(){
+            return shareLocationAction;
+        }
+        public RCSSuggestionViewLocationAction getViewLocationAction(){
+            return viewLocationAction;
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+            private String text;
+            private String postbackData;
+            private RCSSuggestionUrlAction urlAction;
+            private RCSSuggestionDialAction dialAction;
+            private Object shareLocationAction;
+            private RCSSuggestionViewLocationAction viewLocationAction;
+
+            public RCSSuggestion build() {
+                return new RCSSuggestion(
+                   this.text,
+                   this.postbackData,
+                   this.urlAction,
+                   this.dialAction,
+                   this.shareLocationAction,
+                   this.viewLocationAction
+                );
+            }
+            public Builder setText(String text) {
+                this.text = text;
+                return this;
+            }
+            public Builder setPostbackData(String postbackData) {
+                this.postbackData = postbackData;
+                return this;
+            }
+            public Builder setUrlAction(RCSSuggestionUrlAction urlAction) {
+                this.urlAction = urlAction;
+                return this;
+            }
+            public Builder setDialAction(RCSSuggestionDialAction dialAction) {
+                this.dialAction = dialAction;
+                return this;
+            }
+            public Builder setShareLocationAction(Object shareLocationAction) {
+                this.shareLocationAction = shareLocationAction;
+                return this;
+            }
+            public Builder setViewLocationAction(RCSSuggestionViewLocationAction viewLocationAction) {
+                this.viewLocationAction = viewLocationAction;
+                return this;
+            }
+        }
+
+            public static class RCSSuggestionUrlAction {
+            private String url;
+
+            private RCSSuggestionUrlAction(String url){
+            this.url = url;
+            }
+
+            public String getUrl(){
+                return url;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String url;
+
+                public RCSSuggestionUrlAction build() {
+                    return new RCSSuggestionUrlAction(
+                        this.url
+                    );
+                }
+                public Builder setUrl(String url) {
+                    this.url = url;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSSuggestionDialAction {
+            private String phoneNumber;
+
+            private RCSSuggestionDialAction(String phoneNumber){
+            this.phoneNumber = phoneNumber;
+            }
+
+            public String getPhoneNumber(){
+                return phoneNumber;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String phoneNumber;
+
+                public RCSSuggestionDialAction build() {
+                    return new RCSSuggestionDialAction(
+                        this.phoneNumber
+                    );
+                }
+                public Builder setPhoneNumber(String phoneNumber) {
+                    this.phoneNumber = phoneNumber;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSSuggestionViewLocationAction {
+            private BigDecimal latitude;
+            private BigDecimal longitude;
+            private String label;
+            private String query;
+
+            private RCSSuggestionViewLocationAction(BigDecimal latitude, BigDecimal longitude, String label, String query){
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.label = label;
+            this.query = query;
+            }
+
+            public BigDecimal getLatitude(){
+                return latitude;
+            }
+            public BigDecimal getLongitude(){
+                return longitude;
+            }
+            public String getLabel(){
+                return label;
+            }
+            public String getQuery(){
+                return query;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private BigDecimal latitude;
+                private BigDecimal longitude;
+                private String label;
+                private String query;
+
+                public RCSSuggestionViewLocationAction build() {
+                    return new RCSSuggestionViewLocationAction(
+                        this.latitude,
+                        this.longitude,
+                        this.label,
+                        this.query
+                    );
+                }
+                public Builder setLatitude(BigDecimal latitude) {
+                    this.latitude = latitude;
+                    return this;
+                }
+                public Builder setLongitude(BigDecimal longitude) {
+                    this.longitude = longitude;
+                    return this;
+                }
+                public Builder setLabel(String label) {
+                    this.label = label;
+                    return this;
+                }
+                public Builder setQuery(String query) {
+                    this.query = query;
+                    return this;
+                }
+            }
+
+    
+        }
+
+    }
+
+    }
+
+        }
+    public static class RCSSuggestion {
+        private String text;
+        private String postbackData;
+        private RCSSuggestionUrlAction urlAction;
+        private RCSSuggestionDialAction dialAction;
+        private Object shareLocationAction;
+        private RCSSuggestionViewLocationAction viewLocationAction;
+
+        private RCSSuggestion(String text,String postbackData,RCSSuggestionUrlAction urlAction,RCSSuggestionDialAction dialAction,Object shareLocationAction,RCSSuggestionViewLocationAction viewLocationAction){
+            this.text = text;
+            this.postbackData = postbackData;
+            this.urlAction = urlAction;
+            this.dialAction = dialAction;
+            this.shareLocationAction = shareLocationAction;
+            this.viewLocationAction = viewLocationAction;
+        }
+
+        public String getText(){
+            return text;
+        }
+        public String getPostbackData(){
+            return postbackData;
+        }
+        public RCSSuggestionUrlAction getUrlAction(){
+            return urlAction;
+        }
+        public RCSSuggestionDialAction getDialAction(){
+            return dialAction;
+        }
+        public Object getShareLocationAction(){
+            return shareLocationAction;
+        }
+        public RCSSuggestionViewLocationAction getViewLocationAction(){
+            return viewLocationAction;
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }   
+
+        public static class Builder {
+            private String text;
+            private String postbackData;
+            private RCSSuggestionUrlAction urlAction;
+            private RCSSuggestionDialAction dialAction;
+            private Object shareLocationAction;
+            private RCSSuggestionViewLocationAction viewLocationAction;
+
+            public RCSSuggestion build() {
+                return new RCSSuggestion(
+                   this.text,
+                   this.postbackData,
+                   this.urlAction,
+                   this.dialAction,
+                   this.shareLocationAction,
+                   this.viewLocationAction
+                );
+            }
+            public Builder setText(String text) {
+                this.text = text;
+                return this;
+            }
+            public Builder setPostbackData(String postbackData) {
+                this.postbackData = postbackData;
+                return this;
+            }
+            public Builder setUrlAction(RCSSuggestionUrlAction urlAction) {
+                this.urlAction = urlAction;
+                return this;
+            }
+            public Builder setDialAction(RCSSuggestionDialAction dialAction) {
+                this.dialAction = dialAction;
+                return this;
+            }
+            public Builder setShareLocationAction(Object shareLocationAction) {
+                this.shareLocationAction = shareLocationAction;
+                return this;
+            }
+            public Builder setViewLocationAction(RCSSuggestionViewLocationAction viewLocationAction) {
+                this.viewLocationAction = viewLocationAction;
+                return this;
+            }
+        }
+
+            public static class RCSSuggestionUrlAction {
+            private String url;
+
+            private RCSSuggestionUrlAction(String url){
+            this.url = url;
+            }
+
+            public String getUrl(){
+                return url;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String url;
+
+                public RCSSuggestionUrlAction build() {
+                    return new RCSSuggestionUrlAction(
+                        this.url
+                    );
+                }
+                public Builder setUrl(String url) {
+                    this.url = url;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSSuggestionDialAction {
+            private String phoneNumber;
+
+            private RCSSuggestionDialAction(String phoneNumber){
+            this.phoneNumber = phoneNumber;
+            }
+
+            public String getPhoneNumber(){
+                return phoneNumber;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String phoneNumber;
+
+                public RCSSuggestionDialAction build() {
+                    return new RCSSuggestionDialAction(
+                        this.phoneNumber
+                    );
+                }
+                public Builder setPhoneNumber(String phoneNumber) {
+                    this.phoneNumber = phoneNumber;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class RCSSuggestionViewLocationAction {
+            private BigDecimal latitude;
+            private BigDecimal longitude;
+            private String label;
+            private String query;
+
+            private RCSSuggestionViewLocationAction(BigDecimal latitude, BigDecimal longitude, String label, String query){
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.label = label;
+            this.query = query;
+            }
+
+            public BigDecimal getLatitude(){
+                return latitude;
+            }
+            public BigDecimal getLongitude(){
+                return longitude;
+            }
+            public String getLabel(){
+                return label;
+            }
+            public String getQuery(){
+                return query;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private BigDecimal latitude;
+                private BigDecimal longitude;
+                private String label;
+                private String query;
+
+                public RCSSuggestionViewLocationAction build() {
+                    return new RCSSuggestionViewLocationAction(
+                        this.latitude,
+                        this.longitude,
+                        this.label,
+                        this.query
+                    );
+                }
+                public Builder setLatitude(BigDecimal latitude) {
+                    this.latitude = latitude;
+                    return this;
+                }
+                public Builder setLongitude(BigDecimal longitude) {
+                    this.longitude = longitude;
+                    return this;
+                }
+                public Builder setLabel(String label) {
+                    this.label = label;
+                    return this;
+                }
+                public Builder setQuery(String query) {
+                    this.query = query;
+                    return this;
+                }
+            }
+
+    
+        }
+
+    }
+
+        }
         public static class Features {
             private PushOptions pushOptions;
             private AliasOption aliasOption;
+            private FeaturesFallback fallback;
 
-            private Features(PushOptions pushOptions, AliasOption aliasOption){
+            private Features(PushOptions pushOptions, AliasOption aliasOption, FeaturesFallback fallback){
             this.pushOptions = pushOptions;
             this.aliasOption = aliasOption;
+            this.fallback = fallback;
             }
 
             public PushOptions getPushOptions(){
@@ -4779,6 +7691,9 @@ public class ScenariosApi {
             }
             public AliasOption getAliasOption(){
                 return aliasOption;
+            }
+            public FeaturesFallback getFallback(){
+                return fallback;
             }
 
             public static Builder builder() {
@@ -4788,11 +7703,13 @@ public class ScenariosApi {
             public static class Builder {
                 private PushOptions pushOptions;
                 private AliasOption aliasOption;
+                private FeaturesFallback fallback;
 
                 public Features build() {
                     return new Features(
                         this.pushOptions,
-                        this.aliasOption
+                        this.aliasOption,
+                        this.fallback
                     );
                 }
                 public Builder setPushOptions(PushOptions pushOptions) {
@@ -4801,6 +7718,10 @@ public class ScenariosApi {
                 }
                 public Builder setAliasOption(AliasOption aliasOption) {
                     this.aliasOption = aliasOption;
+                    return this;
+                }
+                public Builder setFallback(FeaturesFallback fallback) {
+                    this.fallback = fallback;
                     return this;
                 }
             }
@@ -5093,6 +8014,74 @@ public class ScenariosApi {
 
     
         }
+        public static class FeaturesFallback {
+            private String channel;
+            private String templateName;
+
+            private FeaturesFallback(String channel, String templateName){
+            this.channel = channel;
+            this.templateName = templateName;
+            }
+
+            public String getChannel(){
+                return channel;
+            }
+            public enum ChannelEnum {
+                SMS("SMS");
+                private String value;
+                ChannelEnum(String value){
+                    this.value = value;
+                }
+
+                public String getValue() {
+                    return value;
+                }
+                
+                @Override
+                public String toString() {
+                    return String.valueOf(value);
+                }
+
+                public static ChannelEnum fromValue(String value) {
+                    for (ChannelEnum b : ChannelEnum.values()) {
+                        if (b.value.equals(value)) {
+                            return b;
+                        }
+                    }
+                    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+                }
+
+            }
+            public String getTemplateName(){
+                return templateName;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private String channel;
+                private String templateName;
+
+                public FeaturesFallback build() {
+                    return new FeaturesFallback(
+                        this.channel,
+                        this.templateName
+                    );
+                }
+                public Builder setChannel(ChannelEnum channel) {
+                    this.channel = channel.getValue();
+                    return this;
+                }
+                public Builder setTemplateName(String templateName) {
+                    this.templateName = templateName;
+                    return this;
+                }
+            }
+
+    
+        }
 
         }
         public static class Resource {
@@ -5212,12 +8201,14 @@ public class ScenariosApi {
             private String body;
             private String footer;
             private String type;
+            private OptOutOption optOutOption;
             private Attachments resources;
 
-            private Email(String body, String footer, String type, Attachments resources){
+            private Email(String body, String footer, String type, OptOutOption optOutOption, Attachments resources){
             this.body = body;
             this.footer = footer;
             this.type = type;
+            this.optOutOption = optOutOption;
             this.resources = resources;
             }
 
@@ -5257,6 +8248,9 @@ public class ScenariosApi {
                 }
 
             }
+            public OptOutOption getOptOutOption(){
+                return optOutOption;
+            }
             public Attachments getResources(){
                 return resources;
             }
@@ -5269,6 +8263,7 @@ public class ScenariosApi {
                 private String body;
                 private String footer;
                 private String type;
+                private OptOutOption optOutOption;
                 private Attachments resources;
 
                 public Email build() {
@@ -5276,6 +8271,7 @@ public class ScenariosApi {
                         this.body,
                         this.footer,
                         this.type,
+                        this.optOutOption,
                         this.resources
                     );
                 }
@@ -5291,21 +8287,30 @@ public class ScenariosApi {
                     this.type = type.getValue();
                     return this;
                 }
+                public Builder setOptOutOption(OptOutOption optOutOption) {
+                    this.optOutOption = optOutOption;
+                    return this;
+                }
                 public Builder setResources(Attachments resources) {
                     this.resources = resources;
                     return this;
                 }
             }
 
-            public static class Attachments {
-            private List<Attachment> attachments;
+            public static class OptOutOption {
+            private String rmsUnsubscribeUrl;
+            private String oneClickApiMapping;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private OptOutOption(String rmsUnsubscribeUrl, String oneClickApiMapping){
+            this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+            this.oneClickApiMapping = oneClickApiMapping;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public String getRmsUnsubscribeUrl(){
+                return rmsUnsubscribeUrl;
+            }
+            public String getOneClickApiMapping(){
+                return oneClickApiMapping;
             }
 
             public static Builder builder() {
@@ -5313,26 +8318,63 @@ public class ScenariosApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private String rmsUnsubscribeUrl;
+                private String oneClickApiMapping;
+
+                public OptOutOption build() {
+                    return new OptOutOption(
+                        this.rmsUnsubscribeUrl,
+                        this.oneClickApiMapping
+                    );
+                }
+                public Builder setRmsUnsubscribeUrl(String rmsUnsubscribeUrl) {
+                    this.rmsUnsubscribeUrl = rmsUnsubscribeUrl;
+                    return this;
+                }
+                public Builder setOneClickApiMapping(String oneClickApiMapping) {
+                    this.oneClickApiMapping = oneClickApiMapping;
+                    return this;
+                }
+            }
+
+    
+        }
+        public static class Attachments {
+            private List<Attachment> attachment;
+
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
+            }
+
+            public List<Attachment> getAttachment(){
+                return attachment;
+            }
+
+            public static Builder builder() {
+                return new Builder();
+            }   
+
+            public static class Builder {
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -5457,14 +8499,14 @@ public class ScenariosApi {
             }
 
             public static class Attachments {
-            private List<Attachment> attachments;
+            private List<Attachment> attachment;
 
-            private Attachments(List<Attachment> attachments){
-            this.attachments = attachments;
+            private Attachments(List<Attachment> attachment){
+            this.attachment = attachment;
             }
 
-            public List<Attachment> getAttachments(){
-                return attachments;
+            public List<Attachment> getAttachment(){
+                return attachment;
             }
 
             public static Builder builder() {
@@ -5472,26 +8514,26 @@ public class ScenariosApi {
             }   
 
             public static class Builder {
-                private List<Attachment> attachments;
+                private List<Attachment> attachment;
 
                 public Attachments build() {
                     return new Attachments(
-                        this.attachments
+                        this.attachment
                     );
                 }
                 public Builder addAttachment(Attachment element) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.add(element);
+                    this.attachment.add(element);
                     return this;
                 }
 
                 public Builder addAllAttachment(List<Attachment> elements) {
-                    if (this.attachments == null) {
-                            this.attachments = new ArrayList<>();
+                    if (this.attachment == null) {
+                            this.attachment = new ArrayList<>();
                     }
-                    this.attachments.addAll(elements);
+                    this.attachment.addAll(elements);
                     return this;
                 }
             }
@@ -5776,16 +8818,14 @@ public class ScenariosApi {
 
     public static class ScenarioUpdateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String scenarioId;
         private final Scenario scenario;
         ApiResponse _lastResponse;
 
-        private ScenarioUpdateRequest(String workspaceId, String xApiKey, String contentType, String accept, String scenarioId, Scenario scenario) {
+        private ScenarioUpdateRequest(String workspaceId, String contentType, String accept, String scenarioId, Scenario scenario) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.scenarioId = scenarioId;
@@ -5799,7 +8839,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return scenarioUpdateCall(workspaceId, xApiKey, contentType, accept, scenarioId, scenario, _callback);
+            return scenarioUpdateCall(workspaceId, contentType, accept, scenarioId, scenario, _callback);
         }
 
         /**
@@ -5807,7 +8847,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            scenarioUpdateWithHttpInfo(workspaceId, xApiKey, contentType, accept, scenarioId, scenario);
+            scenarioUpdateWithHttpInfo(workspaceId, contentType, accept, scenarioId, scenario);
         }
         /**
          * Return the last executed API response
@@ -5825,7 +8865,7 @@ public class ScenariosApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return scenarioUpdateAsync(workspaceId, xApiKey, contentType, accept, scenarioId, scenario, _callback);
+            return scenarioUpdateAsync(workspaceId, contentType, accept, scenarioId, scenario, _callback);
         }
     }
 
@@ -5900,7 +8940,6 @@ public class ScenariosApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.scenario-v1+json";
 
         String accept = "application/vnd.whispir.scenario-v1+json";
@@ -5959,7 +8998,7 @@ public class ScenariosApi {
         Object socialValue = params.getSocial();
         scenario.setSocial((com.whispir.model.Social) socialValue);
 
-        ScenarioUpdateRequest request = new ScenarioUpdateRequest(workspaceId, xApiKey, contentType, accept, scenarioId, scenario);
+        ScenarioUpdateRequest request = new ScenarioUpdateRequest(workspaceId, contentType, accept, scenarioId, scenario);
 
         // Ensure to include all of the 'optionalParams' that are passed
 

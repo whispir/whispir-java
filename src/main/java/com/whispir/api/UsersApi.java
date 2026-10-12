@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class UsersApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call userCreateCall(String xApiKey, String contentType, String accept, User user, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call userCreateCall(String contentType, String accept, User user, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -52,10 +52,6 @@ public class UsersApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -87,12 +83,7 @@ public class UsersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call userCreateValidateBeforeCall(String xApiKey, String contentType, String accept, User user, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling userCreate(Async)");
-        }
-
+    private static okhttp3.Call userCreateValidateBeforeCall(String contentType, String accept, User user, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling userCreate(Async)");
@@ -108,17 +99,17 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'user' when calling userCreate(Async)");
         }
 
-        return userCreateCall(xApiKey, contentType, accept, user, _callback);
+        return userCreateCall(contentType, accept, user, _callback);
     }
 
-    private static ApiResponse<User> userCreateWithHttpInfo(String xApiKey, String contentType, String accept, User user) throws ApiException {
-        okhttp3.Call localVarCall = userCreateCall(xApiKey, contentType, accept, user, null);
+    private static ApiResponse<User> userCreateWithHttpInfo(String contentType, String accept, User user) throws ApiException {
+        okhttp3.Call localVarCall = userCreateCall(contentType, accept, user, null);
         Type localVarReturnType = new TypeToken<User>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call userCreateAsync(String xApiKey, String contentType, String accept, User user, final ApiCallback<User> _callback) throws ApiException {
-        okhttp3.Call localVarCall = userCreateValidateBeforeCall(xApiKey, contentType, accept, user, _callback);
+    private static okhttp3.Call userCreateAsync(String contentType, String accept, User user, final ApiCallback<User> _callback) throws ApiException {
+        okhttp3.Call localVarCall = userCreateValidateBeforeCall(contentType, accept, user, _callback);
         Type localVarReturnType = new TypeToken<User>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -935,14 +926,12 @@ public class UsersApi {
     }
 
     public static class UserCreateRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final User user;
         ApiResponse _lastResponse;
 
-        private UserCreateRequest(String xApiKey, String contentType, String accept, User user) {
-            this.xApiKey = xApiKey;
+        private UserCreateRequest(String contentType, String accept, User user) {
             this.contentType = contentType;
             this.accept = accept;
             this.user = user;
@@ -955,7 +944,7 @@ public class UsersApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return userCreateCall(xApiKey, contentType, accept, user, _callback);
+            return userCreateCall(contentType, accept, user, _callback);
         }
 
         /**
@@ -964,7 +953,7 @@ public class UsersApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public User execute() throws ApiException {
-            ApiResponse<User> localVarResp = userCreateWithHttpInfo(xApiKey, contentType, accept, user);
+            ApiResponse<User> localVarResp = userCreateWithHttpInfo(contentType, accept, user);
             _lastResponse = localVarResp;
             User data = localVarResp.getData();
 
@@ -997,7 +986,7 @@ public class UsersApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<User> _callback) throws ApiException {
-            return userCreateAsync(xApiKey, contentType, accept, user, _callback);
+            return userCreateAsync(contentType, accept, user, _callback);
         }
     }
 
@@ -1160,7 +1149,6 @@ public class UsersApi {
         if(xApiKey == null) {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
-
 
         String contentType = "application/vnd.whispir.user-v1+json";
 
@@ -1370,13 +1358,13 @@ public class UsersApi {
         String role2Value = params.getRole2();
         user.setRole2(role2Value);
 
-        UserCreateRequest request = new UserCreateRequest(xApiKey, contentType, accept, user);
+        UserCreateRequest request = new UserCreateRequest(contentType, accept, user);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call userDeleteCall(String xApiKey, String contentType, String accept, String userId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call userDeleteCall(String contentType, String accept, String userId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1394,10 +1382,6 @@ public class UsersApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -1427,12 +1411,7 @@ public class UsersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call userDeleteValidateBeforeCall(String xApiKey, String contentType, String accept, String userId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling userDelete(Async)");
-        }
-
+    private static okhttp3.Call userDeleteValidateBeforeCall(String contentType, String accept, String userId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling userDelete(Async)");
@@ -1448,16 +1427,16 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'userId' when calling userDelete(Async)");
         }
 
-        return userDeleteCall(xApiKey, contentType, accept, userId, _callback);
+        return userDeleteCall(contentType, accept, userId, _callback);
     }
 
-    private static ApiResponse<Void> userDeleteWithHttpInfo(String xApiKey, String contentType, String accept, String userId) throws ApiException {
-        okhttp3.Call localVarCall = userDeleteCall(xApiKey, contentType, accept, userId, null);
+    private static ApiResponse<Void> userDeleteWithHttpInfo(String contentType, String accept, String userId) throws ApiException {
+        okhttp3.Call localVarCall = userDeleteCall(contentType, accept, userId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call userDeleteAsync(String xApiKey, String contentType, String accept, String userId, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = userDeleteValidateBeforeCall(xApiKey, contentType, accept, userId, _callback);
+    private static okhttp3.Call userDeleteAsync(String contentType, String accept, String userId, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = userDeleteValidateBeforeCall(contentType, accept, userId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1496,14 +1475,12 @@ public class UsersApi {
     }
 
     public static class UserDeleteRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String userId;
         ApiResponse _lastResponse;
 
-        private UserDeleteRequest(String xApiKey, String contentType, String accept, String userId) {
-            this.xApiKey = xApiKey;
+        private UserDeleteRequest(String contentType, String accept, String userId) {
             this.contentType = contentType;
             this.accept = accept;
             this.userId = userId;
@@ -1516,7 +1493,7 @@ public class UsersApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return userDeleteCall(xApiKey, contentType, accept, userId, _callback);
+            return userDeleteCall(contentType, accept, userId, _callback);
         }
 
         /**
@@ -1524,7 +1501,7 @@ public class UsersApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            userDeleteWithHttpInfo(xApiKey, contentType, accept, userId);
+            userDeleteWithHttpInfo(contentType, accept, userId);
         }
         /**
          * Return the last executed API response
@@ -1542,7 +1519,7 @@ public class UsersApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return userDeleteAsync(xApiKey, contentType, accept, userId, _callback);
+            return userDeleteAsync(contentType, accept, userId, _callback);
         }
     }
 
@@ -1572,7 +1549,6 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String contentType = "application/vnd.whispir.user-v1+json";
 
         String accept = "application/vnd.whispir.user-v1+json";
@@ -1583,13 +1559,13 @@ public class UsersApi {
         if(userId == null || userId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'userId'");
         }
-        UserDeleteRequest request = new UserDeleteRequest(xApiKey, contentType, accept, userId);
+        UserDeleteRequest request = new UserDeleteRequest(contentType, accept, userId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call userListCall(String xApiKey, String accept, String fieldname, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call userListCall(String accept, String fieldname, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1627,10 +1603,6 @@ public class UsersApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -1656,28 +1628,23 @@ public class UsersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call userListValidateBeforeCall(String xApiKey, String accept, String fieldname, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling userList(Async)");
-        }
-
+    private static okhttp3.Call userListValidateBeforeCall(String accept, String fieldname, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling userList(Async)");
         }
 
-        return userListCall(xApiKey, accept, fieldname, sortOrder, sortFields, limit, offset, _callback);
+        return userListCall(accept, fieldname, sortOrder, sortFields, limit, offset, _callback);
     }
 
-    private static ApiResponse<UserCollection> userListWithHttpInfo(String xApiKey, String accept, String fieldname, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset) throws ApiException {
-        okhttp3.Call localVarCall = userListCall(xApiKey, accept, fieldname, sortOrder, sortFields, limit, offset, null);
+    private static ApiResponse<UserCollection> userListWithHttpInfo(String accept, String fieldname, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset) throws ApiException {
+        okhttp3.Call localVarCall = userListCall(accept, fieldname, sortOrder, sortFields, limit, offset, null);
         Type localVarReturnType = new TypeToken<UserCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call userListAsync(String xApiKey, String accept, String fieldname, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback<UserCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = userListValidateBeforeCall(xApiKey, accept, fieldname, sortOrder, sortFields, limit, offset, _callback);
+    private static okhttp3.Call userListAsync(String accept, String fieldname, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback<UserCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = userListValidateBeforeCall(accept, fieldname, sortOrder, sortFields, limit, offset, _callback);
         Type localVarReturnType = new TypeToken<UserCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1765,7 +1732,6 @@ public class UsersApi {
     }
 
     public static class UserListRequest {
-        private final String xApiKey;
         private final String accept;
         private String fieldname;
         private String sortOrder;
@@ -1774,8 +1740,7 @@ public class UsersApi {
         private BigDecimal offset;
         ApiResponse _lastResponse;
 
-        private UserListRequest(String xApiKey, String accept) {
-            this.xApiKey = xApiKey;
+        private UserListRequest(String accept) {
             this.accept = accept;
         }
 
@@ -1836,7 +1801,7 @@ public class UsersApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return userListCall(xApiKey, accept, fieldname, sortOrder, sortFields, limit, offset, _callback);
+            return userListCall(accept, fieldname, sortOrder, sortFields, limit, offset, _callback);
         }
 
         /**
@@ -1845,7 +1810,7 @@ public class UsersApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public UserCollection execute() throws ApiException {
-            ApiResponse<UserCollection> localVarResp = userListWithHttpInfo(xApiKey, accept, fieldname, sortOrder, sortFields, limit, offset);
+            ApiResponse<UserCollection> localVarResp = userListWithHttpInfo(accept, fieldname, sortOrder, sortFields, limit, offset);
             _lastResponse = localVarResp;
             UserCollection data = localVarResp.getData();
 
@@ -1869,7 +1834,7 @@ public class UsersApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<UserCollection> _callback) throws ApiException {
-            return userListAsync(xApiKey, accept, fieldname, sortOrder, sortFields, limit, offset, _callback);
+            return userListAsync(accept, fieldname, sortOrder, sortFields, limit, offset, _callback);
         }
     }
 
@@ -1918,10 +1883,9 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.user-v1+json";
 
-        UserListRequest request = new UserListRequest(xApiKey, accept);
+        UserListRequest request = new UserListRequest(accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.fieldname != null){
@@ -1947,7 +1911,7 @@ public class UsersApi {
 
         return request.execute();
     }
-    private static okhttp3.Call userRetrieveCall(String xApiKey, String accept, String userId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call userRetrieveCall(String accept, String userId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1965,10 +1929,6 @@ public class UsersApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -1995,12 +1955,7 @@ public class UsersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call userRetrieveValidateBeforeCall(String xApiKey, String accept, String userId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling userRetrieve(Async)");
-        }
-
+    private static okhttp3.Call userRetrieveValidateBeforeCall(String accept, String userId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling userRetrieve(Async)");
@@ -2011,17 +1966,17 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'userId' when calling userRetrieve(Async)");
         }
 
-        return userRetrieveCall(xApiKey, accept, userId, _callback);
+        return userRetrieveCall(accept, userId, _callback);
     }
 
-    private static ApiResponse<User> userRetrieveWithHttpInfo(String xApiKey, String accept, String userId) throws ApiException {
-        okhttp3.Call localVarCall = userRetrieveCall(xApiKey, accept, userId, null);
+    private static ApiResponse<User> userRetrieveWithHttpInfo(String accept, String userId) throws ApiException {
+        okhttp3.Call localVarCall = userRetrieveCall(accept, userId, null);
         Type localVarReturnType = new TypeToken<User>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call userRetrieveAsync(String xApiKey, String accept, String userId, final ApiCallback<User> _callback) throws ApiException {
-        okhttp3.Call localVarCall = userRetrieveValidateBeforeCall(xApiKey, accept, userId, _callback);
+    private static okhttp3.Call userRetrieveAsync(String accept, String userId, final ApiCallback<User> _callback) throws ApiException {
+        okhttp3.Call localVarCall = userRetrieveValidateBeforeCall(accept, userId, _callback);
         Type localVarReturnType = new TypeToken<User>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2061,13 +2016,11 @@ public class UsersApi {
     }
 
     public static class UserRetrieveRequest {
-        private final String xApiKey;
         private final String accept;
         private final String userId;
         ApiResponse _lastResponse;
 
-        private UserRetrieveRequest(String xApiKey, String accept, String userId) {
-            this.xApiKey = xApiKey;
+        private UserRetrieveRequest(String accept, String userId) {
             this.accept = accept;
             this.userId = userId;
         }
@@ -2079,7 +2032,7 @@ public class UsersApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return userRetrieveCall(xApiKey, accept, userId, _callback);
+            return userRetrieveCall(accept, userId, _callback);
         }
 
         /**
@@ -2088,7 +2041,7 @@ public class UsersApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public User execute() throws ApiException {
-            ApiResponse<User> localVarResp = userRetrieveWithHttpInfo(xApiKey, accept, userId);
+            ApiResponse<User> localVarResp = userRetrieveWithHttpInfo(accept, userId);
             _lastResponse = localVarResp;
             User data = localVarResp.getData();
 
@@ -2112,7 +2065,7 @@ public class UsersApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<User> _callback) throws ApiException {
-            return userRetrieveAsync(xApiKey, accept, userId, _callback);
+            return userRetrieveAsync(accept, userId, _callback);
         }
     }
 
@@ -2142,7 +2095,6 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String accept = "application/vnd.whispir.user-v1+json";
 
 
@@ -2151,13 +2103,13 @@ public class UsersApi {
         if(userId == null || userId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'userId'");
         }
-        UserRetrieveRequest request = new UserRetrieveRequest(xApiKey, accept, userId);
+        UserRetrieveRequest request = new UserRetrieveRequest(accept, userId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call userUpdateCall(String xApiKey, String contentType, String accept, String userId, User user, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call userUpdateCall(String contentType, String accept, String userId, User user, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -2175,10 +2127,6 @@ public class UsersApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -2209,12 +2157,7 @@ public class UsersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call userUpdateValidateBeforeCall(String xApiKey, String contentType, String accept, String userId, User user, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling userUpdate(Async)");
-        }
-
+    private static okhttp3.Call userUpdateValidateBeforeCall(String contentType, String accept, String userId, User user, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling userUpdate(Async)");
@@ -2235,16 +2178,16 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'user' when calling userUpdate(Async)");
         }
 
-        return userUpdateCall(xApiKey, contentType, accept, userId, user, _callback);
+        return userUpdateCall(contentType, accept, userId, user, _callback);
     }
 
-    private static ApiResponse<Void> userUpdateWithHttpInfo(String xApiKey, String contentType, String accept, String userId, User user) throws ApiException {
-        okhttp3.Call localVarCall = userUpdateCall(xApiKey, contentType, accept, userId, user, null);
+    private static ApiResponse<Void> userUpdateWithHttpInfo(String contentType, String accept, String userId, User user) throws ApiException {
+        okhttp3.Call localVarCall = userUpdateCall(contentType, accept, userId, user, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call userUpdateAsync(String xApiKey, String contentType, String accept, String userId, User user, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = userUpdateValidateBeforeCall(xApiKey, contentType, accept, userId, user, _callback);
+    private static okhttp3.Call userUpdateAsync(String contentType, String accept, String userId, User user, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = userUpdateValidateBeforeCall(contentType, accept, userId, user, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -3072,15 +3015,13 @@ public class UsersApi {
     }
 
     public static class UserUpdateRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String userId;
         private final User user;
         ApiResponse _lastResponse;
 
-        private UserUpdateRequest(String xApiKey, String contentType, String accept, String userId, User user) {
-            this.xApiKey = xApiKey;
+        private UserUpdateRequest(String contentType, String accept, String userId, User user) {
             this.contentType = contentType;
             this.accept = accept;
             this.userId = userId;
@@ -3094,7 +3035,7 @@ public class UsersApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return userUpdateCall(xApiKey, contentType, accept, userId, user, _callback);
+            return userUpdateCall(contentType, accept, userId, user, _callback);
         }
 
         /**
@@ -3102,7 +3043,7 @@ public class UsersApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            userUpdateWithHttpInfo(xApiKey, contentType, accept, userId, user);
+            userUpdateWithHttpInfo(contentType, accept, userId, user);
         }
         /**
          * Return the last executed API response
@@ -3120,7 +3061,7 @@ public class UsersApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return userUpdateAsync(xApiKey, contentType, accept, userId, user, _callback);
+            return userUpdateAsync(contentType, accept, userId, user, _callback);
         }
     }
 
@@ -3289,7 +3230,6 @@ public class UsersApi {
         if(xApiKey == null) {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
-
 
         String contentType = "application/vnd.whispir.user-v1+json";
 
@@ -3505,13 +3445,13 @@ public class UsersApi {
         String role2Value = params.getRole2();
         user.setRole2(role2Value);
 
-        UserUpdateRequest request = new UserUpdateRequest(xApiKey, contentType, accept, userId, user);
+        UserUpdateRequest request = new UserUpdateRequest(contentType, accept, userId, user);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call userWorkspaceListCall(String workspaceId, String xApiKey, String accept, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call userWorkspaceListCall(String workspaceId, String accept, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -3546,10 +3486,6 @@ public class UsersApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -3575,15 +3511,10 @@ public class UsersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call userWorkspaceListValidateBeforeCall(String workspaceId, String xApiKey, String accept, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call userWorkspaceListValidateBeforeCall(String workspaceId, String accept, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling userWorkspaceList(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling userWorkspaceList(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -3591,17 +3522,17 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'accept' when calling userWorkspaceList(Async)");
         }
 
-        return userWorkspaceListCall(workspaceId, xApiKey, accept, sortOrder, sortFields, limit, offset, _callback);
+        return userWorkspaceListCall(workspaceId, accept, sortOrder, sortFields, limit, offset, _callback);
     }
 
-    private static ApiResponse<UserCollection> userWorkspaceListWithHttpInfo(String workspaceId, String xApiKey, String accept, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset) throws ApiException {
-        okhttp3.Call localVarCall = userWorkspaceListCall(workspaceId, xApiKey, accept, sortOrder, sortFields, limit, offset, null);
+    private static ApiResponse<UserCollection> userWorkspaceListWithHttpInfo(String workspaceId, String accept, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset) throws ApiException {
+        okhttp3.Call localVarCall = userWorkspaceListCall(workspaceId, accept, sortOrder, sortFields, limit, offset, null);
         Type localVarReturnType = new TypeToken<UserCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call userWorkspaceListAsync(String workspaceId, String xApiKey, String accept, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback<UserCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = userWorkspaceListValidateBeforeCall(workspaceId, xApiKey, accept, sortOrder, sortFields, limit, offset, _callback);
+    private static okhttp3.Call userWorkspaceListAsync(String workspaceId, String accept, String sortOrder, String sortFields, BigDecimal limit, BigDecimal offset, final ApiCallback<UserCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = userWorkspaceListValidateBeforeCall(workspaceId, accept, sortOrder, sortFields, limit, offset, _callback);
         Type localVarReturnType = new TypeToken<UserCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -3690,7 +3621,6 @@ public class UsersApi {
 
     public static class UserWorkspaceListRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private String sortOrder;
         private String sortFields;
@@ -3698,9 +3628,8 @@ public class UsersApi {
         private BigDecimal offset;
         ApiResponse _lastResponse;
 
-        private UserWorkspaceListRequest(String workspaceId, String xApiKey, String accept) {
+        private UserWorkspaceListRequest(String workspaceId, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
         }
 
@@ -3751,7 +3680,7 @@ public class UsersApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return userWorkspaceListCall(workspaceId, xApiKey, accept, sortOrder, sortFields, limit, offset, _callback);
+            return userWorkspaceListCall(workspaceId, accept, sortOrder, sortFields, limit, offset, _callback);
         }
 
         /**
@@ -3760,7 +3689,7 @@ public class UsersApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public UserCollection execute() throws ApiException {
-            ApiResponse<UserCollection> localVarResp = userWorkspaceListWithHttpInfo(workspaceId, xApiKey, accept, sortOrder, sortFields, limit, offset);
+            ApiResponse<UserCollection> localVarResp = userWorkspaceListWithHttpInfo(workspaceId, accept, sortOrder, sortFields, limit, offset);
             _lastResponse = localVarResp;
             UserCollection data = localVarResp.getData();
 
@@ -3784,7 +3713,7 @@ public class UsersApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<UserCollection> _callback) throws ApiException {
-            return userWorkspaceListAsync(workspaceId, xApiKey, accept, sortOrder, sortFields, limit, offset, _callback);
+            return userWorkspaceListAsync(workspaceId, accept, sortOrder, sortFields, limit, offset, _callback);
         }
     }
 
@@ -3840,10 +3769,9 @@ public class UsersApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.user-v1+json";
 
-        UserWorkspaceListRequest request = new UserWorkspaceListRequest(workspaceId, xApiKey, accept);
+        UserWorkspaceListRequest request = new UserWorkspaceListRequest(workspaceId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.sortOrder != null){
@@ -3865,7 +3793,7 @@ public class UsersApi {
 
         return request.execute();
     }
-    private static okhttp3.Call usersDeleteCall(String xApiKey, String contentType, String accept, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call usersDeleteCall(String contentType, String accept, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -3882,10 +3810,6 @@ public class UsersApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -3915,12 +3839,7 @@ public class UsersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call usersDeleteValidateBeforeCall(String xApiKey, String contentType, String accept, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling usersDelete(Async)");
-        }
-
+    private static okhttp3.Call usersDeleteValidateBeforeCall(String contentType, String accept, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling usersDelete(Async)");
@@ -3931,16 +3850,16 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'accept' when calling usersDelete(Async)");
         }
 
-        return usersDeleteCall(xApiKey, contentType, accept, _callback);
+        return usersDeleteCall(contentType, accept, _callback);
     }
 
-    private static ApiResponse<Void> usersDeleteWithHttpInfo(String xApiKey, String contentType, String accept) throws ApiException {
-        okhttp3.Call localVarCall = usersDeleteCall(xApiKey, contentType, accept, null);
+    private static ApiResponse<Void> usersDeleteWithHttpInfo(String contentType, String accept) throws ApiException {
+        okhttp3.Call localVarCall = usersDeleteCall(contentType, accept, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call usersDeleteAsync(String xApiKey, String contentType, String accept, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = usersDeleteValidateBeforeCall(xApiKey, contentType, accept, _callback);
+    private static okhttp3.Call usersDeleteAsync(String contentType, String accept, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = usersDeleteValidateBeforeCall(contentType, accept, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -3967,13 +3886,11 @@ public class UsersApi {
     }
 
     public static class UsersDeleteRequest {
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         ApiResponse _lastResponse;
 
-        private UsersDeleteRequest(String xApiKey, String contentType, String accept) {
-            this.xApiKey = xApiKey;
+        private UsersDeleteRequest(String contentType, String accept) {
             this.contentType = contentType;
             this.accept = accept;
         }
@@ -3985,7 +3902,7 @@ public class UsersApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return usersDeleteCall(xApiKey, contentType, accept, _callback);
+            return usersDeleteCall(contentType, accept, _callback);
         }
 
         /**
@@ -3993,7 +3910,7 @@ public class UsersApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            usersDeleteWithHttpInfo(xApiKey, contentType, accept);
+            usersDeleteWithHttpInfo(contentType, accept);
         }
         /**
          * Return the last executed API response
@@ -4011,7 +3928,7 @@ public class UsersApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return usersDeleteAsync(xApiKey, contentType, accept, _callback);
+            return usersDeleteAsync(contentType, accept, _callback);
         }
     }
 
@@ -4035,12 +3952,11 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'xApiKey'");
         }
 
-
         String contentType = "application/vnd.whispir.user-v1+json";
 
         String accept = "application/vnd.whispir.user-v1+json";
 
-        UsersDeleteRequest request = new UsersDeleteRequest(xApiKey, contentType, accept);
+        UsersDeleteRequest request = new UsersDeleteRequest(contentType, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
 

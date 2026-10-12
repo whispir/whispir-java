@@ -10,10 +10,12 @@ import com.whispir.model.DeliveryReceipt;
 import com.whispir.model.Email;
 import com.whispir.model.Features;
 import com.whispir.model.Link;
+import com.whispir.model.RCS;
 import com.whispir.model.Resource;
 import com.whispir.model.Social;
 import com.whispir.model.Voice;
 import com.whispir.model.Web;
+import com.whispir.model.WhatsApp;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -113,6 +115,12 @@ public class Message {
 
   @SerializedName("social")
   private Social social;
+
+  @SerializedName("whatsapp")
+  private WhatsApp whatsapp;
+
+  @SerializedName("rcs")
+  private RCS rcs;
 
   @SerializedName("type")
   private String type;
@@ -336,6 +344,30 @@ public class Message {
   }
   public void setSocial(Social social) {
     this.social = social;
+  }
+
+   /**
+   * Get whatsapp
+   * @return whatsapp
+  **/
+  @javax.annotation.Nullable
+  public WhatsApp getWhatsapp() {
+    return whatsapp;
+  }
+  public void setWhatsapp(WhatsApp whatsapp) {
+    this.whatsapp = whatsapp;
+  }
+
+   /**
+   * Get rcs
+   * @return rcs
+  **/
+  @javax.annotation.Nullable
+  public RCS getRcs() {
+    return rcs;
+  }
+  public void setRcs(RCS rcs) {
+    this.rcs = rcs;
   }
 
    /**
@@ -566,6 +598,8 @@ public class Message {
         Objects.equals(this.voice, message.voice) &&
         Objects.equals(this.web, message.web) &&
         Objects.equals(this.social, message.social) &&
+        Objects.equals(this.whatsapp, message.whatsapp) &&
+        Objects.equals(this.rcs, message.rcs) &&
         Objects.equals(this.type, message.type) &&
         Objects.equals(this.features, message.features) &&
         Objects.equals(this.resource, message.resource) &&
@@ -586,7 +620,7 @@ public class Message {
   }
   @Override
   public int hashCode() {
-    return Objects.hash(from, direction, responseCount, createdTime, whatsappValidMessage, validBody, validSubject, link, to, subject, body, email, voice, web, social, type, features, resource, messageTemplateId, messageTemplateName, callbackId, callbackParameters, label, eventId, messageType, scheduleType, scheduleDate, repetitionCount, repeatDays, repeatHrs, repeatMin, dlr);
+    return Objects.hash(from, direction, responseCount, createdTime, whatsappValidMessage, validBody, validSubject, link, to, subject, body, email, voice, web, social, whatsapp, rcs, type, features, resource, messageTemplateId, messageTemplateName, callbackId, callbackParameters, label, eventId, messageType, scheduleType, scheduleDate, repetitionCount, repeatDays, repeatHrs, repeatMin, dlr);
   }
   @Override
   public String toString() {
@@ -607,6 +641,8 @@ public class Message {
     sb.append("    voice: ").append(toIndentedString(voice)).append("\n");
     sb.append("    web: ").append(toIndentedString(web)).append("\n");
     sb.append("    social: ").append(toIndentedString(social)).append("\n");
+    sb.append("    whatsapp: ").append(toIndentedString(whatsapp)).append("\n");
+    sb.append("    rcs: ").append(toIndentedString(rcs)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    features: ").append(toIndentedString(features)).append("\n");
     sb.append("    resource: ").append(toIndentedString(resource)).append("\n");

@@ -53,7 +53,7 @@ import com.google.gson.JsonParseException;
 import com.whispir.client.ApiResponse;
 import com.whispir.client.JSON;
 
-@javax.annotation.Generated(value = "com.whispir.codegen.JavaCustomClientCodegen", date = "2023-02-13T11:33:29.412612+13:00[Pacific/Auckland]")
+@javax.annotation.Generated(value = "com.whispir.codegen.JavaCustomClientCodegen", date = "2026-10-12T01:23:38.265904844Z[Etc/UTC]")
 public class MessageResponseCollection extends AbstractOpenApiSchema {
     public ApiResponse lastResponse;
     private static final Logger log = Logger.getLogger(MessageResponseCollection.class.getName());

@@ -11,7 +11,7 @@ import javax.ws.rs.core.GenericType;
  * <p>ApiException class.</p>
  */
 @SuppressWarnings("serial")
-@javax.annotation.Generated(value = "com.whispir.codegen.JavaCustomClientCodegen", date = "2023-02-13T11:33:29.412612+13:00[Pacific/Auckland]")
+@javax.annotation.Generated(value = "com.whispir.codegen.JavaCustomClientCodegen", date = "2026-10-12T01:23:38.265904844Z[Etc/UTC]")
 public class ApiException extends Exception {
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;

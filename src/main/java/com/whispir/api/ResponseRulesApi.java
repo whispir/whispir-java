@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class ResponseRulesApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call reponseRuleListCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call reponseRuleListCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -70,10 +70,6 @@ public class ResponseRulesApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortFields", sortFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -99,15 +95,10 @@ public class ResponseRulesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call reponseRuleListValidateBeforeCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call reponseRuleListValidateBeforeCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling reponseRuleList(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling reponseRuleList(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -115,17 +106,17 @@ public class ResponseRulesApi {
             throw new ApiException("Missing the required parameter 'accept' when calling reponseRuleList(Async)");
         }
 
-        return reponseRuleListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+        return reponseRuleListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
     }
 
-    private static ApiResponse<ResponseRuleCollection> reponseRuleListWithHttpInfo(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
-        okhttp3.Call localVarCall = reponseRuleListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, null);
+    private static ApiResponse<ResponseRuleCollection> reponseRuleListWithHttpInfo(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
+        okhttp3.Call localVarCall = reponseRuleListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, null);
         Type localVarReturnType = new TypeToken<ResponseRuleCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call reponseRuleListAsync(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<ResponseRuleCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = reponseRuleListValidateBeforeCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+    private static okhttp3.Call reponseRuleListAsync(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<ResponseRuleCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = reponseRuleListValidateBeforeCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         Type localVarReturnType = new TypeToken<ResponseRuleCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -214,7 +205,6 @@ public class ResponseRulesApi {
 
     public static class ReponseRuleListRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -222,9 +212,8 @@ public class ResponseRulesApi {
         private String sortFields;
         ApiResponse _lastResponse;
 
-        private ReponseRuleListRequest(String workspaceId, String xApiKey, String accept) {
+        private ReponseRuleListRequest(String workspaceId, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
         }
 
@@ -275,7 +264,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return reponseRuleListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return reponseRuleListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
 
         /**
@@ -284,7 +273,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public ResponseRuleCollection execute() throws ApiException {
-            ApiResponse<ResponseRuleCollection> localVarResp = reponseRuleListWithHttpInfo(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+            ApiResponse<ResponseRuleCollection> localVarResp = reponseRuleListWithHttpInfo(workspaceId, accept, limit, offset, sortOrder, sortFields);
             _lastResponse = localVarResp;
             ResponseRuleCollection data = localVarResp.getData();
 
@@ -308,7 +297,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<ResponseRuleCollection> _callback) throws ApiException {
-            return reponseRuleListAsync(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return reponseRuleListAsync(workspaceId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
     }
 
@@ -364,10 +353,9 @@ public class ResponseRulesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.responserule-v1+json";
 
-        ReponseRuleListRequest request = new ReponseRuleListRequest(workspaceId, xApiKey, accept);
+        ReponseRuleListRequest request = new ReponseRuleListRequest(workspaceId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -389,7 +377,7 @@ public class ResponseRulesApi {
 
         return request.execute();
     }
-    private static okhttp3.Call responseRuleCreateCall(String workspaceId, String xApiKey, String contentType, String accept, ResponseRule responseRule, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call responseRuleCreateCall(String workspaceId, String contentType, String accept, ResponseRule responseRule, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -407,10 +395,6 @@ public class ResponseRulesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -441,15 +425,10 @@ public class ResponseRulesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call responseRuleCreateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, ResponseRule responseRule, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call responseRuleCreateValidateBeforeCall(String workspaceId, String contentType, String accept, ResponseRule responseRule, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling responseRuleCreate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling responseRuleCreate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -467,16 +446,16 @@ public class ResponseRulesApi {
             throw new ApiException("Missing the required parameter 'responseRule' when calling responseRuleCreate(Async)");
         }
 
-        return responseRuleCreateCall(workspaceId, xApiKey, contentType, accept, responseRule, _callback);
+        return responseRuleCreateCall(workspaceId, contentType, accept, responseRule, _callback);
     }
 
-    private static ApiResponse<Void> responseRuleCreateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, ResponseRule responseRule) throws ApiException {
-        okhttp3.Call localVarCall = responseRuleCreateCall(workspaceId, xApiKey, contentType, accept, responseRule, null);
+    private static ApiResponse<Void> responseRuleCreateWithHttpInfo(String workspaceId, String contentType, String accept, ResponseRule responseRule) throws ApiException {
+        okhttp3.Call localVarCall = responseRuleCreateCall(workspaceId, contentType, accept, responseRule, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call responseRuleCreateAsync(String workspaceId, String xApiKey, String contentType, String accept, ResponseRule responseRule, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = responseRuleCreateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, responseRule, _callback);
+    private static okhttp3.Call responseRuleCreateAsync(String workspaceId, String contentType, String accept, ResponseRule responseRule, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = responseRuleCreateValidateBeforeCall(workspaceId, contentType, accept, responseRule, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -651,15 +630,13 @@ public class ResponseRulesApi {
 
     public static class ResponseRuleCreateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final ResponseRule responseRule;
         ApiResponse _lastResponse;
 
-        private ResponseRuleCreateRequest(String workspaceId, String xApiKey, String contentType, String accept, ResponseRule responseRule) {
+        private ResponseRuleCreateRequest(String workspaceId, String contentType, String accept, ResponseRule responseRule) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.responseRule = responseRule;
@@ -672,7 +649,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return responseRuleCreateCall(workspaceId, xApiKey, contentType, accept, responseRule, _callback);
+            return responseRuleCreateCall(workspaceId, contentType, accept, responseRule, _callback);
         }
 
         /**
@@ -680,7 +657,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            responseRuleCreateWithHttpInfo(workspaceId, xApiKey, contentType, accept, responseRule);
+            responseRuleCreateWithHttpInfo(workspaceId, contentType, accept, responseRule);
         }
         /**
          * Return the last executed API response
@@ -698,7 +675,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return responseRuleCreateAsync(workspaceId, xApiKey, contentType, accept, responseRule, _callback);
+            return responseRuleCreateAsync(workspaceId, contentType, accept, responseRule, _callback);
         }
     }
 
@@ -746,7 +723,6 @@ public class ResponseRulesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.responserule-v1+json";
 
         String accept = "application/vnd.whispir.responserule-v1+json";
@@ -769,13 +745,13 @@ public class ResponseRulesApi {
         }
         responseRule.setResponseTemplatePatterns((com.whispir.model.TemplatePattern) responseTemplatePatternsValue);
 
-        ResponseRuleCreateRequest request = new ResponseRuleCreateRequest(workspaceId, xApiKey, contentType, accept, responseRule);
+        ResponseRuleCreateRequest request = new ResponseRuleCreateRequest(workspaceId, contentType, accept, responseRule);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call responseRuleDeleteCall(String workspaceId, String xApiKey, String responseRuleId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call responseRuleDeleteCall(String workspaceId, String responseRuleId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -794,10 +770,6 @@ public class ResponseRulesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         final String[] localVarAccepts = {
             "application/json"
@@ -819,15 +791,10 @@ public class ResponseRulesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call responseRuleDeleteValidateBeforeCall(String workspaceId, String xApiKey, String responseRuleId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call responseRuleDeleteValidateBeforeCall(String workspaceId, String responseRuleId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling responseRuleDelete(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling responseRuleDelete(Async)");
         }
 
         // verify the required parameter 'responseRuleId' is set
@@ -835,16 +802,16 @@ public class ResponseRulesApi {
             throw new ApiException("Missing the required parameter 'responseRuleId' when calling responseRuleDelete(Async)");
         }
 
-        return responseRuleDeleteCall(workspaceId, xApiKey, responseRuleId, _callback);
+        return responseRuleDeleteCall(workspaceId, responseRuleId, _callback);
     }
 
-    private static ApiResponse<Void> responseRuleDeleteWithHttpInfo(String workspaceId, String xApiKey, String responseRuleId) throws ApiException {
-        okhttp3.Call localVarCall = responseRuleDeleteCall(workspaceId, xApiKey, responseRuleId, null);
+    private static ApiResponse<Void> responseRuleDeleteWithHttpInfo(String workspaceId, String responseRuleId) throws ApiException {
+        okhttp3.Call localVarCall = responseRuleDeleteCall(workspaceId, responseRuleId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call responseRuleDeleteAsync(String workspaceId, String xApiKey, String responseRuleId, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = responseRuleDeleteValidateBeforeCall(workspaceId, xApiKey, responseRuleId, _callback);
+    private static okhttp3.Call responseRuleDeleteAsync(String workspaceId, String responseRuleId, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = responseRuleDeleteValidateBeforeCall(workspaceId, responseRuleId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -896,13 +863,11 @@ public class ResponseRulesApi {
 
     public static class ResponseRuleDeleteRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String responseRuleId;
         ApiResponse _lastResponse;
 
-        private ResponseRuleDeleteRequest(String workspaceId, String xApiKey, String responseRuleId) {
+        private ResponseRuleDeleteRequest(String workspaceId, String responseRuleId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.responseRuleId = responseRuleId;
         }
 
@@ -913,7 +878,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return responseRuleDeleteCall(workspaceId, xApiKey, responseRuleId, _callback);
+            return responseRuleDeleteCall(workspaceId, responseRuleId, _callback);
         }
 
         /**
@@ -921,7 +886,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            responseRuleDeleteWithHttpInfo(workspaceId, xApiKey, responseRuleId);
+            responseRuleDeleteWithHttpInfo(workspaceId, responseRuleId);
         }
         /**
          * Return the last executed API response
@@ -939,7 +904,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return responseRuleDeleteAsync(workspaceId, xApiKey, responseRuleId, _callback);
+            return responseRuleDeleteAsync(workspaceId, responseRuleId, _callback);
         }
     }
 
@@ -960,7 +925,6 @@ public class ResponseRulesApi {
         if(responseRuleId == null || responseRuleId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'responseRuleId'");
         }
-        ResponseRuleDeleteParams tempParams = ResponseRuleDeleteParams.builder()
             .setWorkspaceId(workspaceId)
             .setResponseRuleId(responseRuleId).build();
 
@@ -982,19 +946,18 @@ public class ResponseRulesApi {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
 
-
         String responseRuleId = params.getResponseRuleId();
 
         if(responseRuleId == null || responseRuleId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'responseRuleId'");
         }
-        ResponseRuleDeleteRequest request = new ResponseRuleDeleteRequest(workspaceId, xApiKey, responseRuleId);
+        ResponseRuleDeleteRequest request = new ResponseRuleDeleteRequest(workspaceId, responseRuleId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call responseRuleRetrieveCall(String workspaceId, String xApiKey, String accept, String responseRuleId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call responseRuleRetrieveCall(String workspaceId, String accept, String responseRuleId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1013,10 +976,6 @@ public class ResponseRulesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -1043,15 +1002,10 @@ public class ResponseRulesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call responseRuleRetrieveValidateBeforeCall(String workspaceId, String xApiKey, String accept, String responseRuleId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call responseRuleRetrieveValidateBeforeCall(String workspaceId, String accept, String responseRuleId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling responseRuleRetrieve(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling responseRuleRetrieve(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -1064,17 +1018,17 @@ public class ResponseRulesApi {
             throw new ApiException("Missing the required parameter 'responseRuleId' when calling responseRuleRetrieve(Async)");
         }
 
-        return responseRuleRetrieveCall(workspaceId, xApiKey, accept, responseRuleId, _callback);
+        return responseRuleRetrieveCall(workspaceId, accept, responseRuleId, _callback);
     }
 
-    private static ApiResponse<ResponseRule> responseRuleRetrieveWithHttpInfo(String workspaceId, String xApiKey, String accept, String responseRuleId) throws ApiException {
-        okhttp3.Call localVarCall = responseRuleRetrieveCall(workspaceId, xApiKey, accept, responseRuleId, null);
+    private static ApiResponse<ResponseRule> responseRuleRetrieveWithHttpInfo(String workspaceId, String accept, String responseRuleId) throws ApiException {
+        okhttp3.Call localVarCall = responseRuleRetrieveCall(workspaceId, accept, responseRuleId, null);
         Type localVarReturnType = new TypeToken<ResponseRule>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call responseRuleRetrieveAsync(String workspaceId, String xApiKey, String accept, String responseRuleId, final ApiCallback<ResponseRule> _callback) throws ApiException {
-        okhttp3.Call localVarCall = responseRuleRetrieveValidateBeforeCall(workspaceId, xApiKey, accept, responseRuleId, _callback);
+    private static okhttp3.Call responseRuleRetrieveAsync(String workspaceId, String accept, String responseRuleId, final ApiCallback<ResponseRule> _callback) throws ApiException {
+        okhttp3.Call localVarCall = responseRuleRetrieveValidateBeforeCall(workspaceId, accept, responseRuleId, _callback);
         Type localVarReturnType = new TypeToken<ResponseRule>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1127,14 +1081,12 @@ public class ResponseRulesApi {
 
     public static class ResponseRuleRetrieveRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private final String responseRuleId;
         ApiResponse _lastResponse;
 
-        private ResponseRuleRetrieveRequest(String workspaceId, String xApiKey, String accept, String responseRuleId) {
+        private ResponseRuleRetrieveRequest(String workspaceId, String accept, String responseRuleId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
             this.responseRuleId = responseRuleId;
         }
@@ -1146,7 +1098,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return responseRuleRetrieveCall(workspaceId, xApiKey, accept, responseRuleId, _callback);
+            return responseRuleRetrieveCall(workspaceId, accept, responseRuleId, _callback);
         }
 
         /**
@@ -1155,7 +1107,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public ResponseRule execute() throws ApiException {
-            ApiResponse<ResponseRule> localVarResp = responseRuleRetrieveWithHttpInfo(workspaceId, xApiKey, accept, responseRuleId);
+            ApiResponse<ResponseRule> localVarResp = responseRuleRetrieveWithHttpInfo(workspaceId, accept, responseRuleId);
             _lastResponse = localVarResp;
             ResponseRule data = localVarResp.getData();
 
@@ -1179,7 +1131,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<ResponseRule> _callback) throws ApiException {
-            return responseRuleRetrieveAsync(workspaceId, xApiKey, accept, responseRuleId, _callback);
+            return responseRuleRetrieveAsync(workspaceId, accept, responseRuleId, _callback);
         }
     }
 
@@ -1221,7 +1173,6 @@ public class ResponseRulesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.responserule-v1+json";
 
 
@@ -1230,13 +1181,13 @@ public class ResponseRulesApi {
         if(responseRuleId == null || responseRuleId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'responseRuleId'");
         }
-        ResponseRuleRetrieveRequest request = new ResponseRuleRetrieveRequest(workspaceId, xApiKey, accept, responseRuleId);
+        ResponseRuleRetrieveRequest request = new ResponseRuleRetrieveRequest(workspaceId, accept, responseRuleId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call responseRuleUpdateCall(String workspaceId, String xApiKey, String contentType, String accept, String responseRuleId, ResponseRule responseRule, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call responseRuleUpdateCall(String workspaceId, String contentType, String accept, String responseRuleId, ResponseRule responseRule, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1255,10 +1206,6 @@ public class ResponseRulesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -1289,15 +1236,10 @@ public class ResponseRulesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call responseRuleUpdateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, String responseRuleId, ResponseRule responseRule, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call responseRuleUpdateValidateBeforeCall(String workspaceId, String contentType, String accept, String responseRuleId, ResponseRule responseRule, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling responseRuleUpdate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling responseRuleUpdate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -1320,16 +1262,16 @@ public class ResponseRulesApi {
             throw new ApiException("Missing the required parameter 'responseRule' when calling responseRuleUpdate(Async)");
         }
 
-        return responseRuleUpdateCall(workspaceId, xApiKey, contentType, accept, responseRuleId, responseRule, _callback);
+        return responseRuleUpdateCall(workspaceId, contentType, accept, responseRuleId, responseRule, _callback);
     }
 
-    private static ApiResponse<Void> responseRuleUpdateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, String responseRuleId, ResponseRule responseRule) throws ApiException {
-        okhttp3.Call localVarCall = responseRuleUpdateCall(workspaceId, xApiKey, contentType, accept, responseRuleId, responseRule, null);
+    private static ApiResponse<Void> responseRuleUpdateWithHttpInfo(String workspaceId, String contentType, String accept, String responseRuleId, ResponseRule responseRule) throws ApiException {
+        okhttp3.Call localVarCall = responseRuleUpdateCall(workspaceId, contentType, accept, responseRuleId, responseRule, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call responseRuleUpdateAsync(String workspaceId, String xApiKey, String contentType, String accept, String responseRuleId, ResponseRule responseRule, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = responseRuleUpdateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, responseRuleId, responseRule, _callback);
+    private static okhttp3.Call responseRuleUpdateAsync(String workspaceId, String contentType, String accept, String responseRuleId, ResponseRule responseRule, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = responseRuleUpdateValidateBeforeCall(workspaceId, contentType, accept, responseRuleId, responseRule, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1516,16 +1458,14 @@ public class ResponseRulesApi {
 
     public static class ResponseRuleUpdateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String responseRuleId;
         private final ResponseRule responseRule;
         ApiResponse _lastResponse;
 
-        private ResponseRuleUpdateRequest(String workspaceId, String xApiKey, String contentType, String accept, String responseRuleId, ResponseRule responseRule) {
+        private ResponseRuleUpdateRequest(String workspaceId, String contentType, String accept, String responseRuleId, ResponseRule responseRule) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.responseRuleId = responseRuleId;
@@ -1539,7 +1479,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return responseRuleUpdateCall(workspaceId, xApiKey, contentType, accept, responseRuleId, responseRule, _callback);
+            return responseRuleUpdateCall(workspaceId, contentType, accept, responseRuleId, responseRule, _callback);
         }
 
         /**
@@ -1547,7 +1487,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            responseRuleUpdateWithHttpInfo(workspaceId, xApiKey, contentType, accept, responseRuleId, responseRule);
+            responseRuleUpdateWithHttpInfo(workspaceId, contentType, accept, responseRuleId, responseRule);
         }
         /**
          * Return the last executed API response
@@ -1565,7 +1505,7 @@ public class ResponseRulesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return responseRuleUpdateAsync(workspaceId, xApiKey, contentType, accept, responseRuleId, responseRule, _callback);
+            return responseRuleUpdateAsync(workspaceId, contentType, accept, responseRuleId, responseRule, _callback);
         }
     }
 
@@ -1619,7 +1559,6 @@ public class ResponseRulesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.responserule-v1+json";
 
         String accept = "application/vnd.whispir.responserule-v1+json";
@@ -1648,7 +1587,7 @@ public class ResponseRulesApi {
         }
         responseRule.setResponseTemplatePatterns((com.whispir.model.TemplatePattern) responseTemplatePatternsValue);
 
-        ResponseRuleUpdateRequest request = new ResponseRuleUpdateRequest(workspaceId, xApiKey, contentType, accept, responseRuleId, responseRule);
+        ResponseRuleUpdateRequest request = new ResponseRuleUpdateRequest(workspaceId, contentType, accept, responseRuleId, responseRule);
 
         // Ensure to include all of the 'optionalParams' that are passed
 

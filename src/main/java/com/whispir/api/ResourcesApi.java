@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class ResourcesApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call resourceCreateCall(String workspaceId, String xApiKey, String contentType, String accept, Resource resource, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceCreateCall(String workspaceId, String contentType, String accept, Resource resource, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -53,10 +53,6 @@ public class ResourcesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -88,15 +84,10 @@ public class ResourcesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call resourceCreateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, Resource resource, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceCreateValidateBeforeCall(String workspaceId, String contentType, String accept, Resource resource, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling resourceCreate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling resourceCreate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -114,17 +105,17 @@ public class ResourcesApi {
             throw new ApiException("Missing the required parameter 'resource' when calling resourceCreate(Async)");
         }
 
-        return resourceCreateCall(workspaceId, xApiKey, contentType, accept, resource, _callback);
+        return resourceCreateCall(workspaceId, contentType, accept, resource, _callback);
     }
 
-    private static ApiResponse<Resource> resourceCreateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, Resource resource) throws ApiException {
-        okhttp3.Call localVarCall = resourceCreateCall(workspaceId, xApiKey, contentType, accept, resource, null);
+    private static ApiResponse<Resource> resourceCreateWithHttpInfo(String workspaceId, String contentType, String accept, Resource resource) throws ApiException {
+        okhttp3.Call localVarCall = resourceCreateCall(workspaceId, contentType, accept, resource, null);
         Type localVarReturnType = new TypeToken<Resource>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call resourceCreateAsync(String workspaceId, String xApiKey, String contentType, String accept, Resource resource, final ApiCallback<Resource> _callback) throws ApiException {
-        okhttp3.Call localVarCall = resourceCreateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, resource, _callback);
+    private static okhttp3.Call resourceCreateAsync(String workspaceId, String contentType, String accept, Resource resource, final ApiCallback<Resource> _callback) throws ApiException {
+        okhttp3.Call localVarCall = resourceCreateValidateBeforeCall(workspaceId, contentType, accept, resource, _callback);
         Type localVarReturnType = new TypeToken<Resource>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -254,15 +245,13 @@ public class ResourcesApi {
 
     public static class ResourceCreateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final Resource resource;
         ApiResponse _lastResponse;
 
-        private ResourceCreateRequest(String workspaceId, String xApiKey, String contentType, String accept, Resource resource) {
+        private ResourceCreateRequest(String workspaceId, String contentType, String accept, Resource resource) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.resource = resource;
@@ -275,7 +264,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return resourceCreateCall(workspaceId, xApiKey, contentType, accept, resource, _callback);
+            return resourceCreateCall(workspaceId, contentType, accept, resource, _callback);
         }
 
         /**
@@ -284,7 +273,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Resource execute() throws ApiException {
-            ApiResponse<Resource> localVarResp = resourceCreateWithHttpInfo(workspaceId, xApiKey, contentType, accept, resource);
+            ApiResponse<Resource> localVarResp = resourceCreateWithHttpInfo(workspaceId, contentType, accept, resource);
             _lastResponse = localVarResp;
             Resource data = localVarResp.getData();
 
@@ -317,7 +306,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Resource> _callback) throws ApiException {
-            return resourceCreateAsync(workspaceId, xApiKey, contentType, accept, resource, _callback);
+            return resourceCreateAsync(workspaceId, contentType, accept, resource, _callback);
         }
     }
 
@@ -373,7 +362,6 @@ public class ResourcesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.resource-v1+json";
 
         String accept = "application/vnd.whispir.resource-v1+json";
@@ -405,13 +393,13 @@ public class ResourcesApi {
         }
         resource.setDerefUri(derefUriValue);
 
-        ResourceCreateRequest request = new ResourceCreateRequest(workspaceId, xApiKey, contentType, accept, resource);
+        ResourceCreateRequest request = new ResourceCreateRequest(workspaceId, contentType, accept, resource);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call resourceDeleteCall(String workspaceId, String xApiKey, String resourceId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceDeleteCall(String workspaceId, String resourceId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -430,10 +418,6 @@ public class ResourcesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         final String[] localVarAccepts = {
             "application/json"
@@ -455,15 +439,10 @@ public class ResourcesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call resourceDeleteValidateBeforeCall(String workspaceId, String xApiKey, String resourceId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceDeleteValidateBeforeCall(String workspaceId, String resourceId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling resourceDelete(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling resourceDelete(Async)");
         }
 
         // verify the required parameter 'resourceId' is set
@@ -471,16 +450,16 @@ public class ResourcesApi {
             throw new ApiException("Missing the required parameter 'resourceId' when calling resourceDelete(Async)");
         }
 
-        return resourceDeleteCall(workspaceId, xApiKey, resourceId, _callback);
+        return resourceDeleteCall(workspaceId, resourceId, _callback);
     }
 
-    private static ApiResponse<Void> resourceDeleteWithHttpInfo(String workspaceId, String xApiKey, String resourceId) throws ApiException {
-        okhttp3.Call localVarCall = resourceDeleteCall(workspaceId, xApiKey, resourceId, null);
+    private static ApiResponse<Void> resourceDeleteWithHttpInfo(String workspaceId, String resourceId) throws ApiException {
+        okhttp3.Call localVarCall = resourceDeleteCall(workspaceId, resourceId, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call resourceDeleteAsync(String workspaceId, String xApiKey, String resourceId, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = resourceDeleteValidateBeforeCall(workspaceId, xApiKey, resourceId, _callback);
+    private static okhttp3.Call resourceDeleteAsync(String workspaceId, String resourceId, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = resourceDeleteValidateBeforeCall(workspaceId, resourceId, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -532,13 +511,11 @@ public class ResourcesApi {
 
     public static class ResourceDeleteRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String resourceId;
         ApiResponse _lastResponse;
 
-        private ResourceDeleteRequest(String workspaceId, String xApiKey, String resourceId) {
+        private ResourceDeleteRequest(String workspaceId, String resourceId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.resourceId = resourceId;
         }
 
@@ -549,7 +526,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return resourceDeleteCall(workspaceId, xApiKey, resourceId, _callback);
+            return resourceDeleteCall(workspaceId, resourceId, _callback);
         }
 
         /**
@@ -557,7 +534,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            resourceDeleteWithHttpInfo(workspaceId, xApiKey, resourceId);
+            resourceDeleteWithHttpInfo(workspaceId, resourceId);
         }
         /**
          * Return the last executed API response
@@ -575,7 +552,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return resourceDeleteAsync(workspaceId, xApiKey, resourceId, _callback);
+            return resourceDeleteAsync(workspaceId, resourceId, _callback);
         }
     }
 
@@ -596,7 +573,6 @@ public class ResourcesApi {
         if(resourceId == null || resourceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'resourceId'");
         }
-        ResourceDeleteParams tempParams = ResourceDeleteParams.builder()
             .setWorkspaceId(workspaceId)
             .setResourceId(resourceId).build();
 
@@ -618,19 +594,18 @@ public class ResourcesApi {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
 
-
         String resourceId = params.getResourceId();
 
         if(resourceId == null || resourceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'resourceId'");
         }
-        ResourceDeleteRequest request = new ResourceDeleteRequest(workspaceId, xApiKey, resourceId);
+        ResourceDeleteRequest request = new ResourceDeleteRequest(workspaceId, resourceId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         request.execute();
     }
-    private static okhttp3.Call resourceListCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String scope, String name, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceListCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String scope, String name, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -673,10 +648,6 @@ public class ResourcesApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("name", name));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -702,15 +673,10 @@ public class ResourcesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call resourceListValidateBeforeCall(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String scope, String name, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceListValidateBeforeCall(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String scope, String name, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling resourceList(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling resourceList(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -718,17 +684,17 @@ public class ResourcesApi {
             throw new ApiException("Missing the required parameter 'accept' when calling resourceList(Async)");
         }
 
-        return resourceListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name, _callback);
+        return resourceListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, scope, name, _callback);
     }
 
-    private static ApiResponse<ResourceCollection> resourceListWithHttpInfo(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String scope, String name) throws ApiException {
-        okhttp3.Call localVarCall = resourceListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name, null);
+    private static ApiResponse<ResourceCollection> resourceListWithHttpInfo(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String scope, String name) throws ApiException {
+        okhttp3.Call localVarCall = resourceListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, scope, name, null);
         Type localVarReturnType = new TypeToken<ResourceCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call resourceListAsync(String workspaceId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String scope, String name, final ApiCallback<ResourceCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = resourceListValidateBeforeCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name, _callback);
+    private static okhttp3.Call resourceListAsync(String workspaceId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, String scope, String name, final ApiCallback<ResourceCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = resourceListValidateBeforeCall(workspaceId, accept, limit, offset, sortOrder, sortFields, scope, name, _callback);
         Type localVarReturnType = new TypeToken<ResourceCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -841,7 +807,6 @@ public class ResourcesApi {
 
     public static class ResourceListRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -851,9 +816,8 @@ public class ResourcesApi {
         private String name;
         ApiResponse _lastResponse;
 
-        private ResourceListRequest(String workspaceId, String xApiKey, String accept) {
+        private ResourceListRequest(String workspaceId, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
         }
 
@@ -924,7 +888,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return resourceListCall(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name, _callback);
+            return resourceListCall(workspaceId, accept, limit, offset, sortOrder, sortFields, scope, name, _callback);
         }
 
         /**
@@ -933,7 +897,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public ResourceCollection execute() throws ApiException {
-            ApiResponse<ResourceCollection> localVarResp = resourceListWithHttpInfo(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name);
+            ApiResponse<ResourceCollection> localVarResp = resourceListWithHttpInfo(workspaceId, accept, limit, offset, sortOrder, sortFields, scope, name);
             _lastResponse = localVarResp;
             ResourceCollection data = localVarResp.getData();
 
@@ -957,7 +921,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<ResourceCollection> _callback) throws ApiException {
-            return resourceListAsync(workspaceId, xApiKey, accept, limit, offset, sortOrder, sortFields, scope, name, _callback);
+            return resourceListAsync(workspaceId, accept, limit, offset, sortOrder, sortFields, scope, name, _callback);
         }
     }
 
@@ -1023,10 +987,9 @@ public class ResourcesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.resource-v1+json";
 
-        ResourceListRequest request = new ResourceListRequest(workspaceId, xApiKey, accept);
+        ResourceListRequest request = new ResourceListRequest(workspaceId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -1056,7 +1019,7 @@ public class ResourcesApi {
 
         return request.execute();
     }
-    private static okhttp3.Call resourceRetrieveCall(String workspaceId, String xApiKey, String accept, String resourceId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceRetrieveCall(String workspaceId, String accept, String resourceId, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1075,10 +1038,6 @@ public class ResourcesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
@@ -1105,15 +1064,10 @@ public class ResourcesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call resourceRetrieveValidateBeforeCall(String workspaceId, String xApiKey, String accept, String resourceId, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceRetrieveValidateBeforeCall(String workspaceId, String accept, String resourceId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling resourceRetrieve(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling resourceRetrieve(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -1126,17 +1080,17 @@ public class ResourcesApi {
             throw new ApiException("Missing the required parameter 'resourceId' when calling resourceRetrieve(Async)");
         }
 
-        return resourceRetrieveCall(workspaceId, xApiKey, accept, resourceId, _callback);
+        return resourceRetrieveCall(workspaceId, accept, resourceId, _callback);
     }
 
-    private static ApiResponse<Resource> resourceRetrieveWithHttpInfo(String workspaceId, String xApiKey, String accept, String resourceId) throws ApiException {
-        okhttp3.Call localVarCall = resourceRetrieveCall(workspaceId, xApiKey, accept, resourceId, null);
+    private static ApiResponse<Resource> resourceRetrieveWithHttpInfo(String workspaceId, String accept, String resourceId) throws ApiException {
+        okhttp3.Call localVarCall = resourceRetrieveCall(workspaceId, accept, resourceId, null);
         Type localVarReturnType = new TypeToken<Resource>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call resourceRetrieveAsync(String workspaceId, String xApiKey, String accept, String resourceId, final ApiCallback<Resource> _callback) throws ApiException {
-        okhttp3.Call localVarCall = resourceRetrieveValidateBeforeCall(workspaceId, xApiKey, accept, resourceId, _callback);
+    private static okhttp3.Call resourceRetrieveAsync(String workspaceId, String accept, String resourceId, final ApiCallback<Resource> _callback) throws ApiException {
+        okhttp3.Call localVarCall = resourceRetrieveValidateBeforeCall(workspaceId, accept, resourceId, _callback);
         Type localVarReturnType = new TypeToken<Resource>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1189,14 +1143,12 @@ public class ResourcesApi {
 
     public static class ResourceRetrieveRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private final String resourceId;
         ApiResponse _lastResponse;
 
-        private ResourceRetrieveRequest(String workspaceId, String xApiKey, String accept, String resourceId) {
+        private ResourceRetrieveRequest(String workspaceId, String accept, String resourceId) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
             this.resourceId = resourceId;
         }
@@ -1208,7 +1160,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return resourceRetrieveCall(workspaceId, xApiKey, accept, resourceId, _callback);
+            return resourceRetrieveCall(workspaceId, accept, resourceId, _callback);
         }
 
         /**
@@ -1217,7 +1169,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Resource execute() throws ApiException {
-            ApiResponse<Resource> localVarResp = resourceRetrieveWithHttpInfo(workspaceId, xApiKey, accept, resourceId);
+            ApiResponse<Resource> localVarResp = resourceRetrieveWithHttpInfo(workspaceId, accept, resourceId);
             _lastResponse = localVarResp;
             Resource data = localVarResp.getData();
 
@@ -1241,7 +1193,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Resource> _callback) throws ApiException {
-            return resourceRetrieveAsync(workspaceId, xApiKey, accept, resourceId, _callback);
+            return resourceRetrieveAsync(workspaceId, accept, resourceId, _callback);
         }
     }
 
@@ -1283,7 +1235,6 @@ public class ResourcesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.resource-v1+json";
 
 
@@ -1292,13 +1243,13 @@ public class ResourcesApi {
         if(resourceId == null || resourceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'resourceId'");
         }
-        ResourceRetrieveRequest request = new ResourceRetrieveRequest(workspaceId, xApiKey, accept, resourceId);
+        ResourceRetrieveRequest request = new ResourceRetrieveRequest(workspaceId, accept, resourceId);
 
         // Ensure to include all of the 'optionalParams' that are passed
 
         return request.execute();
     }
-    private static okhttp3.Call resourceUpdateCall(String workspaceId, String xApiKey, String contentType, String accept, String resourceId, Resource resource, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceUpdateCall(String workspaceId, String contentType, String accept, String resourceId, Resource resource, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1317,10 +1268,6 @@ public class ResourcesApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -1352,15 +1299,10 @@ public class ResourcesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call resourceUpdateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, String resourceId, Resource resource, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call resourceUpdateValidateBeforeCall(String workspaceId, String contentType, String accept, String resourceId, Resource resource, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling resourceUpdate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling resourceUpdate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -1383,17 +1325,17 @@ public class ResourcesApi {
             throw new ApiException("Missing the required parameter 'resource' when calling resourceUpdate(Async)");
         }
 
-        return resourceUpdateCall(workspaceId, xApiKey, contentType, accept, resourceId, resource, _callback);
+        return resourceUpdateCall(workspaceId, contentType, accept, resourceId, resource, _callback);
     }
 
-    private static ApiResponse<Resource> resourceUpdateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, String resourceId, Resource resource) throws ApiException {
-        okhttp3.Call localVarCall = resourceUpdateCall(workspaceId, xApiKey, contentType, accept, resourceId, resource, null);
+    private static ApiResponse<Resource> resourceUpdateWithHttpInfo(String workspaceId, String contentType, String accept, String resourceId, Resource resource) throws ApiException {
+        okhttp3.Call localVarCall = resourceUpdateCall(workspaceId, contentType, accept, resourceId, resource, null);
         Type localVarReturnType = new TypeToken<Resource>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call resourceUpdateAsync(String workspaceId, String xApiKey, String contentType, String accept, String resourceId, Resource resource, final ApiCallback<Resource> _callback) throws ApiException {
-        okhttp3.Call localVarCall = resourceUpdateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, resourceId, resource, _callback);
+    private static okhttp3.Call resourceUpdateAsync(String workspaceId, String contentType, String accept, String resourceId, Resource resource, final ApiCallback<Resource> _callback) throws ApiException {
+        okhttp3.Call localVarCall = resourceUpdateValidateBeforeCall(workspaceId, contentType, accept, resourceId, resource, _callback);
         Type localVarReturnType = new TypeToken<Resource>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1535,16 +1477,14 @@ public class ResourcesApi {
 
     public static class ResourceUpdateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private final String resourceId;
         private final Resource resource;
         ApiResponse _lastResponse;
 
-        private ResourceUpdateRequest(String workspaceId, String xApiKey, String contentType, String accept, String resourceId, Resource resource) {
+        private ResourceUpdateRequest(String workspaceId, String contentType, String accept, String resourceId, Resource resource) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
             this.resourceId = resourceId;
@@ -1558,7 +1498,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return resourceUpdateCall(workspaceId, xApiKey, contentType, accept, resourceId, resource, _callback);
+            return resourceUpdateCall(workspaceId, contentType, accept, resourceId, resource, _callback);
         }
 
         /**
@@ -1567,7 +1507,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Resource execute() throws ApiException {
-            ApiResponse<Resource> localVarResp = resourceUpdateWithHttpInfo(workspaceId, xApiKey, contentType, accept, resourceId, resource);
+            ApiResponse<Resource> localVarResp = resourceUpdateWithHttpInfo(workspaceId, contentType, accept, resourceId, resource);
             _lastResponse = localVarResp;
             Resource data = localVarResp.getData();
 
@@ -1591,7 +1531,7 @@ public class ResourcesApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Resource> _callback) throws ApiException {
-            return resourceUpdateAsync(workspaceId, xApiKey, contentType, accept, resourceId, resource, _callback);
+            return resourceUpdateAsync(workspaceId, contentType, accept, resourceId, resource, _callback);
         }
     }
 
@@ -1653,7 +1593,6 @@ public class ResourcesApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.resource-v1+json";
 
         String accept = "application/vnd.whispir.resource-v1+json";
@@ -1691,7 +1630,7 @@ public class ResourcesApi {
         }
         resource.setDerefUri(derefUriValue);
 
-        ResourceUpdateRequest request = new ResourceUpdateRequest(workspaceId, xApiKey, contentType, accept, resourceId, resource);
+        ResourceUpdateRequest request = new ResourceUpdateRequest(workspaceId, contentType, accept, resourceId, resource);
 
         // Ensure to include all of the 'optionalParams' that are passed
 

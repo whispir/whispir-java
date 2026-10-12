@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class EventsApi {
     private static ApiClient localVarApiClient = Configuration.getDefaultApiClient();
 
-    private static okhttp3.Call eventCreateCall(String workspaceId, String xApiKey, String contentType, String accept, Event event, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call eventCreateCall(String workspaceId, String contentType, String accept, Event event, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -53,10 +53,6 @@ public class EventsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -88,15 +84,10 @@ public class EventsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call eventCreateValidateBeforeCall(String workspaceId, String xApiKey, String contentType, String accept, Event event, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call eventCreateValidateBeforeCall(String workspaceId, String contentType, String accept, Event event, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling eventCreate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling eventCreate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -109,17 +100,17 @@ public class EventsApi {
             throw new ApiException("Missing the required parameter 'accept' when calling eventCreate(Async)");
         }
 
-        return eventCreateCall(workspaceId, xApiKey, contentType, accept, event, _callback);
+        return eventCreateCall(workspaceId, contentType, accept, event, _callback);
     }
 
-    private static ApiResponse<Event> eventCreateWithHttpInfo(String workspaceId, String xApiKey, String contentType, String accept, Event event) throws ApiException {
-        okhttp3.Call localVarCall = eventCreateCall(workspaceId, xApiKey, contentType, accept, event, null);
+    private static ApiResponse<Event> eventCreateWithHttpInfo(String workspaceId, String contentType, String accept, Event event) throws ApiException {
+        okhttp3.Call localVarCall = eventCreateCall(workspaceId, contentType, accept, event, null);
         Type localVarReturnType = new TypeToken<Event>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call eventCreateAsync(String workspaceId, String xApiKey, String contentType, String accept, Event event, final ApiCallback<Event> _callback) throws ApiException {
-        okhttp3.Call localVarCall = eventCreateValidateBeforeCall(workspaceId, xApiKey, contentType, accept, event, _callback);
+    private static okhttp3.Call eventCreateAsync(String workspaceId, String contentType, String accept, Event event, final ApiCallback<Event> _callback) throws ApiException {
+        okhttp3.Call localVarCall = eventCreateValidateBeforeCall(workspaceId, contentType, accept, event, _callback);
         Type localVarReturnType = new TypeToken<Event>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -172,15 +163,13 @@ public class EventsApi {
 
     public static class EventCreateRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private Event event;
         ApiResponse _lastResponse;
 
-        private EventCreateRequest(String workspaceId, String xApiKey, String contentType, String accept) {
+        private EventCreateRequest(String workspaceId, String contentType, String accept) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
         }
@@ -202,7 +191,7 @@ public class EventsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return eventCreateCall(workspaceId, xApiKey, contentType, accept, event, _callback);
+            return eventCreateCall(workspaceId, contentType, accept, event, _callback);
         }
 
         /**
@@ -211,7 +200,7 @@ public class EventsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Event execute() throws ApiException {
-            ApiResponse<Event> localVarResp = eventCreateWithHttpInfo(workspaceId, xApiKey, contentType, accept, event);
+            ApiResponse<Event> localVarResp = eventCreateWithHttpInfo(workspaceId, contentType, accept, event);
             _lastResponse = localVarResp;
             Event data = localVarResp.getData();
 
@@ -244,7 +233,7 @@ public class EventsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Event> _callback) throws ApiException {
-            return eventCreateAsync(workspaceId, xApiKey, contentType, accept, event, _callback);
+            return eventCreateAsync(workspaceId, contentType, accept, event, _callback);
         }
     }
 
@@ -285,12 +274,11 @@ public class EventsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String contentType = "application/vnd.whispir.event-v1+json";
 
         String accept = "application/vnd.whispir.event-v1+json";
 
-        EventCreateRequest request = new EventCreateRequest(workspaceId, xApiKey, contentType, accept);
+        EventCreateRequest request = new EventCreateRequest(workspaceId, contentType, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.event != null){
@@ -300,7 +288,7 @@ public class EventsApi {
 
         return request.execute();
     }
-    private static okhttp3.Call eventListCall(String workspaceId, String xApiKey, String accept, String eventType, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call eventListCall(String workspaceId, String accept, String eventType, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -335,10 +323,6 @@ public class EventsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortFields", sortFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -368,15 +352,10 @@ public class EventsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call eventListValidateBeforeCall(String workspaceId, String xApiKey, String accept, String eventType, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call eventListValidateBeforeCall(String workspaceId, String accept, String eventType, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling eventList(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling eventList(Async)");
         }
 
         // verify the required parameter 'accept' is set
@@ -389,17 +368,17 @@ public class EventsApi {
             throw new ApiException("Missing the required parameter 'eventType' when calling eventList(Async)");
         }
 
-        return eventListCall(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields, _callback);
+        return eventListCall(workspaceId, accept, eventType, limit, offset, sortOrder, sortFields, _callback);
     }
 
-    private static ApiResponse<EventCollection> eventListWithHttpInfo(String workspaceId, String xApiKey, String accept, String eventType, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
-        okhttp3.Call localVarCall = eventListCall(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields, null);
+    private static ApiResponse<EventCollection> eventListWithHttpInfo(String workspaceId, String accept, String eventType, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
+        okhttp3.Call localVarCall = eventListCall(workspaceId, accept, eventType, limit, offset, sortOrder, sortFields, null);
         Type localVarReturnType = new TypeToken<EventCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call eventListAsync(String workspaceId, String xApiKey, String accept, String eventType, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<EventCollection> _callback) throws ApiException {
-        okhttp3.Call localVarCall = eventListValidateBeforeCall(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields, _callback);
+    private static okhttp3.Call eventListAsync(String workspaceId, String accept, String eventType, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<EventCollection> _callback) throws ApiException {
+        okhttp3.Call localVarCall = eventListValidateBeforeCall(workspaceId, accept, eventType, limit, offset, sortOrder, sortFields, _callback);
         Type localVarReturnType = new TypeToken<EventCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -500,7 +479,6 @@ public class EventsApi {
 
     public static class EventListRequest {
         private final String workspaceId;
-        private final String xApiKey;
         private final String accept;
         private final String eventType;
         private BigDecimal limit;
@@ -509,9 +487,8 @@ public class EventsApi {
         private String sortFields;
         ApiResponse _lastResponse;
 
-        private EventListRequest(String workspaceId, String xApiKey, String accept, String eventType) {
+        private EventListRequest(String workspaceId, String accept, String eventType) {
             this.workspaceId = workspaceId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
             this.eventType = eventType;
         }
@@ -563,7 +540,7 @@ public class EventsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return eventListCall(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields, _callback);
+            return eventListCall(workspaceId, accept, eventType, limit, offset, sortOrder, sortFields, _callback);
         }
 
         /**
@@ -572,7 +549,7 @@ public class EventsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public EventCollection execute() throws ApiException {
-            ApiResponse<EventCollection> localVarResp = eventListWithHttpInfo(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields);
+            ApiResponse<EventCollection> localVarResp = eventListWithHttpInfo(workspaceId, accept, eventType, limit, offset, sortOrder, sortFields);
             _lastResponse = localVarResp;
             EventCollection data = localVarResp.getData();
 
@@ -596,7 +573,7 @@ public class EventsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<EventCollection> _callback) throws ApiException {
-            return eventListAsync(workspaceId, xApiKey, accept, eventType, limit, offset, sortOrder, sortFields, _callback);
+            return eventListAsync(workspaceId, accept, eventType, limit, offset, sortOrder, sortFields, _callback);
         }
     }
 
@@ -658,7 +635,6 @@ public class EventsApi {
         if(workspaceId == null || workspaceId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'workspaceId'");
         }
-
         String accept = "application/vnd.whispir.event-v1+json";
 
 
@@ -667,7 +643,7 @@ public class EventsApi {
         if(eventType == null || eventType.isEmpty()) {
             throw new ApiException("Missing the required parameter 'eventType'");
         }
-        EventListRequest request = new EventListRequest(workspaceId, xApiKey, accept, eventType);
+        EventListRequest request = new EventListRequest(workspaceId, accept, eventType);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -689,7 +665,7 @@ public class EventsApi {
 
         return request.execute();
     }
-    private static okhttp3.Call eventRetrieveCall(String workspaceId, String eventId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call eventRetrieveCall(String workspaceId, String eventId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -725,10 +701,6 @@ public class EventsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("sortFields", sortFields));
         }
 
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
-
         if (accept != null) {
             localVarHeaderParams.put("Accept", localVarApiClient.parameterToString(accept));
         }
@@ -754,7 +726,7 @@ public class EventsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call eventRetrieveValidateBeforeCall(String workspaceId, String eventId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call eventRetrieveValidateBeforeCall(String workspaceId, String eventId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling eventRetrieve(Async)");
@@ -765,27 +737,22 @@ public class EventsApi {
             throw new ApiException("Missing the required parameter 'eventId' when calling eventRetrieve(Async)");
         }
 
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling eventRetrieve(Async)");
-        }
-
         // verify the required parameter 'accept' is set
         if (accept == null) {
             throw new ApiException("Missing the required parameter 'accept' when calling eventRetrieve(Async)");
         }
 
-        return eventRetrieveCall(workspaceId, eventId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+        return eventRetrieveCall(workspaceId, eventId, accept, limit, offset, sortOrder, sortFields, _callback);
     }
 
-    private static ApiResponse<Event> eventRetrieveWithHttpInfo(String workspaceId, String eventId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
-        okhttp3.Call localVarCall = eventRetrieveCall(workspaceId, eventId, xApiKey, accept, limit, offset, sortOrder, sortFields, null);
+    private static ApiResponse<Event> eventRetrieveWithHttpInfo(String workspaceId, String eventId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields) throws ApiException {
+        okhttp3.Call localVarCall = eventRetrieveCall(workspaceId, eventId, accept, limit, offset, sortOrder, sortFields, null);
         Type localVarReturnType = new TypeToken<Event>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private static okhttp3.Call eventRetrieveAsync(String workspaceId, String eventId, String xApiKey, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<Event> _callback) throws ApiException {
-        okhttp3.Call localVarCall = eventRetrieveValidateBeforeCall(workspaceId, eventId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+    private static okhttp3.Call eventRetrieveAsync(String workspaceId, String eventId, String accept, BigDecimal limit, BigDecimal offset, String sortOrder, String sortFields, final ApiCallback<Event> _callback) throws ApiException {
+        okhttp3.Call localVarCall = eventRetrieveValidateBeforeCall(workspaceId, eventId, accept, limit, offset, sortOrder, sortFields, _callback);
         Type localVarReturnType = new TypeToken<Event>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -887,7 +854,6 @@ public class EventsApi {
     public static class EventRetrieveRequest {
         private final String workspaceId;
         private final String eventId;
-        private final String xApiKey;
         private final String accept;
         private BigDecimal limit;
         private BigDecimal offset;
@@ -895,10 +861,9 @@ public class EventsApi {
         private String sortFields;
         ApiResponse _lastResponse;
 
-        private EventRetrieveRequest(String workspaceId, String eventId, String xApiKey, String accept) {
+        private EventRetrieveRequest(String workspaceId, String eventId, String accept) {
             this.workspaceId = workspaceId;
             this.eventId = eventId;
-            this.xApiKey = xApiKey;
             this.accept = accept;
         }
 
@@ -949,7 +914,7 @@ public class EventsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return eventRetrieveCall(workspaceId, eventId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return eventRetrieveCall(workspaceId, eventId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
 
         /**
@@ -958,7 +923,7 @@ public class EventsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public Event execute() throws ApiException {
-            ApiResponse<Event> localVarResp = eventRetrieveWithHttpInfo(workspaceId, eventId, xApiKey, accept, limit, offset, sortOrder, sortFields);
+            ApiResponse<Event> localVarResp = eventRetrieveWithHttpInfo(workspaceId, eventId, accept, limit, offset, sortOrder, sortFields);
             _lastResponse = localVarResp;
             Event data = localVarResp.getData();
 
@@ -982,7 +947,7 @@ public class EventsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Event> _callback) throws ApiException {
-            return eventRetrieveAsync(workspaceId, eventId, xApiKey, accept, limit, offset, sortOrder, sortFields, _callback);
+            return eventRetrieveAsync(workspaceId, eventId, accept, limit, offset, sortOrder, sortFields, _callback);
         }
     }
 
@@ -1050,10 +1015,9 @@ public class EventsApi {
         if(eventId == null || eventId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'eventId'");
         }
-
         String accept = "application/vnd.whispir.event-v1+json";
 
-        EventRetrieveRequest request = new EventRetrieveRequest(workspaceId, eventId, xApiKey, accept);
+        EventRetrieveRequest request = new EventRetrieveRequest(workspaceId, eventId, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.limit != null){
@@ -1075,7 +1039,7 @@ public class EventsApi {
 
         return request.execute();
     }
-    private static okhttp3.Call eventUpdateCall(String workspaceId, String eventId, String xApiKey, String contentType, String accept, Event event, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call eventUpdateCall(String workspaceId, String eventId, String contentType, String accept, Event event, final ApiCallback _callback) throws ApiException {
         String basePath = Whispir.host;
         String authHeader = Whispir.getAuthorizationHeader();
 
@@ -1094,10 +1058,6 @@ public class EventsApi {
 
         localVarHeaderParams.put("Authorization", String.format("Basic %s", authHeader));
         localVarHeaderParams.put("User-Agent", String.format("whispir-java-%s", Version.VERSION));
-
-        if (xApiKey != null) {
-            localVarHeaderParams.put("X-Api-Key", localVarApiClient.parameterToString(xApiKey));
-        }
 
         if (contentType != null) {
             localVarHeaderParams.put("Content-Type", localVarApiClient.parameterToString(contentType));
@@ -1128,7 +1088,7 @@ public class EventsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private static okhttp3.Call eventUpdateValidateBeforeCall(String workspaceId, String eventId, String xApiKey, String contentType, String accept, Event event, final ApiCallback _callback) throws ApiException {
+    private static okhttp3.Call eventUpdateValidateBeforeCall(String workspaceId, String eventId, String contentType, String accept, Event event, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'workspaceId' is set
         if (workspaceId == null) {
             throw new ApiException("Missing the required parameter 'workspaceId' when calling eventUpdate(Async)");
@@ -1137,11 +1097,6 @@ public class EventsApi {
         // verify the required parameter 'eventId' is set
         if (eventId == null) {
             throw new ApiException("Missing the required parameter 'eventId' when calling eventUpdate(Async)");
-        }
-
-        // verify the required parameter 'xApiKey' is set
-        if (xApiKey == null) {
-            throw new ApiException("Missing the required parameter 'xApiKey' when calling eventUpdate(Async)");
         }
 
         // verify the required parameter 'contentType' is set
@@ -1154,16 +1109,16 @@ public class EventsApi {
             throw new ApiException("Missing the required parameter 'accept' when calling eventUpdate(Async)");
         }
 
-        return eventUpdateCall(workspaceId, eventId, xApiKey, contentType, accept, event, _callback);
+        return eventUpdateCall(workspaceId, eventId, contentType, accept, event, _callback);
     }
 
-    private static ApiResponse<Void> eventUpdateWithHttpInfo(String workspaceId, String eventId, String xApiKey, String contentType, String accept, Event event) throws ApiException {
-        okhttp3.Call localVarCall = eventUpdateCall(workspaceId, eventId, xApiKey, contentType, accept, event, null);
+    private static ApiResponse<Void> eventUpdateWithHttpInfo(String workspaceId, String eventId, String contentType, String accept, Event event) throws ApiException {
+        okhttp3.Call localVarCall = eventUpdateCall(workspaceId, eventId, contentType, accept, event, null);
         return localVarApiClient.execute(localVarCall);
     }
 
-    private static okhttp3.Call eventUpdateAsync(String workspaceId, String eventId, String xApiKey, String contentType, String accept, Event event, final ApiCallback<Void> _callback) throws ApiException {
-        okhttp3.Call localVarCall = eventUpdateValidateBeforeCall(workspaceId, eventId, xApiKey, contentType, accept, event, _callback);
+    private static okhttp3.Call eventUpdateAsync(String workspaceId, String eventId, String contentType, String accept, Event event, final ApiCallback<Void> _callback) throws ApiException {
+        okhttp3.Call localVarCall = eventUpdateValidateBeforeCall(workspaceId, eventId, contentType, accept, event, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1228,16 +1183,14 @@ public class EventsApi {
     public static class EventUpdateRequest {
         private final String workspaceId;
         private final String eventId;
-        private final String xApiKey;
         private final String contentType;
         private final String accept;
         private Event event;
         ApiResponse _lastResponse;
 
-        private EventUpdateRequest(String workspaceId, String eventId, String xApiKey, String contentType, String accept) {
+        private EventUpdateRequest(String workspaceId, String eventId, String contentType, String accept) {
             this.workspaceId = workspaceId;
             this.eventId = eventId;
-            this.xApiKey = xApiKey;
             this.contentType = contentType;
             this.accept = accept;
         }
@@ -1259,7 +1212,7 @@ public class EventsApi {
          * @throws ApiException If fail to serialize the request body object
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return eventUpdateCall(workspaceId, eventId, xApiKey, contentType, accept, event, _callback);
+            return eventUpdateCall(workspaceId, eventId, contentType, accept, event, _callback);
         }
 
         /**
@@ -1267,7 +1220,7 @@ public class EventsApi {
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          */
         public void execute() throws ApiException {
-            eventUpdateWithHttpInfo(workspaceId, eventId, xApiKey, contentType, accept, event);
+            eventUpdateWithHttpInfo(workspaceId, eventId, contentType, accept, event);
         }
         /**
          * Return the last executed API response
@@ -1285,7 +1238,7 @@ public class EventsApi {
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
-            return eventUpdateAsync(workspaceId, eventId, xApiKey, contentType, accept, event, _callback);
+            return eventUpdateAsync(workspaceId, eventId, contentType, accept, event, _callback);
         }
     }
 
@@ -1338,12 +1291,11 @@ public class EventsApi {
         if(eventId == null || eventId.isEmpty()) {
             throw new ApiException("Missing the required parameter 'eventId'");
         }
-
         String contentType = "application/vnd.whispir.event-v1+json";
 
         String accept = "application/vnd.whispir.event-v1+json";
 
-        EventUpdateRequest request = new EventUpdateRequest(workspaceId, eventId, xApiKey, contentType, accept);
+        EventUpdateRequest request = new EventUpdateRequest(workspaceId, eventId, contentType, accept);
 
         // Ensure to include all of the 'optionalParams' that are passed
         if(params.event != null){

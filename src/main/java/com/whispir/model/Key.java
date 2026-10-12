@@ -66,26 +66,17 @@ public class Key {
   @SerializedName("type")
   private String type;
 
-  @SerializedName("userId")
-  private UUID userId;
-
-  @SerializedName("clientId")
-  private UUID clientId;
-
-  @SerializedName("accountId")
-  private UUID accountId;
-
   @SerializedName("createdTime")
   private OffsetDateTime createdTime;
 
   @SerializedName("lastModifiedTime")
   private String lastModifiedTime;
 
-  @SerializedName("enabled")
-  private Boolean enabled;
-
   @SerializedName("description")
   private String description;
+
+  @SerializedName("secret")
+  private String secret;
 
   public Key() {
     super();
@@ -94,18 +85,12 @@ public class Key {
   public Key(
     UUID id, 
     String type, 
-    UUID userId, 
-    UUID clientId, 
-    UUID accountId, 
     OffsetDateTime createdTime, 
     String lastModifiedTime
   ) {
     this();
     this.id = id;
     this.type = type;
-    this.userId = userId;
-    this.clientId = clientId;
-    this.accountId = accountId;
     this.createdTime = createdTime;
     this.lastModifiedTime = lastModifiedTime;
   }
@@ -126,30 +111,6 @@ public class Key {
     return type;
   }
    /**
-   * The user identifier associated with this Key
-   * @return userId
-  **/
-  @javax.annotation.Nonnull
-  public UUID getUserId() {
-    return userId;
-  }
-   /**
-   * The company identifier (client). Provided by Auth0 Management API used to revoke client access during deletion.
-   * @return clientId
-  **/
-  @javax.annotation.Nonnull
-  public UUID getClientId() {
-    return clientId;
-  }
-   /**
-   * Nextgen account id associated with this Key
-   * @return accountId
-  **/
-  @javax.annotation.Nonnull
-  public UUID getAccountId() {
-    return accountId;
-  }
-   /**
    * Timestamp on when the Key has been created
    * @return createdTime
   **/
@@ -167,18 +128,6 @@ public class Key {
   }
 
    /**
-   * Determine if this Key is enabled or disabled
-   * @return enabled
-  **/
-  @javax.annotation.Nonnull
-  public Boolean getEnabled() {
-    return enabled;
-  }
-  public void setEnabled(Boolean enabled) {
-    this.enabled = enabled;
-  }
-
-   /**
    * User provided description usually used for identifying usage
    * @return description
   **/
@@ -188,6 +137,18 @@ public class Key {
   }
   public void setDescription(String description) {
     this.description = description;
+  }
+
+   /**
+   * The authentication secret
+   * @return secret
+  **/
+  @javax.annotation.Nullable
+  public String getSecret() {
+    return secret;
+  }
+  public void setSecret(String secret) {
+    this.secret = secret;
   }
 
   @Override
@@ -201,17 +162,14 @@ public class Key {
     Key key = (Key) o;
     return Objects.equals(this.id, key.id) &&
         Objects.equals(this.type, key.type) &&
-        Objects.equals(this.userId, key.userId) &&
-        Objects.equals(this.clientId, key.clientId) &&
-        Objects.equals(this.accountId, key.accountId) &&
         Objects.equals(this.createdTime, key.createdTime) &&
         Objects.equals(this.lastModifiedTime, key.lastModifiedTime) &&
-        Objects.equals(this.enabled, key.enabled) &&
-        Objects.equals(this.description, key.description);
+        Objects.equals(this.description, key.description) &&
+        Objects.equals(this.secret, key.secret);
   }
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, userId, clientId, accountId, createdTime, lastModifiedTime, enabled, description);
+    return Objects.hash(id, type, createdTime, lastModifiedTime, description, secret);
   }
   @Override
   public String toString() {
@@ -219,13 +177,10 @@ public class Key {
     sb.append("class Key {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
-    sb.append("    clientId: ").append(toIndentedString(clientId)).append("\n");
-    sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
     sb.append("    createdTime: ").append(toIndentedString(createdTime)).append("\n");
     sb.append("    lastModifiedTime: ").append(toIndentedString(lastModifiedTime)).append("\n");
-    sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    secret: ").append(toIndentedString(secret)).append("\n");
     sb.append("}");
     return sb.toString();
   }
